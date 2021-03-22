@@ -49,7 +49,7 @@ namespace API.Controllers
             var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
             for (int i = 0; i < computeHash.Length; i++)
             {
-                if (computeHash[i] != user.PasswordSalt[i]) return Unauthorized("Invalid password");
+                if (computeHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
             return new UserDto{
                 Username = user.UserName,

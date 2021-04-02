@@ -9,7 +9,7 @@ import { PaginatedResult, Pagination } from '../_models/pagination';
 import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
-import { getPaginationedResult, getPaginationHeaders } from './paginationHelper';
+import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 
 
@@ -53,7 +53,7 @@ export class MembersService {
     params = params.append('gender',UserParams.gender);
     params = params.append('orderBy',UserParams.orderBy);
 
-    return getPaginationedResult<Member[]>(this.baseUrl+'users',params,this.http)
+    return getPaginatedResult<Member[]>(this.baseUrl+'users',params,this.http)
       .pipe(map(response =>{
         this.memberCache.set(Object.values(UserParams).join('-'),response);
         return response;
@@ -98,7 +98,7 @@ export class MembersService {
   getLikes(predicate:string,pageNumber,pageSize){
     let params = getPaginationHeaders(pageNumber,pageSize);
     params = params.append('predicate',predicate);
-    return getPaginationedResult<Partial<Member[]>>(this.baseUrl + 'likes',params,this.http);
+    return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes',params,this.http);
   }
   
 }

@@ -4,10 +4,9 @@ namespace API.Entities
     {
         public Connection()
         {
-            
         }
 
-        public Connection(string connectionId,string username)
+        public Connection(string connectionId, string username)
         {
             ConnectionId = connectionId;
             Username = username;

@@ -1,0 +1,17 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id"
+           value="service.formData.id" />
+    <div class="form-row">
+      <div class="col-md-6">
+        <input class="form-control" placeholder="Description"
+               name="description" #description="ngModel" [(ngModel)]="genreService.formData.description" required/>
+      </div>     
+ 
+
+      <div class="col-md-6">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+      </div>
+    </div>
+  </form>
+

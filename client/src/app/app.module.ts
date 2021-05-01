@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -34,6 +33,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.component';
+import { GenreComponent } from './genre/genre.component';
+import { GenreFormComponent } from './genre/genre-form/genre-form.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.c
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    GenreComponent,
+    GenreFormComponent,
   ],
   imports: [
     BrowserModule,

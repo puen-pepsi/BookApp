@@ -21,6 +21,14 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<Genre> Genres {get;set;}
+        public DbSet<Story> Stories {get; set;}
+        public DbSet<StoryDetail> StoryDetails {get;set;}
+        public DbSet<Tag> Tags {get;set;}
+        public DbSet<StoryTag> StoryTags { get; set; }
+        public DbSet<StoryComment> StoryComments {get;set;}
+
+      
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -42,7 +50,6 @@ namespace API.Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-
 
             builder.Entity<UserLike>()
                 .HasKey(k => new { k.SourceUserId, k.LikedUserId });
@@ -69,6 +76,26 @@ namespace API.Data
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<StoryDetail>()
+                .HasOne(s => s.CurrnetStory)
+                .WithMany(sd => sd.StoryDetails)
+                .HasForeignKey(sd => sd.CurrentStoriesId);
+
+            builder.Entity<StoryTag>()
+                .HasKey(k => new {k.StoryDetailId,k.TagId});
+
+            builder.Entity<StoryTag>()
+                .HasOne(s => s.StoryDetail)
+                .WithMany(t => t.StoryTags)
+                .HasForeignKey(s => s.StoryDetailId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<StoryTag>()
+                .HasOne(s => s.Tag)
+                .WithMany(t => t.StoryTags)
+                .HasForeignKey(s => s.TagId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
             builder.ApplyUtcDateTimeConverter();
         }
     }

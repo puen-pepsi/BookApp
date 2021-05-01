@@ -33,8 +33,10 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.component';
-import { GenreComponent } from './genre/genre.component';
-import { GenreFormComponent } from './genre/genre-form/genre-form.component';
+import { GenreComponent } from './admin/genre/genre.component';
+import { GenreFormComponent } from './admin/genre/genre-form/genre-form.component';
+import { StatusComponent } from './admin/status/status.component';
+import { StatusFormComponent } from './admin/status/status-form/status-form.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { GenreFormComponent } from './genre/genre-form/genre-form.component';
     ConfirmDialogComponent,
     GenreComponent,
     GenreFormComponent,
+    StatusComponent,
+    StatusFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,10 +6,21 @@
                 <app-user-management></app-user-management>
             </div>
         </tab>
+        <tab heading='Genre' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-genre></app-genre>
+            </div>
+        </tab>
+        <tab heading='Status' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-status></app-status>
+            </div>
+        </tab>
         <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
             <div class="container">
                 <app-photo-management></app-photo-management>
             </div>
         </tab>
+
     </tabset>
 </div>

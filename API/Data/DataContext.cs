@@ -21,7 +21,8 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
-        public DbSet<Genre> Genres {get;set;}
+        public DbSet<Statuses> Genres {get;set;}
+        public DbSet<Status> Statuses {get; set;}
         public DbSet<Story> Stories {get; set;}
         public DbSet<StoryDetail> StoryDetails {get;set;}
         public DbSet<Tag> Tags {get;set;}

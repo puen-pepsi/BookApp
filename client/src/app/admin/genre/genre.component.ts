@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Genres } from '../_models/genre';
-import { GenreService } from '../_services/genre.service';
+import { Genres } from '../../_models/genre';
+import { GenreService } from '../../_services/genre.service';
 
 @Component({
   selector: 'app-genre',

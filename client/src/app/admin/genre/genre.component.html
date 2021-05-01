@@ -1,7 +1,6 @@
-<div class="jumbotron py-2">
+<div class="jumbotron py-2 mb-4">
     <h4 class="display-6 text-center">Genre Details</h4>
   </div>
-  <div class="row">
    <app-genre-form></app-genre-form>
     <table class="table mt-2" >
       <thead>
@@ -15,10 +14,10 @@
           <td (click)="populateForm(row)">{{row.description}}</td>
           <td>
             <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
-            <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button>
-
+            <!-- <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button> -->
+            <i class="far fa-trash-alt text-danger" (click)="onDelete(row.id)"></i>    
           </td>
         </tr>
       </tbody>
     </table>
-  </div> 
+

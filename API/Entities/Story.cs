@@ -9,7 +9,7 @@ namespace API.Entities
         // public int RecentChapter { get; set; }
         public string Synopsis { get; set; }
         public int GenreId { get; set; }
-        public Genre  Genre { get; set; }
+        public Statuses  Genre { get; set; }
         public bool CopyRight { get; set; }
         public int Rating { get; set; }
         public string State { get; set; }

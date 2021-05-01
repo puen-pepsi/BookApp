@@ -15,15 +15,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GenreList()
+        public async Task<ActionResult<IEnumerable<Statuses>>> GenreList()
         {
-            return await _unitOfWork.Repository.SelectAll<Genre>();
+            return await _unitOfWork.Repository.SelectAll<Statuses>();
         } 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int id)
+        public async Task<ActionResult<Statuses>> GetGenre(int id)
         {
-            var model = await _unitOfWork.Repository.SelectById<Genre>(id);
+            var model = await _unitOfWork.Repository.SelectById<Statuses>(id);
             if(model == null){
                 return NotFound();
             }
@@ -31,30 +31,30 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateGenre(int id,Genre genre)
+        public async Task<ActionResult> UpdateGenre(int id,Statuses genre)
         {
             if(id != genre.Id){
                 return BadRequest();
             }
-            await _unitOfWork.Repository.UpdateAsync<Genre>(genre);
+            await _unitOfWork.Repository.UpdateAsync<Statuses>(genre);
             return NoContent();
         }
 
         [HttpPost]
-        public async Task<ActionResult> InsertGenre([FromBody]Genre genre)
+        public async Task<ActionResult> InsertGenre([FromBody]Statuses genre)
         {
-            await _unitOfWork.Repository.CreateAsync<Genre>(genre);
+            await _unitOfWork.Repository.CreateAsync<Statuses>(genre);
             return CreatedAtAction("GetGenre",new {id = genre.Id},genre);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Genre>> DeleteGenre(int id)
+        public async Task<ActionResult<Statuses>> DeleteGenre(int id)
         {
-            var model = await _unitOfWork.Repository.SelectById<Genre>(id);
+            var model = await _unitOfWork.Repository.SelectById<Statuses>(id);
             if(model == null){
                 return NotFound();
             }
-            await _unitOfWork.Repository.DeleteAsync<Genre>(model);
+            await _unitOfWork.Repository.DeleteAsync<Statuses>(model);
             return model;
         }
 

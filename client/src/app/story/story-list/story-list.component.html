@@ -1,0 +1,38 @@
+<!-- <h4>Story</h4> -->
+<div class="tab-panel">
+    <button type="button" class="btn btn-outline-primary">
+        Create A Story
+      </button>
+    <tabset class="member-tabset">
+        <tab heading='Stories'>
+            <div class="container">
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                              <th>StoryName</th>
+                              <th>Rating</th>
+                              <th>Views</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let row of storyService.list">
+                              <td>{{row.storyName}}</td>
+                              <!-- Recent Chapter -->
+                              <td>{{row.rating}}</td>
+                              <td>{{row.views}}</td>
+                              <td>
+                                <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
+                                <!-- <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button> -->
+                                <i class="far fa-trash-alt text-danger" (click)="onDelete(row.id)"></i>    
+                              </td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab>
+
+    </tabset>
+</div>

@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using API.Entities;
 
-namespace API.Entities
+namespace API.DTOs
 {
-    public class Story
+    public class StoryDto
     {
-        public int Id { get; set; }
+        public int StoryId { get; set; }
         public string StoryName { get; set; }
         public string Description { get; set; }        
         public string Genre { get; set; }
@@ -17,14 +19,6 @@ namespace API.Entities
         public int Views { get; set; }
         public string UserName { get; set; }
         public DateTime Created { get; set; }
-        public virtual ICollection<StoryChapter> Chapters { get; set; }
-        public virtual ICollection<StoryComment> PostComments { get; set; }
-        public virtual ICollection<StoryTag> StoryTags { get; set; }
-        public Story()
-        {
-            Chapters = new Collection<StoryChapter>();
-            PostComments = new Collection<StoryComment>();
-            StoryTags = new Collection<StoryTag>();
-        }
+
     }
 }

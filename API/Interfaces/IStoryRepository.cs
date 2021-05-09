@@ -7,13 +7,19 @@ namespace API.Interfaces
     public interface IStoryRepository
     {
          void AddStory(Story story);
-         void AddStoryDetail(StoryDetail storyDetail);
+         void AddStoryChapter(StoryChapter storyChapter);
          void UpdateStory(Story story);
-         void UpdateStoryDetail(StoryDetail storyDetail);
+         void UpdateStoryChapter(StoryChapter storyChapter);
          Task<IEnumerable<Story>> GetStoryAsync();
-         Task<IEnumerable<StoryDetail>> GetStoryDetailsAsync();
-         Task<Story> GetStoryById(int id);
-         Task<StoryDetail> GetStoryDetailById(int id);
+         Task<IEnumerable<Story>> GetStoryByUserName(string username);
+        Task<Story> GetStoryById(int id,bool includeRelated = false );
+        // Task<Story> GetStoryById(int id);
+
+         Task<StoryChapter> GetStoryChapterByStoryId(int id);
+
+         void DeleteStory(Story story);
+
+         Task<IEnumerable<Genre>> GetAllGenre();
 
     }
 }

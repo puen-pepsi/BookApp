@@ -37,6 +37,9 @@ import { GenreComponent } from './admin/genre/genre.component';
 import { GenreFormComponent } from './admin/genre/genre-form/genre-form.component';
 import { StatusComponent } from './admin/status/status.component';
 import { StatusFormComponent } from './admin/status/status-form/status-form.component';
+import { StoryComponent } from './story/story.component';
+import { StoryListComponent } from './story/story-list/story-list.component';
+import { StoryFormComponent } from './story/story-form/story-form.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { StatusFormComponent } from './admin/status/status-form/status-form.comp
     GenreFormComponent,
     StatusComponent,
     StatusFormComponent,
+    StoryComponent,
+    StoryListComponent,
+    StoryFormComponent,
   ],
   imports: [
     BrowserModule,

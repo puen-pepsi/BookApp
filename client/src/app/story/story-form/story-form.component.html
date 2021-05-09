@@ -1,0 +1,35 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+  <input type="hidden" name="id"
+         value="statusService.formData.id" />
+    <div class="mb-3">
+      <label for="storyname" class="form-label">Story Name  <i class="fas fa-info-circle"></i></label>
+      <input class="form-control" placeholder="Story Name"
+             name="storyname" #storyname="ngModel" [(ngModel)]="storyService.formData.storyname" required/>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description  <i class="fas fa-info-circle"></i></label>
+      <textarea class="form-control" placeholder="Synopsis" rows="3"
+      name="description" #description="ngModel" [(ngModel)]="storyService.formData.description" required></textarea>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-md-2">
+              <label for="genre" class="form-label">Genre   <i class="fas fa-info-circle"></i></label>
+      </div>
+      <div class="col-md-6">
+        <select id="genre" class="form-control" [(ngModel)]="GenreList.description" name="genreName" required #genreName="ngModel">
+                <option value="">--Select Genre--</option>
+                <option *ngFor="let m of GenreList" value="{{ m.description }}">{{ m.description }}</option>
+        </select> 
+      </div>
+      
+    </div>
+    <div class="mb-3">
+      <label for="storyname" class="form-label">Tags</label>
+      <input class="form-control" placeholder="Add Tags"
+             name="tag" />
+    </div>
+    <div class="col-md-4 pl-1">
+      <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+      <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+    </div>
+</form>

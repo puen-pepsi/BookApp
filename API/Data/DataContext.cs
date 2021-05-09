@@ -21,10 +21,11 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
-        public DbSet<Statuses> Genres {get;set;}
+        public DbSet<Genre> Genres {get;set;}
         public DbSet<Status> Statuses {get; set;}
         public DbSet<Story> Stories {get; set;}
-        public DbSet<StoryDetail> StoryDetails {get;set;}
+        public DbSet<StoryChapter> StoryChapters { get; set; }
+        public DbSet<Published> Publishes { get; set; }
         public DbSet<Tag> Tags {get;set;}
         public DbSet<StoryTag> StoryTags { get; set; }
         public DbSet<StoryComment> StoryComments {get;set;}
@@ -77,18 +78,13 @@ namespace API.Data
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<StoryDetail>()
-                .HasOne(s => s.CurrnetStory)
-                .WithMany(sd => sd.StoryDetails)
-                .HasForeignKey(sd => sd.CurrentStoriesId);
+            builder.Entity<StoryTag>()
+                .HasKey(k => new {k.StoryId,k.TagId});
 
             builder.Entity<StoryTag>()
-                .HasKey(k => new {k.StoryDetailId,k.TagId});
-
-            builder.Entity<StoryTag>()
-                .HasOne(s => s.StoryDetail)
+                .HasOne(s => s.Story)
                 .WithMany(t => t.StoryTags)
-                .HasForeignKey(s => s.StoryDetailId)
+                .HasForeignKey(s => s.StoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<StoryTag>()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Interfaces;
@@ -19,12 +20,74 @@ namespace API.Data
 
         public void AddStory(Story story)
         {
-            _context.Stories.Add(story);
+             _context.Stories.Add(story);
         }
 
-        public void AddStoryDetail(StoryDetail storyDetail)
+        public void AddStoryChapter(StoryChapter storyChapter)
         {
-            _context.StoryDetails.Add(storyDetail);
+            _context.StoryChapters.Add(storyChapter);
+        }
+
+
+
+        public void DeleteStory(Story story)
+        {
+            _context.Stories.Remove(story);
+        }
+
+        public async Task<IEnumerable<Story>> GetStoryAsync(string username)
+        {   
+            return await _context.Stories
+                        .Where(s => s.UserName == username)
+                        .ToListAsync();
+        }
+
+        public async Task<Story> GetStoryById(int id,bool includeRelated = false)
+        {
+            if(!includeRelated)
+                return await _context.Stories.FindAsync(id);
+            return await _context.Stories
+                            .Include(s => s.Chapters)
+                                .ThenInclude(sc => sc.Published)
+                            .SingleOrDefaultAsync(s => s.Id == id);
+        }
+        // public async Task<Story> GetStoryById(int id)
+        // {
+        //         return await _context.Stories.FindAsync(id);
+        // }
+
+        public async Task<IEnumerable<Story>> GetStoryByUserName(string username)
+        {                
+            return await _context.Stories
+                .Where(x => x.UserName == username)
+                .ToListAsync();
+        }
+
+        public Task<StoryChapter> GetStoryChapter(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public void UpdateStory(Story story)
+        {
+            _context.Entry(story).State = EntityState.Modified;
+        }
+
+        public void UpdateStoryChapter(StoryChapter storyChapter)
+        {
+            _context.Entry(storyChapter).State = EntityState.Modified;
+        }
+
+
+        public Task<StoryChapter> GetStoryChapterById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<StoryChapter> GetStoryChapterByStoryId(int id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Task<IEnumerable<Story>> GetStoryAsync()
@@ -32,29 +95,9 @@ namespace API.Data
             throw new System.NotImplementedException();
         }
 
-        public Task<Story> GetStoryById(int id)
+        public async Task<IEnumerable<Genre>> GetAllGenre()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<StoryDetail> GetStoryDetailById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IEnumerable<StoryDetail>> GetStoryDetailsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateStory(Story story)
-        {
-            _context.Entry(story).State = EntityState.Modified;
-        }
-
-        public void UpdateStoryDetail(StoryDetail storyDetail)
-        {
-            _context.Entry(storyDetail).State = EntityState.Modified;
+            return  await _context.Genres.ToListAsync();
         }
     }
 }

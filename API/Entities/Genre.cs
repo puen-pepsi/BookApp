@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace API.Entities
 {
-    public class Statuses
+    public class Genre
     {
         public int Id { get; set; }
         public string Description { get; set; }

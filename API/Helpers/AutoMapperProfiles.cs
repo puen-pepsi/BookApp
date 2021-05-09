@@ -24,6 +24,12 @@ namespace API.Helpers
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => 
                     src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<MessageDto, Message>();
+            CreateMap<StoryDto,Story>()
+                .ForMember(src => src.Id,opt => opt.Ignore());
+            CreateMap<Story,StoryDto>()
+                .ForMember(dest => dest.StoryId,ex => ex.MapFrom(src => src.Id));
+            
+
         }
     }
 }

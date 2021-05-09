@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210501093527_Status")]
-    partial class Status
+    [Migration("20210508201834_edit")]
+    partial class edit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -264,6 +264,23 @@ namespace API.Data.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("API.Entities.Published", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("PublishedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoryContentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publishes");
+                });
+
             modelBuilder.Entity("API.Entities.Status", b =>
                 {
                     b.Property<int>("Id")
@@ -284,14 +301,23 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int?>("AppUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("CopyRight")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Language")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
@@ -302,7 +328,7 @@ namespace API.Data.Migrations
                     b.Property<string>("StoryName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Synopsis")
+                    b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Views")
@@ -312,9 +338,38 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("GenreId");
-
                     b.ToTable("Stories");
+                });
+
+            modelBuilder.Entity("API.Entities.StoryChapter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ChapterName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("PublishedId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PublishedId")
+                        .IsUnique();
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("StoryChapters");
                 });
 
             modelBuilder.Entity("API.Entities.StoryComment", b =>
@@ -332,7 +387,7 @@ namespace API.Data.Migrations
                     b.Property<int?>("ParentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("StoryDetailId")
+                    b.Property<int>("StoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserPostId")
@@ -340,59 +395,22 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StoryDetailId");
+                    b.HasIndex("StoryId");
 
                     b.HasIndex("UserPostId");
 
                     b.ToTable("StoryComments");
                 });
 
-            modelBuilder.Entity("API.Entities.StoryDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CurrentStoriesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("MainCharacter")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("PublicId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("tag")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CurrentStoriesId");
-
-                    b.ToTable("StoryDetails");
-                });
-
             modelBuilder.Entity("API.Entities.StoryTag", b =>
                 {
-                    b.Property<int>("StoryDetailId")
+                    b.Property<int>("StoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TagId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("StoryDetailId", "TagId");
+                    b.HasKey("StoryId", "TagId");
 
                     b.HasIndex("TagId");
 
@@ -405,7 +423,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("HashTag")
+                    b.Property<string>("TagName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -571,58 +589,54 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "AppUser")
+                    b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Stories")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("API.Entities.StoryChapter", b =>
+                {
+                    b.HasOne("API.Entities.Published", "Published")
+                        .WithOne("StoryChapter")
+                        .HasForeignKey("API.Entities.StoryChapter", "PublishedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
+                    b.HasOne("API.Entities.Story", "Story")
+                        .WithMany("Chapters")
+                        .HasForeignKey("StoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Published");
 
-                    b.Navigation("Genre");
+                    b.Navigation("Story");
                 });
 
             modelBuilder.Entity("API.Entities.StoryComment", b =>
                 {
-                    b.HasOne("API.Entities.StoryDetail", "StoryDetail")
+                    b.HasOne("API.Entities.Story", "Story")
                         .WithMany("PostComments")
-                        .HasForeignKey("StoryDetailId")
+                        .HasForeignKey("StoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "UserPost")
-                        .WithMany()
+                        .WithMany("StoryComments")
                         .HasForeignKey("UserPostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("StoryDetail");
+                    b.Navigation("Story");
 
                     b.Navigation("UserPost");
                 });
 
-            modelBuilder.Entity("API.Entities.StoryDetail", b =>
-                {
-                    b.HasOne("API.Entities.Story", "CurrnetStory")
-                        .WithMany("StoryDetails")
-                        .HasForeignKey("CurrentStoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CurrnetStory");
-                });
-
             modelBuilder.Entity("API.Entities.StoryTag", b =>
                 {
-                    b.HasOne("API.Entities.StoryDetail", "StoryDetail")
+                    b.HasOne("API.Entities.Story", "Story")
                         .WithMany("StoryTags")
-                        .HasForeignKey("StoryDetailId")
+                        .HasForeignKey("StoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -632,7 +646,7 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("StoryDetail");
+                    b.Navigation("Story");
 
                     b.Navigation("Tag");
                 });
@@ -711,6 +725,8 @@ namespace API.Data.Migrations
 
                     b.Navigation("Stories");
 
+                    b.Navigation("StoryComments");
+
                     b.Navigation("UserRoles");
                 });
 
@@ -719,13 +735,15 @@ namespace API.Data.Migrations
                     b.Navigation("Connections");
                 });
 
-            modelBuilder.Entity("API.Entities.Story", b =>
+            modelBuilder.Entity("API.Entities.Published", b =>
                 {
-                    b.Navigation("StoryDetails");
+                    b.Navigation("StoryChapter");
                 });
 
-            modelBuilder.Entity("API.Entities.StoryDetail", b =>
+            modelBuilder.Entity("API.Entities.Story", b =>
                 {
+                    b.Navigation("Chapters");
+
                     b.Navigation("PostComments");
 
                     b.Navigation("StoryTags");

@@ -1,0 +1,13 @@
+
+<section class="list" *ngIf="!isCreate">
+    <app-chapter-list
+    (CreateActive)="ChangeForm($event)">
+        Story list
+    </app-chapter-list>
+</section>
+<section class="create" *ngIf="isCreate">
+    <app-chapter-form
+    (submitSuccess)="ChangeForm($event)">  
+        Story form
+    </app-chapter-form>
+</section>

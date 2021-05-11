@@ -81,14 +81,17 @@ namespace API.Data
         }
 
 
-        public Task<StoryChapter> GetStoryChapterById(int id)
+        public async Task<StoryChapter> GetStoryChapterById(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.StoryChapters.FindAsync(id);
         }
 
-        public Task<StoryChapter> GetStoryChapterByStoryId(int id)
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Where(c => c.StoryId == id)
+                            .ToListAsync();
         }
 
         public Task<IEnumerable<Story>> GetStoryAsync()
@@ -100,5 +103,7 @@ namespace API.Data
         {
             return  await _context.Genres.ToListAsync();
         }
+
+       
     }
 }

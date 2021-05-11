@@ -15,8 +15,8 @@ namespace API.Interfaces
         Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
 
-         Task<StoryChapter> GetStoryChapterByStoryId(int id);
-
+         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id);
+         Task<StoryChapter> GetStoryChapterById(int id);
          void DeleteStory(Story story);
 
          Task<IEnumerable<Genre>> GetAllGenre();

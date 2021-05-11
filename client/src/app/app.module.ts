@@ -43,6 +43,9 @@ import { StoryFormComponent } from './story/story-form/story-form.component';
 import { LanguageComponent } from './admin/language/language.component';
 import { LanguageFormComponent } from './admin/language/language-form/language-form.component';
 import { StoryFormImageComponent } from './story/story-form-image/story-form-image.component';
+import { StorychapterComponent } from './story/storychapter/storychapter.component';
+import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
+import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { StoryFormImageComponent } from './story/story-form-image/story-form-ima
     LanguageComponent,
     LanguageFormComponent,
     StoryFormImageComponent,
+    StorychapterComponent,
+    ChapterFormComponent,
+    ChapterListComponent,
   ],
   imports: [
     BrowserModule,

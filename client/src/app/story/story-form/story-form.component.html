@@ -3,7 +3,10 @@
   <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
     Back to Stories
   </button>
-  <tabset class="member-tabset">
+  <button type="button" class="btn btn-outline-success Header" (click)="selectTab(1)">
+    Add Chapter
+  </button>
+  <tabset class="member-tabset" #StoryTabs>
     <tab heading='Stories Details'>
       <div class="container">
         <!-- <p>{{ storyService.formData| json}}</p> -->
@@ -68,6 +71,18 @@
       </div>
 
     </tab>
-    <tab heading="Chaptor"></tab>
+    <tab heading="Chaptor">
+      <!-- <app-storychapter></app-storychapter> -->
+      <section class="list" *ngIf="!isCreate">
+        <app-chapter-list (goForm)="ChangeForm($event)">
+          Story list
+        </app-chapter-list>
+      </section>
+      <section class="create" *ngIf="isCreate">
+        <app-chapter-form (goList)="ChangeForm($event)">
+          Story form
+        </app-chapter-form>
+      </section>
+    </tab>
   </tabset>
 </div>

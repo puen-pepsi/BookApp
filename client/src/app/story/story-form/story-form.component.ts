@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {  NgForm } from '@angular/forms';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { Story } from 'src/app/_models/story.model';
 import { PhotoService } from 'src/app/_services/photo.service';
@@ -12,7 +13,8 @@ import { StoryService } from 'src/app/_services/story.service';
 })
 export class StoryFormComponent implements OnInit {
   @Output() submitSuccess = new EventEmitter();
-  @Output() 
+  @ViewChild('StoryTabs',{static:true}) StoryTabs: TabsetComponent;
+  isCreate:boolean;
   GenreList : any=[];
   LanguageList : any=[];
   response:{dbPath:''};
@@ -80,5 +82,11 @@ export class StoryFormComponent implements OnInit {
       this.LanguageList=res;
     });
   }
-
+  selectTab(tabId: number){
+    this.StoryTabs.tabs[tabId].active = true;
+    this.isCreate = true;
+  }
+  ChangeForm(event){
+    this.isCreate = event;
+  }
 }

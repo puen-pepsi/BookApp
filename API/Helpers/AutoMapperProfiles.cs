@@ -29,6 +29,7 @@ namespace API.Helpers
             CreateMap<Story,StoryDto>()
                 .ForMember(dest => dest.StoryId,ex => ex.MapFrom(src => src.Id));
             CreateMap<PhotoStory, PhotoStoryResource>();
+            CreateMap<StoryChapterDto,StoryChapter>().ReverseMap();
 
         }
     }

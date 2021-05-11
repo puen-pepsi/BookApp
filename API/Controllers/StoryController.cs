@@ -98,11 +98,17 @@ namespace API.Controllers
         }
         [Route("GetAllGenre")]
         public async Task<IEnumerable<Genre>> GetAllGenre()
-    {
-        var genrelist = await _unitOfWork.Repository.SelectAll<Genre>();
+        {
+            var genrelist = await _unitOfWork.Repository.SelectAll<Genre>();
 
-        return genrelist;
-    }
+            return genrelist;
+        }
+        [Route("GetAllLanguage")]
+        public async Task<IEnumerable<Language>> GetAllLanguage()
+        {
+            var languageList = await _unitOfWork.Repository.SelectAll<Language>();
 
+            return languageList;
+        }
     }
 }

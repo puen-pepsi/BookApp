@@ -1,0 +1,10 @@
+<div>
+    <img [src] ="CreateImage(storyService.formData.imageUrl)" class="img-thumbnail image" (click)="fileInput.click($event)">
+    <button
+        class="btn btn-secondary invisible"
+        (click)="fileInput.click($event)">
+        Choose a picture
+    </button>
+    <input #fileInput type = "file" accept="image/jpeg" class="invisible" (change)="UploadImage(fileInput.files)" >
+    
+</div>

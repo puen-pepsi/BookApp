@@ -23,12 +23,14 @@ namespace API.Data
         public DbSet<Connection> Connections { get; set; }
         public DbSet<Genre> Genres {get;set;}
         public DbSet<Status> Statuses {get; set;}
+        public DbSet<Language> Languages { get; set; }
         public DbSet<Story> Stories {get; set;}
         public DbSet<StoryChapter> StoryChapters { get; set; }
         public DbSet<Published> Publishes { get; set; }
         public DbSet<Tag> Tags {get;set;}
         public DbSet<StoryTag> StoryTags { get; set; }
         public DbSet<StoryComment> StoryComments {get;set;}
+        public DbSet<PhotoStory> PhotoStories { get; set; }
 
       
 

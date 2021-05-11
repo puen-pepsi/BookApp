@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Story } from 'src/app/_models/story.model';
 import { StoryService } from 'src/app/_services/story.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-story-list',
@@ -7,11 +9,25 @@ import { StoryService } from 'src/app/_services/story.service';
   styleUrls: ['./story-list.component.css']
 })
 export class StoryListComponent implements OnInit {
-
+  @Output()  CreateActive = new EventEmitter();
+  baseUrl = environment.resourceUrl;
   constructor(public storyService:StoryService) { }
 
   ngOnInit(): void {
     this.storyService.refreshList();
   }
-
+  ChangeForm(){
+    this.CreateActive.emit(true);
+  }
+  populateForm(selectedRecord: Story) {
+    this.storyService.formData = Object.assign({},selectedRecord);
+    this.CreateActive.emit(true);
+  }
+  public createImagePath = (serverPath: string) => {
+    if(serverPath){
+      return this.baseUrl + serverPath;
+    }
+    return `/assets/images/no-image.jpeg`;
+    
+  }
 }

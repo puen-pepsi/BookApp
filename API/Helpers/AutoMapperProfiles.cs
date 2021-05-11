@@ -28,7 +28,7 @@ namespace API.Helpers
                 .ForMember(src => src.Id,opt => opt.Ignore());
             CreateMap<Story,StoryDto>()
                 .ForMember(dest => dest.StoryId,ex => ex.MapFrom(src => src.Id));
-            
+            CreateMap<PhotoStory, PhotoStoryResource>();
 
         }
     }

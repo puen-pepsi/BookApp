@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using API.Entities;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 
@@ -8,5 +9,6 @@ namespace API.Interfaces
     {
         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
         Task<DeletionResult> DeletePhotoAsync(string publicId);
+
     }
 }

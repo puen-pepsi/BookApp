@@ -195,6 +195,20 @@ namespace API.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("API.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -260,6 +274,31 @@ namespace API.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("API.Entities.PhotoStory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("PhotoStories");
                 });
 
             modelBuilder.Entity("API.Entities.Published", b =>
@@ -585,6 +624,17 @@ namespace API.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.PhotoStory", b =>
+                {
+                    b.HasOne("API.Entities.Story", "story")
+                        .WithMany("PhotoStories")
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("story");
+                });
+
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
                     b.HasOne("API.Entities.AppUser", null)
@@ -741,6 +791,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
                     b.Navigation("Chapters");
+
+                    b.Navigation("PhotoStories");
 
                     b.Navigation("PostComments");
 

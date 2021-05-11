@@ -1,6 +1,7 @@
 <!-- <h4>Story</h4> -->
 <div class="tab-panel">
-    <button type="button" class="btn btn-outline-primary">
+    <button type="button" class="btn btn-outline-primary Header" 
+        (click) = "ChangeForm()">
         Create A Story
       </button>
     <tabset class="member-tabset">
@@ -10,7 +11,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                              <th>StoryName</th>
+                              <th>Image/StoryName</th>
                               <th>Rating</th>
                               <th>Views</th>
                               <th></th>
@@ -18,14 +19,15 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let row of storyService.list">
-                              <td>{{row.storyName}}</td>
+                              <td><img [src]="createImagePath(row.imageUrl)" alt={{row.storyName}} >
+                                {{row.storyName}}
+                              </td>
                               <!-- Recent Chapter -->
                               <td>{{row.rating}}</td>
                               <td>{{row.views}}</td>
                               <td>
                                 <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
-                                <!-- <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button> -->
-                                <i class="far fa-trash-alt text-danger" (click)="onDelete(row.id)"></i>    
+                                <button (click)="populateForm(row)" class='btn btn-outline-primary btn-sm '>EXPLORE</button>
                               </td>
                             </tr>
                           </tbody>

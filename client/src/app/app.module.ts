@@ -40,6 +40,9 @@ import { StatusFormComponent } from './admin/status/status-form/status-form.comp
 import { StoryComponent } from './story/story.component';
 import { StoryListComponent } from './story/story-list/story-list.component';
 import { StoryFormComponent } from './story/story-form/story-form.component';
+import { LanguageComponent } from './admin/language/language.component';
+import { LanguageFormComponent } from './admin/language/language-form/language-form.component';
+import { StoryFormImageComponent } from './story/story-form-image/story-form-image.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import { StoryFormComponent } from './story/story-form/story-form.component';
     StoryComponent,
     StoryListComponent,
     StoryFormComponent,
+    LanguageComponent,
+    LanguageFormComponent,
+    StoryFormImageComponent,
   ],
   imports: [
     BrowserModule,

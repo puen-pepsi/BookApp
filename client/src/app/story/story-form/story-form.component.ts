@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {  NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Story } from 'src/app/_models/story.model';
+import { PhotoService } from 'src/app/_services/photo.service';
 import { StoryService } from 'src/app/_services/story.service';
 
 @Component({
@@ -9,16 +11,30 @@ import { StoryService } from 'src/app/_services/story.service';
   styleUrls: ['./story-form.component.css']
 })
 export class StoryFormComponent implements OnInit {
+  @Output() submitSuccess = new EventEmitter();
+  @Output() 
   GenreList : any=[];
+  LanguageList : any=[];
+  response:{dbPath:''};
   constructor(public storyService:StoryService,
-    private fb:FormBuilder) { }
+    private photoSevice:PhotoService,
+    private toastr:ToastrService) { }
   ngOnInit(): void {
     this.getGenreList();
+    this.getLanguageList();
+  }
+  uploadFinished = (event) =>{
+    
+    this.response = event;
+    this.storyService.formData.imageUrl = this.response.dbPath;
   }
 
-
+  returnToStory(){
+    this.submitSuccess.emit(false);
+    this.storyService.formData = new Story();
+  }
   onSubmit(form:NgForm) {
-    console.log(form);
+    // console.log(form);
     if(this.storyService.formData.id == 0) //we will use the id as identifier for updating or insertion
     this.insertRecord(form);
     else
@@ -27,8 +43,11 @@ export class StoryFormComponent implements OnInit {
   insertRecord(form:NgForm) {
     this.storyService.postStory().subscribe(
       res => {
+        console.log(res);
+        // this.photoSevice.upload()
         this.resetForm(form);
         this.storyService.refreshList();
+        this.submitSuccess.emit(false);
       },
       err => {
         console.log(err);
@@ -40,6 +59,7 @@ export class StoryFormComponent implements OnInit {
       res => {
         this.resetForm(form);
         this.storyService.refreshList();
+        this.submitSuccess.emit(false);
       },
       err => {
         console.log(err);
@@ -55,5 +75,10 @@ export class StoryFormComponent implements OnInit {
       this.GenreList=res;
     });
   }
-  
+  getLanguageList(){
+    this.storyService.getAllLanguage().subscribe(res =>{
+      this.LanguageList=res;
+    });
+  }
+
 }

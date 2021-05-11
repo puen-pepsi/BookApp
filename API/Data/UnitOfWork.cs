@@ -24,6 +24,7 @@ namespace API.Data
 
         public IRepository Repository => new Repository<DataContext>(_context);
 
+        public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
 
         public async Task<bool> Complete()
         {

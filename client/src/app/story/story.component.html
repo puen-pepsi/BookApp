@@ -1,2 +1,14 @@
-<app-story-list>Story list</app-story-list>
-<app-story-form>Story form</app-story-form>
+<section class="list" *ngIf="!isCreate">
+    <app-story-list
+    (CreateActive)="ChangeForm($event)">
+        Story list
+    </app-story-list>
+</section>
+<section class="create" *ngIf="isCreate">
+    <app-story-form
+    (submitSuccess)="ChangeForm($event)">  
+        Story form
+    </app-story-form>
+</section>
+
+

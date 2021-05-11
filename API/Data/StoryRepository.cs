@@ -49,6 +49,7 @@ namespace API.Data
             return await _context.Stories
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
+                            .Include(p => p.PhotoStories)
                             .SingleOrDefaultAsync(s => s.Id == id);
         }
         // public async Task<Story> GetStoryById(int id)

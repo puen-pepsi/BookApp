@@ -16,6 +16,11 @@
                 <app-status></app-status>
             </div>
         </tab>
+        <tab heading='Languages' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-language></app-language>
+            </div>
+        </tab>
         <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
             <div class="container">
                 <app-photo-management></app-photo-management>

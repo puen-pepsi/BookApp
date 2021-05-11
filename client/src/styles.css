@@ -4,7 +4,7 @@
     padding: 10px;
     border-radius: 4px;
   }
-  .tab-panel button{
+  .tab-panel .Header{
     float: right;
   }
   .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {

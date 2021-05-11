@@ -1,4 +1,5 @@
 using API.Data;
+using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
@@ -16,9 +17,14 @@ namespace API.Extensions
         {
             services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.Configure<PhotoSettings>(config.GetSection("PhotoSettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddTransient<IPhotoStoryService, PhotoStorySevice>();
+            services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>

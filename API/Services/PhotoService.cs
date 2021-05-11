@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 using CloudinaryDotNet;
@@ -11,8 +12,10 @@ namespace API.Services
     public class PhotoService : IPhotoService
     {
         private readonly Cloudinary _cloudinary;
+
         public PhotoService(IOptions<CloudinarySettings> config)
         {
+
             var acc = new Account
             (
                 config.Value.CloudName,
@@ -49,5 +52,7 @@ namespace API.Services
 
             return result;
         }
+
+        
     }
 }

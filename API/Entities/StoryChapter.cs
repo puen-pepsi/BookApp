@@ -10,7 +10,6 @@ namespace API.Entities
         public int Order { get; set; }
         public int StoryId { get; set; }
         public Story Story { get; set; }
-        public Guid? PublishedId { get; set; }
         public Published Published { get; set; }
 
     }

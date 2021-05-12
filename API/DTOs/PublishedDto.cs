@@ -1,13 +1,11 @@
 using System;
 
-namespace API.Entities
+namespace API.DTOs
 {
-    public class Published
+    public class PublishedDto
     {
         public Guid Id { get; set; }
         public DateTime Created { get; set; }
         public int StoryChapterId { get; set; }
-
-
     }
 }

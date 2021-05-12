@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace API.DTOs
@@ -12,5 +13,9 @@ namespace API.DTOs
         public string Content { get; set; }
         public int Order { get; set; }
         public int StoryId { get; set; }
+
+        [Required]
+        public Guid PublishedId { get; set; }
+        public DateTime PublishedCreated { get; set; }
     }
 }

@@ -13,7 +13,8 @@
           <td>{{row.chapterName}}</td>
           <!-- <td>{{row.content}}</td> -->
           
-          <td>{{row.publishedId || "Waiting to Publish"}}</td>
+          <!-- <td>{{(row.publishedCreated | date:'short') || "Waiting to Publish"}}</td> -->
+          <td>{{row.publishedId !== "00000000-0000-0000-0000-000000000000"? (row.publishedCreated | date:'short' ): "Waiting to Publish"}}</td>
           <td>
             <button (click)="populateForm(row)" class='btn btn-warning btn-sm '>EDIT</button>
             <button (click)="publish(row)" class='btn btn-primary btn-sm '>PUBLISH</button>           

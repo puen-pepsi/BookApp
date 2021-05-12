@@ -28,7 +28,10 @@ namespace API.Data
             _context.StoryChapters.Add(storyChapter);
         }
 
-
+        public void AddPublished(Published publish)
+        {
+            _context.Publishes.Add(publish);
+        }
 
         public void DeleteStory(Story story)
         {
@@ -83,7 +86,10 @@ namespace API.Data
 
         public async Task<StoryChapter> GetStoryChapterById(int id)
         {
-            return await _context.StoryChapters.FindAsync(id);
+            return await _context.StoryChapters
+                            .Include(p => p.Published)
+                            .Where(c => c.Id == id)
+                            .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id)

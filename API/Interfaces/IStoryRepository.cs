@@ -8,6 +8,7 @@ namespace API.Interfaces
     {
          void AddStory(Story story);
          void AddStoryChapter(StoryChapter storyChapter);
+         void AddPublished(Published publish);
          void UpdateStory(Story story);
          void UpdateStoryChapter(StoryChapter storyChapter);
          Task<IEnumerable<Story>> GetStoryAsync();

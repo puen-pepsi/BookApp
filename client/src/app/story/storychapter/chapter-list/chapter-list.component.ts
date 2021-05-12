@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Chapter } from 'src/app/_models/chapter.model';
+import { Chapter } from 'src/app/_models/chapter';
 import { StoryService } from 'src/app/_services/story.service';
 import { StorychapterService } from 'src/app/_services/storychapter.service';
 
@@ -17,9 +17,11 @@ export class ChapterListComponent implements OnInit {
       this.storyChapterService.refreshList(this.storyService.formData.id);
   }
   populateForm(selectedRecord: Chapter) {
-    console.log(selectedRecord);
+
     this.storyChapterService.formData = Object.assign({},selectedRecord);
+    console.log(this.storyChapterService.formData);
     this.goForm.emit(true);
 
   }
+
 }

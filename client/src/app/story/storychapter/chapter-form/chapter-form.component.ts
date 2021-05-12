@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { formatArrayBuffer } from '@microsoft/signalr/dist/esm/Utils';
-import { Chapter } from 'src/app/_models/chapter.model';
+import { Chapter } from 'src/app/_models/chapter';
 import { StoryService } from 'src/app/_services/story.service';
 import { StorychapterService } from 'src/app/_services/storychapter.service';
 

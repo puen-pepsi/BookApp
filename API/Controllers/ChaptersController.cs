@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -26,8 +27,17 @@ namespace API.Controllers
             var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
             if(ChapterList == null)
                 return NotFound();
+                
+            return Ok(_mapper.Map<IEnumerable<StoryChapter>,IEnumerable<StoryChapterDto>>(ChapterList));
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetChapterById(int StoryId,int id)
+        {
+            var Chapter = await _unitOfWork.StoryRepository.GetStoryChapterById(id);
+            if(Chapter == null)
+                return NotFound();
 
-            return Ok(ChapterList);
+            return Ok(_mapper.Map<StoryChapter,StoryChapterDto>(Chapter));
         }
         [HttpPost]
         public async Task<ActionResult> CreateChapter(int storyId,[FromBody] StoryChapterDto storyChapterDto)
@@ -42,8 +52,16 @@ namespace API.Controllers
             var chapter = _mapper.Map<StoryChapter>(storyChapterDto);
 
             story.Chapters.Add(chapter);
-            if(await _unitOfWork.Complete()) {
-               var ChapterToReturn = _mapper.Map<StoryChapterDto>(chapter);
+            if(await _unitOfWork.Complete()) { 
+
+                //    var pub = new Published{
+                //        PublishedDate = DateTime.Now,
+                //        StoryChapterId = chapter.Id
+                //    };
+                //    _unitOfWork.StoryRepository.AddPublished(pub);
+                //    await _unitOfWork.Complete();
+                     var ChapterToReturn = _mapper.Map<StoryChapterDto>(chapter);
+
                 // return CreatedAtAction("GetStory",new{id = storyToReturn.StoryId},storyToReturn);
                 return Ok(ChapterToReturn);
             }           

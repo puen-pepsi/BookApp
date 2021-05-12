@@ -30,6 +30,9 @@ namespace API.Helpers
                 .ForMember(dest => dest.StoryId,ex => ex.MapFrom(src => src.Id));
             CreateMap<PhotoStory, PhotoStoryResource>();
             CreateMap<StoryChapterDto,StoryChapter>().ReverseMap();
+            CreateMap<Published,PublishedDto>().ReverseMap();
+            // CreateMap<StoryChapter,StoryChapterPublicDto>()
+            //     .ForMember(pub => pub.Published, opt => opt.MapFrom(p => new PublishedDto { Id = p.Id} ))
 
         }
     }

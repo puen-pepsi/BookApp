@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Chapter } from '../_models/chapter.model';
+import { Chapter } from '../_models/chapter';
 import { StoryService } from './story.service';
 
 @Injectable({
@@ -28,6 +28,7 @@ export class StorychapterService {
     this.http.get(this.baseUrl + 'story/'+ storyId +'/chapter')
       .toPromise()
       .then(res => this.list = res as Chapter[]);
+
   }
   // getAllGenre(){
   //   return this.http.get(this.baseUrl + 'story/GetAllGenre') ;

@@ -55,7 +55,6 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
     return `/assets/images/no-image.jpeg`;
   }
   public UploadImage = (files) => {
-    console.log(files);
     if (files.length === 0) {
       return;
     }

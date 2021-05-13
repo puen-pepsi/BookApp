@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { formatArrayBuffer } from '@microsoft/signalr/dist/esm/Utils';
+import { ToastrService } from 'ngx-toastr';
 import { Chapter } from 'src/app/_models/chapter';
 import { StoryService } from 'src/app/_services/story.service';
 import { StorychapterService } from 'src/app/_services/storychapter.service';
@@ -12,8 +13,11 @@ import { StorychapterService } from 'src/app/_services/storychapter.service';
 })
 export class ChapterFormComponent implements OnInit {
   @Output() goList = new EventEmitter();
+  publishCheck:boolean;
+
   constructor(public storyChapterService:StorychapterService,
-              public storyService:StoryService) { }
+              public storyService:StoryService,
+              private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,20 +29,23 @@ export class ChapterFormComponent implements OnInit {
     this.updateRecord(form);
   }
   insertRecord(form:NgForm) {
-    this.storyChapterService.postStoryChapter().subscribe(
+    this.storyChapterService.postStoryChapter(this.publishCheck).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.resetForm(form);
         this.storyChapterService.refreshList(this.storyService.formData.id);
         this.goList.emit(false);
+        this.toastr.success("Add Chapter Success","Infomation");
+
       },
       err => {
+        this.toastr.error("!!!UnSuccess","Infomation");
         console.log(err);
       }
     );
   }
   updateRecord(form: NgForm) {
-    this.storyChapterService.putStoryChapter().subscribe(
+    this.storyChapterService.putStoryChapter(this.publishCheck).subscribe(
       res => {
         this.resetForm(form);
         this.storyChapterService.refreshList(this.storyService.formData.id);
@@ -57,4 +64,7 @@ export class ChapterFormComponent implements OnInit {
     this.storyChapterService.formData = new Chapter();
     this.goList.emit(false);
   }
+    createPublish(chk:boolean){
+      this.publishCheck = chk;
+    }
 }

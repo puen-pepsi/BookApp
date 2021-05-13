@@ -39,8 +39,8 @@ namespace API.Controllers
 
             return Ok(_mapper.Map<StoryChapter,StoryChapterDto>(Chapter));
         }
-        [HttpPost]
-        public async Task<ActionResult> CreateChapter(int storyId,[FromBody] StoryChapterDto storyChapterDto)
+        [HttpPost("{publishNow}")]
+        public async Task<ActionResult> CreateChapter(int storyId,[FromBody] StoryChapterDto storyChapterDto,bool publishNow)
         {
             if(!ModelState.IsValid){
                 return BadRequest();
@@ -50,16 +50,17 @@ namespace API.Controllers
                 return NotFound();
 
             var chapter = _mapper.Map<StoryChapter>(storyChapterDto);
-
+            
             story.Chapters.Add(chapter);
             if(await _unitOfWork.Complete()) { 
-
-                //    var pub = new Published{
-                //        PublishedDate = DateTime.Now,
-                //        StoryChapterId = chapter.Id
-                //    };
-                //    _unitOfWork.StoryRepository.AddPublished(pub);
-                //    await _unitOfWork.Complete();
+                if(publishNow){
+                   var pub = new Published{
+                       Created = DateTime.Now,
+                       StoryChapterId = chapter.Id
+                   };
+                   _unitOfWork.StoryRepository.AddPublished(pub);
+                    await _unitOfWork.Complete();
+                 }       
                      var ChapterToReturn = _mapper.Map<StoryChapterDto>(chapter);
 
                 // return CreatedAtAction("GetStory",new{id = storyToReturn.StoryId},storyToReturn);
@@ -67,8 +68,9 @@ namespace API.Controllers
             }           
             return BadRequest("Problem create Chapter");
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateStory(int id,[FromBody] StoryChapterDto storyChapterDto)
+
+        [HttpPut("{id}/{publish}")]
+        public async Task<ActionResult> UpdateStory([FromRoute]int id,[FromRoute] bool publish,[FromBody] StoryChapterDto storyChapterDto)
         {
 
             var chapterUpdate = await _unitOfWork.StoryRepository.GetStoryChapterById(id);
@@ -81,10 +83,22 @@ namespace API.Controllers
 
             _unitOfWork.StoryRepository.UpdateStoryChapter(chapterUpdate);
             if(await _unitOfWork.Complete()){
+                if(publish){
+                    var pub = new Published
+                    {
+                        Created = DateTime.Now,
+                        StoryChapterId = chapterUpdate.Id
+                    };
+                    _unitOfWork.StoryRepository.AddPublished(pub);
+                    await _unitOfWork.Complete();
+                }
+                
                 var chapterToReturn = _mapper.Map<StoryChapterDto>(chapterUpdate);
                 return Ok(chapterToReturn);
             }
             return BadRequest("Problem update story chapter");
         }
+
+
     }
 }

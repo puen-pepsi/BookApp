@@ -12,9 +12,10 @@
     </div>
     
     <div class="col-md-12 pr-0">
-      <button class="btn btn-danger Header" [disabled]="form.invalid" type="button"
-        (click)="resetForm(form)">PUBLISH</button>
-        <button class="btn btn-primary Header " type="submit" [disabled]="form.invalid">SAVE</button> 
+      <button class="btn btn-danger Header" #publish [disabled]="form.invalid" type="submit" 
+        (click)="createPublish(true)"><i class="fas fa-check"></i>  PUBLISH</button>
+        <button class="btn btn-primary Header " #save type="submit" [disabled]="form.invalid"
+        (click)="createPublish(false)"><i class="far fa-bookmark"></i>  SAVE</button> 
     </div>
   </form>
-  <button class="btn btn-primary" type="button" (click)="backToChapter()">Back To Chapter</button>
+  <button class="btn btn-primary" type="button" (click)="backToChapter()"><i class="fas fa-arrow-left"></i>  Back To Chapter</button>

@@ -62,6 +62,7 @@ export class StoryFormComponent implements OnInit {
         this.resetForm(form);
         this.storyService.refreshList();
         this.submitSuccess.emit(false);
+        this.toastr.success("Add Story Success","Information")
       },
       err => {
         console.log(err);

@@ -14,11 +14,11 @@ export class StorychapterService {
   constructor(private http:HttpClient,
             public storyService:StoryService) { }
   
-  postStoryChapter(){
-    return this.http.post(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter' ,this.formData);
+  postStoryChapter(pub:boolean){
+    return this.http.post(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter/'+ pub ,this.formData);
   }
-  putStoryChapter(){
-    return this.http.put(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter/'+this.formData.id, this.formData);
+  putStoryChapter(pub:boolean){
+    return this.http.put(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter/'+this.formData.id+'/'+pub, this.formData);
   }
   // deleteStory(id:number){
   //   return this.http.delete(this.baseUrl + 'story/' + id);

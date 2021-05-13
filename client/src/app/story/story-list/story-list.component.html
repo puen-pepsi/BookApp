@@ -2,7 +2,7 @@
 <div class="tab-panel">
     <button type="button" class="btn btn-outline-primary Header" 
         (click) = "ChangeForm()">
-        Create A Story
+        <i class="fas fa-plus"></i> Create A Story
       </button>
     <tabset class="member-tabset">
         <tab heading='Stories'>
@@ -27,7 +27,7 @@
                               <td>{{row.views}}</td>
                               <td>
                                 <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
-                                <button (click)="populateForm(row)" class='btn btn-outline-primary btn-sm '>EXPLORE</button>
+                                <button (click)="populateForm(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-search"></i> EXPLORE  </button>
                               </td>
                             </tr>
                           </tbody>

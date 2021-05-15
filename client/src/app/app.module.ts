@@ -46,6 +46,7 @@ import { StoryFormImageComponent } from './story/story-form-image/story-form-ima
 import { StorychapterComponent } from './story/storychapter/storychapter.component';
 import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
 import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CKEditorModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

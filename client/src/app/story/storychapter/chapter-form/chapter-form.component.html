@@ -7,8 +7,9 @@
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">Content  <i class="fas fa-info-circle"></i></label>
-      <textarea class="form-control" placeholder="content..." rows="6" name="content" #content="ngModel"
-        [(ngModel)]="storyChapterService.formData.content" required></textarea>
+      <ckeditor [editor]="Editor" [config]='config' (change)="onChange($event)" 
+        data={{storyChapterService.formData.content}}>
+    </ckeditor>
     </div>
     
     <div class="col-md-12 pr-0">

@@ -97,6 +97,7 @@ namespace API.Data
             return await _context.StoryChapters
                             .Include(c => c.Published)
                             .Where(c => c.StoryId == id)
+                            .OrderByDescending(c => c.Order)
                             .ToListAsync();
         }
 

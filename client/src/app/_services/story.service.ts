@@ -23,7 +23,7 @@ export class StoryService {
     return this.http.delete(this.baseUrl + 'story/' + id);
   }
   refreshList() {
-    this.formData
+    // this.formData
     this.http.get(this.baseUrl + 'story')
       .toPromise()
       .then(res => this.list = res as Story[]);

@@ -7,9 +7,14 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
-         <tr *ngFor="let row of storyChapterService.list" >
-            <td>{{row.order}}</td>
+      <tbody>       
+         <tr *ngFor="let row of storyChapterService.list">
+            <td>             
+              <button (click)="chapterUp(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-arrow-up"></i></button>
+              <!-- {{row.order}} -->
+              <button (click)="chapterDown(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-arrow-down"></i></button>
+            
+            </td>
           <td>{{row.chapterName}}</td>
           <!-- <td>{{row.content}}</td> -->       
           <!-- <td>{{(row.publishedCreated | date:'short') || "Waiting to Publish"}}</td> -->
@@ -23,3 +28,5 @@
         </tr> 
       </tbody>
 </table>
+
+<!-- <p>{{storyChapterService.formData | json}}</p> -->

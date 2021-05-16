@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
-using API.Interfaces;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using API.Interfaces;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -50,7 +51,7 @@ namespace API.Controllers
                 return NotFound();
 
             var chapter = _mapper.Map<StoryChapter>(storyChapterDto);
-            
+            var cCount = story.Chapters.Count.ToString();
             story.Chapters.Add(chapter);
             if(await _unitOfWork.Complete()) { 
                 if(publishNow){
@@ -70,7 +71,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}/{publish}")]
-        public async Task<ActionResult> UpdateStory([FromRoute]int id,[FromRoute] bool publish,[FromBody] StoryChapterDto storyChapterDto)
+        public async Task<ActionResult> UpdateStoryChapter([FromRoute]int id,[FromRoute] bool publish,[FromBody] StoryChapterDto storyChapterDto)
         {
 
             var chapterUpdate = await _unitOfWork.StoryRepository.GetStoryChapterById(id);
@@ -98,7 +99,35 @@ namespace API.Controllers
             }
             return BadRequest("Problem update story chapter");
         }
+        [HttpPut]
+        [Route("Up/{order}")]
+        public async Task<IActionResult> Up([FromRoute]int storyId,[FromRoute]int order)
+        {
+            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
+            if(chapterlist.Count() == order)return NoContent();
+            var chapterUp = chapterlist.Where(o => o.Order == order).FirstOrDefault();
+             var chapterDown = chapterlist.Where( o => o.Order == order+1).FirstOrDefault();
+            chapterUp.Order = chapterUp.Order + 1;
+            chapterDown.Order = chapterDown.Order - 1;
+            await _unitOfWork.Repository.UpdateAsync<StoryChapter>(chapterUp);
+            await _unitOfWork.Repository.UpdateAsync<StoryChapter>(chapterDown);
+            return Ok("up");
+        }
+        [HttpPut]
+        [Route("Down/{order}")]
+        public async Task<IActionResult> Down([FromRoute]int storyId,[FromRoute]int order)
+        {                
 
-
+            if(order == 1)return NoContent();
+            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
+            var chapterDown = chapterlist.Where( o => o.Order == order).FirstOrDefault();
+            var chapterUp = chapterlist.Where(o => o.Order == order-1).FirstOrDefault();
+            chapterDown.Order = chapterDown.Order - 1;
+            chapterUp.Order = chapterUp.Order +1;
+            await _unitOfWork.Repository.UpdateAsync<StoryChapter>(chapterDown);  
+            await _unitOfWork.Repository.UpdateAsync<StoryChapter>(chapterUp);
+            
+            return Ok("down");
+        }
     }
 }

@@ -47,7 +47,6 @@ namespace API.Controllers
                 return NotFound();
             return Ok(userStory);
         }
-        
         [HttpPost]
         public async Task<ActionResult> CreateStory([FromBody] StoryDto storyDto)
         {
@@ -109,6 +108,13 @@ namespace API.Controllers
             var languageList = await _unitOfWork.Repository.SelectAll<Language>();
 
             return languageList;
+        }
+        [Route("GetAllState")]
+        public async Task<IEnumerable<Status>> GetAllState()
+        {
+            var StatusList = await _unitOfWork.Repository.SelectAll<Status>();
+
+            return StatusList;
         }
     }
 }

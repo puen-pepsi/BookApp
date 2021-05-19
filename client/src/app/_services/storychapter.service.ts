@@ -26,12 +26,15 @@ export class StorychapterService {
   // deleteStory(id:number){
   //   return this.http.delete(this.baseUrl + 'story/' + id);
   // }
+  putPublish(id:number){
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/published/' +id,null,{ responseType: 'text' });
+  }
   putChapterUp(order:number){
-    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Up/' +order,this.formData,{ responseType: 'text' });
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Up/' +order,null,{ responseType: 'text' });
   }
   putChapterDown(order:number){
     
-    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Down/'+order,this.formData,{ responseType: 'text' });
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Down/'+order,null,{ responseType: 'text' });
       
   }
   refreshList(storyId:number) {
@@ -41,10 +44,4 @@ export class StorychapterService {
       .then(res => this.list = res as Chapter[]);
 
   }
-  // getAllGenre(){
-  //   return this.http.get(this.baseUrl + 'story/GetAllGenre') ;
-  // }
-  // getAllLanguage(){
-  //   return this.http.get(this.baseUrl + 'story/GetAllLanguage') ;
-  // }
 }

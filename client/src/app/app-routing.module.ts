@@ -15,6 +15,9 @@ import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailedResolver } from './_resolvers/member-detialed.resolver';
 import { StoryComponent } from './story/story.component';
+import { ShowListComponent } from './ShowStory/show-list/show-list.component';
+import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
+import { ShowDetailedResolver } from './_resolvers/show-detailed.resolver';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -28,6 +31,8 @@ const routes: Routes = [
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
       {path:'story',component:StoryComponent},
+      {path:'showstory',component:ShowListComponent},
+      {path:'showstory/:storyname',component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
       {path:'messages',component:MessagesComponent},
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard]},
     ]

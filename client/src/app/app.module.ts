@@ -47,6 +47,9 @@ import { StorychapterComponent } from './story/storychapter/storychapter.compone
 import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
 import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ShowListComponent } from './ShowStory/show-list/show-list.component';
+import { ShowCardComponent } from './ShowStory/show-card/show-card.component';
+import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +89,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     StorychapterComponent,
     ChapterFormComponent,
     ChapterListComponent,
+    ShowListComponent,
+    ShowCardComponent,
+    ShowDetailComponent,
   ],
   imports: [
     BrowserModule,

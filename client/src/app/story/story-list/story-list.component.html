@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                               <th>Image/StoryName</th>
+                              <th>State</th>
                               <th>Rating</th>
                               <th>Views</th>
                               <th></th>
@@ -22,7 +23,7 @@
                               <td><img [src]="createImagePath(row.imageUrl)" alt={{row.storyName}} >
                                 {{row.storyName}}
                               </td>
-                              <!-- Recent Chapter -->
+                              <td>{{row.state}}</td>
                               <td>{{row.rating}}</td>
                               <td>{{row.views}}</td>
                               <td>

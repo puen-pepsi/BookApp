@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using API.Entities;
 
 namespace API.DTOs
 {
-    public class StoryDto
+    public class StoryDetailDto
     {
         public int StoryId { get; set; }
         public string StoryName { get; set; }
@@ -19,8 +17,11 @@ namespace API.DTOs
         public int Views { get; set; }
         public string UserName { get; set; }
         public DateTime Created { get; set; }
+        public ICollection<StoryChapterDto> Chapters {get; set;}
 
-        
-
+        public StoryDetailDto()
+        {
+            Chapters = new Collection<StoryChapterDto>();
+        }
     }
 }

@@ -17,6 +17,7 @@ export class StoryFormComponent implements OnInit {
   isCreate:boolean;
   GenreList : any=[];
   LanguageList : any=[];
+  StateList : any=[];
   response:{dbPath:''};
   constructor(public storyService:StoryService,
     private photoSevice:PhotoService,
@@ -24,6 +25,7 @@ export class StoryFormComponent implements OnInit {
   ngOnInit(): void {
     this.getGenreList();
     this.getLanguageList();
+    this.getState();
   }
   uploadFinished = (event) =>{
     
@@ -82,6 +84,11 @@ export class StoryFormComponent implements OnInit {
     this.storyService.getAllLanguage().subscribe(res =>{
       this.LanguageList=res;
     });
+  }
+  getState(){
+    this.storyService.getAllState().subscribe(res=>{
+      this.StateList=res;
+    })
   }
   selectTab(tabId: number){
     this.StoryTabs.tabs[tabId].active = true;

@@ -1,4 +1,4 @@
-<!-- <h4>Story</h4> -->
+<h4>Story</h4>
 <div class="tab-panel header">
   <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
     <i class="fas fa-arrow-left"></i> Back to Stories
@@ -51,6 +51,19 @@
                     name="language" required #genre="ngModel">
                     <option value="" selected>--Select Language--</option>
                     <option *ngFor="let m of LanguageList" value="{{ m.description }}">{{ m.description }}</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="mb-3 row">
+                <div class="col-md-2">
+                  <label for="state" class="form-label">State <i class="fas fa-info-circle"></i></label>
+                </div>
+                <div class="col-md-6">
+                  <select id="state" class="form-control" [(ngModel)]="storyService.formData.state"
+                    name="state" required #genre="ngModel">
+                    <option value="" selected>--Select State--</option>
+                    <option *ngFor="let r of StateList" value="{{ r.description }}">{{ r.description }}</option>
                   </select>
                 </div>
 

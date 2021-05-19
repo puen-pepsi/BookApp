@@ -42,6 +42,7 @@ export class MembersService {
   }
   getMembers(UserParams: UserParams){
     var response =this.memberCache.get(Object.values(UserParams).join('-'));
+    // console.log(response);
     if(response){
       return of(response);
     }
@@ -52,10 +53,11 @@ export class MembersService {
     params = params.append('maxAge',UserParams.maxAge.toString());
     params = params.append('gender',UserParams.gender);
     params = params.append('orderBy',UserParams.orderBy);
-
+    // console.log(params);
     return getPaginatedResult<Member[]>(this.baseUrl+'users',params,this.http)
       .pipe(map(response =>{
         this.memberCache.set(Object.values(UserParams).join('-'),response);
+        // console.log(response);
         return response;
       }))
   }
@@ -66,7 +68,7 @@ export class MembersService {
     const member = [...this.memberCache.values()]
       .reduce((arr,elem)=> arr.concat(elem.result),[])
       .find((member:Member)=> member.username === username);
-
+      console.log(member);
       if(member){
         return of(member);
       }

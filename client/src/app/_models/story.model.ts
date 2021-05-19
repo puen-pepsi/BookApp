@@ -5,6 +5,7 @@ export class Story{
         genre :string;
         language:string;
         imageUrl:string;
+        state:string;
         rating:number;
         views:number;
         created:Date;
@@ -17,6 +18,7 @@ export class Story{
                 this.language="";
                 this.imageUrl="";
                 this.views=0;
+                this.state="";
                 this.rating=0;      
         }
 }

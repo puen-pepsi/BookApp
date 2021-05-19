@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./story-list.component.css']
 })
 export class StoryListComponent implements OnInit {
-  @Output()  CreateActive = new EventEmitter();
+  @Output()  StoryDetail = new EventEmitter();
   @Output()  StoryId = new EventEmitter();
   baseUrl = environment.resourceUrl;
   constructor(public storyService:StoryService) { }
@@ -18,11 +18,11 @@ export class StoryListComponent implements OnInit {
     this.storyService.refreshList();
   }
   ChangeForm(){
-    this.CreateActive.emit(true);
+    this.StoryDetail.emit(true);
   }
   populateForm(selectedRecord: Story) {
     this.storyService.formData = Object.assign({},selectedRecord);
-    this.CreateActive.emit(true);
+    this.StoryDetail.emit(true);
 
   }
   public createImagePath = (serverPath: string) => {

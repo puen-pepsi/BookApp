@@ -51,7 +51,8 @@ namespace API.Controllers
                 return NotFound();
 
             var chapter = _mapper.Map<StoryChapter>(storyChapterDto);
-            var cCount = story.Chapters.Count.ToString();
+            int cCount = story.Chapters.Count;
+            chapter.Order = cCount + 1;
             story.Chapters.Add(chapter);
             if(await _unitOfWork.Complete()) { 
                 if(publishNow){
@@ -98,6 +99,19 @@ namespace API.Controllers
                 return Ok(chapterToReturn);
             }
             return BadRequest("Problem update story chapter");
+        }
+        [HttpPut("published/{id}")]
+        public async Task<IActionResult> published([FromRoute]int storyId,int id)
+        {
+                    var pub = new Published
+                    {
+                        Created = DateTime.Now,
+                        StoryChapterId = id
+                    };
+                    _unitOfWork.StoryRepository.AddPublished(pub);
+                    if(await _unitOfWork.Complete())
+                        return Ok("published");
+                return NoContent();
         }
         [HttpPut]
         [Route("Up/{order}")]

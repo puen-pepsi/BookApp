@@ -23,7 +23,7 @@
          
           <td>
             <button (click)="populateForm(row)" class='btn btn-primary btn-sm '><i class="fas fa-edit"></i> EDIT</button>
-            <button (click)="publish(row)" class='btn btn-success btn-sm '><i class="fas fa-check"></i> PUBLISH</button>           
+            <button  [disabled]="row.publishedCreated !== '0001-01-01T00:00:00'" (click)="publish(row)" class='btn btn-success btn-sm '><i class="fas fa-check"></i> PUBLISH</button>           
           </td>
         </tr> 
       </tbody>

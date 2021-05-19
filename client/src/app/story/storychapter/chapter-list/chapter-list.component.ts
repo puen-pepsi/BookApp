@@ -49,4 +49,15 @@ export class ChapterListComponent implements OnInit {
       }
     )
   }
+  publish(selectedRow:Chapter){
+    this.storyChapterService.putPublish(selectedRow.id).subscribe(
+      res=>{
+        console.log(res);
+        this.storyChapterService.refreshList(this.storyService.formData.id);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
 }

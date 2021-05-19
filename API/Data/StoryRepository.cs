@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -37,7 +40,7 @@ namespace API.Data
         {
             _context.Stories.Remove(story);
         }
-
+        
         public async Task<IEnumerable<Story>> GetStoryAsync(string username)
         {   
             return await _context.Stories
@@ -66,7 +69,14 @@ namespace API.Data
                 .Where(x => x.UserName == username)
                 .ToListAsync();
         }
-
+        public async Task<Story> GetStoryByName(string storyName)
+        {
+             return await _context.Stories
+                            .Include(s => s.Chapters)
+                                .ThenInclude(sc => sc.Published)
+                            .Include(p => p.PhotoStories)
+                            .SingleOrDefaultAsync(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower());
+        }
         public Task<StoryChapter> GetStoryChapter(int id)
         {
             throw new System.NotImplementedException();
@@ -111,6 +121,26 @@ namespace API.Data
             return  await _context.Genres.ToListAsync();
         }
 
-       
+        public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
+        {
+            var query = _context.Stories.AsQueryable();
+            if(storyParams.Genre != ""){
+                query = query.Where(s => s.Genre == storyParams.Genre);
+            }
+            // query = query.Where(a => a.UserName == storyParams.Author);
+            query = storyParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending( s => s.Created),
+                "rating" => query.OrderByDescending(s => s.Rating),
+                "views" => query.OrderByDescending(s => s.Views),
+                _ => query.OrderBy(s=>s.Created)
+            };
+            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(
+                    _mapper.ConfigurationProvider).AsNoTracking(),
+                    storyParams.PageNumber,storyParams.PageSize);
+
+        }
+
+        
     }
 }

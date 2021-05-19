@@ -34,5 +34,7 @@ export class StoryService {
   getAllLanguage(){
     return this.http.get(this.baseUrl + 'story/GetAllLanguage') ;
   }
-  
+  getAllState(){
+    return this.http.get(this.baseUrl + 'story/GetAllState')
+  }
 }

@@ -1,5 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { env } from 'process';
 import { PhotoService } from 'src/app/_services/photo.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { environment } from 'src/environments/environment';
@@ -14,7 +15,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
   @Output() imageChange = new EventEmitter();
 
   @ViewChild('fileInput') fileInput:ElementRef;
-  baseUrl = environment.resourceUrl;
+  baseUrl = environment.apiUrl;
   public progress: number;
   public message: string;
   constructor(private renderer:Renderer2,
@@ -62,7 +63,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    this.http.post('https://localhost:5001/api/story/photos', formData, {reportProgress: true, observe: 'events'})
+    this.http.post(this.baseUrl + '/story/photos', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

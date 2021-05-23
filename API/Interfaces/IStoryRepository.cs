@@ -19,11 +19,10 @@ namespace API.Interfaces
         Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
         Task<Story> GetStoryByName(string storyName);
-         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id);
+         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published);
          Task<StoryChapter> GetStoryChapterById(int id);
          void DeleteStory(Story story);
 
-         Task<IEnumerable<Genre>> GetAllGenre();
 
     }
 }

@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserManagementComponent } from '../admin/user-management/user-management.component';
+import { Chapter } from '../_models/chapter';
 import { ShowStory } from '../_models/showstory';
 import { StoryParams } from '../_models/storyParams';
 import { User } from '../_models/user';
@@ -20,6 +21,7 @@ export class ShowstoryService {
   showStoryCache = new Map();
   user :User;
   storyParams:StoryParams;
+  list : Chapter[];
   constructor(private http:HttpClient,private accountService:AccountService) { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
@@ -59,7 +61,7 @@ export class ShowstoryService {
     // if(member !== undefined) return of(member);
     const story = [...this.showStoryCache.values()]
       .reduce((arr,elem)=> arr.concat(elem.result),[])
-      .find((showStory:ShowStory)=> showStory.id === storyId);
+      .find((showStory:ShowStory)=> showStory.storyId === storyId);
 
       if(story){
         return of(story);
@@ -77,7 +79,11 @@ export class ShowstoryService {
       }
       return this.http.get<ShowStory>(this.baseUrl+'showstory/'+storyName);
   }
-
+  getStoryChapter(storyId:number,published:boolean){
+    this.http.get(this.baseUrl + 'story/'+ storyId +'/chapter/GetChapters/'+published)
+      .toPromise()
+      .then(res => this.list = res as Chapter[]);
+  }
   getGenreList(){
     return this.http.get(this.baseUrl + 'story/GetAllGenre') ;
   }

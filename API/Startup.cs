@@ -46,6 +46,10 @@ namespace API
         {
             services.AddApplicationServices(_config);
             services.AddControllers();
+            // services.AddControllersWithViews()
+            //     .AddNewtonsoftJson(options =>
+            //     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            // );
             services.AddCors();
             services.AddIdentityServices(_config);
             services.AddSignalR();

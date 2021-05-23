@@ -1,0 +1,13 @@
+<div class="mat-h5">Please rate this app!</div>
+<!-- <button mat-icon-button color="primary" *ngFor="let r of ratingArr; index as i" 
+    (click)="onClick(i)">
+        <span class="material-icons">
+            {{ returnStar(i) }}
+        </span>
+</button> -->
+    <div class="icon">
+        <mat-icon *ngFor="let s of ratingArr;index as i">star</mat-icon>
+    </div>
+<p class="body-2">
+    Your rated <span class="body-2">{{rating}}</span> / <span class="body-2">{{starCount}}</span>
+</p>

@@ -1,0 +1,39 @@
+<table class="table table-borderless">
+    <!-- <thead>
+        <tr>
+          <th>Order</th>
+          <th>Chapter Name</th>
+          <th>Published</th>
+          <th></th>
+        </tr>
+      </thead> -->
+      <tbody>       
+         <tr *ngFor="let row of showstoryService.list">
+          <mat-card-header>
+            {{row.chapterName | uppercase}}
+          </mat-card-header>
+          {{row.publishedCreated|timeago}}
+          <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+          <mat-card-content>
+            <div [innerHtml] = "row.content"></div>
+              <!-- (yourString.Length <= maxLength) ? yourString : yourString.Substring(0, maxLength) + "..."; -->
+              <!-- {{row.content}}; -->
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+          <hr/>
+          <!-- <td>{{row.order}}</td>
+          <td>{{row.chapterName}}</td>
+          <td>{{row.publishedCreated !== "0001-01-01T00:00:00"? (row.publishedCreated | date:'short' ): "Waiting to Publish"}}</td>
+         
+          <td>
+            <button (click)="populateForm(row)" class='btn btn-primary btn-sm '><i class="fas fa-edit"></i> EDIT</button>
+          </td> -->
+        </tr> 
+      </tbody>
+</table>
+
+<!-- <p>{{storyChapterService.formData | json}}</p> -->
+

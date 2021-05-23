@@ -25,7 +25,7 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
-
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
@@ -51,7 +51,8 @@ Editor.builtinPlugins = [
 	Indent,
 	IndentBlock,
 	Italic,
-	Paragraph
+	Paragraph,
+	Alignment
 ];
 
 export default Editor;

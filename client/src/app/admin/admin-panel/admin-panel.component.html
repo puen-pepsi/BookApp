@@ -21,6 +21,11 @@
                 <app-language></app-language>
             </div>
         </tab>
+        <tab heading='Tags' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-tag></app-tag>
+            </div>
+        </tab>
         <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
             <div class="container">
                 <app-photo-management></app-photo-management>

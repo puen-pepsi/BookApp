@@ -54,7 +54,7 @@ namespace API.Controllers
                 return BadRequest();
             }
             storyDto.UserName= User.GetUsername();
-            storyDto.Created = DateTime.Now;
+            storyDto.Created = DateTime.UtcNow;
             var createStory = _mapper.Map<Story>(storyDto);
 
             _unitOfWork.StoryRepository.AddStory(createStory);
@@ -82,7 +82,13 @@ namespace API.Controllers
             }
             return BadRequest("Problem update story");
         }
-
+        // [HttpPost]
+        // [Route("rate-story")]
+        // public async Task<ActionResult> RateStory(int rate,int storyId)
+        // {
+        //     var storyRate = _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+        //     storyRate
+        // }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStory(int id)
         {
@@ -96,9 +102,9 @@ namespace API.Controllers
             return BadRequest("Problem delete story");
         }
         [Route("GetAllGenre")]
-        public async Task<IEnumerable<Genre>> GetAllGenre()
+        public async Task<IEnumerable<Tag>> GetAllGenre()
         {
-            var genrelist = await _unitOfWork.Repository.SelectAll<Genre>();
+            var genrelist = await _unitOfWork.Repository.SelectAll<Tag>();
 
             return genrelist;
         }

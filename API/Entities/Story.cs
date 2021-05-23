@@ -21,12 +21,14 @@ namespace API.Entities
         public virtual ICollection<StoryChapter> Chapters { get; set; }
         public virtual ICollection<StoryComment> PostComments { get; set; }
         public virtual ICollection<StoryTag> StoryTags { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
         public Story()
         {
             Chapters = new Collection<StoryChapter>();
             PostComments = new Collection<StoryComment>();
             StoryTags = new Collection<StoryTag>();
             PhotoStories = new Collection<PhotoStory>();
+            Ratings = new Collection<Rating>();
         }
     }
 }

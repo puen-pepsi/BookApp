@@ -50,7 +50,12 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ShowListComponent } from './ShowStory/show-list/show-list.component';
 import { ShowCardComponent } from './ShowStory/show-card/show-card.component';
 import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
-
+import { ShowChaptersComponent } from './ShowStory/show-chapters/show-chapters.component';
+import {MaterialModule} from './material.module';
+import { StarRatingComponent } from './star-rating/star-rating/star-rating.component';
+import {TagComponent} from './admin/tag/tag.component'
+import { TagFormComponent } from './admin/tag/tag-form/tag-form.component';
+import { StarRatingShowComponent } from './star-rating/star-rating-show/star-rating-show.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +97,11 @@ import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.compone
     ShowListComponent,
     ShowCardComponent,
     ShowDetailComponent,
+    ShowChaptersComponent,
+    StarRatingComponent,
+    TagComponent,
+    TagFormComponent,
+    StarRatingShowComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +112,8 @@ import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.compone
     ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule,
-    CKEditorModule
+    CKEditorModule,
+    MaterialModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

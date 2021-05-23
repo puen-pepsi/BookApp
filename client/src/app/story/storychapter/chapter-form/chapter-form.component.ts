@@ -26,7 +26,7 @@ export class ChapterFormComponent implements OnInit {
   public config = {
       toolbar: [ 'undo', 'redo','|',
                 'heading', '|',
-                '|', 'outdent', 'indent', 
+                '|', 'outdent', 'indent', '|','alignment:left', 'alignment:center','alignment:right' ,
                 'bold', 'italic','blockQuote','horizontalLine',
                 '|','fontsize', 'fontFamily','fontColor', 'fontBackgroundColor',
                 '|', 
@@ -117,8 +117,6 @@ export class ChapterFormComponent implements OnInit {
   }
   public onChange( { editor }: ChangeEvent ) {
     this.storyChapterService.formData.content = editor.getData();
-
-    console.log( this.storyChapterService.formData.content );
   }
   onSubmit(form:NgForm) {
     // console.log(form);
@@ -132,7 +130,7 @@ export class ChapterFormComponent implements OnInit {
       res => {
         // console.log(res);
         this.resetForm(form);
-        this.storyChapterService.refreshList(this.storyService.formData.id);
+        this.storyChapterService.refreshList(this.storyService.formData.id,false);
         this.goList.emit(false);
         this.toastr.success("Add Chapter Success","Infomation");
 
@@ -147,7 +145,7 @@ export class ChapterFormComponent implements OnInit {
     this.storyChapterService.putStoryChapter(this.publishCheck).subscribe(
       res => {
         this.resetForm(form);
-        this.storyChapterService.refreshList(this.storyService.formData.id);
+        this.storyChapterService.refreshList(this.storyService.formData.id,false);
         this.goList.emit(false);
       },
       err => {

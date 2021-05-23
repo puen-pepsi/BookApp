@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,6 +57,7 @@ namespace API.Data
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
                             .Include(p => p.PhotoStories)
+                            .Include(s => s.Ratings)
                             .SingleOrDefaultAsync(s => s.Id == id);
         }
         // public async Task<Story> GetStoryById(int id)
@@ -102,11 +104,19 @@ namespace API.Data
                             .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id)
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published = false)
         {
-            return await _context.StoryChapters
+            if(!published){
+                return await _context.StoryChapters
                             .Include(c => c.Published)
                             .Where(c => c.StoryId == id)
+                            .OrderByDescending(c => c.Order)
+                            .ToListAsync();
+            }
+                    
+            return await _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Where(c => c.StoryId == id && c.Published != null)
                             .OrderByDescending(c => c.Order)
                             .ToListAsync();
         }
@@ -116,10 +126,7 @@ namespace API.Data
             throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<Genre>> GetAllGenre()
-        {
-            return  await _context.Genres.ToListAsync();
-        }
+      
 
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {

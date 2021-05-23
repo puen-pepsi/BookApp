@@ -37,9 +37,9 @@ export class StorychapterService {
     return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Down/'+order,null,{ responseType: 'text' });
       
   }
-  refreshList(storyId:number) {
+  refreshList(storyId:number,published:boolean) {
     // this.formData
-    this.http.get(this.baseUrl + 'story/'+ storyId +'/chapter')
+    this.http.get(this.baseUrl + 'story/'+ storyId +'/chapter/GetChapters/'+published)
       .toPromise()
       .then(res => this.list = res as Chapter[]);
 

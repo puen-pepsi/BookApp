@@ -1,7 +1,7 @@
 import { Photo } from "./photo";
 
 export interface ShowStory {
-    id:number;
+    storyId:number;
     storyName : string;
     description :string;       
     genre :string;

@@ -321,6 +321,30 @@ namespace API.Migrations
                     b.ToTable("Publishes");
                 });
 
+            modelBuilder.Entity("API.Entities.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Rated")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StoryRatedId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserRatedId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryRatedId");
+
+                    b.HasIndex("UserRatedId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("API.Entities.Status", b =>
                 {
                     b.Property<int>("Id")
@@ -397,6 +421,9 @@ namespace API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("views")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -641,6 +668,25 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Entities.Rating", b =>
+                {
+                    b.HasOne("API.Entities.Story", "StoryRated")
+                        .WithMany("Ratings")
+                        .HasForeignKey("StoryRatedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "UserRated")
+                        .WithMany()
+                        .HasForeignKey("UserRatedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StoryRated");
+
+                    b.Navigation("UserRated");
+                });
+
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
                     b.HasOne("API.Entities.AppUser", null)
@@ -788,6 +834,8 @@ namespace API.Migrations
                     b.Navigation("PhotoStories");
 
                     b.Navigation("PostComments");
+
+                    b.Navigation("Ratings");
 
                     b.Navigation("StoryTags");
                 });

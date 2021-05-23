@@ -21,11 +21,11 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
 
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<StoryChapter>>> GetChapterByStoryId(int storyId)
+        [HttpGet("GetChapters/{published}")]
+        public async Task<ActionResult<IEnumerable<StoryChapter>>> GetChapters(int storyId,bool published=false)
         {
 
-            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
+            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId,published);
             if(ChapterList == null)
                 return NotFound();
                 
@@ -57,7 +57,7 @@ namespace API.Controllers
             if(await _unitOfWork.Complete()) { 
                 if(publishNow){
                    var pub = new Published{
-                       Created = DateTime.Now,
+                       Created = DateTime.UtcNow,
                        StoryChapterId = chapter.Id
                    };
                    _unitOfWork.StoryRepository.AddPublished(pub);
@@ -117,7 +117,7 @@ namespace API.Controllers
         [Route("Up/{order}")]
         public async Task<IActionResult> Up([FromRoute]int storyId,[FromRoute]int order)
         {
-            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
+            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId,false);
             if(chapterlist.Count() == order)return NoContent();
             var chapterUp = chapterlist.Where(o => o.Order == order).FirstOrDefault();
              var chapterDown = chapterlist.Where( o => o.Order == order+1).FirstOrDefault();
@@ -133,7 +133,7 @@ namespace API.Controllers
         {                
 
             if(order == 1)return NoContent();
-            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId);
+            var chapterlist = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId,false);
             var chapterDown = chapterlist.Where( o => o.Order == order).FirstOrDefault();
             var chapterUp = chapterlist.Where(o => o.Order == order-1).FirstOrDefault();
             chapterDown.Order = chapterDown.Order - 1;

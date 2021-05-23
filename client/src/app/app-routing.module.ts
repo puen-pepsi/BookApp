@@ -30,9 +30,9 @@ const routes: Routes = [
       {path:'members/:username',component:MemberDetailComponent,resolve:{member:MemberDetailedResolver}},
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
-      {path:'story',component:StoryComponent},
-      {path:'showstory',component:ShowListComponent},
-      {path:'showstory/:storyname',component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
+      {path:'mystory',component:StoryComponent},
+      {path:'stories',component:ShowListComponent},
+      {path:'stories/:storyname',component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
       {path:'messages',component:MessagesComponent},
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard]},
     ]

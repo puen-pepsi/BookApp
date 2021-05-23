@@ -15,7 +15,7 @@ namespace API.DTOs
         public string Language { get; set; }
         public string ImageUrl { get; set; }
         public int Rating { get; set; }
-        public string State { get; set; }
+        public string State { get; set; }="New";
         public int Views { get; set; }
         public string UserName { get; set; }
         public DateTime Created { get; set; }

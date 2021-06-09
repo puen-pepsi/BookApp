@@ -8,9 +8,12 @@ export interface ShowStory {
     language:string;
     imageUrl:string;
     rating:number;
+    totalRate:number;
+    totalChapter:number;
     views:number;
     created:Date;
     state:string;
     userName:string;
+    userPhoto:string;
     //photos: Photo[];
 }

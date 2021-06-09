@@ -56,6 +56,8 @@ namespace API.Data
             return await _context.Stories
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
+                            .Include(s=> s.Author)
+                                .ThenInclude(a => a.Photos)       
                             .Include(p => p.PhotoStories)
                             .Include(s => s.Ratings)
                             .SingleOrDefaultAsync(s => s.Id == id);
@@ -68,6 +70,9 @@ namespace API.Data
         public async Task<IEnumerable<Story>> GetStoryByUserName(string username)
         {                
             return await _context.Stories
+                .Include(s => s.Ratings)
+                .Include(s=> s.Author)
+                    .ThenInclude(a => a.Photos)  
                 .Where(x => x.UserName == username)
                 .ToListAsync();
         }
@@ -76,7 +81,10 @@ namespace API.Data
              return await _context.Stories
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
+                            .Include(s=> s.Author)
+                                .ThenInclude(a => a.Photos)  
                             .Include(p => p.PhotoStories)
+                            .Include(s => s.Ratings)
                             .SingleOrDefaultAsync(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower());
         }
         public Task<StoryChapter> GetStoryChapter(int id)
@@ -140,7 +148,7 @@ namespace API.Data
                 "created" => query.OrderByDescending( s => s.Created),
                 "rating" => query.OrderByDescending(s => s.Rating),
                 "views" => query.OrderByDescending(s => s.Views),
-                _ => query.OrderBy(s=>s.Created)
+                _ => query.OrderBy(s=>s.Rating)
             };
             return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(
                     _mapper.ConfigurationProvider).AsNoTracking(),
@@ -148,6 +156,53 @@ namespace API.Data
 
         }
 
-        
+        public async Task<Rating> GetYouRate(int storyId, int userId)
+        {
+            return await _context.Ratings
+                        .Where(s => s.StoryRatedId == storyId 
+                         && s.UserRatedId == userId)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryName(string storyName)
+        {
+            return await  _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
+                                &&  c.Published != null)
+                            .OrderBy(c => c.Order)
+                            .ToListAsync();          
+        }
+
+        public void AddComment(StoryComment storyComment)
+        {
+            _context.StoryComments.Add(storyComment);
+        }
+
+        // public async Task<IEnumerable<StoryComment>> GetStoryComments(string storyName)
+        // {
+        //     return await _context.StoryComments
+        //             .Include(s=> s.Story)
+        //             .Include(s=>s.UserPost)
+        //             .ThenInclude(s=>s.Photos)
+        //             .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower())
+        //             .OrderByDescending(s => s.Created)
+        //             .ToListAsync();
+        // }
+         public async Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName)
+        {
+            return await _context.StoryComments
+                    .Include(s=> s.Story)
+                    .Include(s=>s.UserPost)
+                    .ThenInclude(s=>s.Photos)
+                    .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower())
+                    .OrderByDescending(s => s.Created)
+                    .ProjectTo<StoryCommentDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+        }
+        public void DeletStoryComment(StoryComment storyComment)
+        {
+            _context.StoryComments.Remove(storyComment);
+        }
     }
 }

@@ -56,6 +56,16 @@ import { StarRatingComponent } from './star-rating/star-rating/star-rating.compo
 import {TagComponent} from './admin/tag/tag.component'
 import { TagFormComponent } from './admin/tag/tag-form/tag-form.component';
 import { StarRatingShowComponent } from './star-rating/star-rating-show/star-rating-show.component';
+import { ShowAChapterComponent } from './ShowStory/show-achapter/show-achapter.component';
+import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
+import { ShowstoryComponent } from './ShowStory/showstory.component';
+// import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { ScrollSpyDirective } from './ShowStory/scroll-spy-directive';
+import { CommentComponent } from './ShowStory/comments/comment/comment.component';
+import { CommentListComponent } from './ShowStory/comments/comment-list/comment-list.component';
+import { ReplyComponent } from './ShowStory/comments/reply/reply.component';
+import { ReplyListComponent } from './ShowStory/comments/reply-list/reply-list.component';
+import { CommentsComponent } from './ShowStory/comments/comments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +112,15 @@ import { StarRatingShowComponent } from './star-rating/star-rating-show/star-rat
     TagComponent,
     TagFormComponent,
     StarRatingShowComponent,
+    ShowAChapterComponent,
+    ShowTChapterComponent,
+    ShowstoryComponent,
+    ScrollSpyDirective,
+    CommentComponent,
+    CommentListComponent,
+    ReplyComponent,
+    ReplyListComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +132,9 @@ import { StarRatingShowComponent } from './star-rating/star-rating-show/star-rat
     SharedModule,
     NgxSpinnerModule,
     CKEditorModule,
-    MaterialModule
+    MaterialModule,
+    // NgxPageScrollCoreModule.forRoot({ 
+    //   duration: 1000 })
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

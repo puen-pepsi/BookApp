@@ -46,10 +46,10 @@ namespace API
         {
             services.AddApplicationServices(_config);
             services.AddControllers();
-            // services.AddControllersWithViews()
-            //     .AddNewtonsoftJson(options =>
-            //     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            // );
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
             services.AddIdentityServices(_config);
             services.AddSignalR();
@@ -94,6 +94,7 @@ namespace API
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapHub<CommentHub>("hubs/comment");
             });
         }
     }

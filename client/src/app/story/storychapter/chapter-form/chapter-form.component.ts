@@ -130,7 +130,7 @@ export class ChapterFormComponent implements OnInit {
       res => {
         // console.log(res);
         this.resetForm(form);
-        this.storyChapterService.refreshList(this.storyService.formData.id,false);
+        this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
         this.goList.emit(false);
         this.toastr.success("Add Chapter Success","Infomation");
 
@@ -145,7 +145,7 @@ export class ChapterFormComponent implements OnInit {
     this.storyChapterService.putStoryChapter(this.publishCheck).subscribe(
       res => {
         this.resetForm(form);
-        this.storyChapterService.refreshList(this.storyService.formData.id,false);
+        this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
         this.goList.emit(false);
       },
       err => {

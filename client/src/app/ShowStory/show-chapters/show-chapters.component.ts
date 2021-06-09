@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Chapter } from 'src/app/_models/chapter';
 import { ShowstoryService } from 'src/app/_services/showstory.service';
 
@@ -8,11 +9,16 @@ import { ShowstoryService } from 'src/app/_services/showstory.service';
   styleUrls: ['./show-chapters.component.css']
 })
 export class ShowChaptersComponent implements OnInit {
-  @Input() storyId : number;
-  constructor(public showstoryService:ShowstoryService) { }
+  @Input() ChapterList :any;
+  constructor(private showstoryService:ShowstoryService,
+              private route:ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.showstoryService.getStoryChapter(this.storyId,true);
+  ngOnInit(): void {  
+    // const {storyname} = this.route.snapshot.params;
+    // console.log(storyname);
+    // this.showstoryService.getStoryNameChapter(storyname).subscribe(res =>{
+    //   this.ChapterList = res;
+    // })
   }
 
 }

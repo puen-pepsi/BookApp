@@ -365,7 +365,7 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Created")
@@ -392,6 +392,9 @@ namespace API.Migrations
                     b.Property<string>("StoryName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
@@ -400,7 +403,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Stories");
                 });
@@ -461,21 +464,6 @@ namespace API.Migrations
                     b.HasIndex("UserPostId");
 
                     b.ToTable("StoryComments");
-                });
-
-            modelBuilder.Entity("API.Entities.StoryTag", b =>
-                {
-                    b.Property<int>("StoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("StoryId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("StoryTags");
                 });
 
             modelBuilder.Entity("API.Entities.Tag", b =>
@@ -689,9 +677,11 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", null)
+                    b.HasOne("API.Entities.AppUser", "Author")
                         .WithMany("Stories")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AuthorId");
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("API.Entities.StoryChapter", b =>
@@ -722,25 +712,6 @@ namespace API.Migrations
                     b.Navigation("Story");
 
                     b.Navigation("UserPost");
-                });
-
-            modelBuilder.Entity("API.Entities.StoryTag", b =>
-                {
-                    b.HasOne("API.Entities.Story", "Story")
-                        .WithMany("StoryTags")
-                        .HasForeignKey("StoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Tag", "Tag")
-                        .WithMany("StoryTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Story");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -836,18 +807,11 @@ namespace API.Migrations
                     b.Navigation("PostComments");
 
                     b.Navigation("Ratings");
-
-                    b.Navigation("StoryTags");
                 });
 
             modelBuilder.Entity("API.Entities.StoryChapter", b =>
                 {
                     b.Navigation("Published");
-                });
-
-            modelBuilder.Entity("API.Entities.Tag", b =>
-                {
-                    b.Navigation("StoryTags");
                 });
 #pragma warning restore 612, 618
         }

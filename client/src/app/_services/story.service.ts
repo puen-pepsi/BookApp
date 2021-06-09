@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Story } from '../_models/story.model';
+import { Tags } from '../_models/tag';
 
 
 @Injectable({
@@ -17,7 +17,7 @@ export class StoryService {
     return this.http.post(this.baseUrl + 'story',this.formData);
   }
   putStory(){
-    return this.http.put(this.baseUrl + 'story/'+ this.formData.id, this.formData);
+    return this.http.put(this.baseUrl + 'story/'+ this.formData.storyId, this.formData);
   }
   deleteStory(id:number){
     return this.http.delete(this.baseUrl + 'story/' + id);
@@ -32,9 +32,12 @@ export class StoryService {
     return this.http.get(this.baseUrl + 'story/GetAllGenre') ;
   }
   getAllLanguage(){
-    return this.http.get(this.baseUrl + 'story/GetAllLanguage') ;
+    return this.http.get(this.baseUrl + 'story/GetAllLanguage');
   }
   getAllState(){
-    return this.http.get(this.baseUrl + 'story/GetAllState')
+    return this.http.get(this.baseUrl + 'story/GetAllState');
+  }
+  getAllTags(){
+    return this.http.get<Tags[]>(this.baseUrl + 'story/GetAllTags');
   }
 }

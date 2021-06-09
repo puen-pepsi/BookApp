@@ -1,11 +1,17 @@
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { map, reduce} from 'rxjs/operators';
+import { MatChipInputEvent} from '@angular/material/chips';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
+
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import {  NgForm } from '@angular/forms';
+import {  FormControl, NgForm } from '@angular/forms';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { Story } from 'src/app/_models/story.model';
-import { PhotoService } from 'src/app/_services/photo.service';
 import { StoryService } from 'src/app/_services/story.service';
-
+import { Tags } from 'src/app/_models/tag';
 @Component({
   selector: 'app-story-form',
   templateUrl: './story-form.component.html',
@@ -14,18 +20,35 @@ import { StoryService } from 'src/app/_services/story.service';
 export class StoryFormComponent implements OnInit {
   @Output() submitSuccess = new EventEmitter();
   @ViewChild('StoryTabs',{static:true}) StoryTabs: TabsetComponent;
+  
+  @ViewChild('TagInput') TagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   isCreate:boolean;
   GenreList : any=[];
   LanguageList : any=[];
   StateList : any=[];
   response:{dbPath:''};
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagCtrl = new FormControl();
+  filteredTags: Observable<string[]>;
+  tags: string[] = ['Rainobu'];
+  // allTags: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  tagArray :string[]=[];
   constructor(public storyService:StoryService,
-    private photoSevice:PhotoService,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService) { 
+      this.filteredTags = this.tagCtrl.valueChanges.pipe(
+        map((tag: string | null) => tag ? this._filter(tag) : this.tagArray.slice()));
+    }
   ngOnInit(): void {
     this.getGenreList();
     this.getLanguageList();
     this.getState();
+    this.getAllTags(); 
+    this.getTags();
   }
   uploadFinished = (event) =>{
     
@@ -39,7 +62,7 @@ export class StoryFormComponent implements OnInit {
   }
   onSubmit(form:NgForm) {
     // console.log(form);
-    if(this.storyService.formData.id == 0) //we will use the id as identifier for updating or insertion
+    if(this.storyService.formData.storyId == 0) //we will use the id as identifier for updating or insertion
     this.insertRecord(form);
     else
     this.updateRecord(form);
@@ -88,13 +111,59 @@ export class StoryFormComponent implements OnInit {
   getState(){
     this.storyService.getAllState().subscribe(res=>{
       this.StateList=res;
-    })
+    });
+  }
+  getAllTags(){
+   this.storyService.getAllTags()
+        .subscribe( (res:Tags[]) => {
+            this.tagArray = res.map(res => res.tagName);
+        });
+  }
+  
+  getTags(){
+    if(this.storyService.formData.storyId != 0 && this.storyService.formData.tags != null)
+      this.tags = this.storyService.formData.tags.split(",");
   }
   selectTab(tabId: number){
     this.StoryTabs.tabs[tabId].active = true;
     this.isCreate = true;
   }
+
   ChangeForm(event){
     this.isCreate = event;
+  }
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    // Add our fruit
+    if (value) {
+      this.tags.push(value);
+      this.storyService.formData.tags = this.tags.join();
+    }
+    // Clear the input value
+     //event.chipInput!.clear();
+      event.input.value = '';
+    //  this.TagInput.nativeElement.value = '';
+    this.tagCtrl.setValue(null);
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    this.TagInput.nativeElement.value = '';
+    this.tagCtrl.setValue(null);
+    this.storyService.formData.tags = this.tags.join();
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    
+    return this.tagArray.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 }

@@ -3,16 +3,6 @@
 </div>
 <div class="container mt-3">
     <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadStory()" autocomplete="off">
-        <!-- <div class="form-group">
-            <label>Age from:</label>
-            <input type="number" class="form-control ml-1" style="width: 70px;" name="minAge"
-                [(ngModel)]="userParams.minAge">
-        </div>
-        <div class="form-group px-2">
-            <label>Age To:</label>
-            <input type="number" class="form-control ml-1" style="width: 70px;" name="maxAge"
-                [(ngModel)]="userParams.maxAge">
-        </div> -->
         <div class="form-group px-2">
             <label>Genre : </label>
             <select name="genre" style="width: 150px;" [(ngModel)]="storyParams.genre"
@@ -33,7 +23,7 @@
                 name='orderBy' 
                 (click)="loadStory()"
                 btnRadio='rating'
-                [(ngModel)] = 'storyParams.orderBy'>Top Rate</button>
+                [(ngModel)] = 'storyParams.orderBy'>Top Vote</button>
             <button 
                 type='button'
                 class="btn btn-primary"             
@@ -48,13 +38,13 @@
                 (click)="loadStory()"
                 btnRadio='created'
                 [(ngModel)] = 'storyParams.orderBy'>Lastest</button>
-        </div>
+            </div>
         </div>
         
     </form>
 </div>
-<div class="row">
-    <div *ngFor="let story of showstory" class="col-md-2">
+<div class="row d-flex ">
+    <div *ngFor="let story of showstory" class="col-md-2 ">
         <app-show-card [story]="story"></app-show-card>
     </div>
 </div>

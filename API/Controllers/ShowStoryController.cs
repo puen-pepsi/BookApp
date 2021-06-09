@@ -36,13 +36,32 @@ namespace API.Controllers
             var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
             if (story == null)
                 return NotFound();
+            var StoryShow = _mapper.Map<StoryDto>(story);
 
-            return Ok(story);
+            return Ok(StoryShow);
         }
-        // [HttpGet("GetAuthorName")]
-        // public async Task<ActionResult<AuthorNameDto> GetAuthorName()
+        [HttpPut("{storyName}")]
+        public async Task<ActionResult<StoryDto>> AddViews(string storyName)
+        {
+            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+            if (story == null)
+                return NotFound();
+            story.Views++;
+            _unitOfWork.StoryRepository.UpdateStory(story);
+            if(await _unitOfWork.Complete()){
+                return _mapper.Map<StoryDto>(story);
+            }
+            return BadRequest("Problem Add Views");
+        }
+        // [HttpGet("{storyName}/chapters")]
+        // public  async Task<ActionResult<StoryChapterDto>> GetStoryChapterByName(string storyName)
         // {
-        //     return
-        // } 
+        //     var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+        //     if (story == null)
+        //         return NotFound();
+        //     var StoryShow = _mapper.Map<StoryDto>(story);
+
+        //     return Ok(StoryShow);
+        // }
     }
 }

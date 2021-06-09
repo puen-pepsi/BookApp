@@ -16,11 +16,11 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
 
   @ViewChild('fileInput') fileInput:ElementRef;
   baseUrl = environment.apiUrl;
+  ResoucreUrl = environment.resourceUrl;
   public progress: number;
   public message: string;
-  constructor(private renderer:Renderer2,
-     public storyService:StoryService,
-      private photoService:PhotoService,
+  constructor(
+      public storyService:StoryService,
       private http:HttpClient) {}
   ngOnDestroy(): void {
     this.image = "";
@@ -51,19 +51,28 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
   // }
   CreateImage(serverPath:string){
     if(serverPath){
-      return this.baseUrl + serverPath;
+      return this.ResoucreUrl + serverPath;
     }
     return `/assets/images/no-image.jpeg`;
   }
-  public UploadImage = (files) => {
+  public UploadImage = (files,id:number) => {
     if (files.length === 0) {
       return;
     }
-    
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    this.http.post(this.baseUrl + '/story/photos', formData, {reportProgress: true, observe: 'events'})
+    if(id == 0){
+      this.http.post(this.baseUrl + 'story/photos', formData, {reportProgress: true, observe: 'events'})
+            .subscribe(event => {
+              if (event.type === HttpEventType.UploadProgress)
+                this.progress = Math.round(100 * event.loaded / event.total);
+              else if (event.type === HttpEventType.Response) {
+                this.imageChange.emit(event.body);
+              }
+            });
+    }else{
+      this.http.put(this.baseUrl + 'story/photos/'+id, formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -71,6 +80,6 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
           this.imageChange.emit(event.body);
         }
       });
-    
+    } 
   }
 }

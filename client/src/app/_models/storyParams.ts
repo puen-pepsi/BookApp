@@ -5,9 +5,9 @@ export class StoryParams{
     author : string;
     pageNumber = 1;
     pageSize = 5;
-    topViews = 'views'
-    topRate = 'rating'
-    orderBy = 'created';
+    // topViews = 'views'
+    // topRate = 'rating'
+    orderBy = 'rating';
     constructor(user:User){
         this.genre ='';
         this.author='';

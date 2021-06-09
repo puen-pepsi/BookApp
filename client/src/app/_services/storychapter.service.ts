@@ -18,23 +18,23 @@ export class StorychapterService {
             public storyService:StoryService) { }
   
   postStoryChapter(pub:boolean){
-    return this.http.post(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter/'+ pub ,this.formData);
+    return this.http.post(this.baseUrl + 'story/'+ this.storyService.formData.storyId + '/chapter/'+ pub ,this.formData);
   }
   putStoryChapter(pub:boolean){
-    return this.http.put(this.baseUrl + 'story/'+ this.storyService.formData.id + '/chapter/'+this.formData.id+'/'+pub, this.formData);
+    return this.http.put(this.baseUrl + 'story/'+ this.storyService.formData.storyId + '/chapter/'+this.formData.id+'/'+pub, this.formData);
   }
   // deleteStory(id:number){
   //   return this.http.delete(this.baseUrl + 'story/' + id);
   // }
   putPublish(id:number){
-    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/published/' +id,null,{ responseType: 'text' });
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.storyId + '/chapter/published/' +id,null,{ responseType: 'text' });
   }
   putChapterUp(order:number){
-    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Up/' +order,null,{ responseType: 'text' });
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.storyId + '/chapter/Up/' +order,null,{ responseType: 'text' });
   }
   putChapterDown(order:number){
     
-    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.id + '/chapter/Down/'+order,null,{ responseType: 'text' });
+    return this.http.put(this.baseUrl +'story/'+ this.storyService.formData.storyId + '/chapter/Down/'+order,null,{ responseType: 'text' });
       
   }
   refreshList(storyId:number,published:boolean) {

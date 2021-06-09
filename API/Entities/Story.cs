@@ -16,17 +16,20 @@ namespace API.Entities
         public string State { get; set; }
         public int Views { get; set; }
         public string UserName { get; set; }
+        public int AuthorId { get; set; }
+        public AppUser Author { get; set; }
         public DateTime Created { get; set; }
+        public string Tags { get; set; }
         public virtual ICollection<PhotoStory> PhotoStories { get; set; }
         public virtual ICollection<StoryChapter> Chapters { get; set; }
         public virtual ICollection<StoryComment> PostComments { get; set; }
-        public virtual ICollection<StoryTag> StoryTags { get; set; }
+        //public virtual ICollection<StoryTag> StoryTags { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
         public Story()
         {
             Chapters = new Collection<StoryChapter>();
             PostComments = new Collection<StoryComment>();
-            StoryTags = new Collection<StoryTag>();
+            //StoryTags = new Collection<StoryTag>();
             PhotoStories = new Collection<PhotoStory>();
             Ratings = new Collection<Rating>();
         }

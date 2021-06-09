@@ -1,9 +1,10 @@
+<p>{{storyService.formData | json}}</p>
 <h4>Story</h4>
 <div class="tab-panel header">
   <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
     <i class="fas fa-arrow-left"></i> Back to Stories
   </button>
-  <button *ngIf="storyService.formData.id" class="btn btn-outline-success Header" (click)="selectTab(1)">
+  <button *ngIf="storyService.formData.storyId" class="btn btn-outline-success Header" (click)="selectTab(1)">
     <i class="fas fa-plus"></i> Add Chapter
   </button>
   <tabset class="member-tabset" #StoryTabs>
@@ -25,7 +26,7 @@
                   [(ngModel)]="storyService.formData.storyName" required />
               </div>
               <div class="mb-3">
-                <label for="description" class="form-label">Description <i class="fas fa-info-circle"></i></label>
+                <label for="description" class="form-label">Synopsis <i class="fas fa-info-circle"></i></label>
                 <textarea class="form-control" placeholder="Synopsis" rows="3" name="description" #description="ngModel"
                   [(ngModel)]="storyService.formData.description" required></textarea>
               </div>
@@ -68,10 +69,32 @@
                 </div>
 
               </div>
-              <div class="mb-3">
-                <label for="tag" class="form-label">Tags <i class="fas fa-info-circle"></i></label>
-                <input class="form-control" placeholder="Add Tags" name="tag" />
-              </div>
+              <mat-form-field class="example-chip-list">
+                <mat-label>Tags</mat-label>
+                <mat-chip-list #chipList aria-label="Tag selection">
+                  <mat-chip
+                    *ngFor="let tag of tags"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(tag)">
+                    #{{tag}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New Tag..."
+                    #TagInput
+                    [formControl]="tagCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                    {{tag}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
               <div class="col-md-4 pl-1">
                 <button class="btn btn-primary" type="submit" [disabled]="form.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
                 <button class="btn btn-danger" [disabled]="form.invalid" type="button"

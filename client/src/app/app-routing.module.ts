@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -18,7 +18,13 @@ import { StoryComponent } from './story/story.component';
 import { ShowListComponent } from './ShowStory/show-list/show-list.component';
 import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
 import { ShowDetailedResolver } from './_resolvers/show-detailed.resolver';
-
+import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
+import { ShowstoryComponent } from './ShowStory/showstory.component';
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 64],
+};
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -31,23 +37,33 @@ const routes: Routes = [
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
       {path:'mystory',component:StoryComponent},
-      {path:'stories',component:ShowListComponent},
-      {path:'stories/:storyname',component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
+      {path:'stories',
+        component:ShowstoryComponent,
+        children:[
+          {path :'',
+          component:ShowListComponent},
+          {path :':storyname',
+          component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
+          {path :':storyname/chapters',
+          component:ShowTChapterComponent},
+        ]
+      },
       {path:'messages',component:MessagesComponent},
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard]},
-    ]
-    
+    ]  
   },
+  
   {path:'errors',component:TestErrorsComponent},
   {path:'not-found',component:NotFoundComponent},
   {path:'server-error',component:ServerErrorComponent},
   {path:'**',component:NotFoundComponent,pathMatch:'full'},
 
-
+  // {path:'stories/:storyname',component:ShowDetailComponent,resolve:{showstory:ShowDetailedResolver}},
+  // {path:'chapters',component:ShowTChapterComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

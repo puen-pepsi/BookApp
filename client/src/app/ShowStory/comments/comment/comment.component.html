@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" [formGroup]="commentForm">
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-label>Full Name</mat-label>
+              <input
+                type="text"
+                formControlName="name"
+                placeholder="Full Name"
+                matInput>
+              <mat-error align="end" *ngIf="commentForm.controls['name'].hasError('required')">Required</mat-error>
+            </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  matInput
+                  placeholder="john.doe@simplifyjs.com">
+                <mat-error align="end" *ngIf="commentForm.controls['email'].errors?.required">Required</mat-error>
+                <mat-error align="end" *ngIf="commentForm.controls['email'].invalid">Incorrect email format</mat-error>
+              </mat-form-field>
+            </div>
+          </div> -->
+          <!-- <div class="row">
+            <div class="col-md-12">
+            <mat-form-field>
+              <mat-label>Message</mat-label>
+              <textarea formControlName="message" matInput placeholder="Message"></textarea>
+              <mat-error align="end" *ngIf="commentForm.controls['message'].hasError('required')">Required</mat-error>
+              </mat-form-field>
+            </div>
+          </div> -->
+          <mat-form-field class="example-full-width">
+            <mat-label>Leave a comment</mat-label>
+            <textarea formControlName="content" matInput placeholder="Ex. It makes me feel..."></textarea>
+            <mat-error align ="end" *ngIf="commentForm.controls['content'].hasError('required')">Required</mat-error>
+          </mat-form-field>
+          
+          <mat-action-list class="pull-right">
+            <button type="button" (click)="onCommentCancel()" mat-flat-button>Cancel</button>
+            <button type="submit" mat-raised-button >Comment</button>
+          </mat-action-list>
+      </form>
+    </div>
+  </div>
+  <app-comment-list></app-comment-list>

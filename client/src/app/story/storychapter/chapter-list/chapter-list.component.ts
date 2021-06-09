@@ -15,7 +15,7 @@ export class ChapterListComponent implements OnInit {
       public storyService:StoryService) { }
 
   ngOnInit(): void {
-      this.storyChapterService.refreshList(this.storyService.formData.id,false);
+      this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
   }
   populateForm(selectedRecord: Chapter) {
 
@@ -29,7 +29,7 @@ export class ChapterListComponent implements OnInit {
     this.storyChapterService.putChapterUp(selectedRow.order).subscribe(
       res=>{
         console.log(res);
-        this.storyChapterService.refreshList(this.storyService.formData.id,false);
+        this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
       },
       err=>{
         console.log(err);
@@ -42,7 +42,7 @@ export class ChapterListComponent implements OnInit {
     this.storyChapterService.putChapterDown(selectedRow.order).subscribe(
       res=>{
         console.log(res);
-        this.storyChapterService.refreshList(this.storyService.formData.id,false);
+        this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
       },
       err=>{
         console.log(err);
@@ -53,7 +53,7 @@ export class ChapterListComponent implements OnInit {
     this.storyChapterService.putPublish(selectedRow.id).subscribe(
       res=>{
         console.log(res);
-        this.storyChapterService.refreshList(this.storyService.formData.id,false);
+        this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
       },
       err=>{
         console.log(err);

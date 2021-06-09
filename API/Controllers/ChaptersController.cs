@@ -22,10 +22,21 @@ namespace API.Controllers
 
         }
         [HttpGet("GetChapters/{published}")]
-        public async Task<ActionResult<IEnumerable<StoryChapter>>> GetChapters(int storyId,bool published=false)
+        public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetChapters(int storyId,bool published=false)
         {
 
             var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryId(storyId,published);
+            if(ChapterList == null)
+                return NotFound();
+                
+            return Ok(_mapper.Map<IEnumerable<StoryChapter>,IEnumerable<StoryChapterDto>>(ChapterList));
+        }
+        [Route("/api/story/{storyName}/chapters")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetChaptersByStoryName(string storyName)
+        {
+
+            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryName(storyName);
             if(ChapterList == null)
                 return NotFound();
                 

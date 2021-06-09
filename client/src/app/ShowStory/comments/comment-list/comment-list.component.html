@@ -1,0 +1,38 @@
+<!-- <div class="mt-2" *ngFor="let comment of comments; let i = index"> -->
+  <div *ngIf="(commentService.commentThread$ | async)?.length > 0">
+  <div class="mt-2" *ngFor="let comment of (commentService.commentThread$ | async)">
+  <mat-card class="pt-0 pb-0 pl-2 pr-2"> 
+    <div class="d-flex flex-row" style="width: 100%;">
+      <div class="col-md-1 p-2 pull-left">
+        <img 
+              class="img-circle rounded-circle mr-2"
+              src="{{comment.image || './assets/user.png'}}" 
+              alt="{{comment.knownAs}}">
+          
+      <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
+      </div>
+      <div class="col-md-9 p-2" >
+        <strong >{{comment.knownAs | titlecase}}</strong> <br/>
+        <div class="p-2" id="rconners1">
+          <p>{{comment.content}}</p>
+        </div>
+        
+      </div>
+      <div class="col-md-2 p-2 text-right pull-right">
+        <small class="text-muted ">{{comment.created | timeago}}</small>
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+        <button mat-button >Like</button>
+        <button mat-button color="primary"
+          (click)="togglePanel[i] = !togglePanel[i]">Reply</button>
+        <button mat-button (click)="onDeleteComment(comment.id)">Remove</button>
+
+    </div>
+    <mat-action>
+      <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"></app-reply-form>
+    </mat-action>
+  </mat-card>
+</div>
+</div>
+

@@ -1,6 +1,7 @@
 <table class="table table-borderless">
     <thead>
         <tr>
+          <th></th>
             <th>Order</th>
           <th>Chapter Name</th>
           <th>Published</th>
@@ -8,13 +9,14 @@
         </tr>
       </thead>
       <tbody>       
-         <tr *ngFor="let row of storyChapterService.list">
+         <tr *ngFor="let row of storyChapterService.list ">
             <td>             
               <button (click)="chapterUp(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-arrow-up"></i></button>
               <!-- {{row.order}} -->
               <button (click)="chapterDown(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-arrow-down"></i></button>
             
             </td>
+          <td>{{row.order}}</td>
           <td>{{row.chapterName}}</td>
           <!-- <td>{{row.content}}</td> -->       
           <!-- <td>{{(row.publishedCreated | date:'short') || "Waiting to Publish"}}</td> -->

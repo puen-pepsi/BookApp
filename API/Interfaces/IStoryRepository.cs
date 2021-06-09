@@ -11,17 +11,22 @@ namespace API.Interfaces
          void AddStory(Story story);
          void AddStoryChapter(StoryChapter storyChapter);
          void AddPublished(Published publish);
+         void AddComment(StoryComment storyComment);
          void UpdateStory(Story story);
          void UpdateStoryChapter(StoryChapter storyChapter);
          Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams);
          Task<IEnumerable<Story>> GetStoryAsync();
          Task<IEnumerable<Story>> GetStoryByUserName(string username);
-        Task<Story> GetStoryById(int id,bool includeRelated = false );
+         Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName);
+         Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
-        Task<Story> GetStoryByName(string storyName);
+         Task<Story> GetStoryByName(string storyName);
          Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published);
          Task<StoryChapter> GetStoryChapterById(int id);
+         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryName(string storyName);
+         Task<Rating> GetYouRate(int storyId,int userId);
          void DeleteStory(Story story);
+         void DeletStoryComment(StoryComment storyComment);
 
 
     }

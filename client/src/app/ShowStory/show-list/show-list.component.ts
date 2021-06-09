@@ -29,7 +29,7 @@ export class ShowListComponent implements OnInit {
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
-    })
+    });
   }
   resetFilters(){
     this.storyParams = this.showStoryService.resetStoryParams();

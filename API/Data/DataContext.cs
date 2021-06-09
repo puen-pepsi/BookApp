@@ -28,7 +28,7 @@ namespace API.Data
         public DbSet<StoryChapter> StoryChapters { get; set; }
         public DbSet<Published> Publishes { get; set; }
         public DbSet<Tag> Tags {get;set;}
-        public DbSet<StoryTag> StoryTags { get; set; }
+        //public DbSet<StoryTag> StoryTags { get; set; }
         public DbSet<StoryComment> StoryComments {get;set;}
         public DbSet<PhotoStory> PhotoStories { get; set; }
         public DbSet<Rating> Ratings { get; set; }
@@ -80,20 +80,20 @@ namespace API.Data
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<StoryTag>()
-                .HasKey(k => new {k.StoryId,k.TagId});
+            // builder.Entity<StoryTag>()
+            //     .HasKey(k => new {k.StoryId,k.TagId});
 
-            builder.Entity<StoryTag>()
-                .HasOne(s => s.Story)
-                .WithMany(t => t.StoryTags)
-                .HasForeignKey(s => s.StoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.Entity<StoryTag>()
+            //     .HasOne(s => s.Story)
+            //     .WithMany(t => t.StoryTags)
+            //     .HasForeignKey(s => s.StoryId)
+            //     .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<StoryTag>()
-                .HasOne(s => s.Tag)
-                .WithMany(t => t.StoryTags)
-                .HasForeignKey(s => s.TagId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // builder.Entity<StoryTag>()
+            //     .HasOne(s => s.Tag)
+            //     .WithMany(t => t.StoryTags)
+            //     .HasForeignKey(s => s.TagId)
+            //     .OnDelete(DeleteBehavior.Restrict);
                 
             builder.ApplyUtcDateTimeConverter();
         }

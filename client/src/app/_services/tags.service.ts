@@ -8,7 +8,7 @@ import { Tags } from '../_models/tag';
 })
 export class TagsService {
   baseUrl = environment.apiUrl ;
-  formData : Tags = new Tags();
+  formData : Tags =new Tags();
   list : Tags[];
   constructor(private http:HttpClient) { }
 
@@ -26,5 +26,5 @@ export class TagsService {
       .toPromise()
       .then(res => this.list = res as Tags[]);
   }
-
+  
 }

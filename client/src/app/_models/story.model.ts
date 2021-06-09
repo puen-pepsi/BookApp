@@ -1,5 +1,5 @@
 export class Story{
-        id:number;
+        storyId:number;
         storyName : string;
         description :string;       
         genre :string;
@@ -10,13 +10,16 @@ export class Story{
         views:number;
         created:Date;
         username:string;
+        userphoto:string;
+        tags:string;
         constructor(){
-                this.id=0;
+                this.storyId=0;
                 this.storyName="";
                 this.description ="";
                 this.genre="";
                 this.language="";
                 this.imageUrl="";
+                this.userphoto="";
                 this.views=0;
                 this.state="";
                 this.rating=0;      

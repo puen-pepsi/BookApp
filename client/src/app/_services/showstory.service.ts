@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { UserManagementComponent } from '../admin/user-management/user-management.component';
 import { Chapter } from '../_models/chapter';
 import { ShowStory } from '../_models/showstory';
 import { StoryParams } from '../_models/storyParams';
@@ -31,7 +30,6 @@ export class ShowstoryService {
   getStoryParams(){
     return this.storyParams;
   }
-
   setStoryParams(params: StoryParams){
     this.storyParams = params;
   }
@@ -66,8 +64,6 @@ export class ShowstoryService {
       if(story){
         return of(story);
       }
-
-    
     return this.http.get<ShowStory>(this.baseUrl + 'showstory/' + storyId);
   }
   getStoryName(storyName:string){
@@ -84,8 +80,22 @@ export class ShowstoryService {
       .toPromise()
       .then(res => this.list = res as Chapter[]);
   }
-  getGenreList(){
-    return this.http.get(this.baseUrl + 'story/GetAllGenre') ;
+  getStoryNameChapter(storyName:string){
+    return this.http.get(this.baseUrl + 'story/'+ storyName +'/chapters')
+      // .toPromise()
+      // .then(res => this.list = res as Chapter[]);
   }
-  
+  getGenreList(){
+    return this.http.get(this.baseUrl + 'story/GetAllGenre');
+  }
+  getPostRate(rate:number,storyId:number){
+    console.log(rate);
+    return this.http.post(this.baseUrl+'story/RateStory/'+storyId+'/'+rate,null,{responseType:'text'});
+  }
+  getYouRate(storyId:number){
+    return this.http.get(this.baseUrl + 'story/GetRateStory/'+storyId);
+  }
+  getAddViews(storyName:string){
+    return this.http.put(this.baseUrl + 'showstory/'+storyName,null);
+  }
 }

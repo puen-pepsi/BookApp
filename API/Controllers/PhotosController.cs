@@ -43,7 +43,6 @@ namespace API.Controllers
                 var file = formCollection.Files.First();
                 var folderName = Path.Combine("Resources", "Images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
                 if (file.Length > 0)
                 {
                     //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
@@ -55,8 +54,51 @@ namespace API.Controllers
                     {
                         file.CopyTo(stream);
                     }
-
+                    //Update Or Create
                     return Ok(new {dbPath});
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+        [HttpPut("{storyId}")]
+        public async Task<ActionResult> UpdatePhoto(int storyId)
+        {
+             try
+            {
+                // var file = Request.Form.Files[0];
+                var formCollection = await Request.ReadFormAsync();
+                var file = formCollection.Files.First();
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (file.Length > 0)
+                {
+                    //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    //Update Or Create
+                    var storyUpdate = await _unitOfWork.StoryRepository.GetStoryById(storyId,false);
+                    if(storyUpdate == null)
+                        return NotFound();
+                    storyUpdate.ImageUrl = dbPath;
+                    _mapper.Map<Story>(storyUpdate);
+                    _unitOfWork.StoryRepository.UpdateStory(storyUpdate);
+                    await _unitOfWork.Complete();
+                    return Ok(new {dbPath});
+
+                    
                 }
                 else
                 {

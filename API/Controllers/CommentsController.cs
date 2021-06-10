@@ -45,5 +45,14 @@ namespace API.Controllers
             }
             return BadRequest("Problem create story");
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteComment(int id)
+        {
+            var username = User.GetUsername();
+            var comment = await _unitOfWork.StoryRepository.GetStoryCommentById(id);
+            _unitOfWork.StoryRepository.DeletStoryComment(comment);
+            if(await _unitOfWork.Complete())return Ok();
+            return BadRequest("Problem deleting the comment");
+        }
     }
 }

@@ -18,13 +18,15 @@ namespace API.Interfaces
          Task<IEnumerable<Story>> GetStoryAsync();
          Task<IEnumerable<Story>> GetStoryByUserName(string username);
          Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName);
+         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published);
+        Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryName(string storyName);
          Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
          Task<Story> GetStoryByName(string storyName);
-         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published);
          Task<StoryChapter> GetStoryChapterById(int id);
-         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryName(string storyName);
+         Task<StoryComment> GetStoryCommentById(int id);
          Task<Rating> GetYouRate(int storyId,int userId);
+
          void DeleteStory(Story story);
          void DeletStoryComment(StoryComment storyComment);
 

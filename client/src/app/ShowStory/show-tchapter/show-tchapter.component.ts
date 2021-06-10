@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShowstoryService } from 'src/app/_services/showstory.service';
 @Component({
@@ -9,10 +9,15 @@ import { ShowstoryService } from 'src/app/_services/showstory.service';
 export class ShowTChapterComponent implements OnInit{
   chapterList:any;
   currentSection = '1';
-
+  listener;
   constructor(private showStoryService:ShowstoryService,
-              private route:ActivatedRoute,  
-            ) { }
+              private route:ActivatedRoute, 
+              private renderer2:Renderer2 
+            ) { 
+              this.listener = this.renderer2.listen('window', 'scroll', (e) => {
+                console.log(this.getYPosition(e));
+              });
+            }
 
   ngOnInit(): void {
     this.showStoryService.getStoryNameChapter(this.getStoryName()).subscribe(res =>{
@@ -36,12 +41,18 @@ export class ShowTChapterComponent implements OnInit{
 
   onSectionChange(sectionId: string) {
     this.currentSection = sectionId;
-    console.log(this.currentSection);
+    // console.log(this.currentSection);
   }
 
   scrollTo(section) {
-    console.log(section);
+    // console.log(section);
     document.querySelector('#' + section)
     .scrollIntoView();
   }
+  getYPosition(e: Event): number {
+    return (e.target as Element).scrollTop;
+  }
+  ngOnDestroy(): void {
+    this.listener();
+}
 }

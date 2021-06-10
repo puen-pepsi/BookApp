@@ -6,7 +6,8 @@ import {BehaviorSubject } from 'rxjs';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { User } from '../_models/user';
 import { Group } from '../_models/group';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
+import { AccountService } from './account.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +17,12 @@ export class CommentService {
   private hubConnection : HubConnection;
   private commentThreadSource = new BehaviorSubject<StoryComment[]>([]);
   commentThread$ = this.commentThreadSource.asObservable();
-
-  constructor(private http:HttpClient) { }
+  user:User;
+  constructor(private http:HttpClient,private accountService:AccountService) { 
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user =>{
+      this.user = user;
+    })
+  }
 
   createHubConnection(user: User, storyName: string) {
     // this.busyService.busy();
@@ -34,16 +39,21 @@ export class CommentService {
     //   .finally(() => this.busyService.idle());
 
     this.hubConnection.on('ReceiveComments', comments => {
-      this.commentThreadSource.next(comments);
+      this.commentThreadSource.next([...comments]);
     })
 
     this.hubConnection.on('NewComment', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
         console.log(comment)
-        this.commentThreadSource.next([...comments, comment])
+        this.commentThreadSource.next([comment,...comments ])
       })
     })
-
+    this.hubConnection.on('DeleteComment', comment => {
+      this.commentThread$.pipe(take(1)).subscribe(comments => {
+        comments = comments.filter(comments => comments.id != comment.id);     
+        this.commentThreadSource.next([...comments].reverse());
+      })
+    })
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
       if (group.connections.some(x => x.username === storyName)) {
         this.commentThread$.pipe(take(1)).subscribe(comments => {
@@ -75,6 +85,10 @@ export class CommentService {
   getComments(storyName:string){
     return this.http.get<StoryComment[]>(this.baseUrl +'comments/' + storyName);
   }
- 
+  async deleteComment(commentid: number,storyname:string) {
+    // return this.http.delete(this.baseUrl + 'comments/' + id);
+    return this.hubConnection.invoke('DeleteComment',{commentid,storyname})
+        .catch(error => console.log(error));
+  }
   
 }

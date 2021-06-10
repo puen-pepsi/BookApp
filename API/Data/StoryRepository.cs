@@ -204,5 +204,13 @@ namespace API.Data
         {
             _context.StoryComments.Remove(storyComment);
         }
+
+        public async Task<StoryComment> GetStoryCommentById(int id)
+        {
+            return await _context.StoryComments
+                .Include(u => u.UserPost)
+                .Include(u => u.Story)
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

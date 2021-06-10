@@ -6,4 +6,9 @@
   
  .example-full-width {
      width: 100%;
+     margin-right: 5px;
   }
+
+.comment-form{
+  width:100%;
+}

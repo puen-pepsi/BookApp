@@ -109,6 +109,22 @@ namespace API.SignalR
                 await Clients.Group(groupName).SendAsync("NewComment", _mapper.Map<StoryCommentDto>(comment));
             }
         }
+        public async Task DeleteComment(DeleteCommentDto  deleteCommentDto)
+        {            
+            var commetToDelete = await _unitOfWork.StoryRepository.GetStoryCommentById(deleteCommentDto.CommentId);
+            if (commetToDelete == null) throw new HubException("Not found comment");
+
+            var groupName = deleteCommentDto.StoryName;
+
+            var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
+
+            _unitOfWork.StoryRepository.DeletStoryComment(commetToDelete);
+
+            if (await _unitOfWork.Complete())
+            {
+                await Clients.Group(groupName).SendAsync("DeleteComment", _mapper.Map<StoryCommentDto>(commetToDelete));
+            }
+        }
         // private string GetGroupName(string caller, string other)
         // {
         //     var stringCompare = string.CompareOrdinal(caller, other) < 0;

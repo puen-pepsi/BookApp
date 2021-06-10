@@ -4,7 +4,7 @@ export interface StoryComment{
     parentId?:number;
     created:Date;
     content:string;
-    username:string;
+    userName:string;
     knownAs:string;
     image:string;
     /**

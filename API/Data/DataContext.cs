@@ -18,6 +18,7 @@ namespace API.Data
         }
 
         public DbSet<UserLike> Likes { get; set; }
+        public DbSet<UserStory> LikeStory { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
@@ -80,6 +81,20 @@ namespace API.Data
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<UserStory>()
+                .HasKey(k => new { k.SourceUserId, k.LikedStoryId });
+
+            builder.Entity<UserStory>()
+                .HasOne(s => s.SourceUser)
+                .WithMany(l => l.LikedStoryByUsers)
+                .HasForeignKey(s => s.SourceUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserStory>()
+                .HasOne(s => s.LikedStory)
+                .WithMany(l => l.StoryLiked)
+                .HasForeignKey(s => s.LikedStoryId)
+                .OnDelete(DeleteBehavior.Cascade);
             // builder.Entity<StoryTag>()
             //     .HasKey(k => new {k.StoryId,k.TagId});
 

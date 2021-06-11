@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
@@ -21,12 +22,25 @@ namespace API.Entities
         public ICollection<UserLike> LikedByUsers { get; set; }
         // Liked Users
         public ICollection<UserLike> LikedUsers { get; set; }
-
+        public ICollection<UserStory> LikedStoryByUsers { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<Story> Stories { get; set; }
         public ICollection<StoryComment> StoryComments {get; set;}
+        public AppUser()
+        {
+            Photos = new Collection<Photo>();
+            LikedByUsers = new Collection<UserLike>();
+            LikedUsers = new Collection<UserLike>();
+            LikedStoryByUsers = new Collection<UserStory>();
+            MessagesSent = new Collection<Message>();
+            MessagesReceived = new Collection<Message>();
+            UserRoles = new Collection<AppUserRole>();
+            Stories = new Collection<Story>();
+            StoryComments = new Collection<StoryComment>();
+
+        }
 
     }
 }

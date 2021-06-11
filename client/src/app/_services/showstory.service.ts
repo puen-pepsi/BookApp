@@ -98,4 +98,11 @@ export class ShowstoryService {
   getAddViews(storyName:string){
     return this.http.put(this.baseUrl + 'showstory/'+storyName,null);
   }
+  addLikeStory(storyname:string){
+    return this.http.post(this.baseUrl +'likestories/' + storyname,{});
+  }
+  getStoryLikes(pageNumber,pageSize){
+    let params = getPaginationHeaders(pageNumber,pageSize);
+    return getPaginatedResult<Partial<ShowStory[]>>(this.baseUrl +'likestories',params,this.http);
+  }
 }

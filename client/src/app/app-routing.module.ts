@@ -20,6 +20,7 @@ import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.compone
 import { ShowDetailedResolver } from './_resolvers/show-detailed.resolver';
 import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
 import { ShowstoryComponent } from './ShowStory/showstory.component';
+import { LibraryComponent } from './library/library.component';
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',
@@ -36,6 +37,7 @@ const routes: Routes = [
       {path:'members/:username',component:MemberDetailComponent,resolve:{member:MemberDetailedResolver}},
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
+      {path:'library',component:LibraryComponent},
       {path:'mystory',component:StoryComponent},
       {path:'stories',
         component:ShowstoryComponent,

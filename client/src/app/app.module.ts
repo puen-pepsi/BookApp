@@ -67,6 +67,7 @@ import { CommentListComponent } from './ShowStory/comments/comment-list/comment-
 import { ReplyComponent } from './ShowStory/comments/reply/reply.component';
 import { ReplyListComponent } from './ShowStory/comments/reply-list/reply-list.component';
 import { CommentsComponent } from './ShowStory/comments/comments.component';
+import { LibraryComponent } from './library/library.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,8 @@ import { CommentsComponent } from './ShowStory/comments/comments.component';
     CommentListComponent,
     ReplyComponent,
     ReplyListComponent,
-    CommentsComponent
+    CommentsComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { take } from 'rxjs/operators';
-import { Chapter } from 'src/app/_models/chapter';
 import { ShowStory } from 'src/app/_models/showstory';
 import { StoryComment } from 'src/app/_models/storycomment';
 import { User } from 'src/app/_models/user';
@@ -15,7 +14,7 @@ import { ShowstoryService } from 'src/app/_services/showstory.service';
   templateUrl: './show-detail.component.html',
   styleUrls: ['./show-detail.component.css']
 })
-export class ShowDetailComponent implements OnInit {
+export class ShowDetailComponent implements OnInit ,OnDestroy{
   @ViewChild('storyTabs',{static:true}) storyTabs:TabsetComponent;
   showstory : ShowStory;
   user : User;
@@ -75,5 +74,8 @@ export class ShowDetailComponent implements OnInit {
   }
   getStoryName(){
     return this.route.snapshot.params.storyname;
+  }
+  ngOnDestroy(): void {
+    this.commentService.stopHubConnection();
   }
 }

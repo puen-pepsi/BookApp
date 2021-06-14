@@ -7,6 +7,8 @@ export class Chapter{
     content:string;
     order:number;
     storyId:number;
+    authorName:string;
+    authorImageUrl:string;
     publishedId:Guid;
     publishedCreated:Date;
     constructor(){
@@ -15,6 +17,8 @@ export class Chapter{
         this.content="";
         this.order=0;
         this.storyId=0;
+        this.authorName="";
+        this.authorImageUrl="";
 
     }
 }

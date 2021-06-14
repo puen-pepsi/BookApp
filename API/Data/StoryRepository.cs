@@ -168,6 +168,8 @@ namespace API.Data
         {
             return await  _context.StoryChapters
                             .Include(c => c.Published)
+                            .Include(c => c.Story)
+                                .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
                             .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
                                 &&  c.Published != null)
                             .OrderBy(c => c.Order)

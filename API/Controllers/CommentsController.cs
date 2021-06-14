@@ -38,6 +38,7 @@ namespace API.Controllers
             if(story == null)
                 return NotFound();
             storyComment.UserPostId = User.GetUserId();
+            storyComment.ParentId = storyComment.ParentId;
             story.PostComments.Add(storyComment);
             if(await _unitOfWork.Complete()){
                 // var commentreturn = _mapper.Map<StoryCommentDto>(storyComment);

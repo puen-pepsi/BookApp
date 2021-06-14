@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ShowStoryService } from '../show-story/show-story.service';
 import { Pagination } from '../_models/pagination';
 import { ShowStory } from '../_models/showstory';
-import { ShowstoryService } from '../_services/showstory.service';
 
 @Component({
   selector: 'app-library',
@@ -14,7 +14,7 @@ export class LibraryComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   pagination:Pagination;
-  constructor(private showstoryService:ShowstoryService) { }
+  constructor(private showstoryService:ShowStoryService) { }
 
   ngOnInit(): void {
     this.loadStoryLikes();

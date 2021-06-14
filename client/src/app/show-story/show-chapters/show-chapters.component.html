@@ -1,0 +1,33 @@
+<p>Lastest Release : </p>
+<table class="table table-hover">
+    <!-- <thead>
+        <tr>
+          <th>Order</th>
+          <th>Chapter Name</th>
+          <th>Published</th>
+          <th></th>
+        </tr>
+      </thead> -->
+      <tbody> 
+             
+         <tr *ngFor="let row of ChapterList index as i">
+          <a [routerLink]='"./chapters"' 
+              fragment='Chapter-{{i+1}}'
+              routerLinkActive="active-link"
+              > <td>{{i+1}}</td>
+          <!-- <td>{{row.order}}</td> -->
+          <td>{{row.chapterName}}</td>
+          <td>{{row.publishedCreated | timeago}}</td>
+         </a>
+        </tr> 
+      </tbody>
+</table>
+<a [routerLink]="['/stories/Test17/chapters']" [fragment]="'tester'">
+  link to user component
+</a>
+
+<!-- <p>{{storyChapterService.formData | json}}</p> -->
+
+<a [routerLink]="['/stories/Test17/chapters']" [queryParams]="{position:'1050'}">
+  page#
+</a>

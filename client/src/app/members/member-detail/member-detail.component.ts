@@ -12,6 +12,7 @@ import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
+import { BreadcrumbService } from 'xng-breadcrumb';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
@@ -30,6 +31,7 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
       private route:ActivatedRoute,
       private messageService:MessageService,
       private accountService:AccountService,
+      private bcService:BreadcrumbService,
       private router:Router) { 
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -39,6 +41,7 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
+      this.bcService.set('UserName',this.member.username);
     })
 
     this.route.queryParams.subscribe(params => {

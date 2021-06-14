@@ -1,0 +1,22 @@
+<div class="d-flex flex-row">
+    <div class="col-md-9 d-flex flex-column ">
+        <div *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
+                spyTarget="Chapter-{{i+1}}" style="margin-bottom: 50px;"> 
+            <app-show-achapter 
+                [chapter] = 'chapter'
+                [index]='i+1'>
+            </app-show-achapter>
+        </div>  
+    </div> 
+    <div class="col-md-3 " style="background-color: #f1f1f1;">
+        <div class="sidebar">
+            <div *ngFor="let list of chapterList index as i">
+                <a  spyOn="Chapter-{{i+1}}" 
+                    activeClass="sidebar__link--active" 
+                    class="sidebar__link" 
+                    (click)="goTo(i+1)">{{list.chapterName}}
+                </a>
+            </div>
+        </div>  
+    </div>
+</div>    

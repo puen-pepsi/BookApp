@@ -78,8 +78,8 @@ export class CommentService {
   addComment(data){
     return this.http.post<StoryComment>(this.baseUrl + 'comments/' + data.storyName,data); 
   }
-   async sendComment(storyname:string,content:string){
-    return this.hubConnection.invoke('SendComment',{storyname,content})
+   async sendComment(storyname:string,content:string,parentId:number){
+    return this.hubConnection.invoke('SendComment',{storyname,content,parentId})
         .catch(error=> console.log(error));
   }
   getComments(storyName:string){

@@ -1,0 +1,15 @@
+.rounded-circle {
+    max-height: 45px;
+    border:2px solid #e5e7e8;
+}
+
+.example-full-width {
+    width: 100%;
+ }
+
+ #rconners1 {
+    border-radius: 10px;
+    background: #f3f8fc;
+    padding: 10px;
+    width: 100%;
+  }

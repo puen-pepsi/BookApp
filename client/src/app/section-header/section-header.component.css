@@ -1,0 +1,12 @@
+    :host ::ng-deep .xng-breadcrumb-root{
+    padding: 4px 8px;
+    display: inline;
+    border-radius: 0;
+  }
+  :host ::ng-deep label.xng-breadcrumb-trail{
+    margin-top: 8px;
+    color: lightskyblue;
+  } 
+   :host ::ng-deep .xng-breadcrumb-separator{
+    padding: 0 0 ;
+  }

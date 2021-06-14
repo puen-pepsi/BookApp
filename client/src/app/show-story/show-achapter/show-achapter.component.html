@@ -1,0 +1,16 @@
+<div class="Header">
+  <h2>Chapter {{index}} :&nbsp;{{chapter.chapterName}}</h2>
+  <div class="">
+    <img 
+                class="img-circle rounded-circle mr-2"
+                src="{{chapter.authorImageUrl || './assets/user.png'}}" 
+                alt="{{chapter.authorName}}">  
+    <span class="text-muted">{{(chapter.authorName | titlecase)  + ' : Author'}} | {{'Published : '+ (chapter.publishedCreated | timeago)}}</span>
+  </div>
+  
+</div>
+<div class="Body" >
+    <div [innerHtml] = "chapter.content"></div>
+</div>
+
+    

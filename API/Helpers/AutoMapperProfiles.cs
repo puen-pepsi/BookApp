@@ -29,7 +29,11 @@ namespace API.Helpers
                 .ForMember(src => src.Id,opt => opt.Ignore());
             CreateMap<Rating,RatingDto>().ReverseMap();
             CreateMap<PhotoStory, PhotoStoryResource>();
-            CreateMap<StoryChapterDto,StoryChapter>().ReverseMap();
+            CreateMap<StoryChapterDto,StoryChapter>();
+            CreateMap<StoryChapter,StoryChapterDto>()
+                .ForMember(dest => dest.AuthorName,ex=>ex.MapFrom(src => src.Story.Author.KnownAs))
+                .ForMember(dest => dest.AuthorImageUrl,
+                    ex => ex.MapFrom(src=>src.Story.Author.Photos.FirstOrDefault(x=>x.IsMain).Url));
             CreateMap<Published,PublishedDto>().ReverseMap();
             CreateMap<Story,StoryDto>()
                 .ForMember(dest=> dest.UserPhoto,ex=>ex.MapFrom(src=>src.Author.Photos.FirstOrDefault(x=>x.IsMain).Url))

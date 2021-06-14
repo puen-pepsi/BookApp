@@ -2,7 +2,7 @@ import { ShowStory } from "../_models/showstory";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { ShowstoryService } from "../_services/showstory.service";
+import { ShowStoryService } from "../show-story/show-story.service";
 
 @Injectable({
     providedIn:'root'
@@ -10,7 +10,7 @@ import { ShowstoryService } from "../_services/showstory.service";
 
 export class ShowDetailedResolver implements Resolve<ShowStory> {
     
-    constructor(private showStoryService:ShowstoryService){}
+    constructor(private showStoryService:ShowStoryService){}
     resolve(route: ActivatedRouteSnapshot): Observable<ShowStory> {
         return this.showStoryService.getStoryName(route.paramMap.get('storyname'));
     }

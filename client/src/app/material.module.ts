@@ -21,7 +21,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         MatAutocompleteModule,
         MatListModule,
         MatInputModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
     ],
     exports: [MatSliderModule,
         MatSnackBarModule,
@@ -33,7 +33,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         MatAutocompleteModule,
         MatListModule,
         MatInputModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
     ]
 })
 export class MaterialModule { }

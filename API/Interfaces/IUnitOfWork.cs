@@ -8,6 +8,7 @@ namespace API.Interfaces
         IMessageRepository MessageRepository {get;}
         ILikesRepository LikesRepository {get; }
         ILikeStoryRepository LikeStoryRepository {get;}
+        IHistoryRepository HistoryRepository{get;}
         IStoryRepository StoryRepository {get; }
         IRepository Repository {get;}
         IPhotoRepository PhotoRepository {get;}

@@ -480,6 +480,27 @@ namespace API.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("API.Entities.UserHistory", b =>
+                {
+                    b.Property<int>("SourceUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("HistoryStoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("fregment")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SourceUserId", "HistoryStoryId");
+
+                    b.HasIndex("HistoryStoryId");
+
+                    b.ToTable("HistoryUsers");
+                });
+
             modelBuilder.Entity("API.Entities.UserLike", b =>
                 {
                     b.Property<int>("SourceUserId")
@@ -731,6 +752,25 @@ namespace API.Migrations
                     b.Navigation("UserPost");
                 });
 
+            modelBuilder.Entity("API.Entities.UserHistory", b =>
+                {
+                    b.HasOne("API.Entities.Story", "HistoryStory")
+                        .WithMany("StoryHistory")
+                        .HasForeignKey("HistoryStoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "SourceUser")
+                        .WithMany("UserHistory")
+                        .HasForeignKey("SourceUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HistoryStory");
+
+                    b.Navigation("SourceUser");
+                });
+
             modelBuilder.Entity("API.Entities.UserLike", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "LikedUser")
@@ -828,6 +868,8 @@ namespace API.Migrations
 
                     b.Navigation("StoryComments");
 
+                    b.Navigation("UserHistory");
+
                     b.Navigation("UserRoles");
                 });
 
@@ -845,6 +887,8 @@ namespace API.Migrations
                     b.Navigation("PostComments");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("StoryHistory");
 
                     b.Navigation("StoryLiked");
                 });

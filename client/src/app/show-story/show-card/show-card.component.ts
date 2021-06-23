@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ShowStory } from 'src/app/_models/showstory';
 import { StarRatingColor} from 'src/app/show-story/star-rating/star-rating-show/star-rating-show.component'
 import { ToastrService } from 'ngx-toastr';
 import { ShowStoryService } from '../show-story.service';
+import { User } from 'src/app/_models/user';
+import { Router } from '@angular/router';
+import { EventEmitter } from 'stream';
 @Component({
   selector: 'app-show-card',
   templateUrl: './show-card.component.html',
@@ -11,11 +14,14 @@ import { ShowStoryService } from '../show-story.service';
 export class ShowCardComponent implements OnInit {
 @Input() story : ShowStory;
 rating:number=0;
-starColor:StarRatingColor = StarRatingColor.accent;
+starColor:StarRatingColor = StarRatingColor.lightblue;
+fSize : string = "1.2rem";
 starCount:number = 5;
 totalRate:number;
 yourRate:any;
-  constructor(private showStoryService:ShowStoryService,
+mylist : number[]=[];
+  constructor(public showStoryService:ShowStoryService,
+              private router:Router,
               private toastr:ToastrService) { }
 
   ngOnInit(): void {
@@ -25,6 +31,9 @@ yourRate:any;
       this.yourRate = res;
     });
   }
+  goToDetial(storyname:string){
+    this.router.navigate(['/stories',storyname]);
+  }
   onRatingChanged(rating){
     console.log(rating);
     this.rating = rating;
@@ -33,5 +42,11 @@ yourRate:any;
     this.showStoryService.addLikeStory(story.storyName).subscribe(() =>{
       this.toastr.success('You have liked '+ story.storyName);
     })
+    // error => {
+    //   this.toastr.warning('You already liked' + story.storyName);
+    // }) 
+  }
+  deletLikeStory(story:any){
+    
   }
 }

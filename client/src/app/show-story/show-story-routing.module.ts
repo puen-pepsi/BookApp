@@ -6,17 +6,30 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ShowDetailedResolver } from '../_resolvers/show-detailed.resolver';
 import { ShowTChapterComponent } from './show-tchapter/show-tchapter.component';
 import { ShowStoryComponent } from './show-story.component';
+import { SaveHistoryGuard } from '../_guards/save-history.guard';
 
 const routes : Routes =[
-    {path :'',
-    component:ShowListComponent},
-    {path :':storyname',
-    component:ShowDetailComponent,
-      resolve:{showstory:ShowDetailedResolver},
-      data:{breadcrumb:{alias:'detial'}},
+    // {path :'',component:ShowListComponent,
+    //   children:[
+    //     {path :':storyname',
+    //         component:ShowDetailComponent,
+            
+            
+    //         resolve:{showstory:ShowDetailedResolver}
+    //         },    
+    //     {path :':storyname/chapters',
+    //     component:ShowTChapterComponent
+    //     },
+    //   ]
+    // },
+    {path:'',component:ShowListComponent},
+    {path:':storyname',
+            component:ShowDetailComponent,
+            data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },
+            resolve:{showstory:ShowDetailedResolver},
     },    
     {path :':storyname/chapters',
-    component:ShowTChapterComponent
+            component:ShowTChapterComponent,canDeactivate:[SaveHistoryGuard]
     },
   ]
 

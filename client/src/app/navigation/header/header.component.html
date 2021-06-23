@@ -1,0 +1,85 @@
+<mat-toolbar color="primary">
+    <!-- <app-nav></app-nav> -->
+   <div fxHide.gt-xs>
+       <button mat-icon-button (click)="onToggleSidenav()">
+       <mat-icon>menu</mat-icon></button>
+   </div>
+   <div class="mr-5"><a routerlink="/"></a>Rainobu</div>
+   <div fxFlex fxLayout fxLayoutAlign="flex-start" fxHide.xs>
+     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+       <ng-container *ngIf="accountService.currentUser$|async"> 
+              <li >
+                <a  routerLink='/members' routerLinkActive='active'>Authors</a>
+              </li>
+              <li >
+                <a  routerLink='/lists' routerLinkActive='active'>Lists</a>
+              </li>
+              <li >
+                <a  routerLink='/library' routerLinkActive='active'>Library</a>
+              </li>
+              <li >
+                <a  routerLink='/mystory' routerLinkActive='active'>My Story</a>
+              </li>
+              <li >
+                <a  routerLink='/stories' routerLinkActive='active'>Story</a>
+              </li>
+              <li >
+                <a  routerLink='/messages' routerLinkActive='active'>Messages</a>
+              </li>
+              <li *appHasRole='["Admin","Moderator"]' >
+                <a  routerLink='/admin' routerLinkActive='active'>Admin</a>
+              </li>
+            </ng-container>
+            <li >
+              <a  routerLink='/errors' routerLinkActive='active'>Errors</a>
+            </li>
+            <li >
+              <a  routerLink='/history' routerLinkActive='active'>History</a>
+            </li>
+     </ul>
+     
+   </div>
+   <div fxFlex fxLayout fxLayoutAlign="flex-end">
+       <ul fxLayout fxLayoutGap="0px" class="navigation-items">
+        <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
+          <img src="{{user.photoUrl|| './assets/user.png'}} " 
+          class="img-circle rounded-circle mr-0"
+            alt="{{user.username}}">
+          <a class="dropdown-toggle text-light ml-2" dropdownToggle ><span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span> </a>
+          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+             <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
+             <div class="dropdown-divider"></div>
+             <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+       </div>
+       <!-- <ng-container *ngIf="(accountService.currentUser$|async) as user" >
+          <mat-form-field appearance="fill">
+            <mat-label><span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span>
+            </mat-label>
+            <mat-select>
+              <mat-option >
+                <span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container> -->
+       <form *ngIf="(accountService.currentUser$|async) === null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()"
+            autocomplete="off">
+          <input 
+            name="username"
+            [(ngModel)]="model.username"
+            class="form-control mr-sm-2" 
+            type="text" 
+            placeholder="UserName">
+          <input 
+            name="password"
+            [(ngModel)]="model.password"
+            class="form-control mr-sm-2" 
+            type="password" 
+            placeholder="Password">
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+        </form>
+       </ul>
+       
+   </div>
+</mat-toolbar>

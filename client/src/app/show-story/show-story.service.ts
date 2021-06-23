@@ -4,9 +4,11 @@ import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Chapter } from '../_models/chapter';
+import { ShowHistory } from '../_models/ShowHIstory';
 import { ShowStory } from '../_models/showstory';
 import { StoryParams } from '../_models/storyParams';
 import { User } from '../_models/user';
+import { Userhistory } from '../_models/userhistory';
 import { AccountService } from '../_services/account.service';
 import { getPaginatedResult, getPaginationHeaders } from '../_services/paginationHelper';
 
@@ -73,6 +75,7 @@ export class ShowStoryService {
       if(showstory){
         return of(showstory);
       }
+      
       return this.http.get<ShowStory>(this.baseUrl+'showstory/'+storyName);
   }
   getStoryChapter(storyId:number,published:boolean){
@@ -81,7 +84,7 @@ export class ShowStoryService {
       .then(res => this.list = res as Chapter[]);
   }
   getStoryNameChapter(storyName:string){
-    return this.http.get(this.baseUrl + 'story/'+ storyName +'/chapters')
+    return this.http.get<Chapter[]>(this.baseUrl + 'story/'+ storyName +'/chapters')
       // .toPromise()
       // .then(res => this.list = res as Chapter[]);
   }
@@ -104,5 +107,34 @@ export class ShowStoryService {
   getStoryLikes(pageNumber,pageSize){
     let params = getPaginationHeaders(pageNumber,pageSize);
     return getPaginatedResult<Partial<ShowStory[]>>(this.baseUrl +'likestories',params,this.http);
+  }
+  getStoryHistory(pageNumber,pageSize){
+    let params = getPaginationHeaders(pageNumber,pageSize);
+    return getPaginatedResult<Partial<ShowHistory[]>>(this.baseUrl + 'HistoryUser',params,this.http)
+  }
+
+  addHistoryUser(storyname:string,target:string){
+    return this.http.post(this.baseUrl+'HistoryUser/'+storyname+'/'+target,{});
+  }
+  getStorybyName(storyname:string){
+    return this.http.get<ShowStory>(this.baseUrl+'showstory/'+storyname,{});
+  }
+  getUserHistory(storyId:number){
+    return this.http.get<Userhistory>(this.baseUrl+'HistoryUser/'+storyId,{});
+  }
+  getStoryAuthor(pageNumber,pageSize,authorname:string){
+    let params = getPaginationHeaders(pageNumber,pageSize);
+    params = params.append('authorName',authorname);
+    return getPaginatedResult<Partial<ShowStory[]>>(this.baseUrl+'showstory/GetStoryAuthor/',params,this.http);
+  }
+  getUserLiked(storyId:number){
+    return this.http.get(this.baseUrl+'likestories/'+storyId,{})
+  }
+
+  deletHistoryUser(storyId:number){
+    return this.http.delete(this.baseUrl+'HistoryUser/'+storyId,{});
+  }
+  deleteStoryLike(storyId:number){
+    return this.http.delete(this.baseUrl+'LikeStories/'+storyId,{});
   }
 }

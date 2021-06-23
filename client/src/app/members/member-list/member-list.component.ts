@@ -6,6 +6,7 @@ import { Pagination } from 'src/app/_models/pagination';
 import { User } from 'src/app/_models/user';
 import { UserParams } from 'src/app/_models/userParams';
 import { MembersService } from 'src/app/_services/members.service';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-member-list',
@@ -41,7 +42,8 @@ export class MemberListComponent implements OnInit {
   }
   pageChanged(event:any){
     this.memberService.setUserParams(this.userParams);
-    this.userParams.pageNumber = event.page;
+    //this.userParams.pageNumber = event.page;
+    this.userParams.pageNumber = event.pageIndex+1;
     this.loadMembers();
   }
 }

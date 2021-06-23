@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .mat-column-no {
+    width: 20px;
+    /* border-right: 1px solid currentColor; */
+     /* padding-right: 10px;  */
+    text-align: center;
+    color: lightslategray;
+  }
+  
+  .mat-column-chaptername {
+    padding-left: 1rem;
+    font-size: 1.1em;
+    color: lightslategray;
+  } 
+  .mat-column-publishedCreated{
+    color:lightslategray;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 100% !important;
+  }
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+  }
+  

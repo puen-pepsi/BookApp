@@ -19,6 +19,19 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
 
         }
+        [Route("GetStoryAuthor")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<StoryDto>>> GetStoryAuthor([FromQuery] AuthorStoryParams authorStoryParams)
+        {
+
+            var storyAuthor = await _unitOfWork.StoryRepository.GetAuthorStory(authorStoryParams);
+             if(storyAuthor == null)
+                return NotFound();
+                Response.AddPaginationHeader(storyAuthor.CurrentPage,
+                storyAuthor.PageSize, storyAuthor.TotalCount, storyAuthor.TotalPages);
+            var storylist = _mapper.Map<IEnumerable<StoryDto>>(storyAuthor);
+            return Ok(storylist);
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StoryDto>>> GetStory([FromQuery] StoryParams storyParams)
          {

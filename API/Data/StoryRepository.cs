@@ -60,6 +60,7 @@ namespace API.Data
                                 .ThenInclude(a => a.Photos)       
                             .Include(p => p.PhotoStories)
                             .Include(s => s.Ratings)
+                            .Include(h => h.StoryHistory)
                             .SingleOrDefaultAsync(s => s.Id == id);
         }
         // public async Task<Story> GetStoryById(int id)
@@ -155,7 +156,16 @@ namespace API.Data
                     storyParams.PageNumber,storyParams.PageSize);
 
         }
-
+        public async Task<PagedList<StoryDto>> GetAuthorStory(AuthorStoryParams authorStoryParams)
+        {
+            var query = _context.Stories.AsQueryable();
+            if(authorStoryParams.AuthorName != null){
+                query = query.Where(a => a.UserName == authorStoryParams.AuthorName);             
+            }
+            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(
+                _mapper.ConfigurationProvider).AsNoTracking(),
+                authorStoryParams.PageNumber,authorStoryParams.PageSize); 
+        }
         public async Task<Rating> GetYouRate(int storyId, int userId)
         {
             return await _context.Ratings
@@ -214,5 +224,7 @@ namespace API.Data
                 .Include(u => u.Story)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        
     }
 }

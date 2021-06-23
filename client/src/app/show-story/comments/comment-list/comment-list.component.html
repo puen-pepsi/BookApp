@@ -3,15 +3,18 @@
   <div class="mt-2 mb-2" *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
   <mat-card *ngIf="comment.parentId==null"
     class="pt-0 pb-0 pl-2 pr-2"> 
-    <div class="d-flex flex-row" style="width: 100%;">
-      <div class="col-md-1 p-2 pull-left">
+    <div class="created">
+      <small class="text-muted ">{{comment.created | timeago}}</small>
+    </div>
+    <div fxLayout="row"  style="width: 100%;">
+      <div class=" p-2 ">
         <img 
               class="img-circle rounded-circle mr-2"
               src="{{comment.image || './assets/user.png'}}" 
               alt="{{comment.knownAs}}">     
       <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
       </div>
-      <div class="col-md-9 p-2" >
+      <div class=" p-2" fxFill>
         <strong >{{comment.knownAs | titlecase}}</strong> <br/>
         <div class="p-2" id="rconners1">
           <p>{{comment.content}}</p>
@@ -26,10 +29,9 @@
             Remove</button>
       </div>
       </div>
-      <div class="col-md-2 p-2 text-right pull-right">
-        <small class="text-muted ">{{comment.created | timeago}}</small>
-      </div>
+      
     </div>
+    
     <mat-action>
       <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
         [storyName]='this.storyName'></app-reply-form>

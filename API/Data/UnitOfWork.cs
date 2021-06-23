@@ -28,6 +28,8 @@ namespace API.Data
 
         public ILikeStoryRepository LikeStoryRepository => new LikeStoryRepository(_context);
 
+        public IHistoryRepository HistoryRepository =>  new HistoryRepository(_context,_mapper);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

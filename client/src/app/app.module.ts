@@ -47,28 +47,14 @@ import { StorychapterComponent } from './story/storychapter/storychapter.compone
 import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
 import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-// import { ShowListComponent } from './ShowStory/show-list/show-list.component';
-// import { ShowCardComponent } from './ShowStory/show-card/show-card.component';
-// import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
-// import { ShowChaptersComponent } from './ShowStory/show-chapters/show-chapters.component';
-import {MaterialModule} from './material.module';
-import {TagComponent} from './admin/tag/tag.component'
+import { MaterialModule} from './material.module';
+import { TagComponent} from './admin/tag/tag.component'
 import { TagFormComponent } from './admin/tag/tag-form/tag-form.component';
-// import { StarRatingComponent } from './show-story/star-rating/star-rating/star-rating.component';
-// import { StarRatingShowComponent } from './show-story/star-rating/star-rating-show/star-rating-show.component';
-// import { ShowAChapterComponent } from './ShowStory/show-achapter/show-achapter.component';
-// import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
-// import { ShowstoryComponent } from './ShowStory/showstory.component';
-// import { CommentComponent } from './show-story/comments/comment/comment.component';
-// import { CommentListComponent } from './show-story/comments/comment-list/comment-list.component';
-// import { ReplyComponent } from './show-story/comments/reply/reply.component';
-// import { ReplyListComponent } from './show-story/comments/reply-list/reply-list.component';
-// import { CommentsComponent } from './show-story/comments/comments.component';
-import { LibraryComponent } from './library/library.component';
-import { ScrollSpyModule } from 'ng-spy';
 import { SectionHeaderComponent } from './section-header/section-header.component';
-import {BreadcrumbModule} from 'xng-breadcrumb';
 import { ShowStoryModule } from './show-story/show-story.module';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { AuthorStoryComponent } from './members/member-detail/author-story/author-story.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,24 +93,14 @@ import { ShowStoryModule } from './show-story/show-story.module';
     StorychapterComponent,
     ChapterFormComponent,
     ChapterListComponent,
-    // ShowListComponent,
-    // ShowCardComponent,
-    // ShowDetailComponent,
-    // ShowChaptersComponent,
-    // StarRatingComponent,
     TagComponent,
     TagFormComponent,
-    // StarRatingShowComponent,
-    // ShowAChapterComponent,
-    // ShowTChapterComponent,
-    // ShowstoryComponent,
-    // CommentComponent,
-    // CommentListComponent,
-    // ReplyComponent,
-    // ReplyListComponent,
-    // CommentsComponent,
-    LibraryComponent,
-    SectionHeaderComponent
+    
+    SectionHeaderComponent,
+    
+    HeaderComponent,
+    SidenavListComponent,
+    AuthorStoryComponent
   ],
   imports: [
     BrowserModule,
@@ -138,9 +114,9 @@ import { ShowStoryModule } from './show-story/show-story.module';
     CKEditorModule,
     MaterialModule,
     FlexLayoutModule,
-    ScrollSpyModule,
-    BreadcrumbModule,
-    ShowStoryModule
+    // ScrollSpyModule,
+    // BreadcrumbModule,
+    ShowStoryModule,
     
   ],
   providers: [

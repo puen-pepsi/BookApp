@@ -1,0 +1,19 @@
+<h4>Stories : {{authorname}}</h4>
+<div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5px" >
+    <div *ngFor="let story of showstory" fxLayout fxFlex="20" >
+        <app-show-card [story]="story"></app-show-card>
+    </div>
+</div>
+<!-- <mat-paginator *ngIf="pagination"
+    [length]="pagination?.totalItems" 
+    [pageSizeOptions]="[5]"
+    [showFirstLastButtons]="true"
+    [pageIndex]="pagination.currentPage-1"
+    (page)="pageChanged($event)"
+></mat-paginator> -->
+<mat-paginator 
+  [length]="pagination?.totalItems" 
+  [pageSizeOptions]="[5]"
+  [showFirstLastButtons]="true"
+  (page)="pageChanged($event)">
+</mat-paginator>

@@ -20,26 +20,31 @@ import { StoryComponent } from './story/story.component';
 // import { ShowDetailedResolver } from './_resolvers/show-detailed.resolver';
 // import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
 // import { ShowstoryComponent } from './ShowStory/showstory.component';
-import { LibraryComponent } from './library/library.component';
+import { LibraryComponent } from './show-story/library/library.component';
+import { ShowStoryComponent } from './show-story/show-story.component';
+import { HistoryComponent } from './show-story/library/history/history.component';
+import { ShowListComponent } from './show-story/show-list/show-list.component';
 const routes: Routes = [
   {path:'',component:HomeComponent,data:{breadcrumb:'Home'}},
-  
   {
     path:'',
     runGuardsAndResolvers:'always',
     canActivate: [AuthGuard],
     children: [
       {path:'members',component:MemberListComponent,data:{breadcrumb:'Members'}},
-      {path:'members/:username',component:MemberDetailComponent,resolve:{member:MemberDetailedResolver},
-        data:{breadcrumb:{alias:'UserName'}}},
+      {path:'members/:username',component:MemberDetailComponent,
+          data:{ breadcrumb: (data: any) => `${data.member.username}` },
+          resolve:{member:MemberDetailedResolver}
+      },
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent,data:{breadcrumb:'List'}},
       {path:'library',component:LibraryComponent,data:{breadcrumb:'My Library'}},
       {path:'mystory',component:StoryComponent,data:{breadcrumb:'My Stories'}},
       {
-        path: 'stories', loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
+        path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
         data: { breadcrumb: 'Stories' }
       },
+
       // {path:'stories',
       //   component:ShowstoryComponent,data:{breadcrumb:'Stories'},
       //   children:[
@@ -60,7 +65,7 @@ const routes: Routes = [
           data:{breadcrumb:'admin'}},
     ]  
   },
-  
+  {path:'history',component:HistoryComponent},
   {path:'errors',component:TestErrorsComponent},
   {path:'not-found',component:NotFoundComponent},
   {path:'server-error',component:ServerErrorComponent},
@@ -74,7 +79,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes,{
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
-    scrollOffset: [0, 100], // [x, y] - adjust scroll offset
+    //scrollOffset: [0, 150], // [x, y] - adjust scroll offset
+    scrollOffset: [0, 64+16], 
     // onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]

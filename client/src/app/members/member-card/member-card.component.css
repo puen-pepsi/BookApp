@@ -1,3 +1,6 @@
+.card {
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+}
 .card:hover img{
     transform:scale(1.2,1.2);
     transition-duration: 500ms;

@@ -22,7 +22,8 @@ namespace API.Entities
         public ICollection<UserLike> LikedByUsers { get; set; }
         // Liked Users
         public ICollection<UserLike> LikedUsers { get; set; }
-        public ICollection<UserStory> LikedStoryByUsers { get; set; }
+        public ICollection<UserStory> LikedStoryByUsers { get; set; }//Library
+        public ICollection<UserHistory> UserHistory { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
@@ -34,6 +35,7 @@ namespace API.Entities
             LikedByUsers = new Collection<UserLike>();
             LikedUsers = new Collection<UserLike>();
             LikedStoryByUsers = new Collection<UserStory>();
+            UserHistory  = new Collection<UserHistory>();
             MessagesSent = new Collection<Message>();
             MessagesReceived = new Collection<Message>();
             UserRoles = new Collection<AppUserRole>();

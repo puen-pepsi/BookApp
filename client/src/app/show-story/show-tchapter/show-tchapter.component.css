@@ -1,66 +1,226 @@
+:host ::ng-deep html {
+  scroll-behavior: smooth;
+}
+.title{
+  text-align: center;
+}
+.title img{
+  width: 35%;
+}
+.title h4{
+  margin-top: 5;
 
-/* The side navigation menu */
-.sidebar {
-  top: 100px;
- /*  right:0; */
-  padding-top: 10px;
-  /* width: 25%; */
-  /* background-color: #f1f1f1; */
-  position: fixed;
-  height: 100vmax;
-  overflow: auto;
+}
+.title p{
+  color: lightgray;
 }
 
-/* Sidebar links */
-.sidebar a {
-  display: block;
-  /* color: black; */
-  padding: 16px;
-  text-decoration: none;
+.section-nav {
+  position: sticky;
+  top: 80px;
+  right:0px;
+  width: 100%;
+  align-self: start;
 }
 
-/* Active/current link */
-/* .sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
+
+h5 {
+
+  width: 90%;
+  margin: 2em auto;
+  overflow: hidden;
+  text-align: center;
+  font-weight:300;
+  color: lightgray;
+}
+h5:before, h5:after {
+  content: "";
+  display: inline-block;
+  width: 80%;
+  margin: 0 .5em 0 -55%;
+  vertical-align: middle;
+  border-bottom: 1px solid;
+}
+h5:after {
+  margin: 0 -55% 0 .5em;
+}
+.paper{
+  background-color: #fffaf0;
+}
+
+
+/* :host ::ng-deep body {
+  color: black;
+  background-color: white;
+  margin: 0;
+  padding: 0;
 } */
-.sidebar__link--active {
-  background-color: #fff;
-  color:#555;
+/* ::ng-deep body::-webkit-scrollbar {
+  width: 1rem;
 }
 
-.sidebar__link:hover {
-  background-color: #555;
-}
-/* Links on mouse-over */
-.sidebar a:hover:not(.active) {
-  background-color: rgb(230, 230, 233);
-  color: white;
-  cursor: pointer;
+::ng-deep body::-webkit-scrollbar-track {
+  background: #1e1e24;
 }
 
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
+::ng-deep body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+} */
+
+.navbar {
+  position: fixed;
+  background-color: var(--bg-primary);
+  transition: width 600ms ease;
+  overflow: scroll;
+
 }
 
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  height: 100%;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+
+.nav-link {
+  display: flex;
+  align-items: flex-start;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.link-text {
+  display: none;
+  margin-left: 0.5rem;
+}
+
+.nav-link svg {
+  width: 1.5rem;
+  min-width: 1.5rem;
+  margin: 0 0rem;
+}
+
+.fa-primary {
+  color: #ff7eee;
+}
+
+.fa-secondary {
+  color: #df49a6;
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+
+  .logo {
+    display: none;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .nav-link {
+    justify-content: flex-start;
+  }
+
+  main {
+    margin: 0;
+  }
 }
 
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
+/* Large screens */
+@media only screen and (min-width: 600px) {
+
+  .navbar {
+    top: 0;
+    right:0;
+    width: 3rem;
+    height: 100vh;
   }
+  .nav-item{
+    justify-items: center;
+  }
+  .navbar:hover {
+    width: 10rem;
+  }
+
+  .navbar:hover .link-text {
+    display: inline;
+  }
+
+  .navbar:hover .logo svg
+  {
+    margin-left: 0rem;
+  }
+
+  .navbar:hover .logo-text
+  {
+    left: 0px;
+  }
+}
+
+.dark {
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+}
+
+.light {
+  --text-primary: #1f1f1f;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e4e4e4;
+}
+
+.solar {
+  --text-primary: #576e75;
+  --text-secondary: #35535c;
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #f5e5b8;
+}
+
+.theme-icon {
+  display: none;
+}
+
+.dark #darkIcon {
+  display: block;
+}
+
+.light #lightIcon {
+  display: block;
+}
+
+.solar #solarIcon {
+  display: block;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
@@ -6,6 +6,7 @@ import { PresenceService } from './_services/presence.service';
 import { ViewportScroller } from '@angular/common';
 import { Router, Scroll } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { MatSidenav } from '@angular/material/sidenav';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit{
     }
     
   }
-
+  
   
 
 }

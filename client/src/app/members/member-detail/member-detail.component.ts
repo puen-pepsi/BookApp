@@ -13,6 +13,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { ShowStoryService } from 'src/app/show-story/show-story.service';
+import { ShowStory } from 'src/app/_models/showstory';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
@@ -26,8 +28,10 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
   activeTab:TabDirective;
   messages:Message[] = [];
   user : User;
-
-  constructor(public presence:PresenceService,private memberService:MembersService,
+  author:string;
+  constructor(public presence:PresenceService,
+      private memberService:MembersService,
+      private showStoryService:ShowStoryService,
       private route:ActivatedRoute,
       private messageService:MessageService,
       private accountService:AccountService,
@@ -41,7 +45,8 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
-      this.bcService.set('UserName',this.member.username);
+      console.log(this.member.username);
+      this.author = this.member.username;
     })
 
     this.route.queryParams.subscribe(params => {
@@ -59,7 +64,6 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
       }
     ]
     this.galleryImages = this.getImages();
-
   }
 
   getImages():NgxGalleryImage[]{

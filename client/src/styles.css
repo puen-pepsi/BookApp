@@ -1,4 +1,16 @@
+/* @import "@angular/material/prebuilt-themes/indigo-pink.css"; */
 /* You can add global styles to this file, and also import other style files */
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --highlight-toggle1:#FFD500;
+  --highlight-toggle2:#FFBF00;
+  --transition-speed: 600ms;
+}
 .tab-panel {
     border: 1px solid #ddd;
     padding: 10px;
@@ -50,7 +62,8 @@
 html, body { height: 100%; }
 body { 
   margin: 0; 
-  font-family: Roboto,"Helvetica Neue", sans-serif;
+  /* font-family: Roboto,"Helvetica Neue", sans-serif; */
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
    /* background: #eee;  */
 }
 
@@ -62,7 +75,7 @@ input[type=text]{
   -moz-border-radius: 20px;
    border-radius: 20px;
    border: 1px solid #2d9fd9;
-   color: #a0d18c;
+   color: #2780e3;
    /* width: 250px;
    height: 30px; */
    padding-left: 10px;
@@ -72,7 +85,7 @@ input[type=text]{
     -moz-border-radius: 20px;
      border-radius: 20px;
      border: 1px solid #2d9fd9;
-     color: #a0d18c;
+     color: #2780e3;
      /* width: 250px;
      height: 30px; */
      padding-left: 10px;

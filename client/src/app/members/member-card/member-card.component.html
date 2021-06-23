@@ -2,16 +2,38 @@
     <div class="card-img-wrapper">
         <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top">
         <ul class="list-inline member-icons animate text-center">
-            <li class="list-inline-item"><button routerLink='/members/{{member.username}}'  class="btn btn-primary">
-                <i class="fa fa-user"></i></button></li>
-            <li class="list-inline-item"><button (click)="addLike(member)" class="btn btn-primary">
-                <i class="fa fa-heart"></i></button></li>
             <li class="list-inline-item">
-                <button 
+                <!-- <button [routerLink]="['/members',member.username]" class="btn btn-primary">
+                <i class="fa fa-user"></i></button> -->
+                <button mat-mini-fab
+                    [routerLink]="['/members',member.username]"
+                    color="primary"
+                    aria-label="Action icon" >
+                    <mat-icon>person</mat-icon>
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <!-- <button (click)="addLike(member)" class="btn btn-primary">
+                <i class="fa fa-heart"></i></button> -->
+                <button mat-mini-fab 
+                     (click)="addLike(member)" 
+                    aria-label="Action icon">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <!-- <button 
                     routerLink='/members/{{member.username}}' 
                     [queryParams]='{tab:3}'
                     class="btn btn-primary">
                 <i class="fa fa-envelope"></i>
+                </button> -->
+                <button mat-mini-fab
+                    routerLink='/members/{{member.username}}' 
+                    [queryParams]='{tab:3}'
+                    color="warn"
+                    aria-label="Action icon">
+                    <mat-icon>email</mat-icon>
                 </button>
             </li>
         </ul>

@@ -15,6 +15,7 @@ namespace API.Interfaces
          void UpdateStory(Story story);
          void UpdateStoryChapter(StoryChapter storyChapter);
          Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams);
+         Task<PagedList<StoryDto>> GetAuthorStory(AuthorStoryParams authorStoryParams);
          Task<IEnumerable<Story>> GetStoryAsync();
          Task<IEnumerable<Story>> GetStoryByUserName(string username);
          Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName);

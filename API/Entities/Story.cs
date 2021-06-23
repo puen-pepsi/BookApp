@@ -26,6 +26,7 @@ namespace API.Entities
         //public virtual ICollection<StoryTag> StoryTags { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual  ICollection<UserStory> StoryLiked { get; set; }
+        public virtual ICollection<UserHistory> StoryHistory { get; set; }
         public Story()
         {
             Chapters = new Collection<StoryChapter>();
@@ -34,6 +35,7 @@ namespace API.Entities
             PhotoStories = new Collection<PhotoStory>();
             Ratings = new Collection<Rating>();
             StoryLiked = new Collection<UserStory>();
+            StoryHistory =new Collection<UserHistory>();
         }
     }
 }

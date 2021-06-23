@@ -51,7 +51,25 @@ namespace API.Helpers
                 .ForMember(d => d.UserName,o => o.MapFrom(s => s.UserPost.UserName))
                 .ForMember(d => d.KnownAs,o => o.MapFrom(s => s.UserPost.KnownAs))
                 .ForMember(dest=>dest.Image,ex=>ex.MapFrom(src=>src.UserPost.Photos.FirstOrDefault(x=>x.IsMain).Url));
-                
+            CreateMap<Story,HistoryStoryDto>()
+                .ForMember(dest => dest.storyId, ex => ex.MapFrom(s => s.Id))
+                .ForMember(dest => dest.CreateAt, ex => ex.MapFrom(s => s.Created))
+                .ForMember(dest=> dest.UserPhoto,ex=>ex.MapFrom(src=>src.Author.Photos.FirstOrDefault(x=>x.IsMain).Url))
+                .ForMember(dest=> dest.Rating,
+                    ex=>ex.MapFrom(sr=> sr.Ratings.Count()==0 ? 0:sr.Ratings.Average(src=> src.Rated)))
+                .ForMember(dest=> dest.TotalRate,
+                    ex=>ex.MapFrom(sr=> sr.Ratings.Count()==0 ? 0 :sr.Ratings.Count()))
+                .ForMember(dest => dest.fregment,ex => ex.MapFrom(s => s.StoryHistory.FirstOrDefault(x=>x.HistoryStoryId== s.Id).fregment)) 
+                .ForMember(dest=> dest.Rating,
+                    ex=>ex.MapFrom(sr=> sr.Ratings.Count()==0 ? 0:sr.Ratings.Average(src=> src.Rated)))
+                .ForMember(dest => dest.Created,ex => ex.MapFrom(s => s.StoryHistory.FirstOrDefault(x=>x.HistoryStoryId== s.Id).Created))
+                .ForMember(dest => dest.TotalChapter, 
+                    ex=>ex.MapFrom(src=>src.Chapters.Where(src=>src.Published.Created > DateTime.MinValue)
+                        .Count()==0?0:src.Chapters
+                            .Where(src=>src.Published.Created > DateTime.MinValue)
+                            .Count()));
+            CreateMap<UserHistory,UserHistoryDto>().ReverseMap();
+
         }
     }
 }

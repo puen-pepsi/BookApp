@@ -1,0 +1,93 @@
+.header{
+  padding: 1rem 1rem 0rem 0rem;
+}
+  
+/* The side navigation menu */
+.sidebar {
+   /*  right:0; */
+    /* width: 25%; */
+    /* background-color: #f1f1f1; */
+    /* height: 100vmax;
+    overflow: auto;
+    color:#333; */
+    padding-left: 6px;
+    border-left: 2px solid #efefef;
+    width: 100%;
+    
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    text-decoration: none;
+    display: block;
+    padding: .125rem 10px;
+    color:#ccc;
+    transition: all 50ms ease-in-out;
+  }
+  
+  /* Active/current link */
+  /* .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+  .sidebar__link--active{
+    color:#666 !important;
+    font-weight: 600;
+  }
+  /* ul li::marker {
+    font-size: 150%;
+    color: lightgreen;
+  } */
+  
+  .sidebar__link:hover {
+    color: #ccc;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  /* Links on mouse-over */
+.sidebar a:hover,
+.sidebar-nav a:focus {
+  color: #666;
+  font-weight: 500;
+}
+
+  /* 2. Make nav sticky */
+  
+  
+  /* 3. ScrollSpy active styles (see JS tab for activation) */
+
+  
+  
+/* Sidebar links */
+
+  /* Active/current link */
+  /* .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+  /* Links on mouse-over */
+  /* .section-nav a:hover,
+  .section-nav a:focus {
+    color: #666;
+    cursor: pointer;
+  } */
+  .rightCircle{ 
+    position:absolute;
+    text-align: center;
+    align-items: center;
+    width:20px; 
+    height:20px; 
+    border-radius:50%; 
+    color: #ccc; 
+    font-size: 1.5rem;
+    /* background-color: royalblue; */
+    right:0rem; 
+    top:0.5rem;
+    z-index: 999;
+}
+.rightCircle :hover{
+  cursor: pointer;
+  color:#666;
+}
+ 
+  

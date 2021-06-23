@@ -1,0 +1,18 @@
+
+
+<div class="header"><h5>Table of Contents</h5> 
+    <div class="rightCircle">
+        <mat-icon (click)="toggle($event)" [inline]="true">close</mat-icon>
+    </div>
+</div>
+
+
+<div class="sidebar">
+            <div *ngFor="let list of chapterList index as i">
+                <a  spyOn="Chapter-{{i+1}}" 
+                    activeClass="sidebar__link--active" 
+                    class="sidebar__link" 
+                    (click)="goTo('Chapter-'+ (i+1))">{{list.chapterName | titlecase}}
+                </a>
+            </div>
+</div>  

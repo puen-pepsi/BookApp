@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -17,6 +18,15 @@ namespace API.Data
 
         }
 
+        public void DeleteStoryLiked(UserStory userStory)
+        {
+            _context.LikeStory.Remove(userStory);
+        }
+
+        public Task<IEnumerable<LikeStoryDto>> GetStoryLikedUser(int userId)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public async Task<PagedList<LikeStoryDto>> GetStoryLikes(LikeStoryParams likeStoryParams)
         {

@@ -51,5 +51,28 @@ namespace API.Controllers
 
             return Ok(storylike);
         }
+
+        [HttpGet("{storyId}")]
+        public async Task<ActionResult<UserLikedDto>> GetUserStoryLiked( int storyId)
+        {
+            var userId = User.GetUserId();
+            var Liked = await _unitOfWork.LikeStoryRepository.GetUserLikeStory(userId,storyId);
+            if(Liked == null){
+                    return Ok(null);
+            }
+            var userliked = new UserLikedDto{
+                storyId = Liked.LikedStoryId
+            };
+            return Ok(userliked);
+        }
+        [HttpDelete("{storyId}")]
+        public async Task<ActionResult> DeleteLikeStory(int storyId){
+            var userId = User.GetUserId();
+            var likestory = await _unitOfWork.LikeStoryRepository.GetUserLikeStory(userId,storyId);
+            _unitOfWork.LikeStoryRepository.DeleteStoryLiked(likestory);
+             if(await _unitOfWork.Complete())return Ok();
+            return BadRequest("Problem deleting the story liked");
+        }
+
     }
 }

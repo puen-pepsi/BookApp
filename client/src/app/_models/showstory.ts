@@ -15,5 +15,7 @@ export interface ShowStory {
     state:string;
     userName:string;
     userPhoto:string;
+    tags:string;
     //photos: Photo[];
+    
 }

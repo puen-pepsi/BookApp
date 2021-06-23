@@ -59,6 +59,7 @@ namespace API.Controllers
         {
             var user = await _userManager.Users
                 .Include(p => p.Photos)
+                .Include(l => l.LikedStoryByUsers)
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
             if (user == null) return Unauthorized("Invalid username");
@@ -74,7 +75,11 @@ namespace API.Controllers
                 Token = await _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
-                Gender = user.Gender
+                Gender = user.Gender,
+                // MyList = user.LikedStoryByUsers.Select(s => new UserStoryDto{
+                //     LikedStoryId = s.LikedStoryId
+                // })
+                MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
             };
         }
 

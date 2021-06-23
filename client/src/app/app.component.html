@@ -1,8 +1,22 @@
 <ngx-spinner>
     <h3>Loading...</h3>
 </ngx-spinner>
-<app-nav></app-nav>
-<app-section-header></app-section-header>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav role="navigation">
+        <app-sidenav-list (closesidenav)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <app-header (sidenavtoggle)="sidenav.toggle()"></app-header>
+        <!-- <app-section-header></app-section-header> -->
+        <main class="container">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <app-nav></app-nav>
+
 <div class="container">
     <router-outlet></router-outlet>
-</div>
+</div> -->

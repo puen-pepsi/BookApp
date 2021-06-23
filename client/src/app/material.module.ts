@@ -10,6 +10,13 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSortModule} from '@angular/material/sort';
+
 @NgModule({
     imports: [MatSliderModule,
         MatSnackBarModule,
@@ -22,6 +29,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         MatListModule,
         MatInputModule,
         MatButtonToggleModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatSortModule
     ],
     exports: [MatSliderModule,
         MatSnackBarModule,
@@ -34,6 +47,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         MatListModule,
         MatInputModule,
         MatButtonToggleModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatSortModule
     ]
 })
 export class MaterialModule { }

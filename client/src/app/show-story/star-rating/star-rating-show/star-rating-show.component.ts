@@ -10,6 +10,8 @@ export class StarRatingShowComponent implements OnInit {
   @Input('rating')  rating: number=0;
   @Input('starCount')  starCount: number = 5;
   @Input('color')  color: string = 'accent';
+  @Input() fSize : string = '1rem';
+  @Input() wSize : string = '1rem';
   @Input('totalRate') totalRate:number=0;
   @Input('yourRate') yourRate:number;
   @Output()  ratingUpdated = new EventEmitter();
@@ -52,6 +54,10 @@ export class StarRatingShowComponent implements OnInit {
   export enum StarRatingColor {
     primary = "primary",
     accent = "accent",
-    warn = "warn"
+    warn = "warn",
+    gold1 ="#FFD700",
+    gold2 ="#FFBF00",
+    gold3 ="#FFD500",
+    lightblue ="lightskyblue"
   }
 

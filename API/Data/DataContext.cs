@@ -19,6 +19,7 @@ namespace API.Data
 
         public DbSet<UserLike> Likes { get; set; }
         public DbSet<UserStory> LikeStory { get; set; }
+        public DbSet<UserHistory> HistoryUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
@@ -94,6 +95,21 @@ namespace API.Data
                 .HasOne(s => s.LikedStory)
                 .WithMany(l => l.StoryLiked)
                 .HasForeignKey(s => s.LikedStoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserHistory>()
+                .HasKey(k => new { k.SourceUserId, k.HistoryStoryId });
+
+            builder.Entity<UserHistory>()
+                .HasOne(s => s.SourceUser)
+                .WithMany(l => l.UserHistory)
+                .HasForeignKey(s => s.SourceUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserHistory>()
+                .HasOne(s => s.HistoryStory)
+                .WithMany(l => l.StoryHistory)
+                .HasForeignKey(s => s.HistoryStoryId)
                 .OnDelete(DeleteBehavior.Cascade);
             // builder.Entity<StoryTag>()
             //     .HasKey(k => new {k.StoryId,k.TagId});

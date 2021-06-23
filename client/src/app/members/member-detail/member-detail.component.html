@@ -40,6 +40,7 @@
                 <p>{{member.introduction}}</p>
                 <h4>Looking for</h4>
                 <p>{{member.lookingFor}}</p>
+                <app-author-story [authorname]="author"></app-author-story>
             </tab>
             <tab heading='Interests'>
                 <h4>Interests</h4>
@@ -53,5 +54,6 @@
                 <app-member-messages [username]="member.username"></app-member-messages>
             </tab>
         </tabset>
+        
     </div>
 </div>

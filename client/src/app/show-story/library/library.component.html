@@ -1,0 +1,34 @@
+
+<tabset class="member-tabset" #Library *ngIf="storylikes">
+    <tab heading='My List' (selectTab)="onTabActivated($event)">
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="1rem"  >
+                <div  *ngFor="let storylike of storylikes" fxFlex="18">
+                    <app-library-card [story]="storylike"></app-library-card>
+                </div>
+            </div>
+        <mat-paginator 
+            [length]="pagination?.totalItems" 
+            [pageSizeOptions]="[5]"
+            [showFirstLastButtons]="true"
+            (page)="pageChanged($event)">
+        </mat-paginator>
+        <!-- <div class="d-flex justify-content-center" *ngIf="pagination">
+            <pagination 
+                [boundaryLinks]="true" 
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;" 
+                nextText="&rsaquo;" 
+                firstText="&laquo;" 
+                lastText="&raquo;"> 
+            </pagination>
+        </div> -->
+    </tab>
+    <tab heading='History' (selectTab)="onTabActivated($event)">
+        <app-history></app-history>
+    </tab> 
+</tabset>
+

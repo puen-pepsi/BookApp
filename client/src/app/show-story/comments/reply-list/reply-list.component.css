@@ -1,5 +1,5 @@
 .rounded-circle {
-    max-height: 45px;
+    max-height: 35px;
     border:2px solid #e5e7e8;
 }
 
@@ -12,4 +12,5 @@
     background: #f3f8fc;
     padding: 10px;
     width: 100%;
+    font:0.8em;
   }

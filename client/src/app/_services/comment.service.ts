@@ -90,5 +90,7 @@ export class CommentService {
     return this.hubConnection.invoke('DeleteComment',{commentid,storyname})
         .catch(error => console.log(error));
   }
-  
+  addLikedComment(commentId:number){
+    return this.http.post(this.baseUrl+'comments/AddLiked/'+ commentId,{})
+  }
 }

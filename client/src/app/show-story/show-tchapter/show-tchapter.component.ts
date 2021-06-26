@@ -3,8 +3,12 @@ import { AfterViewInit, Component,  OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { ScrollSpyService } from 'ng-spy';
 import {  Unsubscribable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { ShowStory } from 'src/app/_models/showstory';
+import { StoryComment } from 'src/app/_models/storycomment';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
+import { CommentService } from 'src/app/_services/comment.service';
 import { ShowStoryService } from '../show-story.service';
 @Component({
   selector: 'app-show-tchapter',
@@ -20,13 +24,19 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   sub : Unsubscribable;
   sub2:Unsubscribable;
   showstory:ShowStory;
-  ShowTableContent:boolean = true;
+  user:User;
+  comments:StoryComment[]=[];
+  ShowTableContent:boolean = false;
+  ShowComment:boolean = false;
   constructor(private showStoryService:ShowStoryService,
               private route:ActivatedRoute, 
               private router:Router,
               private spyService:ScrollSpyService,
+              private accountService:AccountService,
+              private commentService:CommentService,
               private scroller:ViewportScroller
             ) { 
+              this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
               // this.router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
               //   console.log(e);
           
@@ -105,12 +115,23 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     // console.log(this.scroller.getScrollPosition())
     // this.scroller.scrollToPosition([0,1059]);
   }
-  toggle(event){
-    this.ShowTableContent = event;
+  toggletableContents(event){
+    this.ShowTableContent = !this.ShowTableContent;
+    this.ShowComment =false;
   }
+  toggleComment(event){
+    this.ShowComment  = !this.ShowComment;
+    if(this.ShowComment){
+      this.commentService.createHubConnection(this.user,this.storyname);
+    }else{
+      this.commentService.stopHubConnection();
+    }
+    this.ShowTableContent = false;
+  }
+
   async ngOnDestroy() {
-    console.log(this.scroller.getScrollPosition());
-    
+    //console.log(this.scroller.getScrollPosition());
+    this.commentService.stopHubConnection();
     this.sub.unsubscribe();
     this.sub2.unsubscribe();
   }

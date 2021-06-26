@@ -4,7 +4,7 @@
        <button mat-icon-button (click)="onToggleSidenav()">
        <mat-icon>menu</mat-icon></button>
    </div>
-   <div class="mr-5"><a routerlink="/"></a>Rainobu</div>
+   <div class="mr-5"><a routerlink="/"></a><img src="./assets/images/logo.png"></div>
    <div fxFlex fxLayout fxLayoutAlign="flex-start" fxHide.xs>
      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
        <ng-container *ngIf="accountService.currentUser$|async"> 
@@ -42,10 +42,10 @@
    <div fxFlex fxLayout fxLayoutAlign="flex-end">
        <ul fxLayout fxLayoutGap="0px" class="navigation-items">
         <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-          <img src="{{user.photoUrl|| './assets/user.png'}} " 
+          <img #person src="{{user.photoUrl|| './assets/user.png'}} " 
           class="img-circle rounded-circle mr-0"
             alt="{{user.username}}">
-          <a class="dropdown-toggle text-light ml-2" dropdownToggle ><span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span> </a>
+          <a class="dropdown-toggle ml-2" dropdownToggle ><span fxHide.xs>{{user.knownAs|| user.username |titlecase}}</span> </a>
           <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
              <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
              <div class="dropdown-divider"></div>
@@ -78,6 +78,8 @@
             type="password" 
             placeholder="Password">
           <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+          <button class="btn btn-info" type="button" (click)="loginWithGoogle()">Google</button>
+          <!-- <button class="btn btn-primary" type="button" (click)="loginWithFacebook()" >Facebook</button> -->
         </form>
        </ul>
        

@@ -15,15 +15,9 @@ import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailedResolver } from './_resolvers/member-detialed.resolver';
 import { StoryComponent } from './story/story.component';
-// import { ShowListComponent } from './ShowStory/show-list/show-list.component';
-// import { ShowDetailComponent } from './ShowStory/show-detail/show-detail.component';
-// import { ShowDetailedResolver } from './_resolvers/show-detailed.resolver';
-// import { ShowTChapterComponent } from './ShowStory/show-tchapter/show-tchapter.component';
-// import { ShowstoryComponent } from './ShowStory/showstory.component';
 import { LibraryComponent } from './show-story/library/library.component';
 import { ShowStoryComponent } from './show-story/show-story.component';
 import { HistoryComponent } from './show-story/library/history/history.component';
-import { ShowListComponent } from './show-story/show-list/show-list.component';
 const routes: Routes = [
   {path:'',component:HomeComponent,data:{breadcrumb:'Home'}},
   {
@@ -31,18 +25,24 @@ const routes: Routes = [
     runGuardsAndResolvers:'always',
     canActivate: [AuthGuard],
     children: [
-      {path:'members',component:MemberListComponent,data:{breadcrumb:'Members'}},
+      {path:'members',component:MemberListComponent,
+        // data:{breadcrumb:'Members'}
+      },
       {path:'members/:username',component:MemberDetailComponent,
-          data:{ breadcrumb: (data: any) => `${data.member.username}` },
+          // data:{ breadcrumb: (data: any) => `${data.member.username}` },
           resolve:{member:MemberDetailedResolver}
       },
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
-      {path:'lists',component:ListsComponent,data:{breadcrumb:'List'}},
-      {path:'library',component:LibraryComponent,data:{breadcrumb:'My Library'}},
-      {path:'mystory',component:StoryComponent,data:{breadcrumb:'My Stories'}},
+      {path:'lists',component:ListsComponent},
+      {path:'library',component:LibraryComponent,
+        // data:{breadcrumb:'My Library'}
+      },
+      {path:'mystory',component:StoryComponent,
+        // data:{breadcrumb:'My Stories'}
+      },
       {
         path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
-        data: { breadcrumb: 'Stories' }
+        // data: { breadcrumb: 'Stories' }
       },
 
       // {path:'stories',
@@ -60,9 +60,11 @@ const routes: Routes = [
       //   ]
       // },
       {path:'messages',component:MessagesComponent,
-          data:{breadcrumb:'Messages'}},
+          // data:{breadcrumb:'Messages'}
+        },
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
-          data:{breadcrumb:'admin'}},
+          // data:{breadcrumb:'admin'}
+      },
     ]  
   },
   {path:'history',component:HistoryComponent},

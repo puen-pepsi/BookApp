@@ -27,10 +27,10 @@ namespace API.Interfaces
          Task<StoryChapter> GetStoryChapterById(int id);
          Task<StoryComment> GetStoryCommentById(int id);
          Task<Rating> GetYouRate(int storyId,int userId);
-
+         Task<Activities> GetLikedComment(int commentId,int userId);
          void DeleteStory(Story story);
          void DeletStoryComment(StoryComment storyComment);
-
+         void DeleteLikeComment(Activities activities);
 
     }
 }

@@ -50,6 +50,7 @@ namespace API.Helpers
             CreateMap<StoryComment,StoryCommentDto>()
                 .ForMember(d => d.UserName,o => o.MapFrom(s => s.UserPost.UserName))
                 .ForMember(d => d.KnownAs,o => o.MapFrom(s => s.UserPost.KnownAs))
+                .ForMember(d => d.liked , o => o.MapFrom(s => s.Liked.Select(x => x.UserActive.UserName)))
                 .ForMember(dest=>dest.Image,ex=>ex.MapFrom(src=>src.UserPost.Photos.FirstOrDefault(x=>x.IsMain).Url));
             CreateMap<Story,HistoryStoryDto>()
                 .ForMember(dest => dest.storyId, ex => ex.MapFrom(s => s.Id))
@@ -69,6 +70,9 @@ namespace API.Helpers
                             .Where(src=>src.Published.Created > DateTime.MinValue)
                             .Count()));
             CreateMap<UserHistory,UserHistoryDto>().ReverseMap();
+            // CreateMap<Activities,ActivitiesDto>()
+            //     .ForMember(dest => dest.UserName, ex => ex.MapFrom(s => s.UserActive.UserName));
+
 
         }
     }

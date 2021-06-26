@@ -16,7 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
-
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 @NgModule({
     imports: [MatSliderModule,
         MatSnackBarModule,
@@ -34,7 +34,8 @@ import {MatSortModule} from '@angular/material/sort';
         MatTableModule,
         MatPaginatorModule,
         MatSelectModule,
-        MatSortModule
+        MatSortModule,
+        MatCarouselModule
     ],
     exports: [MatSliderModule,
         MatSnackBarModule,
@@ -52,7 +53,8 @@ import {MatSortModule} from '@angular/material/sort';
         MatTableModule,
         MatPaginatorModule,
         MatSelectModule,
-        MatSortModule
+        MatSortModule,
+        MatCarouselModule
     ]
 })
 export class MaterialModule { }

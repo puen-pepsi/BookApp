@@ -6,23 +6,25 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ShowChaptersComponent } from './show-chapters/show-chapters.component';
 import { ShowCardComponent } from './show-card/show-card.component';
 import { ShowAChapterComponent } from './show-tchapter/show-achapter/show-achapter.component';
-import { CommentComponent } from './comments/comment/comment.component';
+import { CommentComponent } from './comment/comment/comment.component';
 import { ShowStoryRoutingModule } from './show-story-routing.module';
 import { SharedModule } from '../_modules/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowStoryComponent } from './show-story.component';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CommentListComponent } from './comments/comment-list/comment-list.component';
+import { CommentListComponent } from './comment/comment-list/comment-list.component';
 import { StarRatingShowComponent } from './star-rating/star-rating-show/star-rating-show.component';
 import { ScrollSpyModule } from 'ng-spy';
-import { ReplyComponent } from './comments/reply/reply.component';
-import { ReplyListComponent } from './comments/reply-list/reply-list.component';
+import { ReplyComponent } from './comment/reply/reply.component';
+import { ReplyListComponent } from './comment/reply-list/reply-list.component';
 import { NavSidebarComponent } from './show-tchapter/nav-sidebar.component';
 import { LibraryComponent } from './library/library.component';
 import { HistoryComponent } from './library/history/history.component';
 import { LibraryCardComponent } from './library/library-card.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HistoryCardComponent } from './library/history/history-card.component';
+import { LikeComponent } from './Like/like.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { LibraryCardComponent } from './library/library-card.component';
     LibraryComponent,
     HistoryComponent,
     LibraryCardComponent,
+    HistoryCardComponent,
+    LikeComponent,
   ],
   imports: [
     CommonModule,
@@ -52,10 +56,12 @@ import { LibraryCardComponent } from './library/library-card.component';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    ScrollSpyModule
+    ScrollSpyModule,
+    NgbModule
   ],
   exports: [
-    ShowCardComponent
+    ShowCardComponent,
+    LikeComponent
   ]
 })
 export class ShowStoryModule { }

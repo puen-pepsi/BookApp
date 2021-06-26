@@ -5,7 +5,10 @@ import {map} from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
-
+import { FacebookLoginProvider, SocialAuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+import { ExternalAuthDto } from '../_models/externalAuthDto';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +17,9 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient,private presence:PresenceService) { }
+  constructor(private http: HttpClient,
+            private _externalAuthService: SocialAuthService,
+            private presence:PresenceService) { }
 
   login(model:any){
     return this.http.post(this.baseUrl + 'account/login',model).pipe(
@@ -56,4 +61,29 @@ export class AccountService {
   getDecodedToken(token){
     return JSON.parse(atob(token.split('.')[1]));
   }
+  public signInWithGoogle = ()=> {
+    return this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+  public signInWithFaceBook = ()=>{
+    return this._externalAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+  public signOutExternal = () => {
+    this._externalAuthService.signOut();
+  }
+ 
+  externalLogin(externalAuth: ExternalAuthDto){
+    return this.http.post(this.baseUrl+'account/externallogin',externalAuth).pipe(
+      map((response:User)=>{
+        const user = response;
+        if(user){
+          this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
+        }
+      })
+    );
+  }
+  Savesresponse(responce)    
+  {    
+    return this.http.post(this.baseUrl+'account/saveresponse',responce);    
+  }    
 }

@@ -12,8 +12,8 @@ import { ShowStory } from '../../_models/showstory';
 })
 export class LibraryComponent implements OnInit {
   @ViewChild('Library',{static:true}) libraryTab:TabsetComponent;
-
   storylikes : Partial<ShowStory[]>;
+  activeTab:TabDirective;
   // predicate = 'liked';
   pageNumber = 1;
   pageSize = 5;
@@ -36,14 +36,14 @@ export class LibraryComponent implements OnInit {
     this.pageNumber = event.pageIndex+1;
     this.loadStoryLikes();
   }
-  deleteStoryLike(event){
-    this.showstoryService.deleteStoryLike(event.storyId).subscribe(()=>{
+  deleteStoryLike(storyid){
+    this.showstoryService.deleteStoryLike(storyid).subscribe(()=>{
         this.loadStoryLikes();
     })
   }
   onTabActivated(data: TabDirective){
-    // this.activeTab = data;
-    // if(this.activeTab.heading==='Table of Contents'){
+    this.activeTab = data;
+    // if(this.activeTab.heading==='History'){
     //   this.showStoryService.getStoryNameChapter(this.storyName).subscribe(res =>{
     //     this.chapterList = res;
     //   });

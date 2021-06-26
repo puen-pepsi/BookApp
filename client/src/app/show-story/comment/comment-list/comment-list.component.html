@@ -1,13 +1,10 @@
 <!-- <div class="mt-2" *ngFor="let comment of comments; let i = index"> -->
 <ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
   <div class="mt-2 mb-2" *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
-  <mat-card *ngIf="comment.parentId==null"
+  <div *ngIf="comment.parentId==null"
     class="pt-0 pb-0 pl-2 pr-2"> 
-    <div class="created">
-      <small class="text-muted ">{{comment.created | timeago}}</small>
-    </div>
-    <div fxLayout="row"  style="width: 100%;">
-      <div class=" p-2 ">
+    <div fxLayout="row"  >
+      <div class=" p-1 ">
         <img 
               class="img-circle rounded-circle mr-2"
               src="{{comment.image || './assets/user.png'}}" 
@@ -19,14 +16,21 @@
         <div class="p-2" id="rconners1">
           <p>{{comment.content}}</p>
         </div>
-        <div class="d-flex flex-row">
-          <button mat-button >Like</button>
+        <div fxLayout="row" fxLayoutAlign="start center">
+         <button mat-button >
+            <like [likeCount]="comment.liked.length"
+                [isActive]="comment.liked.includes(commentService.user.username)"
+                (commentId)="addLike(comment.id)"></like>
+          </button>
           <button 
             mat-button color="primary"
-            (click)="togglePanel[i] = !togglePanel[i]">Reply</button>
+            (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
           <button *ngIf="comment.userName === commentService.user.username"
             mat-button (click)="onDeleteComment(comment.id)">
             Remove</button>
+          <span>
+            <small class="text-muted ">{{comment.created | timeago}}</small>
+          </span>
       </div>
       </div>
       
@@ -36,7 +40,7 @@
       <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
         [storyName]='this.storyName'></app-reply-form>
     </mat-action>
-  </mat-card>
+  </div>
 </div>
   </ng-container>
 

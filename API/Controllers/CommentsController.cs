@@ -55,5 +55,29 @@ namespace API.Controllers
             if(await _unitOfWork.Complete())return Ok();
             return BadRequest("Problem deleting the comment");
         }
+        [Route("AddLiked/{commentId}")]
+        [HttpPost]
+        public async Task<ActionResult> AddLiked(int commentId)
+        {
+            var userId = User.GetUserId();
+            var comment = await _unitOfWork.StoryRepository.GetStoryCommentById(commentId);
+            var existliked = await _unitOfWork.StoryRepository.GetLikedComment(commentId,userId);
+            if(existliked != null){
+                _unitOfWork.StoryRepository.DeleteLikeComment(existliked);
+            }else{
+                var currentUser = await _unitOfWork.UserRepository.GetUserByIdAsync(userId);
+                var userLiked = new Activities{
+                    UserActive = currentUser,
+                    UserActiveId  = userId,
+                    ParentId = commentId
+                };
+                comment.Liked.Add(userLiked); 
+            }
+            
+            if( await _unitOfWork.Complete()){
+                return Ok();
+            }
+            return BadRequest("Problem like comment");
+        }
     }
 }

@@ -1,0 +1,7 @@
+<span class="material-icons-outlined"
+    [class.highlighted]="isActive"
+    (click)="onClick()">
+    <i class="far fa-thumbs-up"></i>
+    {{(isActive)?"Liked":"Like"}}
+</span>
+<span class="pl-1"> {{likeCount>0?likeCount:''}}</span>

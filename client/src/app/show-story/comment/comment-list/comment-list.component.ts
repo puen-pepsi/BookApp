@@ -24,7 +24,7 @@ export class CommentListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private confirmService:ConfirmService
   ) {}
-
+    
   ngOnInit() {
     this.storyName = this.route.snapshot.params.storyname;
     // this.commentService.getComments(this.storyName);
@@ -48,6 +48,12 @@ export class CommentListComponent implements OnInit, OnDestroy {
   onReply(){
     this.showReply = (!this.showReply) ? true : false;
   }
+  addLike(commentid:number){
+    this.commentService.addLikedComment(commentid).subscribe( res =>{
+      console.log(res);
+    });
+  }
+
   ngOnDestroy() {
     // this.commentSub.unsubscribe();
   }

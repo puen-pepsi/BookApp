@@ -1,1 +1,37 @@
+<!-- <div >    
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let image of images">
+      <div class="wrapper">
+        <img [src]="image.src" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        
+      </div>
+    </ng-template>
+  </ngb-carousel>
+      
+  </div> -->
+  <!-- <mat-carousel
+  timings="250ms ease-in"
+  [autoplay]="true"
+  interval="2000"
+  color="primary"
+  maxWidth="auto"
+  proportion="50"
+  slides="5"
+  [loop]="true"
+  [hideArrows]="false"
+  [hideIndicators]="false"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr"
+>
+  <mat-carousel-slide
+    #matCarouselSlide
+    *ngFor="let slide of slides; let i = index"
+    [image]="slide.image"
+    overlayColor="#00000040"
+    [hideOverlay]="false"
+  ></mat-carousel-slide>
+</mat-carousel> -->
 <router-outlet></router-outlet>

@@ -1,6 +1,7 @@
 a{
     text-decoration: none;
-    color:white;
+    color:black;
+    font-family: 'Montserrat', sans-serif;
 }
 a:hover,
 a:active{
@@ -27,11 +28,19 @@ a:active{
 }
 img {
     max-height: 40px;
-    border:2px solid #fff;
+    border:1px solid rgb(255, 255, 255);
     display: inline;
 }
 mat-toolbar{
     position: fixed;
     z-index: 999;
     font-weight: lighter;
+}
+.mat-toolbar.mat-primary {
+    background: #fff;
+    color: #007bff;
+    box-shadow: 0 0px 4px 0px rgba(0,0,0,0.4);
+}
+.mat-toolbar.dropdown-toggle {
+    color:black;
 }

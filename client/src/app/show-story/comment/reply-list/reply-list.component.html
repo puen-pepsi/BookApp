@@ -1,0 +1,48 @@
+<ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
+    <div class="ml-5 pt-0 pb-0 pl-2 pr-2" >
+    <div *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
+        <div *ngIf="comment.parentId== commentId" >     
+          <div fxLayout="row" >      
+            <div class="p-1">
+              <img 
+                    class="img-circle rounded-circle mr-2"
+                    src="{{comment.image || './assets/user.png'}}" 
+                    alt="{{comment.knownAs}}">     
+            <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
+            </div>
+            <div class="p-1" fxFlex="80" >
+              <strong >{{comment.knownAs | titlecase}}</strong> <br/>
+              <div class="p-2" id="rconners1">
+                <p>{{comment.content}}</p>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-button >
+                    <like [likeCount]="comment.liked.length"
+                        [isActive]="comment.liked.includes(commentService.user.username)"
+                        (commentId)="addLike(comment.id)">
+                    </like>
+                </button>
+                <!-- <button 
+                  mat-button color="primary"
+                  (click)="togglePanel[i] = !togglePanel[i]">Reply</button> -->
+                <button *ngIf="comment.userName === commentService.user.username"
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove</button>
+                  <div class="created">
+                    <small class="text-muted ">{{comment.created | timeago}}</small>
+                  </div>
+              </div>
+            </div>
+            <!-- <div class="created">
+              <small class="text-muted ">{{comment.created | timeago}}</small>
+            </div> -->
+        </div>
+      </div>
+        <mat-action>
+          <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+            [storyName]='this.storyName'></app-reply-form>
+        </mat-action>
+    </div>
+      
+  </div>
+</ng-container>

@@ -55,6 +55,8 @@ import { ShowStoryModule } from './show-story/show-story.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { AuthorStoryComponent } from './members/member-detail/author-story/author-story.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,12 +119,33 @@ import { AuthorStoryComponent } from './members/member-detail/author-story/autho
     // ScrollSpyModule,
     // BreadcrumbModule,
     ShowStoryModule,
+    SocialLoginModule,
     
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '798468934206-b5n7mrr7kld0pmjasn6neuntoounhuq5.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '951482782076972'
+            )
+          }
+        ],
+      } as SocialAuthServiceConfig
+    }
 
   ],
   bootstrap: [AppComponent]

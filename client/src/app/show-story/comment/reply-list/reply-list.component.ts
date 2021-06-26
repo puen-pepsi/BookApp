@@ -48,7 +48,11 @@ export class ReplyListComponent implements OnInit, OnDestroy {
   onReply(){
     this.showReply = (!this.showReply) ? true : false;
   }
-
+  addLike(commentid:number){
+    this.commentService.addLikedComment(commentid).subscribe( res =>{
+      console.log(res);
+    });
+  }
   ngOnDestroy() {
     // this.replySub.unsubscribe();
   }

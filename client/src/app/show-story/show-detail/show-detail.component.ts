@@ -63,11 +63,11 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
           this.tags = this.showstory.tags.split(",");
     }
   }
-  loadComments() {
-    this.commentService.getComments(this.storyName).subscribe(comment => {
-      this.comments = comment;
-    })
-  }
+  // loadComments() {
+  //   this.commentService.getComments(this.storyName).subscribe(comment => {
+  //     this.comments = comment;
+  //   })
+  // }
   onTabActivated(data: TabDirective){
     this.activeTab = data;
     if(this.activeTab.heading==='Table of Contents'){
@@ -101,7 +101,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     });
     this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
       this.userLiked = res;
-      console.log(this.userLiked)
+      // console.log(this.userLiked)
     })
   }
   addLikeStory(story:ShowStory){

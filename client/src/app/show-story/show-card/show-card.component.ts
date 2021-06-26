@@ -6,6 +6,7 @@ import { ShowStoryService } from '../show-story.service';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
 import { EventEmitter } from 'stream';
+import { UserLiked } from 'src/app/_models/userLiked';
 @Component({
   selector: 'app-show-card',
   templateUrl: './show-card.component.html',
@@ -20,6 +21,7 @@ starCount:number = 5;
 totalRate:number;
 yourRate:any;
 mylist : number[]=[];
+userLiked : UserLiked;
   constructor(public showStoryService:ShowStoryService,
               private router:Router,
               private toastr:ToastrService) { }
@@ -30,6 +32,9 @@ mylist : number[]=[];
     this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
       this.yourRate = res;
     });
+    this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
+      this.userLiked = res;
+    });
   }
   goToDetial(storyname:string){
     this.router.navigate(['/stories',storyname]);
@@ -39,7 +44,7 @@ mylist : number[]=[];
     this.rating = rating;
   }
   addLikeStory(story:ShowStory){
-    this.showStoryService.addLikeStory(story.storyName).subscribe(() =>{
+    this.showStoryService.addLikeStory(story.storyName).subscribe(() => {
       this.toastr.success('You have liked '+ story.storyName);
     })
     // error => {

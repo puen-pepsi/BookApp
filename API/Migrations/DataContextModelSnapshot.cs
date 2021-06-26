@@ -16,6 +16,30 @@ namespace API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.4");
 
+            modelBuilder.Entity("API.Entities.Activities", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("StoryCommentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserActiveId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryCommentId");
+
+                    b.HasIndex("UserActiveId");
+
+                    b.ToTable("Activities");
+                });
+
             modelBuilder.Entity("API.Entities.AppRole", b =>
                 {
                     b.Property<int>("Id")
@@ -442,6 +466,9 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ChapterId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
@@ -613,6 +640,21 @@ namespace API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("API.Entities.Activities", b =>
+                {
+                    b.HasOne("API.Entities.StoryComment", null)
+                        .WithMany("Liked")
+                        .HasForeignKey("StoryCommentId");
+
+                    b.HasOne("API.Entities.AppUser", "UserActive")
+                        .WithMany()
+                        .HasForeignKey("UserActiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserActive");
                 });
 
             modelBuilder.Entity("API.Entities.AppUserRole", b =>
@@ -896,6 +938,11 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.StoryChapter", b =>
                 {
                     b.Navigation("Published");
+                });
+
+            modelBuilder.Entity("API.Entities.StoryComment", b =>
+                {
+                    b.Navigation("Liked");
                 });
 #pragma warning restore 612, 618
         }

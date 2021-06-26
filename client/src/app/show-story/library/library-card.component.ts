@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ShowStory } from 'src/app/_models/showstory';
-import { EventEmitter } from 'stream';
+import { UserLiked } from 'src/app/_models/userLiked';
 import { ShowStoryService } from '../show-story.service';
 import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-show.component';
-
 @Component({
   selector: 'app-library-card',
   templateUrl: './library-card.component.html',
@@ -13,14 +12,14 @@ import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-sho
 })
 export class LibraryCardComponent implements OnInit {
   @Input() story : ShowStory;
-  //@Output() unlike = new EventEmitter();
+  @Output() unlike = new EventEmitter();
   rating:number=0;
   starColor:StarRatingColor = StarRatingColor.lightblue;
   fSize : string = "1.2rem";
   starCount:number = 5;
   totalRate:number;
   yourRate:any;
-  mylist : number[]=[];
+  userLiked:UserLiked;
     constructor(public showStoryService:ShowStoryService,
                 private router:Router,
                 private toastr:ToastrService) { }
@@ -30,6 +29,9 @@ export class LibraryCardComponent implements OnInit {
       this.totalRate = this.story.totalRate;
       this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
         this.yourRate = res;
+      });
+      this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
+        this.userLiked = res;
       });
     }
     goToDetial(storyname:string){
@@ -48,7 +50,7 @@ export class LibraryCardComponent implements OnInit {
       // }) 
     }
     deletLikeStory(story:any){
-      
+      this.unlike.emit(story);
     }
 
 }

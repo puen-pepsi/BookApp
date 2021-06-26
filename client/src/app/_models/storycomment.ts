@@ -1,3 +1,5 @@
+import { Activities } from "./activities";
+
 export interface StoryComment{
     id:number;
     storyId:number;
@@ -7,6 +9,7 @@ export interface StoryComment{
     userName:string;
     knownAs:string;
     image:string;
+    liked:string[];
     /**
      *
      */

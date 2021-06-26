@@ -1,0 +1,82 @@
+<div class="card">
+    <div class="additional">
+      <div class="user-card">
+        <div class="level center">
+          {{history.genre}}
+        </div>
+        <div class="genre center">
+          <!-- <app-star-rating-show
+              [rating]="history.rating" 
+              [starCount]="starCount" 
+              [totalRate]="totalRate"
+              [color]="starColor" 
+              [fSize] = "fSize"
+              [wSize] = "fSize"
+              (ratingUpdated)="onRatingChanged($event)">
+          </app-star-rating-show> -->
+        </div>
+        <img src="https://localhost:5001/{{history.imageUrl || 'Resources/Images/no-image.jpeg'}}" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
+      </div>
+      <div class="more-info">
+              <div class="author"> 
+                  <h4>{{history.storyName}}</h4>   
+                    <p><img 
+                    class="img-circle rounded-circle mr-2" style="max-height: 20px;"
+                    src="{{history.userPhoto || './assets/user.png'}}" 
+                    alt="{{history.userName}}">{{history.userName | titlecase}}
+                          : Author |  Created : {{history.createAt | timeago}}</p>  
+              </div>
+        
+        <div class="stats">
+          <div>
+            <div class="title">Awards</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">2</div>
+          </div>
+          <div>
+            <div class="title">state</div>
+            <i class="fas fa-compass"></i>
+            <div class="value">{{history.state}}</div>
+          </div>
+          <div>
+            <div class="title">Chapters</div>
+            <i class="fas fa-file-alt"></i>
+            <div class="value">{{history.totalChapter}}</div>
+          </div>
+          <div>
+            <div class="title">Views</div>
+            <i class="fas fa-eye"></i>
+            <div class="value">{{history.views}}</div>
+          </div>
+        </div> 
+            
+            
+        <div class="floatright">
+         <button type="button" class="btn btn-outline-light"
+              [routerLink]= "['/stories',history.storyName,'chapters']"
+              fragment={{history.fregment}}>Continue Reading..</button>
+          <!-- <button type="button" class="btn btn-light">Add To Library</button> -->
+          <button *ngIf="!userLiked"
+                  type="button" class="btn btn-outline-primary" 
+                  (click)="addLikeStory(story)">
+                  <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
+              <button *ngIf="userLiked"
+                  type="button" class="btn btn-outline-light" 
+                  (click)="addLikeStory(story)"> 
+                  <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <div class="rightCircle">
+        <mat-icon [inline]="true" (click)="deleteHistory(history.storyId)">close</mat-icon>
+      </div>
+
+      <h4>{{history.storyName}}</h4>
+      <div class="synopsis">
+        <p>{{createSynopsis(history.description)}}</p>
+      </div>
+      
+      <span class="more">Lastest update : {{ history.created | date:'short' }}</span>
+    </div>
+  </div>

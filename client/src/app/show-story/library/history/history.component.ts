@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShowStoryService } from 'src/app/show-story/show-story.service';
 import { Pagination } from 'src/app/_models/pagination';
 import { ShowHistory } from 'src/app/_models/ShowHIstory';
+import { UserLiked } from 'src/app/_models/userLiked';
 import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-show.component';
 
 @Component({
@@ -21,11 +22,16 @@ export class HistoryComponent implements OnInit {
   starColor:StarRatingColor = StarRatingColor.gold3;
   fSize : string = "1.2rem";
   starCount:number = 5;
+  userLiked:UserLiked;
   constructor(public showStoryService:ShowStoryService) { 
   }
 
   ngOnInit(): void {
     this.loadStoryHistory();
+    // this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
+    //   this.userLiked = res;
+    //   console.log(res)
+    // });
   }
   loadStoryHistory(){
     this.showStoryService.getStoryHistory(this.pageNumber,this.pageSize).subscribe(response =>{
@@ -40,10 +46,9 @@ export class HistoryComponent implements OnInit {
     this.pageNumber = event.pageIndex+1;
     this.loadStoryHistory();
   }
-  createSynopsis(content:string){
-    return content.substr(0,200)+".....";
-  }
+ 
   deleteHistory(storyId:number){
+    console.log(storyId)
     this.showStoryService.deletHistoryUser(storyId).subscribe(() =>{
       this.loadStoryHistory();
     })

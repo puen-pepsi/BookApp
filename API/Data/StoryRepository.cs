@@ -225,6 +225,15 @@ namespace API.Data
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        
+        public async Task<Activities> GetLikedComment(int commentId, int userId)
+        {
+            return await _context.Activities
+            .SingleOrDefaultAsync(x => x.UserActiveId == userId && x.ParentId == commentId);
+        }
+
+        public void DeleteLikeComment(Activities activities)
+        {
+            _context.Activities.Remove(activities);
+        }
     }
 }

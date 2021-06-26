@@ -34,6 +34,8 @@ namespace API.Data
         public DbSet<StoryComment> StoryComments {get;set;}
         public DbSet<PhotoStory> PhotoStories { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Activities> Activities {get; set;}
       
 
         protected override void OnModelCreating(ModelBuilder builder)

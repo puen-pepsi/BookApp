@@ -17,14 +17,14 @@
                     <mat-icon>menu_book</mat-icon>
                 </button>
             </li>        
-            <li *ngIf="!showStoryService.user.myList.includes(story.storyId)" class="list-inline-item">
+            <li *ngIf="!userLiked" class="list-inline-item">
                 <button mat-mini-fab aria-label="Action icon" (click)="addLikeStory(story)">
                     <mat-icon>bookmark_border</mat-icon>
                 </button>
             </li>
-            <li *ngIf="showStoryService.user.myList.includes(story.storyId)" class="list-inline-item">
+            <li *ngIf="userLiked" class="list-inline-item">
                 <button mat-mini-fab
-                    aria-label="Action icon" >
+                    aria-label="Action icon" (click)="deletLikeStory(story.storyId)">
                     <mat-icon>bookmark_added</mat-icon>
                 </button>
             </li>

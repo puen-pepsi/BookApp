@@ -27,7 +27,6 @@ export class NavSidebarComponent implements OnInit {
     this.target.emit(target);
   }
   toggle(event) {
-    this.isShow = !this.isShow;
-    this.Show.emit(this.isShow);
+    this.Show.emit();
   }
 }

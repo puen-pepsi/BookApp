@@ -25,7 +25,7 @@ const routes : Routes =[
     {path:'',component:ShowListComponent},
     {path:':storyname',
             component:ShowDetailComponent,
-            data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },
+            // data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },
             resolve:{showstory:ShowDetailedResolver},
     },    
     {path :':storyname/chapters',

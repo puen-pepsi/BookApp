@@ -9,6 +9,7 @@ import { ShowStory } from '../_models/showstory';
 import { StoryParams } from '../_models/storyParams';
 import { User } from '../_models/user';
 import { Userhistory } from '../_models/userhistory';
+import { UserLiked } from '../_models/userLiked';
 import { AccountService } from '../_services/account.service';
 import { getPaginatedResult, getPaginationHeaders } from '../_services/paginationHelper';
 
@@ -128,7 +129,7 @@ export class ShowStoryService {
     return getPaginatedResult<Partial<ShowStory[]>>(this.baseUrl+'showstory/GetStoryAuthor/',params,this.http);
   }
   getUserLiked(storyId:number){
-    return this.http.get(this.baseUrl+'likestories/'+storyId,{})
+    return this.http.get<UserLiked>(this.baseUrl+'likestories/'+storyId,{})
   }
 
   deletHistoryUser(storyId:number){
@@ -137,4 +138,5 @@ export class ShowStoryService {
   deleteStoryLike(storyId:number){
     return this.http.delete(this.baseUrl+'LikeStories/'+storyId,{});
   }
+  
 }

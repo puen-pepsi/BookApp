@@ -88,6 +88,7 @@ namespace API
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseDefaultFiles();
 
             app.UseEndpoints(endpoints =>
             {
@@ -95,6 +96,7 @@ namespace API
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
                 endpoints.MapHub<CommentHub>("hubs/comment");
+                endpoints.MapFallbackToController("index","Fallback");
             });
         }
     }

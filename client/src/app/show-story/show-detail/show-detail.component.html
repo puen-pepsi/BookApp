@@ -1,68 +1,89 @@
-<div class="row"  >
+<div class="row mb-4"  >
     <div class="col-md-4">
         <div class="card">
-            <img 
-                src="https://localhost:5001/{{showstory.imageUrl || 'Resources/Images/no-image.jpeg'}}" 
-                alt="{{showstory.storyName}}"
-                class="card-img-top img-thumbnail">
-        </div>
-        <div class="pt-2" >
-            <mat-chip-list aria-label="tags">
-                <mat-chip *ngFor="let ele of tags">#{{ele}}</mat-chip>
-            </mat-chip-list>
+            <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
+            <ng-template #first>
+                <img src="https://localhost:5001/{{showstory.imageUrl}}"
+                alt="{{showstory.storyName}}" 
+                class="card-img-top">
+            </ng-template>
+            <ng-template #second>
+                <img src="./assets/images/BlackCover.png"
+                alt="{{showstory.storyName}}" 
+                class="card-img-top">
+                <div class="text_up">
+                    <h4>{{showstory.storyName | titlecase }}</h4>
+                </div>
+                <div id="benmark">
+                    <span>{{showstory.userName}}</span>
+                    <h5>&copy; Rainobu</h5>
+                </div>
+            </ng-template>
         </div>
         
+        
     </div>
-     <div class="col-md-8 pt-2">
-         <h4>{{showstory.storyName | titlecase}}</h4>
-         <hr/>
-         
-         <div fxLayout="row" fxLayoutGap="2rem"> 
-             <div  >
-                 <p><i class="fas fa-list-alt"></i>&nbsp;&nbsp;{{showstory.genre}}</p>
+     <div class="col-md-8 pt-2" >
+         <div>
+            <h2>{{showstory.storyName | titlecase}}</h2>
+            <hr/>
+            
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="detials"> 
+                <div  >
+                    <p><i class="fas fa-list-alt"></i>&nbsp;&nbsp;{{showstory.genre}}</p>
+                </div>
+                <div >
+                    <p><i class="fas fa-compass"></i>&nbsp;&nbsp;{{showstory.state || 0}}</p>
+                </div>
+                <div >
+                    <p><i class="fas fa-file-alt"></i>&nbsp;&nbsp;{{showstory.totalChapter}} Chapters </p>
+                </div>
+                <div >
+                    <p><i class="fas fa-eye"></i>&nbsp;&nbsp;{{showstory.views}} views</p>
+                </div>
             </div>
-            <div >
-                <p><i class="fas fa-compass"></i>&nbsp;&nbsp;{{showstory.state || 0}}</p>
+            <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="3rem">
+                <div> 
+                    <img 
+                        class="img-circle rounded-circle mr-2"
+                        src="{{showstory.userPhoto || './assets/user.png'}}" 
+                        alt="{{showstory.userName}}">
+                    <strong>{{showstory.userName | titlecase}}</strong>
+                    <span> : Author</span>
+                </div>
+                <div >
+                    <b>Created : </b>{{showstory.created | timeago}}
+                </div>
             </div>
-            <div >
-                <p><i class="fas fa-file-alt"></i>&nbsp;&nbsp;{{showstory.totalChapter}} Chapters </p>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem" class="mt-4">
+                <div >
+                    <app-star-rating-show [rating]="rating" 
+                        [starCount]="starCount"  
+                        [color]="starColor" 
+                        [fSize] = "fSize"
+                        [wSize] = "fSize"
+                        (ratingUpdated)="onRatingChanged($event)"
+                        [yourRate]='yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"'
+                    >
+                    </app-star-rating-show>
+                </div>
+                <div class="pt-2" >
+                        <p>{{showstory.rating | number:'1.2-2'}} ({{showstory.totalRate}} ratings)</p>
+                </div>
             </div>
-            <div >
-                <p><i class="fas fa-eye"></i>&nbsp;&nbsp;{{showstory.views}} views</p>
-            </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="3rem">
-            <div> 
-                <img 
-                    class="img-circle rounded-circle mr-2"
-                    src="{{showstory.userPhoto || './assets/user.png'}}" 
-                    alt="{{showstory.userName}}">
-                <strong>{{showstory.userName | titlecase}}</strong>
-                <span> : Author</span>
-            </div>
-            <div >
-                 <b>Created : </b>{{showstory.created | timeago}}
-            </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem" class="mt-4">
-            <div >
-                <app-star-rating-show [rating]="rating" 
-                    [starCount]="starCount"  
-                    [color]="starColor" 
-                    [fSize] = "fSize"
-                    [wSize] = "fSize"
-                    (ratingUpdated)="onRatingChanged($event)"
-                    [yourRate]='yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"'
-                >
-                </app-star-rating-show>
-            </div>
+
+            <br/>
+            <!-- <hr/> -->
+            <!-- <h5>Synopsis :</h5>
+            <p>{{showstory.description}}</p> -->
             <div class="pt-2" >
-                    <p>{{showstory.rating | number:'1.2-2'}} ({{showstory.totalRate}} ratings)</p>
+                <mat-chip-list aria-label="tags">
+                    <mat-chip *ngFor="let ele of tags">#{{ele}}</mat-chip>
+                </mat-chip-list>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-            <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="0.2rem">
+            <div fxLayout="row" fxLayoutAlign="end end" fxHide.xs
+                fxLayoutGap="0.2rem" class="buttongroup">
                 <button *ngIf="!userHistory"
                     type="button" class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
@@ -80,30 +101,45 @@
                     (click)="addLikeStory(showstory)"> 
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
             </div>
+            <div fxLayout="row"  fxHide.gt-xs
+                fxLayoutGap="0.2rem" class="buttongroupxs">
+                <button *ngIf="!userHistory"
+                    type="button" class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
+                    <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
+                <button *ngIf="userHistory" 
+                        type="button" class="btn btn-primary" 
+                        [routerLink]="['/stories',storyName,'chapters']" fragment="{{userHistory.fregment}}">
+                        <i class="fas fa-book-open"></i>&nbsp;&nbsp;Continue Reading..</button>
+                
+                <button *ngIf="!userLiked"
+                    type="button" class="btn btn-warning" 
+                    (click)="addLikeStory(showstory)">
+                    <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
+                <button *ngIf="userLiked"
+                    type="button" class="btn btn-success" 
+                    (click)="addLikeStory(showstory)"> 
+                    <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
             </div>
-        </div>
-        <br/>
-        <!-- <hr/> -->
-        <!-- <h5>Synopsis :</h5>
-        <p>{{showstory.description}}</p> -->
-        <tabset class="member-tabset" #storyTab>
-            <tab heading='Synopsis' (selectTab)="onTabActivated($event)">
-                <div class="row">
-                    
-                </div>
-                <!-- <h5>Synopsis :</h5> -->
-                <p>{{showstory.description}}</p>
-            </tab>
-            <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
-                <app-show-chapters ></app-show-chapters>
-            </tab> 
-            <tab heading='Comments' (selectTab)="onTabActivated($event)">
-                <app-comment [comments]="comments"></app-comment>
-            </tab> 
-        </tabset>
-    </div> 
-</div>
+        </div> 
+    </div>
+        <!-- <mat-divider></mat-divider> -->
+
 <!-- <p>{{showstory | json}}</p> -->
 <!-- <p>{{userHistory | json}}</p> -->
 
+<tabset class="member-tabset" #storyTab>
+    <tab heading='Synopsis' (selectTab)="onTabActivated($event)">
+        <div class="row">
+            
+        </div>
+        <!-- <h5>Synopsis :</h5> -->
+        <p>{{showstory.description}}</p>
+    </tab>
+    <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
+        <app-show-chapters ></app-show-chapters>
+    </tab> 
+    <tab heading='Comments' (selectTab)="onTabActivated($event)">
+        <app-comment [comments]="comments"></app-comment>
+    </tab> 
+</tabset>
 

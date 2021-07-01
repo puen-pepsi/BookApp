@@ -13,7 +13,7 @@ export class HistoryCardComponent implements OnInit {
   @Input('history') history:ShowHistory;
   @Output() deleteId = new EventEmitter();
   rating:number=0;
-  starColor:StarRatingColor = StarRatingColor.lightblue;
+  starColor:StarRatingColor = StarRatingColor.gold3;
   fSize : string = "1.2rem";
   starCount:number = 5;
   totalRate:number;

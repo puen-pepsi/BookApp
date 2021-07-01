@@ -10,6 +10,7 @@ namespace API.DTOs
         public int StoryId { get; set; }
         // public int? ChapterId { get; set; }
         public int? ParentId { get; set; }
+        public int? ChapterId { get; set; }
         public DateTime Created { get; set; }
         public string Content { get; set; }
         public string UserName { get; set; }

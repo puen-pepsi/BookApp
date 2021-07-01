@@ -3,7 +3,8 @@
     padding: 0;
 }
 .mat-button-toggle-checked{
-    background-color: #2979FF;
+    /* background-color: #2979FF; */
+    background-color: #ff0000;
     /* background-color:var(--highlight-toggle2); */
     font-weight: bolder;
     color: white;

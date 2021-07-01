@@ -1,15 +1,20 @@
-    <div class="mt-2 mb-2 pt-2 pb-2 pl-2 pr-2">
+    <div class="pt-2 pb-2 pl-2 pr-2">
       <form fxLayout="row" 
           (ngSubmit)="onSubmit()" [formGroup]="commentForm">
           <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <textarea formControlName="content" matInput placeholder="Ex. It makes me feel..."></textarea>
-                <!-- <mat-error align ="end" *ngIf="commentForm.controls['content'].hasError('required')">Required</mat-error>    -->
+                <textarea formControlName="content" matInput 
+                placeholder="Ex. It makes me feel..."></textarea>
           </mat-form-field>
           <mat-action-list fxFlexAlign="center">
-            <!-- <button type="button" (click)="onCommentCancel()" mat-flat-button>Cancel</button> -->
-            <button type="submit" mat-raised-button [disabled]="commentForm.invalid">Comment</button>
+            <button type="submit" mat-raised-button [disabled]="commentForm.invalid">
+              <i class="fas fa-paper-plane fa-lg"></i></button>
           </mat-action-list> 
       </form>
+      <!-- <div class="comment">
+        <app-comment-pop [username]="username" (message)="onSubmit($event)"></app-comment-pop>
+      </div> -->
+      <app-comment-list [commentChapter]="commentChapter"></app-comment-list>
     </div>
-  <app-comment-list></app-comment-list>
+    
+  

@@ -30,7 +30,9 @@ export class ShowStoryService {
       this.storyParams = new StoryParams(user);
     })
   }
-  getStoryParams(){
+  getStoryParams(init:string){
+    this.storyParams.storyType=init;
+    this.storyParams.pageNumber = 1;
     return this.storyParams;
   }
   setStoryParams(params: StoryParams){
@@ -46,8 +48,9 @@ export class ShowStoryService {
       return of(response);
     }
     let params = getPaginationHeaders(StoryParams.pageNumber,StoryParams.pageSize);
-        params = params.append('genre',StoryParams.genre.toString());
+        // params = params.append('genre',StoryParams.genre.toString());
     // params = params.append('author',StoryParams.author.toString());
+        params = params.append('storyType',StoryParams.storyType.toString());
         params = params.append('orderBy',StoryParams.orderBy);
     return getPaginatedResult<ShowStory[]>(this.baseUrl+'showstory',params,this.http)
         .pipe(map(response => {

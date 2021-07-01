@@ -5,6 +5,7 @@ namespace API.Helpers
         // public string CurrentUsername { get; set; }
         public string Genre { get; set; }
         public string Author { get; set; }
+        public string StoryType { get; set; }
         public string OrderBy { get; set; } = "created";
     }
 }

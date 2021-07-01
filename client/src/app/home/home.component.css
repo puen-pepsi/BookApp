@@ -1,0 +1,41 @@
+.container{
+    height: 100vh;
+}
+.header{
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    justify-self: center;
+    align-self: center;
+}
+.body b{
+    font-size: 1.5rem;
+}   
+.footer{
+    text-align: center;
+    font-size:0.9rem;
+    margin-top: 3rem;
+}
+
+.summary{
+    text-align: center;
+    font-size: 0.9rem;
+}
+img{
+    height:60px
+}
+/* Large screens */
+@media only screen and (min-width: 600px) {
+    .header{
+        width: 50%;
+        margin:3rem auto;
+
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header{
+        width: 80%;
+        margin:1rem auto;
+
+    }
+}

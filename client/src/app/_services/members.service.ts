@@ -68,7 +68,7 @@ export class MembersService {
     const member = [...this.memberCache.values()]
       .reduce((arr,elem)=> arr.concat(elem.result),[])
       .find((member:Member)=> member.username === username);
-      console.log(member);
+      // console.log(member);
       if(member){
         return of(member);
       }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input  } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, ActivatedRoute } from '@angular/router';
 import { StoryComment } from 'src/app/_models/storycomment';
@@ -10,21 +10,27 @@ import { CommentService } from 'src/app/_services/comment.service';
   styleUrls: ['./comment.component.css']
 })
 
-export class CommentComponent implements OnInit{
+export class CommentComponent implements OnInit,AfterViewInit{
   @Input() comments:StoryComment[];
+  @Input() commentChapter:number;
   private storyName: string;
-
+  username:string;
   commentForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     public commentService:CommentService,
     private route: ActivatedRoute) {}
+  ngAfterViewInit(): void {
+    console.log(this.commentChapter)
+  }
 
   ngOnInit() {
     this.storyName = this.route.snapshot.params.storyname;
     this.commentForm = this.fb.group({
       content: ['', Validators.required],
     });
+    this.username = this.commentService.user.username;
+
   }
 
   onCommentCancel() {
@@ -42,9 +48,11 @@ export class CommentComponent implements OnInit{
     //     this.comments.push(comment);
     //     this.commentForm.reset();
     // });
-    this.commentService.sendComment(this.storyName,this.commentForm.value.content,null).then(()=>{
+    //console.log(event);
+    this.commentService.sendComment(this.storyName,this.commentForm.value.content,null,this.commentChapter).then(()=>{
         this.commentForm.reset();
         
     })
+    
  }
 }

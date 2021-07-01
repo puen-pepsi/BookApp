@@ -14,6 +14,7 @@ import { UserLiked } from 'src/app/_models/userLiked';
 })
 export class ShowCardComponent implements OnInit {
 @Input() story : ShowStory;
+@Input() index : number;
 rating:number=0;
 starColor:StarRatingColor = StarRatingColor.lightblue;
 fSize : string = "1.2rem";

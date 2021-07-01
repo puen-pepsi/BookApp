@@ -22,7 +22,7 @@ const routes : Routes =[
     //     },
     //   ]
     // },
-    {path:'',component:ShowListComponent},
+    {path:'',component:ShowListComponent,data:{storytype:'novel'}},
     {path:':storyname',
             component:ShowDetailComponent,
             // data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },

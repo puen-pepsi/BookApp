@@ -1,3 +1,4 @@
+import { RowContext } from '@angular/cdk/table';
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -14,7 +15,7 @@ import { ShowStoryService } from '../show-story.service';
 })
 export class ShowChaptersComponent implements AfterViewInit{
   // @Input() ChapterList :Chapter;
-  displayedColumns: string[] = ['no','chaptername','publishedCreated'];
+  displayedColumns: string[] = ['order','chaptername','publishedCreated'];
   dataSource = new MatTableDataSource<ChapterList>();
   storyName;
   @ViewChild(MatSort) sort: MatSort;
@@ -51,7 +52,7 @@ export class ShowChaptersComponent implements AfterViewInit{
     this.router.navigate(['/stories/Test17/chapters'], { fragment: 'Chapter-2' });
   }
   clickedRows(row){
-    this.router.navigate(['/stories',this.storyName,'chapters'],{fragment:'Chapter-'+row.order});
+    this.router.navigate(['/stories',this.storyName,'chapters'],{fragment:String(row.id)});
     // this.router.navigate(['/stories',this.storyName,'chapters']);
   }
 

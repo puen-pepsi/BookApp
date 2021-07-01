@@ -3,7 +3,7 @@
   <div class="py-3">No History Now..</div>
 </ng-container>
 <ng-container *ngIf="storyHistory?.length > 0" >
-  <div fxLayout="column" fxLayoutAlign=" end" >
+  <div fxLayout="column" fxLayoutAlign="center" >
    <div *ngFor="let history of storyHistory">
       <app-history-card [history]="history"
         (deleteId)="deleteHistory($event)"></app-history-card>
@@ -11,7 +11,7 @@
 </div>
   <mat-paginator 
   [length]="pagination?.totalItems" 
-  [pageSizeOptions]="[3]"
+  [pageSizeOptions]="[5]"
   [showFirstLastButtons]="true"
   (page)="pageChanged($event)">
 </mat-paginator>

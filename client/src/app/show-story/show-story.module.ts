@@ -25,6 +25,8 @@ import { LibraryCardComponent } from './library/library-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryCardComponent } from './library/history/history-card.component';
 import { LikeComponent } from './Like/like.component';
+import { DialogComponent } from './comment/comment-dialog/dialog/dialog.component';
+import { CommentPopComponent } from './comment/comment-dialog/comment-pop.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { LikeComponent } from './Like/like.component';
     LibraryCardComponent,
     HistoryCardComponent,
     LikeComponent,
+    CommentPopComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,

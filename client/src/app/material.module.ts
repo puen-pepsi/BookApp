@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -17,6 +17,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
     imports: [MatSliderModule,
         MatSnackBarModule,
@@ -35,7 +40,12 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
         MatPaginatorModule,
         MatSelectModule,
         MatSortModule,
-        MatCarouselModule
+        MatCarouselModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatExpansionModule,
+        MatBadgeModule
     ],
     exports: [MatSliderModule,
         MatSnackBarModule,
@@ -54,7 +64,12 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
         MatPaginatorModule,
         MatSelectModule,
         MatSortModule,
-        MatCarouselModule
+        MatCarouselModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatExpansionModule,
+        MatBadgeModule
     ]
 })
 export class MaterialModule { }

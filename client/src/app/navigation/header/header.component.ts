@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { ExternalAuthDto } from 'src/app/_models/externalAuthDto';
@@ -11,25 +11,30 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() headlogo:string;
   @Output() sidenavtoggle = new EventEmitter<void>();
   model:any = {};
   public errorMessage: string = '';
   public showError: boolean;
-  private _returnUrl: string;
   constructor(public accountService: AccountService ,
     private router : Router,
+    private route :ActivatedRoute,
     private toastr:ToastrService,
-    ) { }
+    ) { 
+          this.headlogo ="./assets/images/logo.png"
+       
+      }
 
   ngOnInit(): void {
+    // this.headlogo = this.route.snapshot.data.headlogo;
   }
   onToggleSidenav(){
     this.sidenavtoggle.emit();
   }
   login(){
     this.accountService.login(this.model).subscribe(response => {
-      this.router.navigateByUrl('/members');
-      this.toastr.success("LogIn success","Infomation");
+      this.router.navigateByUrl('/stories');
+      this.toastr.success("SignIn success","Infomation");
     },error => {
       console.log(error);
     })
@@ -70,7 +75,7 @@ export class HeaderComponent implements OnInit {
         // this._authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
         // this.router.navigate([this._returnUrl]);
         this.router.navigateByUrl('/stories');
-        this.toastr.success("LogIn Success","Information");
+        this.toastr.success("SignIn Success","Information");
       },
       error => {
         this.errorMessage = error;
@@ -88,5 +93,8 @@ export class HeaderComponent implements OnInit {
   //     console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));    
   //     this.router.navigate([`/Dashboard`]);    
   //   })    
-  // }    
+  // }  
+  logoClick(event){
+    this.router.navigate(["/"]);
+  }  
 }

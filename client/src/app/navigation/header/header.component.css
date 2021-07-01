@@ -1,6 +1,6 @@
 a{
     text-decoration: none;
-    color:black;
+    color:#585858;
     font-family: 'Montserrat', sans-serif;
 }
 a:hover,
@@ -26,9 +26,16 @@ a:active{
 :host .dropdown-menu{
     right: 5px !important;
 }
+.img-circle {
+    max-height: 40px;
+    border:2px solid #ffffff;
+    box-shadow: 0 0 0 1px #007bff;
+    background-clip: content-box;
+    display: inline;
+}
 img {
     max-height: 40px;
-    border:1px solid rgb(255, 255, 255);
+    background-clip: content-box;
     display: inline;
 }
 mat-toolbar{
@@ -43,4 +50,12 @@ mat-toolbar{
 }
 .mat-toolbar.dropdown-toggle {
     color:black;
+}
+.mat-icon{
+    color:#585858;
+    vertical-align:middle;
+}
+button{
+    padding-right: 1px;
+    padding-left: 1px;
 }

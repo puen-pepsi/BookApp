@@ -26,14 +26,17 @@ export class RegisterComponent implements OnInit {
 
   intitializeForm(){
     this.registerForm = this.fb.group({
-      gender: ['male'],
+      // gender: ['male'],
       username: ['', Validators.required],
-      knownAs: ['', Validators.required],
+      // knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
+      // city: ['', Validators.required],
+      // country: ['', Validators.required],
+      email:['',[Validators.required,Validators.email]],
       password: ['', [Validators.required, 
-        Validators.minLength(4), Validators.maxLength(8)]],
+        Validators.minLength(4), Validators.maxLength(16)
+        ]
+      ],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]]
     })
   }
@@ -46,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/members');
+      this.router.navigateByUrl('/stories');
     }, error =>{
       this.validationErrors = error;
     })

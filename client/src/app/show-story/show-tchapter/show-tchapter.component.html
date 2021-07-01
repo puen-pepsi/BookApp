@@ -1,5 +1,6 @@
+<div class="Read-Container">
 <div fxLayout="row" fxLayoutAlign="center stretch" *ngIf="showstory" >
-    <div class="d-flex flex-column pr-4" [fxFlex] >
+    <div class="d-flex flex-column" [fxFlex] >
         <div class="title">
             <img 
             src="https://localhost:5001/{{showstory?.imageUrl|| 'Resources/Images/no-image.jpeg'}}" 
@@ -10,7 +11,7 @@
             <h5>&copy; Rainobu</h5>
         </div>
         
-        <div 
+        <!-- <div 
             *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
             spyTarget="Chapter-{{i+1}}" style="margin-bottom: 50px;"> 
                 <app-show-achapter 
@@ -18,23 +19,40 @@
                     [index]='i+1'>
                 </app-show-achapter> 
                 <h5>&copy; Rainobu</h5>
+        </div>      -->
+        <div 
+            *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
+            spyTarget="{{chapter.id}}" style="margin-bottom: 50px;"> 
+              <div class="chapter">
+                <app-show-achapter 
+                    [chapter] = 'chapter'
+                    [index]='i+1'>
+                </app-show-achapter> 
+                <h5>&copy; Rainobu</h5>
+              </div>
         </div>     
     </div> 
     <div fxFlex="30" fxLayout fxHide.xs *ngIf="ShowTableContent" >
-        <nav class="section-nav pl-3" >
+        <nav class="section-nav" >
+          <div class="header"><h5>Table of Contents</h5> 
+            <div class="rightCircle">
+                <mat-icon (click)="toggletableContents()" [inline]="true">close</mat-icon>
+            </div>
+          </div>
             <app-nav-sidebar [chapterList] = "chapterList" 
              (target)="goTo($event)"       
             (Show)="toggletableContents($event)"></app-nav-sidebar>
         </nav>
     </div>
-    <div fxFlex="30" fxLayout fxHide.xs *ngIf="ShowComment" >
-      <div class="section-nav">
-        <div class="header"><h4>Comment</h4> 
+    <div fxFlex="30" fxHide.xs *ngIf="ShowComment" >
+      <div class="section-nav" >
+        <div class="header"><h5>Chapter Commnet</h5> 
           <div class="rightCircle">
               <mat-icon (click)="toggleComment()" [inline]="true">close</mat-icon>
           </div>
         </div>
-        <app-comment [comments]="comments"></app-comment>
+        <app-comment [comments]="comments"
+                    [commentChapter]="commentChapter"></app-comment>
       </div>
   </div>
 <div>
@@ -61,3 +79,4 @@
           </li>
         </ul>
     </nav>
+  </div>

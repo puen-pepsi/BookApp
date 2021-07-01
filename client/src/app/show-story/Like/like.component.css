@@ -1,12 +1,22 @@
 .material-icons-outlined{
     cursor: pointer;
-    color:lightslategrey
+    color:lightslategrey;
+    justify-items: center;
+    font-size: 1.5rem;
+    vertical-align:middle;
+
 }
-.mat-icon{
-    font-size: 2rem;
-}
+/* .mat-icon{
+    font-size: 1.5rem;
+     vertical-align: middle;
+} */
 .highlighted{
     /* color: rgb(3, 115, 185); */
     cursor: pointer;
-    color: #2780e3
+    /* color: #2780e3 */
+    /* color:green; */
+    color: #22b60f;
+}
+.normal{
+    color:lightslategrey;
 }

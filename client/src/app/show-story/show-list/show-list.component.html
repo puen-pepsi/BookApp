@@ -22,7 +22,15 @@
                 </div>
                 
                 <div >
-                    <span class="pr-5 text-muted">You Filter - {{pagination?.totalItems}} found</span>
+                    <mat-form-field >
+                        <mat-label>type :</mat-label>
+                        <mat-select [(ngModel)]="storyParams.storyType" name="storyType">
+                        <mat-option *ngFor="let type of storyTypeList" [value]="type.value">
+                            {{type.display}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span class="pl-3 pr-3 text-muted">You Filter - {{pagination?.totalItems}} found</span>
                             <!-- <label>Genre : </label>
                             <select name="genre" style="width: 150px;" [(ngModel)]="storyParams.genre"
                                 class="form-control ml-1">
@@ -31,6 +39,7 @@
                                     {{genre.description}}
                                 </option>
                             </select> -->
+                            
                             <mat-form-field >
                                 <mat-label>Genre :</mat-label>
                                 <mat-select [(ngModel)]="storyParams.genre" name="genre">
@@ -49,9 +58,12 @@
         </div>
     </form>
 
-<div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.gt-xs="space-between" >
-    <div *ngFor="let story of showstory" fxFlex="18" >
-        <app-show-card [story]="story"></app-show-card>
+<div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.gt-sm="20px" >
+    <div *ngFor="let story of showstory index as i" fxFlex="18" >
+        <app-show-card 
+            [story]="story"
+            [index]="i"           >
+        </app-show-card>
     </div>
 </div>
 <mat-paginator *ngIf="pagination"

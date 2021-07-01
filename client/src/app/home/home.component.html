@@ -1,17 +1,22 @@
 <div class="container mt-5">
-    <div *ngIf="!registerMode" style='text-align:center;'>
-    <h1>Find your Auther</h1>
-    <p class="lead">Come on int view your author... all you need to do is sign up!</p>
+    <div *ngIf="!registerMode" class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+            <img src="./assets/images/logo.png" >
+        </div>
+<p class="lead text-center">Whether it be reading an epic tale of an isekai-ed hero or having a 
+        peaceful online tea time conversation with your friends, you can find them all here in 
+        this Guild! Join our rich community of anime/manga/lightnovel -loving readers,
+         writers and illustrators here at Rainobu!!
+</p>
         <div class="text-center">
             <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
             <button class="btn btn-info btn-lg">Learn more</button>
         </div>
-    </div>
+</div>
     <div class="container" *ngIf="registerMode">
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-xl-4 col-md-8 col-sm-10">
                 <app-register (cancelRegister)="cancelRegisterMode()"></app-register>
             </div>
         </div>
     </div>
-</div>

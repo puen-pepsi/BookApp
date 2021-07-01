@@ -44,7 +44,7 @@ export class ReplyComponent implements OnInit {
       story_name:this.storyname
     }
     console.log(submittedVal);
-    this.commentService.sendComment(submittedVal.story_name,submittedVal.content,+submittedVal.comment).then(()=>{
+    this.commentService.sendComment(submittedVal.story_name,submittedVal.content,+submittedVal.comment,null).then(()=>{
       this.replyForm.reset();
       
   })

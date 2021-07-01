@@ -11,7 +11,7 @@ namespace API.DTOs
         public string ChapterName { get; set; }
         [Required]
         public string Content { get; set; }
-        public int Order { get; set; }
+        public int? Order { get; set; }
         public int StoryId { get; set; }
         public string AuthorName { get; set; }
         public string AuthorImageUrl { get; set; }

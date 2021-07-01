@@ -44,7 +44,7 @@ export class CommentService {
 
     this.hubConnection.on('NewComment', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
-        console.log(comment)
+        //console.log(comment)
         this.commentThreadSource.next([comment,...comments ])
       })
     })
@@ -78,8 +78,9 @@ export class CommentService {
   addComment(data){
     return this.http.post<StoryComment>(this.baseUrl + 'comments/' + data.storyName,data); 
   }
-   async sendComment(storyname:string,content:string,parentId:number){
-    return this.hubConnection.invoke('SendComment',{storyname,content,parentId})
+
+  async sendComment(storyname:string,content:string,parentId:number,chapterId:number){
+    return this.hubConnection.invoke('SendComment',{storyname,content,parentId,chapterId})
         .catch(error=> console.log(error));
   }
   getComments(storyName:string){

@@ -1,5 +1,5 @@
 <app-reply-list [commentId]="cId" [storyName]="storyname"></app-reply-list>
-<div class="ml-5 mt-2 mb-2 pt-2 pb-2 pl-2 pr-2">
+<div class="ml-5">
       <form fxLayout="row" 
           (ngSubmit)="onSubmit()" [formGroup]="replyForm">
           <mat-form-field class="example-full-width">
@@ -9,7 +9,9 @@
           </mat-form-field>
           <mat-action-list fxFlexAlign="center">
             <!-- <button type="button" (click)="onCommentCancel()" mat-flat-button>Cancel</button> -->
-            <button type="submit" mat-raised-button [disabled]="replyForm.invalid">Comment</button>
+            <button type="submit" mat-raised-button [disabled]="replyForm.invalid">
+              <i class="fas fa-paper-plane fa-lg"></i>
+            </button>
           </mat-action-list> 
       </form>
       <!-- <form (ngSubmit)="onSubmit()" [formGroup]="replyForm" enctype="multipart/form-data">

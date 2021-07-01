@@ -53,7 +53,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
     if(serverPath){
       return this.ResoucreUrl + serverPath;
     }
-    return `/assets/images/no-image.jpeg`;
+    return `/assets/images/BlackCover.png`;
   }
   public UploadImage = (files,id:number) => {
     if (files.length === 0) {

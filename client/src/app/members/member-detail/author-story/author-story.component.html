@@ -1,4 +1,4 @@
-<h4>Stories : {{authorname}}</h4>
+<h4>Stories by {{authorname|titlecase}}</h4>
 <div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5px" >
     <div *ngFor="let story of showstory" fxLayout fxFlex="20" >
         <app-show-card [story]="story"></app-show-card>

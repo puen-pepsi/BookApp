@@ -3,6 +3,7 @@ export class Story{
         storyName : string;
         description :string;       
         genre :string;
+        type:string;
         language:string;
         imageUrl:string;
         state:string;
@@ -17,11 +18,12 @@ export class Story{
                 this.storyName="";
                 this.description ="";
                 this.genre="";
-                this.language="";
+                this.type="novel";
+                this.language="English";
                 this.imageUrl="";
                 this.userphoto="";
                 this.views=0;
-                this.state="";
+                this.state="New";
                 this.rating=0;      
         }
 }

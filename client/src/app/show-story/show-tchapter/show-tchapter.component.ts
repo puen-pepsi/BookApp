@@ -21,11 +21,12 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   current:string;
   storyname:string;
   goto:string;
+  commentChapter:number;
   sub : Unsubscribable;
   sub2:Unsubscribable;
   showstory:ShowStory;
   user:User;
-  comments:StoryComment[]=[];
+  // comments:StoryComment[]=[];
   ShowTableContent:boolean = false;
   ShowComment:boolean = false;
   constructor(private showStoryService:ShowStoryService,
@@ -38,7 +39,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
             ) { 
               this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
               // this.router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
-              //   console.log(e);
+              //  console.log(e);
           
               //   // this is fix for dynamic generated(loaded..?) content
               //   setTimeout(() => {
@@ -54,7 +55,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
 
               this.sub = this.router.events.pipe(filter((e): e is Scroll => e instanceof Scroll)
               ).subscribe(e => {
-                // console.log(e);
+                //  console.log(e);
                 if (e.position) {
                   // backward navigation
                   setTimeout(() => {scroller.scrollToPosition(e.position); }, 0);
@@ -89,8 +90,12 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
 
     this.sub2 = this.spyService.activeSpyTarget.subscribe(
       (activeTargetName: string) => {
-        this.current = activeTargetName;
-        
+        if(this.current != activeTargetName){
+          this.current = activeTargetName;
+          this.commentChapter = +this.current;
+          // console.log(this.current)
+        }
+  
       }
     );
     
@@ -128,7 +133,9 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     }
     this.ShowTableContent = false;
   }
+  loadCommentChapter(){
 
+  }
   async ngOnDestroy() {
     //console.log(this.scroller.getScrollPosition());
     this.commentService.stopHubConnection();

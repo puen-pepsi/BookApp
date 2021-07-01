@@ -4,6 +4,7 @@ export interface StoryComment{
     id:number;
     storyId:number;
     parentId?:number;
+    chapterId?:number;
     created:Date;
     content:string;
     userName:string;

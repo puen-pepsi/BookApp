@@ -2,12 +2,17 @@ table {
     width: 100%;
     
   }
-  
+  .example-table-container {
+    position: relative;
+    /* min-height: 200px;
+    max-height: 400px; */
+    overflow: auto;
+  }
   th.mat-sort-header-sorted {
     color: black;
   }
 
-  .mat-column-no {
+  .mat-column-order {
     width: 20px;
     /* border-right: 1px solid currentColor; */
      /* padding-right: 10px;  */

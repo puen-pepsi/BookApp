@@ -49,8 +49,8 @@ namespace API.Controllers
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
-                KnownAs = user.KnownAs,
-                Gender = user.Gender
+                //KnownAs = user.KnownAs,
+                //Gender = user.Gender
             };
         }
 
@@ -74,8 +74,8 @@ namespace API.Controllers
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs,
-                Gender = user.Gender,
+                //KnownAs = user.KnownAs,
+                //Gender = user.Gender,
                 //MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
             };
         }
@@ -105,7 +105,7 @@ namespace API.Controllers
                     user = new AppUser { 
                         Email = payload.Email, 
                         UserName = payload.GivenName,
-                        KnownAs = payload.GivenName,
+                        //KnownAs = payload.GivenName,
                         // Photos = new Photo {
                         //     Url= payload.Picture,
                         //     IsMain = true
@@ -134,8 +134,8 @@ namespace API.Controllers
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
                 PhotoUrl = main.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs,
-                Gender = user.Gender,
+                //KnownAs = user.KnownAs,
+                //Gender = user.Gender,
             };
             // return Ok(new AuthResponseDto { Token = token, IsAuthSuccessful = true });
         }

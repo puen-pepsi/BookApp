@@ -38,6 +38,8 @@ namespace API.Controllers
             // storyParams.CurrentUsername = User.GetUsername();
             if (string.IsNullOrEmpty(storyParams.Genre))
                 storyParams.Genre = "";
+            if (string.IsNullOrEmpty(storyParams.StoryType))
+                storyParams.StoryType = "";
             var story = await _unitOfWork.StoryRepository.GetStoriesAsync(storyParams);
             Response.AddPaginationHeader(story.CurrentPage, story.PageSize,
                     story.TotalCount, story.TotalPages);

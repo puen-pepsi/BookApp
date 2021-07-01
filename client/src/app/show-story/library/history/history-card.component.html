@@ -5,15 +5,15 @@
           {{history.genre}}
         </div>
         <div class="genre center">
-          <!-- <app-star-rating-show
+          <app-star-rating-show
               [rating]="history.rating" 
               [starCount]="starCount" 
               [totalRate]="totalRate"
               [color]="starColor" 
               [fSize] = "fSize"
               [wSize] = "fSize"
-              (ratingUpdated)="onRatingChanged($event)">
-          </app-star-rating-show> -->
+          >
+          </app-star-rating-show>
         </div>
         <img src="https://localhost:5001/{{history.imageUrl || 'Resources/Images/no-image.jpeg'}}" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
       </div>
@@ -80,3 +80,4 @@
       <span class="more">Lastest update : {{ history.created | date:'short' }}</span>
     </div>
   </div>
+  <!-- <p>{{history | json}}</p> -->

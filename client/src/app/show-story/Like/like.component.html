@@ -1,7 +1,12 @@
-<span class="material-icons-outlined"
-    [class.highlighted]="isActive"
-    (click)="onClick()">
-    <i class="far fa-thumbs-up"></i>
-    {{(isActive)?"Liked":"Like"}}
+<div fxLayout="row" fxLayoutAlign=" end" fxLayoutGap="3px" (click)="onClick()">
+<span >
+    <!-- <i class="far fa-thumbs-up"></i> -->
+    <!-- <mat-icon class="material-icons-outlined" [class.highlighted]="isActive" >bakery_dining</mat-icon>   -->
+    <mat-icon class="material-icons-outlined" [class.highlighted]="isActive" 
+                >bakery_dining</mat-icon>
 </span>
-<span class="pl-1"> {{likeCount>0?likeCount:''}}</span>
+<span   [class.normal]="!isActive"
+        [class.highlighted]="isActive">{{(isActive)?"Liked":"Like"}} </span>
+<span [class.normal]="!isActive" 
+        [class.highlighted]="isActive"> {{likeCount>0?likeCount:''}}</span>
+</div>

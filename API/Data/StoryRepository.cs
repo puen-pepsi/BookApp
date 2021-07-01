@@ -143,6 +143,9 @@ namespace API.Data
             if(storyParams.Genre != ""){
                 query = query.Where(s => s.Genre == storyParams.Genre);
             }
+            if(storyParams.StoryType !=""){
+                query =query.Where(s => s.Type == storyParams.StoryType);
+            }
             // query = query.Where(a => a.UserName == storyParams.Author);
             query = storyParams.OrderBy switch
             {

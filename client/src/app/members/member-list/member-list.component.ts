@@ -18,7 +18,9 @@ export class MemberListComponent implements OnInit {
   pagination : Pagination;
   userParams:UserParams;
   user :User;
-  genderList = [{value:'male',display:'males'},{value:'female',display:'females'}]
+  genderList = [{value:'male',display:'males'},
+                {value:'female',display:'females'},
+                {value:'Other',display:'other'}]
 
   constructor(private memberService:MembersService) { 
     this.userParams = this.memberService.getUserParams();

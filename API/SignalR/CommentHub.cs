@@ -94,6 +94,7 @@ namespace API.SignalR
                 UserPostId = sender.Id,
                 StoryId = storyCur.Id,
                 ParentId = createCommentDto.ParentId,
+                ChapterId = createCommentDto.ChapterId,
                 Content = createCommentDto.Content
                 
             };

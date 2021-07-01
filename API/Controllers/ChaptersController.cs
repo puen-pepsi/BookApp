@@ -62,8 +62,12 @@ namespace API.Controllers
                 return NotFound();
 
             var chapter = _mapper.Map<StoryChapter>(storyChapterDto);
-            int cCount = story.Chapters.Count;
-            chapter.Order = cCount + 1;
+            if(publishNow){
+                int iCount = story.Chapters.Where(x=>x.Published != null).Count();
+                // int cCount = story.Chapters.Count;
+                chapter.Order = iCount + 1;    
+            }
+            
             story.Chapters.Add(chapter);
             if(await _unitOfWork.Complete()) { 
                 if(publishNow){
@@ -91,7 +95,11 @@ namespace API.Controllers
                 return NotFound();
             storyChapterDto.Id = chapterUpdate.Id;
             storyChapterDto.StoryId = chapterUpdate.StoryId;
-            
+            if(publish){
+                var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                int iCount = story.Chapters.Where(x=>x.Published != null).Count();
+                storyChapterDto.Order = iCount + 1;
+            }
             _mapper.Map<StoryChapterDto,StoryChapter>(storyChapterDto,chapterUpdate);
 
             _unitOfWork.StoryRepository.UpdateStoryChapter(chapterUpdate);
@@ -99,7 +107,7 @@ namespace API.Controllers
                 if(publish){
                     var pub = new Published
                     {
-                        Created = DateTime.Now,
+                        Created = DateTime.UtcNow,
                         StoryChapterId = chapterUpdate.Id
                     };
                     _unitOfWork.StoryRepository.AddPublished(pub);
@@ -114,9 +122,16 @@ namespace API.Controllers
         [HttpPut("published/{id}")]
         public async Task<IActionResult> published([FromRoute]int storyId,int id)
         {
+                    var chapterUpdate = await _unitOfWork.StoryRepository.GetStoryChapterById(id);
+                    if(chapterUpdate == null)
+                        return NotFound();
+                    var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                    int iCount = story.Chapters.Where(x=>x.Published != null).Count();
+                    chapterUpdate.Order = iCount + 1;
+                     _unitOfWork.StoryRepository.UpdateStoryChapter(chapterUpdate);
                     var pub = new Published
                     {
-                        Created = DateTime.Now,
+                        Created = DateTime.UtcNow,
                         StoryChapterId = id
                     };
                     _unitOfWork.StoryRepository.AddPublished(pub);

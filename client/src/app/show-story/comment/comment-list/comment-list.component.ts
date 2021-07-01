@@ -2,7 +2,6 @@
 import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { StoryComment } from 'src/app/_models/storycomment';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
 
@@ -12,7 +11,7 @@ import { ConfirmService } from 'src/app/_services/confirm.service';
   styleUrls: ['./comment-list.component.css']
 })
 export class CommentListComponent implements OnInit, OnDestroy {
-  // @Input() comments:StoryComment[];
+   @Input() commentChapter:number;
 
   storyName: string;
   showReply = false;

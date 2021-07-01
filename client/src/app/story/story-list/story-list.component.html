@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                               <th>Image/StoryName</th>
+                              <th>Type</th>
                               <th>State</th>
                               <th>Rating</th>
                               <th>Views</th>
@@ -23,6 +24,7 @@
                               <td><img [src]="createImagePath(row.imageUrl)" alt={{row.storyName}} >
                                 {{row.storyName}}
                               </td>
+                              <td>{{row.type}}</td>
                               <td>{{row.state}}</td>
                               <td>{{row.rating}}</td>
                               <td>{{row.views}}</td>

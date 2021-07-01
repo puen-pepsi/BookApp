@@ -1,46 +1,95 @@
 <!-- <div class="mt-2" *ngFor="let comment of comments; let i = index"> -->
 <ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
   <div class="mt-2 mb-2" *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
-  <div *ngIf="comment.parentId==null"
-    class="pt-0 pb-0 pl-2 pr-2"> 
-    <div fxLayout="row"  >
-      <div class=" p-1 ">
-        <img 
-              class="img-circle rounded-circle mr-2"
-              src="{{comment.image || './assets/user.png'}}" 
-              alt="{{comment.knownAs}}">     
-      <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
-      </div>
-      <div class=" p-2" fxFill>
-        <strong >{{comment.knownAs | titlecase}}</strong> <br/>
-        <div class="p-2" id="rconners1">
-          <p>{{comment.content}}</p>
+    <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
+      <ng-template #first>
+          <div *ngIf="comment.parentId==null" 
+          class="pt-0 pb-0 pl-0 pr-0"> 
+          
+          <div fxLayout="row" class="main" >
+            <div class="created">
+              <small class="text-muted ">{{comment.created | timeago}}</small>
+            </div>
+            <div class="left ">
+              <img 
+                    class="img-circle rounded-circle"
+                    src="{{comment.image || './assets/user.png'}}" 
+                    alt="{{comment.knownAs}}">     
+            <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
+            </div>
+            <div class="right" style="width: 100%;">
+              <strong >{{comment.knownAs | titlecase}}</strong> <br/>
+              <div id="rconners1">
+                <p>{{comment.content}}</p>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+              <button mat-button>
+                  <like [likeCount]="comment.liked.length"
+                      [isActive]="comment.liked.includes(commentService.user.username)"
+                      (commentId)="addLike(comment.id)"></like>
+                </button>
+                <button 
+                  mat-button color="primary"
+                  (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
+                <button *ngIf="comment.userName === commentService.user.username"
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          
+          <mat-action>
+            <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+              [storyName]='this.storyName'></app-reply-form>
+          </mat-action>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-         <button mat-button >
-            <like [likeCount]="comment.liked.length"
-                [isActive]="comment.liked.includes(commentService.user.username)"
-                (commentId)="addLike(comment.id)"></like>
-          </button>
-          <button 
-            mat-button color="primary"
-            (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
-          <button *ngIf="comment.userName === commentService.user.username"
-            mat-button (click)="onDeleteComment(comment.id)">
-            Remove</button>
-          <span>
-            <small class="text-muted ">{{comment.created | timeago}}</small>
-          </span>
-      </div>
-      </div>
-      
-    </div>
-    
-    <mat-action>
-      <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
-        [storyName]='this.storyName'></app-reply-form>
-    </mat-action>
-  </div>
+      </ng-template>
+      <ng-template #second>
+        <div *ngIf="comment.chapterId===commentChapter" 
+          class="pt-0 pb-0 pl-2 pr-2"> 
+          
+          <div fxLayout="row" class="main" >
+            <div class="created">
+              <small class="text-muted ">{{comment.created | timeago}}</small>
+            </div>
+            <div class="left p-1 ">
+              <img 
+                    class="img-circle rounded-circle mr-2"
+                    src="{{comment.image || './assets/user.png'}}" 
+                    alt="{{comment.knownAs}}">     
+            <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
+            </div>
+            <div class="right p-2" style="width: 100%;">
+              <strong >{{comment.knownAs | titlecase}}</strong> <br/>
+              <div class="p-2" id="rconners1">
+                <p>{{comment.content}}</p>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+              <button mat-button>
+                  <like [likeCount]="comment.liked.length"
+                      [isActive]="comment.liked.includes(commentService.user.username)"
+                      (commentId)="addLike(comment.id)"></like>
+                </button>
+                <button 
+                  mat-button color="primary"
+                  (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
+                <button *ngIf="comment.userName === commentService.user.username"
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove</button>
+              
+              </div>
+            </div>
+            
+          </div>
+          
+          <mat-action>
+            <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+              [storyName]='this.storyName'></app-reply-form>
+          </mat-action>
+        </div>
+      </ng-template>
 </div>
   </ng-container>
 

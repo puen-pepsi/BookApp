@@ -419,6 +419,9 @@ namespace API.Migrations
                     b.Property<string>("Tags")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Type")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 

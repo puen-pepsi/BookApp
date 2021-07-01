@@ -18,6 +18,8 @@ import { StoryComponent } from './story/story.component';
 import { LibraryComponent } from './show-story/library/library.component';
 import { ShowStoryComponent } from './show-story/show-story.component';
 import { HistoryComponent } from './show-story/library/history/history.component';
+import { ShowListComponent } from './show-story/show-list/show-list.component';
+import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {path:'',component:HomeComponent,data:{breadcrumb:'Home'}},
   {
@@ -25,13 +27,8 @@ const routes: Routes = [
     runGuardsAndResolvers:'always',
     canActivate: [AuthGuard],
     children: [
-      {path:'members',component:MemberListComponent,
-        // data:{breadcrumb:'Members'}
-      },
-      {path:'members/:username',component:MemberDetailComponent,
-          // data:{ breadcrumb: (data: any) => `${data.member.username}` },
-          resolve:{member:MemberDetailedResolver}
-      },
+      
+      
       {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
       {path:'library',component:LibraryComponent,
@@ -40,11 +37,7 @@ const routes: Routes = [
       {path:'mystory',component:StoryComponent,
         // data:{breadcrumb:'My Stories'}
       },
-      {
-        path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
-        // data: { breadcrumb: 'Stories' }
-      },
-
+      
       // {path:'stories',
       //   component:ShowstoryComponent,data:{breadcrumb:'Stories'},
       //   children:[
@@ -67,6 +60,22 @@ const routes: Routes = [
       },
     ]  
   },
+  {path:'members',component:MemberListComponent,
+        // data:{breadcrumb:'Members'}
+  },
+  {path:'members/:username',component:MemberDetailComponent,
+      // data:{ breadcrumb: (data: any) => `${data.member.username}` },
+      resolve:{member:MemberDetailedResolver}
+  },
+  {
+    path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
+    // data: { breadcrumb: 'Stories' }
+  },
+  {
+    path: 'manga',component:ShowListComponent,
+    data:{storytype:'manga'},
+  },
+  {path:'login',component:LoginComponent},
   {path:'history',component:HistoryComponent},
   {path:'errors',component:TestErrorsComponent},
   {path:'not-found',component:NotFoundComponent},
@@ -82,7 +91,7 @@ const routes: Routes = [
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
     //scrollOffset: [0, 150], // [x, y] - adjust scroll offset
-    scrollOffset: [0, 64+16], 
+    scrollOffset: [0, 90], 
     // onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]

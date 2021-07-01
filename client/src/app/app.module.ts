@@ -57,6 +57,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { AuthorStoryComponent } from './members/member-detail/author-story/author-story.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
+import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,7 +104,9 @@ import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login
     
     HeaderComponent,
     SidenavListComponent,
-    AuthorStoryComponent
+    AuthorStoryComponent,
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

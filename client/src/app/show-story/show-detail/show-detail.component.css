@@ -1,8 +1,42 @@
 .rounded-circle {
     max-height: 35px;
 }
+.card .text_up{
+    position : absolute;
+    top:25%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color:white;
+    width: 90%;
+    word-wrap: break-word;
+    
+}
+.card #benmark{
+    position : absolute;
+    bottom: 20%;;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color:rgb(175, 175, 175);
+}
+.detials{
+    width: 100%;
+    font-size: 1.2rem;
+}
+.buttongroup{
+    position: absolute;
+    bottom:1rem;
+    right:1rem;
+    display:block;
 
-/* ::ng-deep .mat-icon{
-    font-size: 2rem;
-    width: 2rem;
-} */
+}
+.buttongroupxs{
+    display: block;
+    padding: 10px;
+
+}

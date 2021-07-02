@@ -87,7 +87,7 @@ namespace API
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
                 RequestPath = new PathString("/Resources")
             });
             app.UseEndpoints(endpoints =>
@@ -96,7 +96,7 @@ namespace API
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
                 endpoints.MapHub<CommentHub>("hubs/comment");
-                endpoints.MapFallbackToController("index","Fallback");
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }

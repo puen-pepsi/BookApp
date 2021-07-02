@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
@@ -41,12 +42,23 @@ namespace API
             }
             await host.RunAsync();
         }
+    //     public static IHostBuilder CreateHostBuilder(string[] args) =>
+    //         Host.CreateDefaultBuilder(args)
+    //             .ConfigureWebHostDefaults(webBuilder =>
+    //             {
+    //                 webBuilder.UseStartup<Startup>();
+    //             });
+    // }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder
-                        .UseStartup<Startup>();
+                    webBuilder.ConfigureKestrel(serverOptions =>
+                    {
+                        serverOptions.Listen(IPAddress.Any, Convert.ToInt32(Environment.GetEnvironmentVariable("PORT")));
+                    }).UseStartup<Startup>();
                 });
-    }
+        }
 }
+
+  

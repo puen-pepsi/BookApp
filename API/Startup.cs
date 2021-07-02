@@ -68,12 +68,7 @@ namespace API
             // {
             //     app.UseDeveloperExceptionPage();
             // }
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-                RequestPath = new PathString("/Resources")
-            });
+            
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
@@ -89,7 +84,12 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseDefaultFiles();
-
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

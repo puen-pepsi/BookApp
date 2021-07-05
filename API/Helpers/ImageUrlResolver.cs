@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers
 {
-    public class ImageUrlResolver : IValueResolver<Story,StoryDto, string>
+    public class ImageUrlResolver : IValueResolver<Story,StoryDto,string>
     {
                 private readonly IConfiguration _config;
                 public ImageUrlResolver(IConfiguration config)

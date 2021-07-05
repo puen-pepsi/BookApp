@@ -52,12 +52,17 @@ namespace API.Extensions
                     var pgUserPass = connUrl.Split("@")[0];
                     var pgHostPortDb = connUrl.Split("@")[1];
                     var pgHostPort = pgHostPortDb.Split("/")[0];
-                    var pgDb = pgHostPortDb.Split("/")[1];
-                    var pgUser = pgUserPass.Split(":")[0];
-                    var pgPass = pgUserPass.Split(":")[1];
-                    var pgHost = pgHostPort.Split(":")[0];
-                    var pgPort = pgHostPort.Split(":")[1];
-
+                    //var pgDb = pgHostPortDb.Split("/")[1];
+                    // var pgUser = pgUserPass.Split(":")[0];
+                    // var pgPass = pgUserPass.Split(":")[1];
+                    // var pgHost = pgHostPort.Split(":")[0];
+                    // var pgPort = pgHostPort.Split(":")[1];
+                    var pgUser = "ldqjukpmtasnbc";
+                    var pgPass = "26a4e72e103f337e39deaedfb9bce79fbad7cd8b2ba84f084c528d3c28f40f39";
+                    var pgHost = "ec2-3-231-69-204.compute-1.amazonaws.com";
+                    var pgPort = "5432";
+                    var pgDb ="dftrok1obpgbr7";
+                    
                     connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
                 }
 

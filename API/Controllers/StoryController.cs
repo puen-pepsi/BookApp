@@ -40,6 +40,7 @@ namespace API.Controllers
             var storyFromRepo = await _unitOfWork.StoryRepository.GetStoryById(id,includeRelated);
             if(storyFromRepo == null)
                 return NotFound();
+                
             return Ok(storyFromRepo);
         }
         [HttpGet("{username}",Name="GetStoryByUser")]

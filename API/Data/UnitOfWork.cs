@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Data
 {
@@ -8,8 +9,10 @@ namespace API.Data
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-        public UnitOfWork(DataContext context, IMapper mapper)
+        private readonly IConfiguration _config;
+        public UnitOfWork(DataContext context, IMapper mapper, IConfiguration config)
         {
+            _config = config;
             _context = context;
             _mapper = mapper;
         }
@@ -20,15 +23,15 @@ namespace API.Data
 
         public ILikesRepository LikesRepository => new LikesRepository(_context);
 
-        public IStoryRepository StoryRepository => new StoryRepository(_context,_mapper);
+        public IStoryRepository StoryRepository => new StoryRepository(_context, _mapper);
 
         public IRepository Repository => new Repository<DataContext>(_context);
 
         public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
 
-        public ILikeStoryRepository LikeStoryRepository => new LikeStoryRepository(_context);
+        public ILikeStoryRepository LikeStoryRepository => new LikeStoryRepository(_context,_config);
 
-        public IHistoryRepository HistoryRepository =>  new HistoryRepository(_context,_mapper);
+        public IHistoryRepository HistoryRepository => new HistoryRepository(_context, _mapper,_config);
 
         public async Task<bool> Complete()
         {

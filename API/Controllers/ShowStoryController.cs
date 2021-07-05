@@ -41,6 +41,7 @@ namespace API.Controllers
             if (string.IsNullOrEmpty(storyParams.StoryType))
                 storyParams.StoryType = "";
             var story = await _unitOfWork.StoryRepository.GetStoriesAsync(storyParams);
+
             Response.AddPaginationHeader(story.CurrentPage, story.PageSize,
                     story.TotalCount, story.TotalPages);
             return Ok(story);

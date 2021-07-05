@@ -4,13 +4,14 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles()
-        {
+        { 
             CreateMap<AppUser, MemberDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
@@ -36,6 +37,8 @@ namespace API.Helpers
                     ex => ex.MapFrom(src=>src.Story.Author.Photos.FirstOrDefault(x=>x.IsMain).Url));
             CreateMap<Published,PublishedDto>().ReverseMap();
             CreateMap<Story,StoryDto>()
+                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom<ImageUrlResolver>())
+                .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://localhost:5001/Resources/" + src.ImageUrl ))
                 .ForMember(dest=> dest.UserPhoto,ex=>ex.MapFrom(src=>src.Author.Photos.FirstOrDefault(x=>x.IsMain).Url))
                 .ForMember(dest => dest.StoryId,ex => ex.MapFrom(src => src.Id))
                 .ForMember(dest=> dest.TotalRate,

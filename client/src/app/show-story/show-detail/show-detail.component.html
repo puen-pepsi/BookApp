@@ -3,7 +3,7 @@
         <div class="card">
             <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
-                <img src="https://localhost:5001/{{showstory.imageUrl}}"
+                <img src="{{showstory.imageUrl}}"
                 alt="{{showstory.storyName}}" 
                 class="card-img-top">
             </ng-template>

@@ -1,8 +1,9 @@
 <div class="card mb-4">
     <div class="card-img-wrapper">
-        <ng-container *ngIf="story.imageUrl;then first else second"></ng-container>
+        <ng-container *ngIf="story.imageUrl.length > 40;then first else second"></ng-container>
             <ng-template #first>
-                <img src="https://localhost:5001/{{story.imageUrl || 'Resources/Images/no-image.jpeg'}}"
+                <!-- <p>{{story | json}}</p> -->
+                <img src="{{story.imageUrl}}"
                 alt="{{story.storyName}}" 
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">

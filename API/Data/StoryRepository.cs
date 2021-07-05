@@ -154,8 +154,10 @@ namespace API.Data
                 "views" => query.OrderByDescending(s => s.Views),
                 _ => query.OrderBy(s=>s.Rating)
             };
-            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(
-                    _mapper.ConfigurationProvider).AsNoTracking(),
+          
+            // var pro = query.ProjectTo<StoryDto>(configuration).AsNoTracking();
+            // var test = _mapper.ProjectTo<StoryDto>(query);
+            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                     storyParams.PageNumber,storyParams.PageSize);
 
         }
@@ -238,5 +240,8 @@ namespace API.Data
         {
             _context.Activities.Remove(activities);
         }
+
+        
+
     }
 }

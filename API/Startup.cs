@@ -68,12 +68,7 @@ namespace API
             // {
             //     app.UseDeveloperExceptionPage();
             // }
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-                RequestPath = new PathString("/Resources")
-            });
+            
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
@@ -89,12 +84,21 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+             app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Resources")
+                ), RequestPath = "/resources"
+            });               
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
                 endpoints.MapHub<CommentHub>("hubs/comment");
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }

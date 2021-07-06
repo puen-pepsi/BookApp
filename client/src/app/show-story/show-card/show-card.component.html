@@ -1,15 +1,15 @@
 <div class="card mb-4">
     <div class="card-img-wrapper">
-        <ng-container *ngIf="story.imageUrl.length > 40;then first else second"></ng-container>
+        <ng-container *ngIf="story.imageUrl.length > 50;then first else second"></ng-container>
             <ng-template #first>
-                <!-- <p>{{story | json}}</p> -->
+                        <!-- <p>{{story | json}}</p> -->
                 <img src="{{story.imageUrl}}"
                 alt="{{story.storyName}}" 
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
-                <img src="./assets/images/BlackCover.png"
+                <img src="./assets/images/blackcover.png"
                 alt="{{story.storyName}}" 
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">

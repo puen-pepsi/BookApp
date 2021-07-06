@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -41,7 +42,9 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            
             builder.Entity<Group>()
                 .HasMany(x => x.Connections)
                 .WithOne()

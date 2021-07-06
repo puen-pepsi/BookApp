@@ -1,5 +1,7 @@
 <div>
-    <img [src] ="CreateImage(storyService.formData.imageUrl)" class="img-thumbnail image" (click)="fileInput.click($event)">
+    <!-- <p>{{storyService.formData.imageUrl}}</p> -->
+    <img [src] ="CreateImage(storyService.formData.imageUrl)" 
+    class="img-thumbnail image" (click)="fileInput.click($event)">
     <!-- <button
         class="btn btn-secondary btn-sm "
         (click)="fileInput.click($event)"><i class="far fa-image"></i>

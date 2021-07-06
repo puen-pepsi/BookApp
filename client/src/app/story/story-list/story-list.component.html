@@ -21,8 +21,8 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let row of storyService.list">
-                              <td><img src={{row.imageUrl}} alt={{row.storyName}} >
-                                {{row.storyName}}
+                              <td><img src= "{{row.imageUrl.length > 50?row.imageUrl:'./assets/images/blackcover.png'}}" alt={{row.storyName}} >
+                                {{row.storyName}} 
                               </td>
                               <td>{{row.type}}</td>
                               <td>{{row.state}}</td>

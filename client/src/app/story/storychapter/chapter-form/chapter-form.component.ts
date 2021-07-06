@@ -10,6 +10,7 @@ import * as ClassicEditor from 'src/app/ckCustomBuild/build/ckeditor';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ChapterFormComponent implements OnInit {
   @Output() goList = new EventEmitter();
   publishCheck:boolean;
   user : User;
+  baseApiUrl = environment.apiUrl;
   public Editor = ClassicEditor;
   
   public config = {
@@ -49,8 +51,8 @@ export class ChapterFormComponent implements OnInit {
                 },
                  simpleUpload: {
                   // The URL that the images are uploaded to.
-                  uploadUrl: 'https://localhost:5001/api/Image',
-      
+                  //uploadUrl: 'https://localhost:5001/api/Image',
+                  uploadUrl: this.baseApiUrl + 'Image', 
                   // Enable the XMLHttpRequest.withCredentials property.
                   // withCredentials: true,
       

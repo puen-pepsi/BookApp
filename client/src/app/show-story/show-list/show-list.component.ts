@@ -19,7 +19,7 @@ export class ShowListComponent implements OnInit,OnDestroy {
   GenreList : any=[];
   pagination :Pagination;
   storyParams : StoryParams;
-  storyTypeList = [{value:'novel',display:'Story'},{value:'manga',display:'Manga'}]
+  storyTypeList = [{value:'novel',display:'Novel'},{value:'manga',display:'Manga'}]
   // obs: Observable<any>;
   // dataSource= new MatTableDataSource<ShowStory>();
   // = new MatTableDataSource<ShowStory>(DATA);

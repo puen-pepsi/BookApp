@@ -29,7 +29,7 @@ export class StoryListComponent implements OnInit {
     if(serverPath){
       return this.baseUrl + serverPath;
     }
-    return `/assets/images/no-image.jpeg`;
+    return `https://rainobunew.azurewebsites.net/assets/images/BlackCover.png`;
     
   }
 }

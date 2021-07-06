@@ -40,8 +40,22 @@ namespace API
         }
 
         //public IConfiguration Configuration { get; }
-        
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => {
+                x.UseSqlServer(_config.GetConnectionString
+                ("DefaultConnection"));
+            });
+            ConfigureServices(services);
+        }
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => {
+                x.UseSqlServer(_config.GetConnectionString
+                ("DefaultConnection"));
+            });
+            ConfigureServices(services);
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
@@ -59,16 +73,20 @@ namespace API
                 o.MultipartBodyLengthLimit = int.MaxValue; 
                 o.MemoryBufferThreshold = int.MaxValue; 
             });
+            services.AddDbContext<DataContext>(options => 
+                options.UseSqlServer(_config.GetConnectionString("DefaultConnection"))
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
-            
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseHsts();
+            //app.UseDeveloperExceptionPage();
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();

@@ -25,11 +25,11 @@ export class StoryListComponent implements OnInit {
     this.StoryDetail.emit(true);
 
   }
-  public createImagePath = (serverPath: string) => {
-    if(serverPath){
-      return this.baseUrl + serverPath;
-    }
-    return `https://rainobunew.azurewebsites.net/assets/images/BlackCover.png`;
+  // public createImagePath = (serverPath: string) => {
+  //   if(serverPath){
+  //     return this.baseUrl + serverPath;
+  //   }
+  //   return `https://rainobunew.azurewebsites.net/assets/images/BlackCover.png`;
     
-  }
+  // }
 }

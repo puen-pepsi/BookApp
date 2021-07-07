@@ -49,9 +49,13 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
   //   // nativeElement.value = ''; 
 
   // }
-  CreateImage(serverPath:string){
-    if(serverPath){
-      return this.ResoucreUrl + serverPath;
+  CreateImage(serverPath:string,storyId:number){
+    if(serverPath.length > 50){
+      if(storyId == 0){
+         return this.ResoucreUrl + serverPath;
+      }else {
+         return serverPath;
+      }
     }
     return './assets/images/blackcover.png';
   }

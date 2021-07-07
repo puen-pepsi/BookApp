@@ -141,12 +141,12 @@ import { LoginComponent } from './login/login.component';
               '798468934206-b5n7mrr7kld0pmjasn6neuntoounhuq5.apps.googleusercontent.com'
             )
           },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider(
-              '951482782076972'
-            )
-          }
+          // {
+          //   id: FacebookLoginProvider.PROVIDER_ID,
+          //   provider: new FacebookLoginProvider(
+          //     '951482782076972'
+          //   )
+          // }
         ],
       } as SocialAuthServiceConfig
     }

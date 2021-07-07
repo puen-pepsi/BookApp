@@ -1,6 +1,6 @@
 <div>
     <!-- <p>{{storyService.formData.imageUrl}}</p> -->
-    <img [src] ="CreateImage(storyService.formData.imageUrl)" 
+    <img [src] ="CreateImage(storyService.formData.imageUrl,storyService.formData.storyId)" 
     class="img-thumbnail image" (click)="fileInput.click($event)">
     <!-- <button
         class="btn btn-secondary btn-sm "

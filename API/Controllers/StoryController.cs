@@ -57,6 +57,10 @@ namespace API.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
+            //Check storyName
+            var existStoryName = await _unitOfWork.StoryRepository.GetStoryByName(storyDto.StoryName);
+            if( existStoryName != null)
+                    return BadRequest("Novel Name is taken");
             storyDto.UserName= User.GetUsername();
             storyDto.AuthorId = User.GetUserId();
             storyDto.Created = DateTime.UtcNow;

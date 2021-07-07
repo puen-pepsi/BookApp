@@ -272,3 +272,26 @@
 .solar #solarIcon {
   display: block;
 }
+.card .text_up{
+  position : absolute;
+  top:25%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color:white;
+  width: 90%;
+  word-wrap: break-word;
+  
+}
+.card #benmark{
+  position : absolute;
+  bottom: 20%;;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color:rgb(175, 175, 175);
+}

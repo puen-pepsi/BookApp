@@ -70,7 +70,7 @@ export class StoryFormComponent implements OnInit {
   insertRecord(form:NgForm) {
     this.storyService.postStory().subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
         this.storyService.refreshList();

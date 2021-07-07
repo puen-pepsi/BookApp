@@ -1,14 +1,14 @@
 <div class="row mb-4"  >
     <div class="col-md-4">
         <div class="card">
-            <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
+            <ng-container *ngIf="showstory.imageUrl.length > 50;then first else second"></ng-container>
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
                 alt="{{showstory.storyName}}" 
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
-                <img src="./assets/images/BlackCover.png"
+                <img src="./assets/images/blackcover.png"
                 alt="{{showstory.storyName}}" 
                 class="card-img-top">
                 <div class="text_up">

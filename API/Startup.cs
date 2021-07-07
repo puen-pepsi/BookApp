@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Data;
+using API.EmailService;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
@@ -43,7 +44,7 @@ namespace API
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => {
-                x.UseSqlServer(_config.GetConnectionString
+                x.UseSqlite(_config.GetConnectionString
                 ("DefaultConnection"));
             });
             ConfigureServices(services);
@@ -67,15 +68,19 @@ namespace API
             services.AddCors();
             services.AddIdentityServices(_config);
             services.AddSignalR();
+
+             var emailConfig = _config
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
             services.Configure<FormOptions>(o => 
             { 
                 o.ValueLengthLimit = int.MaxValue; 
                 o.MultipartBodyLengthLimit = int.MaxValue; 
                 o.MemoryBufferThreshold = int.MaxValue; 
             });
-            services.AddDbContext<DataContext>(options => 
-                options.UseSqlServer(_config.GetConnectionString("DefaultConnection"))
-            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,10 +88,12 @@ namespace API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+            }else{
+                app.UseHsts(); 
             }
-            app.UseHsts();
-            //app.UseDeveloperExceptionPage();
+           
+            app.UseDeveloperExceptionPage();
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();

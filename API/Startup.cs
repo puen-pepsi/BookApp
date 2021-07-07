@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Data;
-using API.EmailService;
+
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
@@ -69,11 +69,11 @@ namespace API
             services.AddIdentityServices(_config);
             services.AddSignalR();
 
-             var emailConfig = _config
-                .GetSection("EmailConfiguration")
-                .Get<EmailConfiguration>();
-            services.AddSingleton(emailConfig);
-            services.AddScoped<IEmailSender, EmailSender>();
+            //  var emailConfig = _config
+            //     .GetSection("EmailConfiguration")
+            //     .Get<EmailConfiguration>();
+            // services.AddSingleton(emailConfig);
+            // services.AddScoped<IEmailSender, EmailSender>();
 
             services.Configure<FormOptions>(o => 
             { 

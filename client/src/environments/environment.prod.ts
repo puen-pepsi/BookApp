@@ -2,5 +2,6 @@ export const environment = {
   production: true,
   resourceUrl:'/Resources/',
   apiUrl:'api/',
-  hubUrl:'hubs/'
+  hubUrl:'hubs/',
+  urlAddress: 'https://rainobunew.azurewebsites.net'
 };

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output,EventEmitter, Self } from '@angular/co
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +37,9 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(4), Validators.maxLength(16)
         ]
       ],
-      confirmPassword: ['', [Validators.required, this.matchValues('password')]]
+      confirmPassword: ['', [Validators.required, this.matchValues('password')]],
+      clientURI:['https://localhost:4200/authentication/emailconfirmation']
+   
     })
   }
 
@@ -48,10 +50,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/stories');
-    }, error =>{
-      this.validationErrors = error;
+    // this.accountService.register(this.registerForm.value).subscribe(response => {
+    //   this.router.navigateByUrl('/stories');
+    // }, error =>{
+    //   this.validationErrors = error;
+    // })
+    this.accountService.register(this.registerForm.value).subscribe(()=>{
+      console.log("here")
+      this.router.navigateByUrl('/');
     })
   }
   cancel(){

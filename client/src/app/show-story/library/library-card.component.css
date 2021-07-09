@@ -24,6 +24,30 @@
     position:relative;
     border-top-left-radius: 8;
     border-top-right-radius: 8;
+    z-index: 1;
+}
+.card-img-wrapper .text_up{
+    position : absolute;
+    top:25%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color:white;
+    word-wrap: break-word;
+    width:90%;
+}
+
+.card-img-wrapper #benmark{
+    position : absolute;
+    bottom: 20%;;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color:rgb(175, 175, 175);
 }
 .member-icons{
     position:absolute;

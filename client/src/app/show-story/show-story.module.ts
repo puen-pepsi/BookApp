@@ -27,6 +27,7 @@ import { HistoryCardComponent } from './library/history/history-card.component';
 import { LikeComponent } from './Like/like.component';
 import { DialogComponent } from './comment/comment-dialog/dialog/dialog.component';
 import { CommentPopComponent } from './comment/comment-dialog/comment-pop.component';
+import { ShowCommentChapterComponent } from './show-comment-chapter/show-comment-chapter.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { CommentPopComponent } from './comment/comment-dialog/comment-pop.compon
     LikeComponent,
     CommentPopComponent,
     DialogComponent,
+    ShowCommentChapterComponent,
   ],
   imports: [
     CommonModule,

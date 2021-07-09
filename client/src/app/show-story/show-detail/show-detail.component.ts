@@ -36,6 +36,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   chapterList:Chapter[];
   comments:StoryComment[]=[];
   tags:string[];
+  hubOn:boolean=false;
   constructor(public showStoryService:ShowStoryService,
     private route:ActivatedRoute,
     private accountService:AccountService,
@@ -75,10 +76,24 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       //   this.chapterList = res;
       // });
     }
-    if(this.activeTab.heading==='Comments' && this.comments.length === 0){
-      this.commentService.createHubConnection(this.user,this.storyName);
+    // if(this.activeTab.heading==='Novel Comments' && this.comments.length === 0){
+    //   this.commentService.createHubConnection(this.user,this.storyName);
+    // }else{
+    //   this.commentService.stopHubConnection();
+    // }
+    if(this.activeTab.heading==='Chapter Comments' && this.comments.length === 0){
+      if(!this.hubOn){
+          this.commentService.createHubConnection(this.user,this.storyName);
+          this.hubOn = true;
+      }
+    }else if(this.activeTab.heading==='Novel Comments' && this.comments.length===0){
+      if(!this.hubOn){
+          this.commentService.createHubConnection(this.user,this.storyName);
+          this.hubOn = true;
+      }
     }else{
       this.commentService.stopHubConnection();
+      this.hubOn = false;
     }
   }
   onRatingChanged(rating:number){

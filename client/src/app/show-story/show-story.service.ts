@@ -48,7 +48,7 @@ export class ShowStoryService {
       return of(response);
     }
     let params = getPaginationHeaders(StoryParams.pageNumber,StoryParams.pageSize);
-        // params = params.append('genre',StoryParams.genre.toString());
+        params = params.append('genre',StoryParams.genre.toString());
     // params = params.append('author',StoryParams.author.toString());
         params = params.append('storyType',StoryParams.storyType.toString());
         params = params.append('orderBy',StoryParams.orderBy);

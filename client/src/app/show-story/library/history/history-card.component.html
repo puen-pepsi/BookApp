@@ -15,7 +15,16 @@
           >
           </app-star-rating-show>
         </div>
-        <img src="{{history.imageUrl}}" class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
+        <ng-container *ngIf="history.imageUrl.length > 50;then first else second"></ng-container>
+        <ng-template #first>
+                    <!-- <p>{{story | json}}</p> -->
+            <img src="{{history.imageUrl}}"
+            class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
+        </ng-template>
+        <ng-template #second>
+            <img src="./assets/images/blackcover.png"
+            class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
+        </ng-template>
       </div>
       <div class="more-info">
               <div class="author"> 

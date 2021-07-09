@@ -1,19 +1,16 @@
 <div class="Read-Container">
 <div fxLayout="row" fxLayoutAlign="center stretch" *ngIf="showstory" >
-    <div class="d-flex flex-column" [fxFlex] >
+    <div class="d-flex flex-column" fxFlex="70">
         <div class="title">
-            <!-- <img 
-            src="{{showstory?.imageUrl}}" 
-            alt="{{showstory?.storyName}}"
-            class="card-img-top img-thumbnail"> -->
-            <ng-container *ngIf="showstory.imageUrl.length > 50;then first else second"></ng-container>
+            <div class="card" style="border: 0px;">
+            <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
                 alt="{{showstory.storyName}}" 
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
-                <img src="./assets/images/blackcover.png"
+                  <img src="./assets/images/blackcover.png"
                 alt="{{showstory.storyName}}" 
                 class="card-img-top">
                 <div class="text_up">
@@ -21,9 +18,10 @@
                 </div>
                 <div id="benmark">
                     <span>{{showstory.userName}}</span>
-                    <h5>&copy; Rainobu</h5>
+                    <h4>&copy; Rainobu</h4>
                 </div>
             </ng-template>
+            </div>
             <div class="mt-4"><h4>{{showstory?.storyName}}</h4></div>
             <p><b>Author : </b>{{showstory?.userName}}</p>
             <h5>&copy; Rainobu</h5>
@@ -62,17 +60,27 @@
             (Show)="toggletableContents($event)"></app-nav-sidebar>
         </nav>
     </div>
-    <div fxFlex="30" fxHide.xs *ngIf="ShowComment" >
+    <div fxFlex="30" fxHide.xs *ngIf="ShowCommentChapter" >
       <div class="section-nav" >
-        <div class="header"><h5>Chapter Commnet</h5> 
+        <div class="header"><h5>Chapter Comment</h5> 
           <div class="rightCircle">
-              <mat-icon (click)="toggleComment()" [inline]="true">close</mat-icon>
+              <mat-icon (click)="toggleCommentChapter()" [inline]="true">close</mat-icon>
           </div>
         </div>
         <app-comment [comments]="comments"
                     [commentChapter]="commentChapter"></app-comment>
-      </div>
-  </div>
+        </div>
+    </div>
+    <div fxFlex="30" fxHide.xs *ngIf="ShowComment" >
+      <div class="section-nav" >
+        <div class="header"><h5>Novel Comment</h5> 
+          <div class="rightCircle">
+              <mat-icon (click)="toggleComment()" [inline]="true">close</mat-icon>
+          </div>
+        </div>
+        <app-comment [comments]="comments"></app-comment>
+        </div>
+    </div>
 <div>
     <nav class="navbar" fxLayout fxHide.xs>
         <ul class="navbar-nav">
@@ -84,17 +92,23 @@
           </li>
     
           <li class="nav-item">
-            <a class="nav-link" (click)=toggleComment()>
+            <a class="nav-link" (click)=toggleCommentChapter()>
               <mat-icon>insert_comment</mat-icon>
-              <span class="link-text">Comment</span>
+              <span class="link-text">Chapter Comment</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a class="nav-link" (click)=toggleComment()>
+              <mat-icon>question_answer</mat-icon>
+              <span class="link-text">Novel Comment</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
               <mat-icon>settings</mat-icon>
               <span class="link-text">Settings</span>
             </a>
           </li>
         </ul>
     </nav>
-  </div>
+</div>

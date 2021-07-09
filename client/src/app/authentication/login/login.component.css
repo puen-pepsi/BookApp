@@ -1,0 +1,42 @@
+img{
+    max-height: 80px; 
+    margin-bottom: 2rem;
+}
+.fullpage{
+    /* display: flex; */
+    position: absolute;
+    height:100vh;
+    width: 100vw;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 99999;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+} 
+.center {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.rightCircle{ 
+    position:absolute; 
+    text-align: center;
+    align-items: center;
+    width:20px; 
+    height:20px; 
+    color: rgb(58, 55, 55); 
+    right:20px; 
+    top:20px;
+    z-index: 9999999;
+}
+.rightCircle :hover{
+  cursor: pointer;
+}

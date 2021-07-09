@@ -42,7 +42,7 @@ import { ScrollSpyModule } from 'ng-spy';
     ButtonsModule,
     TimeagoModule,
     ModalModule,
-    ScrollSpyModule
+    ScrollSpyModule,
   ]
 })
 export class SharedModule { }

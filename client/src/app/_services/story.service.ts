@@ -11,7 +11,7 @@ import { Tags } from '../_models/tag';
 export class StoryService {
   baseUrl = environment.apiUrl;
   formData : Story = new Story() ;
-  list : Story[];
+  list : Story[]=[];
   constructor(private http:HttpClient) { }
   postStory(){
     return this.http.post(this.baseUrl + 'story',this.formData);

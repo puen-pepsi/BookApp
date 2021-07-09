@@ -62,6 +62,7 @@
                 </div>
                 <div class="col-md-6">
                   <select id="state" class="form-control" [(ngModel)]="storyService.formData.state"
+                    [disabled]="true"
                     name="state" required #genre="ngModel">
                     <option value="" selected>--Select State--</option>
                     <option *ngFor="let r of StateList" value="{{ r.description }}">{{ r.description }}</option>

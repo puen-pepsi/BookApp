@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
@@ -24,8 +23,6 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { TextInputComponent } from './_forms/text-input/text-input.component';
-import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
@@ -58,13 +55,13 @@ import { AuthorStoryComponent } from './members/member-detail/author-story/autho
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
 import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
+import { ErrorHandlerService } from './_services/error-handler.service';
+import { AuthenticationModule } from './authentication/authentication.module';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent,
     MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
@@ -75,8 +72,6 @@ import { LoginComponent } from './login/login.component';
     MemberCardComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    TextInputComponent,
-    DateInputComponent,
     MemberMessagesComponent,
     AdminPanelComponent,
     HasRoleDirective,
@@ -99,14 +94,12 @@ import { LoginComponent } from './login/login.component';
     ChapterListComponent,
     TagComponent,
     TagFormComponent,
-    
     SectionHeaderComponent,
     
     HeaderComponent,
     SidenavListComponent,
     AuthorStoryComponent,
-    FooterComponent,
-    LoginComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -120,9 +113,8 @@ import { LoginComponent } from './login/login.component';
     CKEditorModule,
     MaterialModule,
     FlexLayoutModule,
-    // ScrollSpyModule,
-    // BreadcrumbModule,
     ShowStoryModule,
+    AuthenticationModule,
     SocialLoginModule,
     
   ],
@@ -130,6 +122,11 @@ import { LoginComponent } from './login/login.component';
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorHandlerService,
+    //   multi: true
+    // },
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

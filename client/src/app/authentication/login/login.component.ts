@@ -2,8 +2,8 @@ import {  Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
-import { ExternalAuthDto } from '../_models/externalAuthDto';
-import { AccountService } from '../_services/account.service';
+import { ExternalAuthDto } from '../../_models/externalAuthDto';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -23,13 +23,15 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.registerMode=false;
   }
   login(){
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/stories');
       this.toastr.success("LogIn success","Infomation");
-    },error => {
-      console.log(error);
+    },(error) => {
+      this.errorMessage = error;
+      this.showError = true;
     })
   }
   logout(){
@@ -85,5 +87,8 @@ export class LoginComponent implements OnInit {
 
   cancelRegisterMode(event:boolean){
     this.registerMode = event;
+  }
+  home(){
+    this.router.navigateByUrl('/')
   }
 }

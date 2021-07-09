@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export class StoryParams{
-    // genre :string;
+    genre :string;
     author : string;
     storyType:string;
     pageNumber = 1;
@@ -11,7 +11,7 @@ export class StoryParams{
     orderBy = 'rating';
     
     constructor(user:User){
-        // this.genre ='';
+        this.genre ='';
         this.author='';
         this.storyType='';
     }

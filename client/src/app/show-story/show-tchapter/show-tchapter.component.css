@@ -33,6 +33,34 @@
 .chapter{
   min-height: 100vh;
 }
+.card img{
+  margin-left: auto;
+  margin-right: auto;
+}
+.card .text_up{
+  position:absolute;
+  top:25%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color:rgb(243, 239, 239);
+  width: 90%;
+  word-wrap: break-word;
+  z-index: 999;
+}
+.card #benmark{
+  position : absolute;
+  bottom: 20%;;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color:rgb(175, 175, 175);
+  z-index: 9999;
+}
 .section-nav {
   position: sticky;
   padding-top: 0;
@@ -99,7 +127,26 @@
   background-color: #fffaf0;
 }
 
+.chapter h5 {
 
+  width: 90%;
+  margin: 2em auto;
+  overflow: hidden;
+  text-align: center;
+  font-weight:300;
+  color: lightgray;
+}
+.chapter h5:before, .chapter h5:after {
+  content: "";
+  display: inline-block;
+  width: 80%;
+  margin: 0 .5em 0 -55%;
+  vertical-align: middle;
+  border-bottom: 1px solid;
+}
+.chapter h5:after {
+  margin: 0 -55% 0 .5em;
+}
 /* :host ::ng-deep body {
   color: black;
   background-color: white;
@@ -165,6 +212,7 @@
 .link-text {
   display: none;
   margin-left: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .nav-link svg {
@@ -272,7 +320,7 @@
 .solar #solarIcon {
   display: block;
 }
-.card .text_up{
+/* .card .text_up{
   position : absolute;
   top:25%;
   margin-left: auto;
@@ -284,14 +332,5 @@
   width: 90%;
   word-wrap: break-word;
   
-}
-.card #benmark{
-  position : absolute;
-  bottom: 20%;;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color:rgb(175, 175, 175);
-}
+} */
+

@@ -21,7 +21,7 @@ export class CommentComponent implements OnInit,AfterViewInit{
     public commentService:CommentService,
     private route: ActivatedRoute) {}
   ngAfterViewInit(): void {
-    console.log(this.commentChapter)
+    // console.log(this.commentChapter)
   }
 
   ngOnInit() {

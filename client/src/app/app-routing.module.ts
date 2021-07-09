@@ -19,9 +19,8 @@ import { LibraryComponent } from './show-story/library/library.component';
 import { ShowStoryComponent } from './show-story/show-story.component';
 import { HistoryComponent } from './show-story/library/history/history.component';
 import { ShowListComponent } from './show-story/show-list/show-list.component';
-import { LoginComponent } from './login/login.component';
 const routes: Routes = [
-  {path:'',component:HomeComponent,data:{breadcrumb:'Home'}},
+  {path:'',component:HomeComponent},
   {
     path:'',
     runGuardsAndResolvers:'always',
@@ -58,24 +57,25 @@ const routes: Routes = [
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
           // data:{breadcrumb:'admin'}
       },
+      {path:'members',component:MemberListComponent,
+        // data:{breadcrumb:'Members'}
+      },
+      {path:'members/:username',component:MemberDetailComponent,
+          // data:{ breadcrumb: (data: any) => `${data.member.username}` },
+          resolve:{member:MemberDetailedResolver}
+      },
+      {
+        path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
+        // data: { breadcrumb: 'Stories' }
+      },
+      {
+        path: 'manga',component:ShowListComponent,
+        data:{storytype:'manga'},
+      },
     ]  
   },
-  {path:'members',component:MemberListComponent,
-        // data:{breadcrumb:'Members'}
-  },
-  {path:'members/:username',component:MemberDetailComponent,
-      // data:{ breadcrumb: (data: any) => `${data.member.username}` },
-      resolve:{member:MemberDetailedResolver}
-  },
-  {
-    path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
-    // data: { breadcrumb: 'Stories' }
-  },
-  {
-    path: 'manga',component:ShowListComponent,
-    data:{storytype:'manga'},
-  },
-  {path:'login',component:LoginComponent},
+  
+  {path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
   {path:'history',component:HistoryComponent},
   {path:'errors',component:TestErrorsComponent},
   {path:'not-found',component:NotFoundComponent},

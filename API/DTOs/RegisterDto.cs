@@ -17,6 +17,7 @@ namespace API.DTOs
         [Required]
         [StringLength(16, MinimumLength = 4)]
         public string Password { get; set; }
-        //public string ClientURI { get; set; }
+        public string ClientURI { get; set; }
+        
     }
 }

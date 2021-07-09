@@ -29,6 +29,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   // comments:StoryComment[]=[];
   ShowTableContent:boolean = false;
   ShowComment:boolean = false;
+  ShowCommentChapter:boolean = false;
   constructor(private showStoryService:ShowStoryService,
               private route:ActivatedRoute, 
               private router:Router,
@@ -123,6 +124,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   toggletableContents(event){
     this.ShowTableContent = !this.ShowTableContent;
     this.ShowComment =false;
+    this.ShowCommentChapter=false;
   }
   toggleComment(event){
     this.ShowComment  = !this.ShowComment;
@@ -132,9 +134,17 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
       this.commentService.stopHubConnection();
     }
     this.ShowTableContent = false;
+    this.ShowCommentChapter = false;
   }
-  loadCommentChapter(){
-
+  toggleCommentChapter(event){
+    this.ShowCommentChapter  = !this.ShowCommentChapter;
+    if(this.ShowCommentChapter){
+      this.commentService.createHubConnection(this.user,this.storyname);
+    }else{
+      this.commentService.stopHubConnection();
+    }
+    this.ShowTableContent = false;
+    this.ShowComment = false;
   }
   async ngOnDestroy() {
     //console.log(this.scroller.getScrollPosition());

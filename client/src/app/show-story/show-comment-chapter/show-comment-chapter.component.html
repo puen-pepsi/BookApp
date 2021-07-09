@@ -1,0 +1,16 @@
+<mat-accordion >
+    <div *ngFor="let chapter of ChapterList;">
+        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{chapter.chapterName}}
+        </mat-panel-title>
+        <!-- <mat-panel-description>
+            This is a summary of the content
+        </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <app-comment [comments]="comments"
+                    [commentChapter]="chapter.id"></app-comment>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>

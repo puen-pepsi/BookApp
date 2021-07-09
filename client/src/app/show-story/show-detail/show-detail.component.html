@@ -1,7 +1,7 @@
 <div class="row mb-4"  >
     <div class="col-md-4">
         <div class="card">
-            <ng-container *ngIf="showstory.imageUrl.length > 50;then first else second"></ng-container>
+            <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
                 alt="{{showstory.storyName}}" 
@@ -138,8 +138,11 @@
     <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
         <app-show-chapters ></app-show-chapters>
     </tab> 
-    <tab heading='Comments' (selectTab)="onTabActivated($event)">
+    <tab heading='Novel Comments' (selectTab)="onTabActivated($event)">
         <app-comment [comments]="comments"></app-comment>
+    </tab> 
+    <tab heading='Chapter Comments' (selectTab)="onTabActivated($event)">
+        <app-show-comment-chapter></app-show-comment-chapter>
     </tab> 
 </tabset>
 

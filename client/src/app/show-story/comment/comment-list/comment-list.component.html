@@ -3,7 +3,7 @@
   <div class="mt-2 mb-2" *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
     <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
       <ng-template #first>
-          <div *ngIf="comment.parentId==null" 
+          <div *ngIf="comment.parentId==null && comment.chapterId==null" 
           class="pt-0 pb-0 pl-0 pr-0"> 
           
           <div fxLayout="row" class="main" >

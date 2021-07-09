@@ -39,7 +39,9 @@ namespace API.Helpers
             CreateMap<Story, StoryDto>()
                 // .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => src.ImageUrl.GetUrl() ))
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom<ImageUrlResolver>())
-                .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://rainobunew.azurewebsites.net/Resources/" + src.ImageUrl ))
+                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://rainobunew.azurewebsites.net/Resources/" + src.ImageUrl ))
+                .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => string.IsNullOrEmpty(src.ImageUrl) ? src.ImageUrl : "https://localhost:5001/Resources/" + src.ImageUrl))
+                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://localhost:5001/Resources/" + src.ImageUrl ))
                 .ForMember(dest => dest.UserPhoto, ex => ex.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.StoryId, ex => ex.MapFrom(src => src.Id))
                 .ForMember(dest => dest.TotalRate,

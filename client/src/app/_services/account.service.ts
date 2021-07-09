@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import {map} from 'rxjs/operators'
@@ -8,7 +8,9 @@ import { PresenceService } from './presence.service';
 import { FacebookLoginProvider, SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { ExternalAuthDto } from '../_models/externalAuthDto';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
+import { CustomEncoder } from './custom-encoder';
+import { ForgotPasswordDto } from '../_models/forgotpasswordDto';
+import { ResetPasswordDto } from '../_models/ResetPasswordDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,14 +36,15 @@ export class AccountService {
   }
 
   register(model:any){
-    return this.http.post(this.baseUrl + 'account/register',model).pipe(
-      map((user:User) => {
-        if(user){
-          this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
-        }
-      })
-    )
+    // return this.http.post(this.baseUrl + 'account/register',model).pipe(
+    //   map((user:User) => {
+    //     if(user){
+    //       this.setCurrentUser(user);
+    //       this.presence.createHubConnection(user);
+    //     }
+    //   })
+    // )
+    return this.http.post(this.baseUrl + 'account/register',model);
   }
 
   setCurrentUser(user:User){
@@ -57,7 +60,18 @@ export class AccountService {
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
   }
- 
+  public forgotPassword = (route: string, body: ForgotPasswordDto) => {
+    return this.http.post(this.createCompleteRoute(route, this.baseUrl), body);
+  }
+  public resetPassword = (route: string, body: ResetPasswordDto) => {
+    return this.http.post(this.createCompleteRoute(route, this.baseUrl), body);
+  }
+  public confirmEmail = (route: string, token: string, email: string) => {
+    let params = new HttpParams({ encoder: new CustomEncoder() })
+    params = params.append('token', token);
+    params = params.append('email', email);
+    return this.http.get(this.createCompleteRoute(route, this.baseUrl), { params: params });
+  }
   getDecodedToken(token){
     return JSON.parse(atob(token.split('.')[1]));
   }
@@ -86,4 +100,7 @@ export class AccountService {
   {    
     return this.http.post(this.baseUrl+'account/saveresponse',responce);    
   }    
+  private createCompleteRoute = (route: string, envAddress: string) => {
+    return `${envAddress}${route}`;
+  }
 }

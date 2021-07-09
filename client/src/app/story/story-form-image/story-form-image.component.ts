@@ -50,7 +50,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
 
   // }
   CreateImage(serverPath:string,storyId:number){
-    if(serverPath.length > 50){
+    if(serverPath){
       if(storyId == 0){
          return this.ResoucreUrl + serverPath;
       }else {

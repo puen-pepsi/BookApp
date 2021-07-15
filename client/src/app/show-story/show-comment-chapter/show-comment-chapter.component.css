@@ -1,3 +1,11 @@
 .mat-form-field + .mat-form-field {
     margin-left: 10px;
   }
+
+.mat-expansion-panel-header-title{
+  color:lightslategray;
+}
+
+.mat-expansion-panel-header-description {
+  font-size: 1.1rem;
+}

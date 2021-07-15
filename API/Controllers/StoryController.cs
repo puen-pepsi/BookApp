@@ -123,9 +123,10 @@ namespace API.Controllers
                 return Ok(0);
             return Ok(YouRate.Rated);
         }
+       
         [Route("RateStory/{storyId}/{rate}")]
         [HttpPost]
-        public async Task<ActionResult> RateStory(int storyId,int rate)
+        public async Task<ActionResult<StoryDto>> RateStory(int storyId,int rate)
         {
             var existRate = await _unitOfWork.StoryRepository.GetYouRate(storyId,User.GetUserId());
             if(existRate==null){
@@ -138,12 +139,16 @@ namespace API.Controllers
                 };
                 storyRate.Ratings.Add(rated);
                 if( await _unitOfWork.Complete()){
-                return Ok("Rated");
-            }
+                    //map to StoryDto
+                    var story = _mapper.Map<StoryDto>(storyRate);
+                    return Ok(story); 
+                }
             }
              existRate.Rated = rate;
              await _unitOfWork.Repository.UpdateAsync<Rating>(existRate);
-                return Ok("Rated");
+                var storyback = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+                var storybackDto = _mapper.Map<StoryDto>(storyback);
+                return Ok(storybackDto);
             
             //return BadRequest("Problem create Rate");
         }

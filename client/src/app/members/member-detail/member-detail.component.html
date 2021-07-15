@@ -13,7 +13,7 @@
                     </div>
                     <div>
                         <strong>Age:</strong>
-                        <p>{{member.age}}</p>
+                        <p>{{member.age > 80?"Unknow":member.age}}</p>
                     </div>
                     
                     <div>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="col-md-8">
-        <h2>Name : {{member.username}}</h2>
+        <h2>{{member.knownAs}}</h2>
         <tabset class="member-tabset" #memberTabs>
             <tab heading='About {{member.username | titlecase}}' (selectTab)="onTabActivated($event)">
                 <h4>Tales Of {{ member.username}}</h4>

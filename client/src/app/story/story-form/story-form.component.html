@@ -1,5 +1,6 @@
 <!-- <p>{{storyService.formData | json}}</p> -->
-<h4>Story</h4>
+
+<h1>My Story</h1>
 <div class="tab-panel header">
   <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
     <i class="fas fa-arrow-left"></i> Back to Stories
@@ -18,7 +19,7 @@
           </div>
 
           <div class="col-md-8">
-            <form novalidate #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+            <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
               <input type="hidden" name="id" value="statusService.formData.id" />
               <div class="mb-3">
                 <label for="storyname" class="form-label">Story Name <i class="fas fa-info-circle"></i></label>
@@ -113,9 +114,9 @@
                 </mat-autocomplete>
               </mat-form-field>
               <div class="col-md-4 pl-1">
-                <button class="btn btn-primary" type="submit" [disabled]="form.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
-                <button class="btn btn-danger" [disabled]="form.invalid" type="button"
-                  (click)="resetForm(form)"><i class="fas fa-eraser"></i> RESET</button>
+                <button class="btn btn-primary" type="submit" [disabled]="editForm.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
+                <button class="btn btn-danger" [disabled]="editForm.invalid" type="button"
+                  (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
               </div>
             </form>
 
@@ -139,3 +140,4 @@
     </tab>
   </tabset>
 </div>
+

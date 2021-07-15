@@ -21,6 +21,11 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
 
         }
+        //[HttpGet("GetNewChapter/{published}")]
+        // public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetNewChapter(bool published)
+        // {
+        //     //var storyChapterNew = _unitOfWork.StoryRepository.GetNewChaper(3)
+        // }
         [HttpGet("GetChapters/{published}")]
         public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetChapters(int storyId,bool published=false)
         {
@@ -30,6 +35,7 @@ namespace API.Controllers
                 return NotFound();
                 
             return Ok(_mapper.Map<IEnumerable<StoryChapter>,IEnumerable<StoryChapterDto>>(ChapterList));
+
         }
         [Route("/api/story/{storyName}/chapters")]
         [HttpGet]
@@ -37,6 +43,18 @@ namespace API.Controllers
         {
 
             var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryName(storyName);
+            if(ChapterList == null)
+                return NotFound();
+                
+            return Ok(_mapper.Map<IEnumerable<StoryChapter>,IEnumerable<StoryChapterDto>>(ChapterList));
+        }
+        [Route("/api/story/{storyName}/chapters/{countSize}/{pageSize}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetChaptersByStoryNameTake(string storyName,int countSize,int pageSize)
+        {
+
+            //var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryName(storyName);
+            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterByStoryNameTake(storyName,countSize,pageSize);
             if(ChapterList == null)
                 return NotFound();
                 

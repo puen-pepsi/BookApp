@@ -37,6 +37,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   comments:StoryComment[]=[];
   tags:string[];
   hubOn:boolean=false;
+  initContent:Chapter[]=[];
   constructor(public showStoryService:ShowStoryService,
     private route:ActivatedRoute,
     private accountService:AccountService,
@@ -90,7 +91,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       if(!this.hubOn){
           this.commentService.createHubConnection(this.user,this.storyName);
           this.hubOn = true;
-      }
+      }   
     }else{
       this.commentService.stopHubConnection();
       this.hubOn = false;
@@ -98,8 +99,8 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   }
   onRatingChanged(rating:number){
     this.rating = rating;
-    this.showStoryService.getPostRate(rating,this.showstory.storyId).subscribe(res => {
-      // console.log(res);
+    this.showStoryService.getPostRate(rating,this.showstory).subscribe(() => {
+      //this.rating = res.rating;
       this.refresh();
     });
   }
@@ -125,6 +126,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       this.toastr.success('You have liked '+ story.storyName);
     })
   }
+  
   // getStoryName(){
   //   return this.route.snapshot.params.storyname;
   // }

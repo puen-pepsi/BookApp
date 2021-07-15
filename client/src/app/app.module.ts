@@ -55,8 +55,10 @@ import { AuthorStoryComponent } from './members/member-detail/author-story/autho
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
 import { FooterComponent } from './footer/footer.component';
-import { ErrorHandlerService } from './_services/error-handler.service';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ChattoComponent } from './chat/chatto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,11 +97,11 @@ import { AuthenticationModule } from './authentication/authentication.module';
     TagComponent,
     TagFormComponent,
     SectionHeaderComponent,
-    
     HeaderComponent,
     SidenavListComponent,
     AuthorStoryComponent,
-    FooterComponent
+    FooterComponent,
+    ChattoComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +118,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
     ShowStoryModule,
     AuthenticationModule,
     SocialLoginModule,
-    
+    InfiniteScrollModule,
+    ScrollingModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

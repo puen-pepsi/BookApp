@@ -9,10 +9,10 @@
      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
        <ng-container *ngIf="accountService.currentUser$|async"> 
               <li >
-                <a  routerLink='/members' routerLinkActive='active'><mat-icon>account_circle</mat-icon> Author</a>
+                <a  routerLink='/members' routerLinkActive='active'><mat-icon >account_circle</mat-icon> Author</a>
               </li>
               
-              <!-- <li >
+              <!-- <li > 
                 <div class="dropdown"  dropdown>
                   <a class="dropdown-toggle ml-2" dropdownToggle ><span><mat-icon>explore</mat-icon>  Browse</span> </a>
                   <div class="dropdown-menu dropdown-menu-left" *dropdownMenu>
@@ -28,9 +28,11 @@
               <li>
                 <a  routerLink='/manga' routerLinkActive='active'><i class="fas fa-hat-wizard"></i> Manga</a>
               </li>
-              
+              <li>
+                <a  routerLink='/chatto' routerLinkActive='active'><mat-icon class="material-icons-round">mode_comment</mat-icon> Chatto</a>
+              </li>
               <li *appHasRole='["Admin","Moderator"]' >
-                <a  routerLink='/admin' routerLinkActive='active'>Admin</a>
+                <a  routerLink='/admin' routerLinkActive='active'><mat-icon>settings</mat-icon> Admin</a>
               </li>
        </ng-container>
        <ng-container *ngIf="(accountService.currentUser$|async)===null">

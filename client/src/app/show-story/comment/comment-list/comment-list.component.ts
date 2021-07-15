@@ -48,7 +48,7 @@ export class CommentListComponent implements OnInit, OnDestroy {
     this.showReply = (!this.showReply) ? true : false;
   }
   addLike(commentid:number){
-    this.commentService.addLikedComment(commentid).subscribe( res =>{
+    this.commentService.addLikedComment(commentid).subscribe(res =>{
       console.log(res);
     });
   }

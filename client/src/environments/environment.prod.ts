@@ -3,5 +3,5 @@ export const environment = {
   resourceUrl:'/Resources/',
   apiUrl:'api/',
   hubUrl:'hubs/',
-  urlAddress: 'https://rainobunew.azurewebsites.net'
+  urlAddress: 'https://rainobunew.azurewebsites.net/'
 };

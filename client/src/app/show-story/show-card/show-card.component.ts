@@ -30,9 +30,9 @@ userLiked : UserLiked;
   ngOnInit(): void {
     this.rating = this.story.rating;
     this.totalRate = this.story.totalRate;
-    this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
-      this.yourRate = res;
-    });
+    // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
+    //   this.yourRate = res;
+    // });
     this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
       this.userLiked = res;
     });
@@ -41,8 +41,11 @@ userLiked : UserLiked;
     this.router.navigate(['/stories',storyname]);
   }
   onRatingChanged(rating){
-    console.log(rating);
-    this.rating = rating;
+    //console.log(rating);
+    //this.rating = rating;
+    this.showStoryService.getPostRate(rating,this.story).subscribe(res => {
+      console.log(res);
+    });
   }
   addLikeStory(story:ShowStory){
     this.showStoryService.addLikeStory(story.storyName).subscribe(() => {

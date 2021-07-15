@@ -92,12 +92,23 @@ export class ShowStoryService {
       // .toPromise()
       // .then(res => this.list = res as Chapter[]);
   }
+  getStoryNameChapterTake(storyName:string,countSize:number,pageSize:number){
+    return this.http.get<Chapter[]>(this.baseUrl + 'story/'+ storyName +'/chapters/'+countSize+'/'+pageSize)
+      // .toPromise()
+      // .then(res => this.list = res as Chapter[]);
+  }
   getGenreList(){
     return this.http.get(this.baseUrl + 'story/GetAllGenre');
   }
-  getPostRate(rate:number,storyId:number){
-    console.log(rate);
-    return this.http.post(this.baseUrl+'story/RateStory/'+storyId+'/'+rate,null,{responseType:'text'});
+  getPostRate(rate:number,story:ShowStory){
+    //console.log(rate);
+    return this.http.post<ShowStory>(this.baseUrl+'story/RateStory/'+story.storyId+'/'+rate,null).pipe(
+      map(res => {
+        //console.log(res)
+        const index = this.showStories.indexOf(story);
+        this.showStories[index] = res;
+      })
+    );
   }
   getYouRate(storyId:number){
     return this.http.get(this.baseUrl + 'story/GetRateStory/'+storyId);

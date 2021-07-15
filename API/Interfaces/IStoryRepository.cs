@@ -21,6 +21,10 @@ namespace API.Interfaces
          Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName);
          Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryId(int id,bool published);
         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryName(string storyName);
+        Task<IEnumerable<StoryChapter>> GetNewChaper(int take);//published
+        Task<StoryChapter> GetLastChapterByStoryName(string storyName);
+        Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize);
+
          Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
          Task<Story> GetStoryByName(string storyName);

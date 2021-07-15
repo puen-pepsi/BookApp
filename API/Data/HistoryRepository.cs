@@ -55,6 +55,7 @@ namespace API.Data
                 TotalRate = uHistory.Ratings.Count,
                 TotalChapter = uHistory.Chapters.Where(s => s.Published.Created > DateTime.MinValue).Count(),
                 State = uHistory.State,
+                Views = uHistory.ViewCount.Count,
                 Created = uHistory.StoryHistory.FirstOrDefault(h => h.SourceUserId == historyStoryParams.UserId).Created
             });
             return await PagedList<HistoryStoryDto>.CreateAsync(historyStory,

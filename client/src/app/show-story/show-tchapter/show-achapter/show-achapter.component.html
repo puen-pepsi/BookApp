@@ -9,8 +9,8 @@
   </div>
   
 </div>
-<div class="Body" >
-    <div [innerHtml] = "chapter.content"></div>
+<div class="Body" [ngStyle]="{'font-size':fSize+'rem'}" #content>
+    <div [innerHtml] = "chapter.content" ></div>
 </div>
 
     

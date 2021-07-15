@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.accountService.signInWithGoogle()
     .then(res => {
       const user: SocialUser = { ...res };
-      //console.log(user)
+      console.log(user)
       const externalAuth: ExternalAuthDto = {
         provider: user.provider,
         idToken: user.idToken

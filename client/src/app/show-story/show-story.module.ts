@@ -25,9 +25,14 @@ import { LibraryCardComponent } from './library/library-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryCardComponent } from './library/history/history-card.component';
 import { LikeComponent } from './Like/like.component';
-import { DialogComponent } from './comment/comment-dialog/dialog/dialog.component';
-import { CommentPopComponent } from './comment/comment-dialog/comment-pop.component';
 import { ShowCommentChapterComponent } from './show-comment-chapter/show-comment-chapter.component';
+import { ShowTableContentComponent } from './show-table-content/show-table-content.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ReportComponent } from './report/report.component';
+import { DialogComponent } from './report/dialog/dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -50,9 +55,11 @@ import { ShowCommentChapterComponent } from './show-comment-chapter/show-comment
     LibraryCardComponent,
     HistoryCardComponent,
     LikeComponent,
-    CommentPopComponent,
     DialogComponent,
     ShowCommentChapterComponent,
+    ShowTableContentComponent,
+    ReportComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +70,10 @@ import { ShowCommentChapterComponent } from './show-comment-chapter/show-comment
     MaterialModule,
     FlexLayoutModule,
     ScrollSpyModule,
-    NgbModule
+    NgbModule,
+    ScrollingModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule
   ],
   exports: [
     ShowCardComponent,

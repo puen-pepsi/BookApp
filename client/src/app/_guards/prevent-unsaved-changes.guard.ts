@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
+import { StoryFormComponent } from '../story/story-form/story-form.component';
+import { StoryComponent } from '../story/story.component';
 import { ConfirmService } from '../_services/confirm.service';
 
 @Injectable({

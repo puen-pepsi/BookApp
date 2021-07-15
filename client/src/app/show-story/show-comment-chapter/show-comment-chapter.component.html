@@ -3,11 +3,12 @@
         <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
         <mat-panel-title>
-            {{chapter.chapterName}}
+            <mat-icon class="material-icons-outlined">comment</mat-icon>
+            &nbsp;&nbsp; Chapter. {{chapter.order}}          
         </mat-panel-title>
-        <!-- <mat-panel-description>
-            This is a summary of the content
-        </mat-panel-description> -->
+        <mat-panel-description>
+           {{chapter.chapterName | titlecase}}
+        </mat-panel-description>
         </mat-expansion-panel-header>
         <app-comment [comments]="comments"
                     [commentChapter]="chapter.id"></app-comment>

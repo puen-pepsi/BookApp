@@ -12,13 +12,14 @@
         <ul
             *ngIf="(messageService.messageThread$ | async)?.length > 0" class="chat">
             <li *ngFor="let message of (messageService.messageThread$ | async)">
-                <div>
+                <!-- <div>
                     <span class="chat-img float-right">
                         <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
                             alt="{{message.senderUsername}}">
                     </span>
                 </div>
                 <div class="chat-body">
+                    <p>{{message.content}}</p>
                     <div class="header">
                         <small class="text-muted">
                             <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
@@ -32,7 +33,51 @@
                             </span>
                         </small>
                     </div>
+                    
+                </div> -->
+                <div *ngIf="message.senderUsername == username" class="recieved">
+                    <span class="chat-img float-left">
+                        <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
+                            alt="{{message.senderUsername}}">
+                    </span>
+                    <div class="chat-body">
                     <p>{{message.content}}</p>
+                    <div>
+                        <small class="text-muted">
+                            <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                            <span class="text-danger" *ngIf="!message.dateRead 
+                                && message.senderUsername !== username">
+                                (unread)
+                            </span>
+                            <span class="text-success" *ngIf="message.dateRead 
+                                && message.senderUsername !== username">
+                                (read {{message.dateRead | timeago}})
+                            </span>
+                        </small>
+                    </div>
+                    </div>
+                </div>
+                <div *ngIf="message.senderUsername != username" class="out">
+                    <!-- <span class="chat-img float-right">
+                        <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
+                            alt="{{message.senderUsername}}">
+                    </span> -->
+                    <div class="chat-body">
+                      <p>{{message.content}}</p>
+                    <div >
+                        <small class="text-muted">
+                            <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                            <span class="text-danger" *ngIf="!message.dateRead 
+                                && message.senderUsername !== username">
+                                (unread)
+                            </span>
+                            <span class="text-success" *ngIf="message.dateRead 
+                                && message.senderUsername !== username">
+                                (read {{message.dateRead | timeago}})
+                            </span>
+                        </small>
+                    </div>
+                    </div>
                 </div>
             </li>
         </ul> 

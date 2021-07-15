@@ -26,6 +26,7 @@
      <div class="col-md-8 pt-2" >
          <div>
             <h2>{{showstory.storyName | titlecase}}</h2>
+           
             <hr/>
             
             <div fxLayout="row" fxLayoutAlign="space-between center" class="detials"> 
@@ -66,10 +67,12 @@
                         [yourRate]='yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"'
                     >
                     </app-star-rating-show>
+                    
                 </div>
                 <div class="pt-2" >
                         <p>{{showstory.rating | number:'1.2-2'}} ({{showstory.totalRate}} ratings)</p>
                 </div>
+                <app-report></app-report>
             </div>
 
             <br/>
@@ -84,6 +87,7 @@
         </div>
             <div fxLayout="row" fxLayoutAlign="end end" fxHide.xs
                 fxLayoutGap="0.2rem" class="buttongroup">
+               
                 <button *ngIf="!userHistory"
                     type="button" class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
@@ -136,7 +140,8 @@
         <p>{{showstory.description}}</p>
     </tab>
     <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
-        <app-show-chapters ></app-show-chapters>
+        <!-- <app-show-chapters ></app-show-chapters> -->
+        <app-show-table-content [initContent]="initContent"></app-show-table-content>
     </tab> 
     <tab heading='Novel Comments' (selectTab)="onTabActivated($event)">
         <app-comment [comments]="comments"></app-comment>

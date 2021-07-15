@@ -1,10 +1,12 @@
 
 <div class="sidebar">
-            <div *ngFor="let list of chapterList index as i">
-                <a  spyOn="{{list.id}}"
-                    activeClass="sidebar__link--active" 
-                    class="sidebar__link" 
-                    (click)="goTo(list.id)">{{list.chapterName | titlecase}}
-                </a>
-            </div>
+    <cdk-virtual-scroll-viewport itemSize="10" class="container">
+        <div *cdkVirtualFor="let list of chapterList index as i">
+            <a  spyOn="{{list.id}}"
+                activeClass="sidebar__link--active" 
+                class="sidebar__link" 
+                (click)="goTo(list.id)">{{list.chapterName | titlecase}}
+            </a>
+        </div>
+    </cdk-virtual-scroll-viewport>
 </div>  

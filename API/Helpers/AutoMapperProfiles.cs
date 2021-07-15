@@ -4,6 +4,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers
@@ -25,6 +26,10 @@ namespace API.Helpers
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src =>
                     src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<MessageDto, Message>();
+            CreateMap<ChatMessage,ChatMessageDto>()
+                .ForMember(dest => dest.UserName,ex => ex.MapFrom(src => src.UserChat.UserName))
+                .ForMember(dest =>dest.KnownAs,ex => ex.MapFrom(src => src.UserChat.KnownAs))
+                .ForMember(dest => dest.Image,ex=>ex.MapFrom(src => src.UserChat.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Tag, TagDto>().ReverseMap();
             CreateMap<StoryDto, Story>()
                 .ForMember(src => src.Id, opt => opt.Ignore());
@@ -37,11 +42,13 @@ namespace API.Helpers
                     ex => ex.MapFrom(src => src.Story.Author.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Published, PublishedDto>().ReverseMap();
             CreateMap<Story, StoryDto>()
+                .ForMember(dest => dest.UserName,ex => ex.MapFrom(src => src.Author.KnownAs))
                 // .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => src.ImageUrl.GetUrl() ))
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom<ImageUrlResolver>())
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://rainobunew.azurewebsites.net/Resources/" + src.ImageUrl ))
                 .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => string.IsNullOrEmpty(src.ImageUrl) ? src.ImageUrl : "https://localhost:5001/Resources/" + src.ImageUrl))
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://localhost:5001/Resources/" + src.ImageUrl ))
+                .ForMember(dest => dest.Views,ex => ex.MapFrom(src => src.ViewCount.Count))
                 .ForMember(dest => dest.UserPhoto, ex => ex.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.StoryId, ex => ex.MapFrom(src => src.Id))
                 .ForMember(dest => dest.TotalRate,
@@ -49,13 +56,12 @@ namespace API.Helpers
                 .ForMember(dest => dest.Rating,
                     ex => ex.MapFrom(sr => sr.Ratings.Count() == 0 ? 0 : sr.Ratings.Average(src => src.Rated)))
                 .ForMember(dest => dest.TotalChapter,
-                    ex => ex.MapFrom(src => src.Chapters.Where(src => src.Published.Created > DateTime.MinValue)
-                          .Count() == 0 ? 0 : src.Chapters
-                              .Where(src => src.Published.Created > DateTime.MinValue)
-                              .Count()));
+                    ex => ex.MapFrom(src => src.Chapters
+                            .Where(src => src.Published.Created > DateTime.MinValue).Count() == 0 ? 0 : src.Chapters
+                            .Where(src => src.Published.Created > DateTime.MinValue).Count()));
             CreateMap<StoryComment, StoryCommentDto>()
                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.UserPost.UserName))
-                .ForMember(d => d.KnownAs, o => o.MapFrom(s => s.UserPost.UserName))
+                .ForMember(d => d.KnownAs, o => o.MapFrom(s => s.UserPost.KnownAs))
                 .ForMember(d => d.liked, o => o.MapFrom(s => s.Liked.Select(x => x.UserActive.UserName)))
                 .ForMember(dest => dest.Image, ex => ex.MapFrom(src => src.UserPost.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Story, HistoryStoryDto>()

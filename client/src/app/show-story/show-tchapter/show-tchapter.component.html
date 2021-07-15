@@ -26,24 +26,29 @@
             <p><b>Author : </b>{{showstory?.userName}}</p>
             <h5>&copy; Rainobu</h5>
         </div>
-        
-        <!-- <div 
-            *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
-            spyTarget="Chapter-{{i+1}}" style="margin-bottom: 50px;"> 
-                <app-show-achapter 
-                    [chapter] = 'chapter'
-                    [index]='i+1'>
-                </app-show-achapter> 
-                <h5>&copy; Rainobu</h5>
-        </div>      -->
         <div 
             *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
             spyTarget="{{chapter.id}}" style="margin-bottom: 50px;"> 
-              <div class="chapter">
+              <div #content class="chapter">
                 <app-show-achapter 
                     [chapter] = 'chapter'
-                    [index]='i+1'>
+                    [index]='i+1'
+                    [fSize]='fSize'>
                 </app-show-achapter> 
+                <!-- <div class="Header" >
+                  <h4>Chapter {{i+1}} :&nbsp;{{chapter.chapterName}}</h4>
+                  <div class="">
+                    <img 
+                                class="img-circle rounded-circle mr-2"
+                                src="{{chapter.authorImageUrl || './assets/user.png'}}" 
+                                alt="{{chapter.authorName}}">  
+                    <span class="text-muted">{{(chapter.authorName | titlecase)  + ' : Author'}} | {{'Published : '+ (chapter.publishedCreated | timeago)}}</span>
+                  </div>
+                  
+                </div>
+                <div class="Body" [ngStyle]="{'font-size':fSize}" #content>
+                    <div [innerHtml] = "chapter.content"  ></div>
+                </div> -->
                 <h5>&copy; Rainobu</h5>
               </div>
         </div>     
@@ -81,6 +86,27 @@
         <app-comment [comments]="comments"></app-comment>
         </div>
     </div>
+    <div fxFlex="30" fxHide.xs *ngIf="ShowSetting" >
+      <div class="section-nav" >
+        <div class="header"><h5>Settings</h5> 
+          <mat-divider></mat-divider>
+          <div class="rightCircle">
+              <mat-icon (click)="toggleSetting()" [inline]="true">close</mat-icon>
+          </div>
+        </div>
+        <div class="bodysetting">
+           <span class="pr-3">Font Size </span>
+          <button mat-mini-fab color="primary" (click)="increase()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" (click)="decrease()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+         
+
+      </div>
+    </div>
 <div>
     <nav class="navbar" fxLayout fxHide.xs>
         <ul class="navbar-nav">
@@ -104,7 +130,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
+            <a class="nav-link" (click)=toggleSetting()>
               <mat-icon>settings</mat-icon>
               <span class="link-text">Settings</span>
             </a>

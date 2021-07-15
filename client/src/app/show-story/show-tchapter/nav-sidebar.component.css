@@ -1,7 +1,10 @@
 .header{
   padding: 1rem 1rem 0rem 0rem;
+
 }
-  
+.container{
+  height: calc(100vh - 200px);
+}  
 /* The side navigation menu */
 .sidebar {
    /*  right:0; */
@@ -13,7 +16,7 @@
     padding-left: 6px;
     /* border-left: 2px solid #efefef; */
     width: 100%;
-    
+     
   }
   
   /* Sidebar links */

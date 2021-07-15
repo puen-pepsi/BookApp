@@ -33,6 +33,7 @@ namespace API.Data
 
         public IHistoryRepository HistoryRepository => new HistoryRepository(_context, _mapper,_config);
 
+        public IChatMessageRepository ChatMessageRepository =>  new ChatMessageRepository(_context,_mapper);
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

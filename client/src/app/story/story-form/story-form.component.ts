@@ -4,7 +4,7 @@ import { MatChipInputEvent} from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import {  FormControl, NgForm } from '@angular/forms';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +20,7 @@ import { Tags } from 'src/app/_models/tag';
 export class StoryFormComponent implements OnInit {
   @Output() submitSuccess = new EventEmitter();
   @ViewChild('StoryTabs',{static:true}) StoryTabs: TabsetComponent;
-  
+  @ViewChild('editForm') editForm: NgForm;
   @ViewChild('TagInput') TagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   isCreate:boolean;
@@ -38,6 +38,12 @@ export class StoryFormComponent implements OnInit {
   tags: string[] = ['Rainobu'];
   // allTags: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   tagArray :string[]=[];
+
+  // @HostListener('window:beforeunload',['$event']) unloadNotification($event:any){
+  //   if(this.editForm.dirty){
+  //     $event.returnValue = true;
+  //   }
+  //}
   constructor(public storyService:StoryService,
     private toastr:ToastrService) { 
       this.filteredTags = this.tagCtrl.valueChanges.pipe(

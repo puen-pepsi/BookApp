@@ -6,6 +6,7 @@ namespace API.Interfaces
     {
         IUserRepository UserRepository {get; }
         IMessageRepository MessageRepository {get;}
+        IChatMessageRepository ChatMessageRepository{get;}
         ILikesRepository LikesRepository {get; }
         ILikeStoryRepository LikeStoryRepository {get;}
         IHistoryRepository HistoryRepository{get;}

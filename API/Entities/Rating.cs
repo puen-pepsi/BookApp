@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
@@ -10,5 +11,6 @@ namespace API.Entities
         public int StoryRatedId { get; set; }
         public AppUser UserRated { get; set; }
         public int UserRatedId { get; set; }
+        public DateTime RateCreated { get; set; } = DateTime.UtcNow;
     }
 }

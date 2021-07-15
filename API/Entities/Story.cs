@@ -15,7 +15,7 @@ namespace API.Entities
         public string ImageUrl { get; set; }
         public int Rating { get; set; }
         public string State { get; set; }
-        public int Views { get; set; }
+       // public int Views { get; set; }
         public string UserName { get; set; }
         public int AuthorId { get; set; }
         public AppUser Author { get; set; }
@@ -26,6 +26,7 @@ namespace API.Entities
         public virtual ICollection<StoryComment> PostComments { get; set; }
         //public virtual ICollection<StoryTag> StoryTags { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<View> ViewCount { get; set; }
         public virtual  ICollection<UserStory> StoryLiked { get; set; }
         public virtual ICollection<UserHistory> StoryHistory { get; set; }
         public Story()
@@ -35,6 +36,7 @@ namespace API.Entities
             //StoryTags = new Collection<StoryTag>();
             PhotoStories = new Collection<PhotoStory>();
             Ratings = new Collection<Rating>();
+            ViewCount = new Collection<View>();
             StoryLiked = new Collection<UserStory>();
             StoryHistory =new Collection<UserHistory>();
         }

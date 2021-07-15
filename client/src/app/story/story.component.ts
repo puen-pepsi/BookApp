@@ -13,7 +13,7 @@ export class StoryComponent implements OnInit {
     this.isCreate= false;
   }
   ChangeForm(event){
-    console.log(event);
+    //console.log(event);
       this.isCreate = event;
   }
 }

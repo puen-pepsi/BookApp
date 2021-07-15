@@ -61,6 +61,9 @@
   color:rgb(175, 175, 175);
   z-index: 9999;
 }
+.mat-divider{
+  left: -2rem;
+}
 .section-nav {
   position: sticky;
   padding-top: 0;
@@ -68,7 +71,7 @@
   /* right:2px; */
   margin-left: 2rem;
   margin-right:  -30px;
-  width: auto;
+  width: 100%;
   overflow-y:scroll;
   overflow-x: hidden;
   height: 100vh;
@@ -146,6 +149,11 @@
 }
 .chapter h5:after {
   margin: 0 -55% 0 .5em;
+}
+
+.bodysetting{
+ padding-left: 2rem;
+ padding-top: 2rem;
 }
 /* :host ::ng-deep body {
   color: black;

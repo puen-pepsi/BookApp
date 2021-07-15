@@ -151,7 +151,7 @@ namespace API.Data
             {
                 "created" => query.OrderByDescending( s => s.Created),
                 "rating" => query.OrderByDescending(s => s.Rating),
-                "views" => query.OrderByDescending(s => s.Views),
+                "views" => query.OrderByDescending(s => s.ViewCount.Count),
                 _ => query.OrderBy(s=>s.Rating)
             };
           
@@ -190,7 +190,19 @@ namespace API.Data
                             .OrderBy(c => c.Order)
                             .ToListAsync();          
         }
-
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize)
+        {
+            return await  _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Include(c => c.Story)
+                                .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
+                            .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
+                                &&  c.Published != null)
+                            .OrderBy(c => c.Order)
+                            .Skip(countSize)
+                            .Take(pageSize)
+                            .ToListAsync(); 
+        }
         public void AddComment(StoryComment storyComment)
         {
             _context.StoryComments.Add(storyComment);
@@ -206,7 +218,7 @@ namespace API.Data
         //             .OrderByDescending(s => s.Created)
         //             .ToListAsync();
         // }
-         public async Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName)
+        public async Task<IEnumerable<StoryCommentDto>> GetStoryComments(string storyName)
         {
             return await _context.StoryComments
                     .Include(s=> s.Story)
@@ -241,7 +253,20 @@ namespace API.Data
             _context.Activities.Remove(activities);
         }
 
-        
+        public async Task<IEnumerable<StoryChapter>> GetNewChaper(int take)
+        {
+            return   await  _context.StoryChapters
+                             .Include(c => c.Published)
+                            .Include(c => c.Story)
+                                .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
+                            .OrderBy(s => s.Published.Created)
+                            .Take(take)
+                            .ToListAsync();
+        }
 
+        Task<StoryChapter> IStoryRepository.GetLastChapterByStoryName(string storyName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

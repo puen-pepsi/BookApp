@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-3">
+        <div *ngFor="let member of (presence.onlineUsers$ | async)">
+            <p>{{member | json}}</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+        <div class="card-body">
+        <!-- <div class="card-body" 
+                #scrollMe style="overflow: scroll; height: 535px;" 
+                [scrollTop]="scrollMe.scrollHeight"> -->
+            <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
+                No messages yet... say hi by using the message box below
+            </div>
+            <ul #scrollMe
+                style="overflow: scroll;height: 100%;"
+                [scrollTop]="scrollMe.scrollHeight"
+                *ngIf="(chatService.commentThread$ | async)?.length > 0" class="chat">
+                <li *ngFor="let message of (chatService.commentThread$ | async)">
+                    <div  *ngIf="message.userName !== user.username" class="yours messages">
+                        <div >
+                        <span>
+                            <img class="rounded-circle pr-2" src="{{message.image || './assets/user.png'}}"
+                                alt="{{message.userName}}">
+                        </span>
+                       <div class="message last">
+                                <p>{{message.knownAs}} | {{message.content}}</p>
+                                <!-- <small class="text-muted">
+                                    <span class="fa fa-clock-o">{{message.created | timeago}}</span>
+                                </small> -->
+                        </div>
+                    </div>
+                    </div>
+                    <div *ngIf="message.userName === user.username" class="mine messages">
+                        <div class="message last">
+                            <p>{{message.content}}</p>
+                            <!-- <small class="text-muted">
+                                <span class="fa fa-clock-o">{{message.created | timeago}}</span>
+                            </small> -->
+                        </div>    
+                    </div> 
+                </li>
+            </ul> 
+        </div>
+        <div class="card-footer">
+            <form fxLayout="row" 
+            (ngSubmit)="onSubmit()" [formGroup]="commentForm">
+            <mat-form-field class="example-full-width">
+                    <mat-label>Leave a message</mat-label>
+                    <textarea formControlName="content" matInput 
+                    placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-action-list fxFlexAlign="center">
+                <button type="submit" mat-raised-button [disabled]="commentForm.invalid">
+                <i class="fas fa-paper-plane fa-lg"></i></button>
+            </mat-action-list> 
+        </form>
+        </div>
+</div>
+    </div>
+</div>
+

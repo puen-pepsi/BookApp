@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210706172408_InitialSqllite")]
-    partial class InitialSqllite
+    [Migration("20210714063540_chatmessage")]
+    partial class chatmessage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,6 +107,9 @@ namespace API.Migrations
                     b.Property<string>("Introduction")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("KnownAs")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("TEXT");
 
@@ -171,6 +174,31 @@ namespace API.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("API.Entities.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserChatId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserChatId");
+
+                    b.ToTable("ChatMessages");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -347,6 +375,9 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("RateCreated")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Rated")
                         .HasColumnType("INTEGER");
 
@@ -420,9 +451,6 @@ namespace API.Migrations
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("Views")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -557,6 +585,30 @@ namespace API.Migrations
                     b.ToTable("LikeStory");
                 });
 
+            modelBuilder.Entity("API.Entities.View", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoryViewId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserViewId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryViewId");
+
+                    b.HasIndex("UserViewId");
+
+                    b.ToTable("Views");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -673,6 +725,17 @@ namespace API.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("API.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "UserChat")
+                        .WithMany()
+                        .HasForeignKey("UserChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserChat");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -850,6 +913,25 @@ namespace API.Migrations
                     b.Navigation("SourceUser");
                 });
 
+            modelBuilder.Entity("API.Entities.View", b =>
+                {
+                    b.HasOne("API.Entities.Story", "StoryView")
+                        .WithMany("ViewCount")
+                        .HasForeignKey("StoryViewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "UserView")
+                        .WithMany()
+                        .HasForeignKey("UserViewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StoryView");
+
+                    b.Navigation("UserView");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("API.Entities.AppRole", null)
@@ -932,6 +1014,8 @@ namespace API.Migrations
                     b.Navigation("StoryHistory");
 
                     b.Navigation("StoryLiked");
+
+                    b.Navigation("ViewCount");
                 });
 
             modelBuilder.Entity("API.Entities.StoryChapter", b =>

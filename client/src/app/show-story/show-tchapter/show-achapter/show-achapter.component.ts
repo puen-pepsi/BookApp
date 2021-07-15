@@ -9,6 +9,7 @@ import { Chapter } from 'src/app/_models/chapter';
 export class ShowAChapterComponent implements OnInit {
   @Input() chapter:Chapter;
   @Input() index:string;
+  @Input() fSize:string='1rem'
   constructor() { }
 
   ngOnInit(): void {

@@ -77,11 +77,19 @@ namespace API.Controllers
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-
-        var user = await _userManager.Users
+        var user = new AppUser();
+        if(loginDto.Username.Contains("@")){
+             user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
-            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            .SingleOrDefaultAsync(x => x.Email == loginDto.Username.ToLower());
+        }else{
+             user = await _userManager.Users
+            .Include(p => p.Photos)
+            .Include(l => l.LikedStoryByUsers)
+            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower()); 
+        }
+
         // var user = await _userManager.FindByNameAsync(userForAuthentication.Email);
         if (user == null)
             return BadRequest("Invalid Request");
@@ -104,7 +112,7 @@ namespace API.Controllers
             Username = user.UserName,
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-            //KnownAs = user.KnownAs,
+            KnownAs = user.KnownAs,
             //Gender = user.Gender,
             //MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
         };
@@ -199,7 +207,8 @@ namespace API.Controllers
                 {
                     Email = payload.Email,
                     UserName = payload.GivenName,
-                    //KnownAs = payload.GivenName,
+                    //DateOfBirth = DateTime.MinValue,
+                    KnownAs = payload.GivenName,
                     // Photos = new Photo {
                     //     Url= payload.Picture,
                     //     IsMain = true
@@ -228,7 +237,7 @@ namespace API.Controllers
             Username = user.UserName,
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = main.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-            //KnownAs = user.KnownAs,
+            KnownAs = user.KnownAs,
             //Gender = user.Gender,
         };
         // return Ok(new AuthResponseDto { Token = token, IsAuthSuccessful = true });

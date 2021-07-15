@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
@@ -59,11 +60,16 @@ namespace API.Controllers
         [HttpPut("{storyName}")]
         public async Task<ActionResult<StoryDto>> AddViews(string storyName)
         {
+            var userId = User.GetUserId();
             var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
             if (story == null)
                 return NotFound();
-            story.Views++;
-            _unitOfWork.StoryRepository.UpdateStory(story);
+            //story.Views++;
+            var viewHit = new View{
+                UserViewId = userId,
+                StoryViewId = story.Id
+            };
+            story.ViewCount.Add(viewHit);
             if(await _unitOfWork.Complete()){
                 return _mapper.Map<StoryDto>(story);
             }

@@ -106,6 +106,7 @@ namespace API
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
                 endpoints.MapHub<CommentHub>("hubs/comment");
+                endpoints.MapHub<ChatHub>("hubs/chat");
                 endpoints.MapFallbackToController("Index","Fallback");
             });
         }

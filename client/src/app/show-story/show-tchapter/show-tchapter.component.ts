@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component,  OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component,  ElementRef,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { ScrollSpyService } from 'ng-spy';
 import {  Unsubscribable } from 'rxjs';
@@ -16,6 +16,7 @@ import { ShowStoryService } from '../show-story.service';
   styleUrls: ['./show-tchapter.component.css']
 })
 export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
+  @ViewChild('content',{static:true}) content:ElementRef;
   chapterList:any;
   getCurrentUrl:any;
   current:string;
@@ -30,6 +31,9 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   ShowTableContent:boolean = false;
   ShowComment:boolean = false;
   ShowCommentChapter:boolean = false;
+  ShowSetting:boolean = false;
+  fontSize=15;
+  fSize = 1;
   constructor(private showStoryService:ShowStoryService,
               private route:ActivatedRoute, 
               private router:Router,
@@ -125,6 +129,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     this.ShowTableContent = !this.ShowTableContent;
     this.ShowComment =false;
     this.ShowCommentChapter=false;
+    this.ShowSetting = false;
   }
   toggleComment(event){
     this.ShowComment  = !this.ShowComment;
@@ -135,6 +140,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     }
     this.ShowTableContent = false;
     this.ShowCommentChapter = false;
+    this.ShowSetting = false;
   }
   toggleCommentChapter(event){
     this.ShowCommentChapter  = !this.ShowCommentChapter;
@@ -145,6 +151,21 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     }
     this.ShowTableContent = false;
     this.ShowComment = false;
+    this.ShowSetting = false;
+  }
+  toggleSetting(event){
+    this.ShowSetting = !this.ShowSetting;
+    this.ShowComment =false;
+    this.ShowCommentChapter=false;
+    this.ShowTableContent=false;
+  }
+
+  decrease(){
+    this.fSize = this.fSize * 0.8;
+  }
+
+  increase(){
+    this.fSize = this.fSize * 1.2;
   }
   async ngOnDestroy() {
     //console.log(this.scroller.getScrollPosition());

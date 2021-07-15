@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       // gender: ['male'],
       username: ['', Validators.required],
-      // knownAs: ['', Validators.required],
+      knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       // city: ['', Validators.required],
       // country: ['', Validators.required],
@@ -38,7 +38,8 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      clientURI:['https://localhost:4200/authentication/emailconfirmation']
+     // clientURI:['https://localhost:4200/authentication/emailconfirmation']
+      clientURI:['https://rainobunew.azurewebsites.net/authentication/emailconfirmation']
    
     })
   }

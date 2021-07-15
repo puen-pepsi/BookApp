@@ -19,6 +19,8 @@ import { LibraryComponent } from './show-story/library/library.component';
 import { ShowStoryComponent } from './show-story/show-story.component';
 import { HistoryComponent } from './show-story/library/history/history.component';
 import { ShowListComponent } from './show-story/show-list/show-list.component';
+import { StoryFormComponent } from './story/story-form/story-form.component';
+import { ChattoComponent } from './chat/chatto.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -33,10 +35,10 @@ const routes: Routes = [
       {path:'library',component:LibraryComponent,
         // data:{breadcrumb:'My Library'}
       },
-      {path:'mystory',component:StoryComponent,
-        // data:{breadcrumb:'My Stories'}
-      },
-      
+      {path:'mystory',component:StoryComponent},
+      //{path:'mystory/create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+     // {path:'mystory/edit/:id',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+
       // {path:'stories',
       //   component:ShowstoryComponent,data:{breadcrumb:'Stories'},
       //   children:[
@@ -72,6 +74,9 @@ const routes: Routes = [
         path: 'manga',component:ShowListComponent,
         data:{storytype:'manga'},
       },
+      {
+        path:'chatto',component:ChattoComponent
+      }
     ]  
   },
   

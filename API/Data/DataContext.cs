@@ -22,6 +22,7 @@ namespace API.Data
         public DbSet<UserStory> LikeStory { get; set; }
         public DbSet<UserHistory> HistoryUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<Genre> Genres {get;set;}
@@ -35,10 +36,8 @@ namespace API.Data
         public DbSet<StoryComment> StoryComments {get;set;}
         public DbSet<PhotoStory> PhotoStories { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-
+        public DbSet<View> Views { get; set; }
         public DbSet<Activities> Activities {get; set;}
-      
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

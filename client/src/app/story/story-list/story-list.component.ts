@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Story } from 'src/app/_models/story.model';
 import { StoryService } from 'src/app/_services/story.service';
 import { environment } from 'src/environments/environment';
@@ -23,7 +24,6 @@ export class StoryListComponent implements OnInit {
   populateForm(selectedRecord: Story) {
     this.storyService.formData = Object.assign({},selectedRecord);
     this.StoryDetail.emit(true);
-
   }
   // public createImagePath = (serverPath: string) => {
   //   if(serverPath){

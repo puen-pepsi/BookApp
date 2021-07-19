@@ -1,12 +1,11 @@
 <!-- <div class="mt-2" *ngFor="let comment of comments; let i = index"> -->
-  <ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
-  <cdk-virtual-scroll-viewport itemSize="10" class="container">
-  <div class="mt-2 mb-2" *cdkVirtualFor="let comment of (commentService.commentThread$ | async);let i =index ">
+<ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
+  <cdk-virtual-scroll-viewport itemSize="120" minBufferPx="480" maxBufferPx="960" class="container">
+  <div  *cdkVirtualFor="let comment of (commentService.commentThread$ | async);let i =index ">
     <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
       <ng-template #first>
-        <div *ngIf="comment.parentId==null && comment.chapterId==null" 
-          class="comment"> 
-          
+        <div *ngIf="comment.parentId==null  && comment.chapterId==null " 
+          class="commentlist">         
           <div fxLayout="row" class="main" >
             <div class="created">
               <small class="text-muted ">{{comment.created | timeago}}</small>
@@ -36,6 +35,11 @@
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove
                 </button>
+                <app-report 
+                    [reportType]="'comment'"
+                    [reportId]="comment.id"
+                    (message)="onReport($event)">
+                </app-report>
               </div>
             </div>
             
@@ -49,7 +53,7 @@
       </ng-template>
       <ng-template #second>
         <div *ngIf="comment.chapterId===commentChapter" 
-          class="comment"> 
+          class="commentlist"> 
           <div fxLayout="row" class="main" >
             <div class="created">
               <small class="text-muted ">{{comment.created | timeago}}</small>
@@ -78,7 +82,11 @@
                 <button *ngIf="comment.userName === commentService.user.username"
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove</button>
-              
+                  <app-report 
+                    [reportType]="'comment'"
+                    [reportId]="comment.id"
+                    (message)="onReport($event)">
+                </app-report>
               </div>
             </div>
             
@@ -94,6 +102,6 @@
       </ng-template>
   </div>
  </cdk-virtual-scroll-viewport>
-  </ng-container>
+</ng-container>
 
 

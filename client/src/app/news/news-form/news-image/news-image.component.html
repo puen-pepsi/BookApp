@@ -1,0 +1,8 @@
+<div>
+    <!-- <p>{{storyService.formData.imageUrl}}</p> -->
+    <img src ="{{newsService.formData.pictureUrl || './assets/images/blackcover.png'}}" 
+    class="img-thumbnail image" (click)="fileInput.click($event)">
+
+    <input #fileInput type = "file" accept="image/png,image/jpeg" class="invisible" (change)="UploadImage(fileInput.files,newsService.formData.id)" >
+    <div class="upload"><h5>Upload Picture</h5></div>
+</div>

@@ -9,3 +9,6 @@
 .mat-expansion-panel-header-description {
   font-size: 1.1rem;
 }
+.mat-expansion-panel-body{
+  height: 600px;
+}

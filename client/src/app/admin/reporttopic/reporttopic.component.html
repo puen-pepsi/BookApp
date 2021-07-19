@@ -1,0 +1,24 @@
+<div class="jumbotron py-2 mb-4">
+    <h4 class="display-6 text-center">Report Decription</h4>
+  </div>
+   <app-reporttopic-form></app-reporttopic-form>
+    <table class="table mt-2" >
+      <thead>
+        <tr>
+          <th>Report Topic</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of reportTopicSersvice.list">
+          <td (click)="populateForm(row)">{{row.reportTopic}}</td>
+          <td>
+            <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
+            <!-- <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button> -->
+            <i class="far fa-trash-alt text-danger" (click)="onDelete(row.id)"></i>    
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+

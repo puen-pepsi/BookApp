@@ -1,0 +1,26 @@
+<mat-card>
+    <div class="main">
+        <div class="image">
+            <img src="{{row.pictureUrl}}"
+                alt="{{row.topic}}" 
+                class="img">
+        </div>
+        <div class="body">
+            <div class="top">
+               <h6><b>{{row.topic | titlecase}}</b></h6>
+                <p>{{row.content}}</p> 
+            </div>
+            <div class="create text-muted">
+                <div>
+                    <small>{{row.newsCreated | timeago}}</small>
+                </div>
+                <div>
+                    <a (click)="populateForm(row)">Edit</a>|
+                    <a>Delete</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</mat-card>
+

@@ -1,25 +1,42 @@
 .card {
     border: none;
-    height: calc(100vh - 200px);
+    /* height: calc(100vh - 200px); */
 }
 /* .card-body{
-    background-color: rgb(247, 249, 252);
-}
+    overflow: hidden;
+} */
+/* 
 .card-footer{
     background-color: rgb(223, 235, 253);
 } */
-.chat {
+/* .chat {
     list-style: none;
     margin: 0;
     padding: 10px;
     display: flex;
     flex-direction: column;
+} */
+.picture{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.container{
+  /* height: calc(100vh - 325px); */
+  height: 500px;
+}
+.commnet-items{
+  height: 50px;
+  /* border:solid 1px; */
+  margin-bottom: 0.5rem;
 }
 
 .chat li {
     margin-bottom: 10px;
+    /* height: 50px; */
     /* padding-bottom: 10px; */
-    /* border-bottom: 1px dotted #B3A9A9; */
+    /* border: 1px dotted #B3A9A9; */
 }
 
 .rounded-circle {
@@ -39,6 +56,7 @@ p {
   .messages {
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
   }
   
   .message {
@@ -119,4 +137,3 @@ p {
     background: white;
     border-bottom-left-radius: 10px;
   }
-  

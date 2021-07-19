@@ -59,6 +59,13 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ChattoComponent } from './chat/chatto.component';
+import { ReporttopicComponent } from './admin/reporttopic/reporttopic.component';
+import { ReporttopicFormComponent } from './admin/reporttopic/reporttopic-form/reporttopic-form.component';
+import { NewsComponent } from './news/news.component';
+import { NewsListComponent } from './News/news-list/news-list.component';
+import { NewsCardComponent } from './news/news-card/news-card.component';
+import { NewsFormComponent } from './news/news-form/news-form.component';
+import { NewsImageComponent } from './news/news-form/news-image/news-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +108,14 @@ import { ChattoComponent } from './chat/chatto.component';
     SidenavListComponent,
     AuthorStoryComponent,
     FooterComponent,
-    ChattoComponent
+    ChattoComponent,
+    ReporttopicComponent,
+    ReporttopicFormComponent,
+    NewsComponent,
+    NewsListComponent,
+    NewsCardComponent,
+    NewsFormComponent,
+    NewsImageComponent
   ],
   imports: [
     BrowserModule,

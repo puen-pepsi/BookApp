@@ -1,0 +1,14 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id"
+           value="reportTopicSersvice.formData.id" />
+    <div class="row">
+      <div class="col-md-6 pr-0">
+        <input class="form-control" placeholder="Add a Report Topic"
+               name="reportTopic" #description="ngModel" [(ngModel)]="reportTopicService.formData.reportTopic" required/>
+      </div>     
+      <div class="col-md-4 pl-1">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+      </div>
+    </div>
+  </form>

@@ -7,24 +7,30 @@ import { DialogComponent } from './dialog/dialog.component';
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.css']
 })
-export class ReportComponent {
-  @Input() username :string;
+export class ReportComponent {  
+  @Input() reportType: string;
+  @Input() reportId: number;
   @Output() message = new EventEmitter();
-  comment: string;
+  
   constructor(public dialog: MatDialog) { }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '400px',
-      data: { name: this.username, conment: this.comment }
+      data: { 
+             comment: '',
+             reportId:this.reportId,
+             reportType:this.reportType,
+             reportTopic:'' }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');
-      this.comment = result;
-      if( this.comment !== undefined){
-        this.message.emit(this.comment);
-      }      
+       if(result !== undefined){
+          if(!(result.reportTopic == '' && result.comment == '')){
+            this.message.emit(result);
+          }
+       }     
     });
   }
 

@@ -41,7 +41,7 @@ export class ChatService {
     this.hubConnection.on('ReceiveChatMessage', comments => {
       this.commentThreadSource.next([...comments]);
     })
-
+    
     this.hubConnection.on('NewChatMessage', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
         //console.log(comment)

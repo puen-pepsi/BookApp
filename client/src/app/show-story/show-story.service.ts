@@ -127,7 +127,9 @@ export class ShowStoryService {
     let params = getPaginationHeaders(pageNumber,pageSize);
     return getPaginatedResult<Partial<ShowHistory[]>>(this.baseUrl + 'HistoryUser',params,this.http)
   }
-
+  postReport(model:any){
+    return this.http.post(this.baseUrl + 'Report',model);
+  }
   addHistoryUser(storyname:string,target:string){
     return this.http.post(this.baseUrl+'HistoryUser/'+storyname+'/'+target,{});
   }

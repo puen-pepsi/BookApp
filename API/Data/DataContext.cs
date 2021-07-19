@@ -37,6 +37,9 @@ namespace API.Data
         public DbSet<PhotoStory> PhotoStories { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<View> Views { get; set; }
+        public DbSet<Report> Reports {get;set;}
+        public DbSet<ReportTopic> ReportTopics {get; set;}
+        public DbSet<News> Newses {get; set;}
         public DbSet<Activities> Activities {get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {

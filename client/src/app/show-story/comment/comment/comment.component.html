@@ -3,11 +3,11 @@
           (ngSubmit)="onSubmit()" [formGroup]="commentForm">
           <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <textarea formControlName="content" matInput 
-                placeholder="Ex. It makes me feel..."></textarea>
+                <input formControlName="content" matInput 
+                placeholder="Ex. It makes me feel..." />
           </mat-form-field>
-          <mat-action-list fxFlexAlign="center">
-            <button type="submit" mat-raised-button [disabled]="commentForm.invalid">
+          <mat-action-list fxFlexAlign="start">
+            <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
               <i class="fas fa-paper-plane fa-lg"></i></button>
           </mat-action-list> 
       </form>

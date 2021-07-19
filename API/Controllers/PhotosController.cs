@@ -91,13 +91,13 @@ namespace API.Controllers
                         file.CopyTo(stream);
                     }
                     //Update Or Create
-                    var storyUpdate = await _unitOfWork.StoryRepository.GetStoryById(storyId,false);
-                    if(storyUpdate == null)
-                        return NotFound();
-                    storyUpdate.ImageUrl = dbPath;
-                    _mapper.Map<Story>(storyUpdate);
-                    _unitOfWork.StoryRepository.UpdateStory(storyUpdate);
-                    await _unitOfWork.Complete();
+                    // var storyUpdate = await _unitOfWork.StoryRepository.GetStoryById(storyId,false);
+                    // if(storyUpdate == null)
+                    //     return NotFound();
+                    // storyUpdate.ImageUrl = dbPath;
+                    // _mapper.Map<Story>(storyUpdate);
+                    // _unitOfWork.StoryRepository.UpdateStory(storyUpdate);
+                    // await _unitOfWork.Complete();
                     return Ok(new {dbPath});
 
                     
@@ -112,6 +112,8 @@ namespace API.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+      
         // [HttpPost]
         // public async Task<IActionResult> Upload(int storyId,FormFile file)
         // {

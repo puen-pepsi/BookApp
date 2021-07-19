@@ -4,12 +4,12 @@
           (ngSubmit)="onSubmit()" [formGroup]="replyForm">
           <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <textarea formControlName="content" matInput placeholder="Ex. It makes me feel..."></textarea>
+                <input formControlName="content" matInput placeholder="Ex. It makes me feel..." />
                 <!-- <mat-error align ="end" *ngIf="commentForm.controls['content'].hasError('required')">Required</mat-error>    -->
           </mat-form-field>
-          <mat-action-list fxFlexAlign="center">
+          <mat-action-list fxFlexAlign="start">
             <!-- <button type="button" (click)="onCommentCancel()" mat-flat-button>Cancel</button> -->
-            <button type="submit" mat-raised-button [disabled]="replyForm.invalid">
+            <button type="submit" mat-raised-button [disabled]="replyForm.value.content==''">
               <i class="fas fa-paper-plane fa-lg"></i>
             </button>
           </mat-action-list> 

@@ -24,7 +24,7 @@ export class ReplyComponent implements OnInit {
   ngOnInit() {
 
     this.replyForm = this.fb.group({
-      content: ['', Validators.required]
+      content: ['']
     });
   }
 

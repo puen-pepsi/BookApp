@@ -108,5 +108,14 @@ namespace API.SignalR
                 await Clients.Group(groupName).SendAsync("NewChatMessage", _mapper.Map<ChatMessageDto>(messages));
             }
         }
+        public async Task GetMoreMessages(string groupName ,int LastId){
+            //last id for skips ,take for take
+            var massages = await _unitOfWork.ChatMessageRepository.
+                GetChatThread(groupName);
+
+            if (_unitOfWork.HasChanges()) await _unitOfWork.Complete();
+
+            await Clients.Caller.SendAsync("GetMoreMessages", massages);
+        }
     }
 }

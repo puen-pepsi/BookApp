@@ -54,7 +54,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
       if(storyId == 0){
          return this.ResoucreUrl + serverPath;
       }else {
-         return serverPath;
+         return  serverPath;
       }
     }
     return './assets/images/blackcover.png';

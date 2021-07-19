@@ -1,14 +1,16 @@
 // import { Comment } from './../comment.model';
-import { Component, OnInit, Input, OnDestroy} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
+import { ShowStoryService } from '../../show-story.service';
 
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.css']
+  styleUrls: ['./comment-list.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentListComponent implements OnInit, OnDestroy {
    @Input() commentChapter:number;
@@ -21,7 +23,8 @@ export class CommentListComponent implements OnInit, OnDestroy {
   constructor(
     public commentService:CommentService,
     private route: ActivatedRoute,
-    private confirmService:ConfirmService
+    private confirmService:ConfirmService,
+    private showService : ShowStoryService,
   ) {}
     
   ngOnInit() {
@@ -52,7 +55,11 @@ export class CommentListComponent implements OnInit, OnDestroy {
       console.log(res);
     });
   }
-
+  onReport(event){
+    this.showService.postReport(event).subscribe(res => {
+      console.log(res)
+    })
+  }
   ngOnDestroy() {
     // this.commentSub.unsubscribe();
   }

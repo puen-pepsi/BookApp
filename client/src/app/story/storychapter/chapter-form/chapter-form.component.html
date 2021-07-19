@@ -1,22 +1,32 @@
 <form novalidate #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
     <input type="hidden" name="id" value="statusService.formData.id" />
-    <div class="mb-3">
-      <label for="chapterName" class="form-label">Chapter Name <i class="fas fa-info-circle"></i></label>
-      <input class="form-control" placeholder="Add Chapter Name" name="chapterName" #chapterName="ngModel"
-        [(ngModel)]="storyChapterService.formData.chapterName" required />
-    </div>
-    <div class="mb-3">
-      <label for="content" class="form-label">Content  <i class="fas fa-info-circle"></i></label>
-      <ckeditor [editor]="Editor" [config]='config' (change)="onChange($event)" 
-        data={{storyChapterService.formData.content}}>
-    </ckeditor>
-    </div>
     
-    <div class="col-md-12 pr-0">
-      <button class="btn btn-danger Header" #publish [disabled]="form.invalid" type="submit" 
-        (click)="createPublish(true)"><i class="fas fa-check"></i>  PUBLISH</button>
-        <button class="btn btn-primary Header " #save type="submit" [disabled]="form.invalid"
-        (click)="createPublish(false)"><i class="far fa-bookmark"></i>  SAVE</button> 
+    <div class="content" >
+      <div class="mb-3 mt-3" style="width: 756px;">
+        <label for="chapterName" class="form-label">Chapter Name <i class="fas fa-info-circle"></i></label>
+        <input class="form-control" placeholder="Add Chapter Name" name="chapterName" #chapterName="ngModel"
+          [(ngModel)]="storyChapterService.formData.chapterName" required />
+      </div>
+      <div style="width: 756px;">
+        <label for="content" class="form-label">Content  <i class="fas fa-info-circle"></i></label>
+        <ckeditor [editor]="Editor" [config]='config' (change)="onChange($event)" 
+          data={{storyChapterService.formData.content}}>
+        </ckeditor>
+      </div>
+      <div class="bottom">
+        <div>
+          <button class="btn btn-primary" type="button" (click)="backToChapter()"><i class="fas fa-arrow-left"></i>  Back To Chapter</button>
+        </div>
+        <div>
+                <button class="btn btn-danger Header" #publish [disabled]="form.invalid" type="submit" 
+                (click)="createPublish(true)"><i class="fas fa-check"></i>  PUBLISH</button>
+                <button class="btn btn-primary Header " #save type="submit" [disabled]="form.invalid"
+                (click)="createPublish(false)"><i class="far fa-bookmark"></i>  SAVE</button> 
+        </div>
+      </div>
     </div>
-  </form>
-  <button class="btn btn-primary" type="button" (click)="backToChapter()"><i class="fas fa-arrow-left"></i>  Back To Chapter</button>
+    <div class="col-md-12 pr-0">
+      
+    </div>
+
+</form>

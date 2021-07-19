@@ -42,7 +42,6 @@ namespace API.Data
               var messages = await _context.ChatMessages
                 .Where(g => g.GroupName == groupName)
                 .OrderBy(m => m.Created)
-                .Take(50)
                 .ProjectTo<ChatMessageDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 

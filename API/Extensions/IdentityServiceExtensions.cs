@@ -38,8 +38,9 @@ namespace API.Extensions
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
 
-            services.Configure<DataProtectionTokenProviderOptions>(opt =>
-                opt.TokenLifespan = TimeSpan.FromHours(2));
+            // services.Configure<DataProtectionTokenProviderOptions>(opt =>
+            //     opt.TokenLifespan = TimeSpan.FromHours(2));
+            
             // services.AddIdentity<DataContext, IdentityRole>()
             //     .AddDefaultTokenProviders();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

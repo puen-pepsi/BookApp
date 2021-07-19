@@ -27,7 +27,7 @@ export class CommentComponent implements OnInit,AfterViewInit{
   ngOnInit() {
     this.storyName = this.route.snapshot.params.storyname;
     this.commentForm = this.fb.group({
-      content: ['', Validators.required],
+      content: [''],
     });
     this.username = this.commentService.user.username;
 

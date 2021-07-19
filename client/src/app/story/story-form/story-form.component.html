@@ -1,6 +1,6 @@
-<!-- <p>{{storyService.formData | json}}</p> -->
+<p>{{storyService.formData | json}}</p>
 
-<h1>My Story</h1>
+<h1>{{(storyService.formData.storyName | titlecase) || "My Story"}}</h1>
 <div class="tab-panel header">
   <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
     <i class="fas fa-arrow-left"></i> Back to Stories

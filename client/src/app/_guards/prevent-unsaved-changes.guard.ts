@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
+import { NewsFormComponent } from '../news/news-form/news-form.component';
 import { StoryFormComponent } from '../story/story-form/story-form.component';
 import { StoryComponent } from '../story/story.component';
 import { ConfirmService } from '../_services/confirm.service';
@@ -11,7 +12,7 @@ import { ConfirmService } from '../_services/confirm.service';
 })
 export class PreventUnsavedChangesGuard implements CanDeactivate<unknown> {
   constructor(private confirmService:ConfirmService){}
-  canDeactivate(component: MemberEditComponent):Observable<boolean> | boolean {
+  canDeactivate(component: MemberEditComponent | StoryFormComponent ):Observable<boolean> | boolean {
     if(component.editForm.dirty){
       return this.confirmService.confirm()
     }

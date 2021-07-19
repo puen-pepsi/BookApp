@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, Scroll } from '@angular/router';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, Unsubscribable } from 'rxjs';
@@ -126,7 +127,12 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       this.toastr.success('You have liked '+ story.storyName);
     })
   }
-  
+  onReport(event){
+    console.log(event);
+    this.showStoryService.postReport(event).subscribe(res =>{
+      console.log(res);
+    })
+  }
   // getStoryName(){
   //   return this.route.snapshot.params.storyname;
   // }

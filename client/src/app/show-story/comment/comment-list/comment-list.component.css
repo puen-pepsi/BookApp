@@ -1,8 +1,17 @@
 .container{
-    height: calc(100vh - 200px);
+    /* height: calc(100vh - 200px); */
+    height: 480px;
+}
+.commentlist{
+    height: 120px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding:0px 5px 0px 5px;
+    /* border:solid 1px; */
 }
 .comment{
     padding:0px 5px 0px 5px;
+
 }
 .rounded-circle {
     max-height: 40px;

@@ -297,6 +297,34 @@ namespace API.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("API.Entities.News", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("NewsCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("UserNewsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("topic")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserNewsId");
+
+                    b.ToTable("Newses");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -392,6 +420,51 @@ namespace API.Migrations
                     b.HasIndex("UserRatedId");
 
                     b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("API.Entities.Report", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("comment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("reportCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("reportId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("reportTopic")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("reportType")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("API.Entities.ReportTopic", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("reportTopic")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ReportTopics");
                 });
 
             modelBuilder.Entity("API.Entities.Status", b =>
@@ -763,6 +836,15 @@ namespace API.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("API.Entities.News", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "UserNews")
+                        .WithMany()
+                        .HasForeignKey("UserNewsId");
+
+                    b.Navigation("UserNews");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -811,6 +893,17 @@ namespace API.Migrations
                     b.Navigation("StoryRated");
 
                     b.Navigation("UserRated");
+                });
+
+            modelBuilder.Entity("API.Entities.Report", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Entities.Story", b =>

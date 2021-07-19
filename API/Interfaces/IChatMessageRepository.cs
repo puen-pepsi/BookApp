@@ -12,5 +12,6 @@ namespace API.Interfaces
         void DeleteMessage(ChatMessage chatMessage);
         Task<ChatMessage> GetMessage(int id);
         Task<IEnumerable<ChatMessageDto>> GetChatThread(string groupName);
+
     }
 }

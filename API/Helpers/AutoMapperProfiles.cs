@@ -18,6 +18,11 @@ namespace API.Helpers
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
+            CreateMap<News,NewsDto>().ReverseMap();
+            CreateMap<News,NewsShowDto>()
+                //.ForMember(dest => dest.PictureUrl,ex=>ex.MapFrom(src => string.IsNullOrEmpty(src.PictureUrl) ? src.PictureUrl : "https://localhost:5001/Resources/" + src.PictureUrl))
+                .ForMember(dest => dest.UserName,ex => ex.MapFrom(src => src.UserNews.KnownAs))
+                .ForMember(dest => dest.UserPhoto,ex => ex.MapFrom(src => src.UserNews.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
             CreateMap<Message, MessageDto>()
@@ -46,8 +51,8 @@ namespace API.Helpers
                 // .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => src.ImageUrl.GetUrl() ))
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom<ImageUrlResolver>())
                 //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://rainobunew.azurewebsites.net/Resources/" + src.ImageUrl ))
-                .ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => string.IsNullOrEmpty(src.ImageUrl) ? src.ImageUrl : "https://localhost:5001/Resources/" + src.ImageUrl))
-                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => "https://localhost:5001/Resources/" + src.ImageUrl ))
+                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => string.IsNullOrEmpty(src.ImageUrl) ? src.ImageUrl : "https://localhost:5001/Resources/" + src.ImageUrl))
+                //.ForMember(dest => dest.ImageUrl,ex=>ex.MapFrom(src => src.ImageUrl ))
                 .ForMember(dest => dest.Views,ex => ex.MapFrom(src => src.ViewCount.Count))
                 .ForMember(dest => dest.UserPhoto, ex => ex.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.StoryId, ex => ex.MapFrom(src => src.Id))

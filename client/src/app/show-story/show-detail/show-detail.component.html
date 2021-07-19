@@ -72,7 +72,11 @@
                 <div class="pt-2" >
                         <p>{{showstory.rating | number:'1.2-2'}} ({{showstory.totalRate}} ratings)</p>
                 </div>
-                <app-report></app-report>
+                <app-report 
+                    [reportType]="showstory.storyName"
+                    [reportId]="showstory.storyId"
+                    (message)="onReport($event)">
+                </app-report>
             </div>
 
             <br/>

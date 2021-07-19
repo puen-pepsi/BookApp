@@ -13,24 +13,22 @@
             <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
                 No messages yet... say hi by using the message box below
             </div>
-            <ul #scrollMe
-                style="overflow: scroll;height: 100%;"
-                [scrollTop]="scrollMe.scrollHeight"
-                *ngIf="(chatService.commentThread$ | async)?.length > 0" class="chat">
-                <li *ngFor="let message of (chatService.commentThread$ | async)">
+            <div *ngIf="(chatService.commentThread$ | async)?.length > 0">
+                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="500" maxBufferPx="1000"
+                 class="container">
+                <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)" class="commnet-items">
                     <div  *ngIf="message.userName !== user.username" class="yours messages">
                         <div >
-                        <span>
-                            <img class="rounded-circle pr-2" src="{{message.image || './assets/user.png'}}"
-                                alt="{{message.userName}}">
-                        </span>
-                       <div class="message last">
-                                <p>{{message.knownAs}} | {{message.content}}</p>
-                                <!-- <small class="text-muted">
-                                    <span class="fa fa-clock-o">{{message.created | timeago}}</span>
-                                </small> -->
+                                <img class="rounded-circle pr-2" src="{{message.image || './assets/user.png'}}"
+                                    alt="{{message.userName}}">
+                                 <small class="text-muted">
+                                     
+                                     <!-- <span class="fa fa-clock-o">{{message.created | timeago}}</span> -->
+                                </small>   
+                            <div class="message last">
+                                        <p><b>{{message.knownAs}}</b> | {{message.content}}</p>            
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div *ngIf="message.userName === user.username" class="mine messages">
                         <div class="message last">
@@ -40,19 +38,20 @@
                             </small> -->
                         </div>    
                     </div> 
-                </li>
-            </ul> 
+                </div>
+                </cdk-virtual-scroll-viewport>
+            </div> 
         </div>
         <div class="card-footer">
             <form fxLayout="row" 
             (ngSubmit)="onSubmit()" [formGroup]="commentForm">
             <mat-form-field class="example-full-width">
                     <mat-label>Leave a message</mat-label>
-                    <textarea formControlName="content" matInput 
-                    placeholder="Ex. It makes me feel..."></textarea>
+                    <input formControlName="content" matInput 
+                    placeholder="Ex. It makes me feel..."/>
             </mat-form-field>
-            <mat-action-list fxFlexAlign="center">
-                <button type="submit" mat-raised-button [disabled]="commentForm.invalid">
+            <mat-action-list fxFlexAlign="start">
+                <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
                 <i class="fas fa-paper-plane fa-lg"></i></button>
             </mat-action-list> 
         </form>

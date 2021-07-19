@@ -13,6 +13,7 @@ namespace API.Interfaces
         IStoryRepository StoryRepository {get; }
         IRepository Repository {get;}
         IPhotoRepository PhotoRepository {get;}
+        INewsRepository NewsRepository {get;}
         Task<bool> Complete();
         bool HasChanges();
     }

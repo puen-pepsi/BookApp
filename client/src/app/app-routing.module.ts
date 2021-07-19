@@ -21,6 +21,8 @@ import { HistoryComponent } from './show-story/library/history/history.component
 import { ShowListComponent } from './show-story/show-list/show-list.component';
 import { StoryFormComponent } from './story/story-form/story-form.component';
 import { ChattoComponent } from './chat/chatto.component';
+import { NewsListComponent } from './News/news-list/news-list.component';
+import { NewsFormComponent } from './news/news-form/news-form.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -36,9 +38,8 @@ const routes: Routes = [
         // data:{breadcrumb:'My Library'}
       },
       {path:'mystory',component:StoryComponent},
-      //{path:'mystory/create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
-     // {path:'mystory/edit/:id',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
-
+      {path:'mystory/create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+      {path:'mystory/edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       // {path:'stories',
       //   component:ShowstoryComponent,data:{breadcrumb:'Stories'},
       //   children:[
@@ -74,6 +75,9 @@ const routes: Routes = [
         path: 'manga',component:ShowListComponent,
         data:{storytype:'manga'},
       },
+      {path:'news',component:NewsListComponent},
+      {path:'news/create',component:NewsFormComponent},
+      {path:'news/edit/:id',component:NewsFormComponent},
       {
         path:'chatto',component:ChattoComponent
       }

@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 import { Story } from 'src/app/_models/story.model';
 import { StoryService } from 'src/app/_services/story.service';
 import { Tags } from 'src/app/_models/tag';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-story-form',
   templateUrl: './story-form.component.html',
@@ -28,6 +30,7 @@ export class StoryFormComponent implements OnInit {
   LanguageList : any=[];
   StateList : any=[];
   response:{dbPath:''};
+  ResoucreUrl = environment.resourceUrl;
 
   visible = true;
   selectable = true;
@@ -45,7 +48,8 @@ export class StoryFormComponent implements OnInit {
   //   }
   //}
   constructor(public storyService:StoryService,
-    private toastr:ToastrService) { 
+              private router:Router,
+              private toastr:ToastrService) { 
       this.filteredTags = this.tagCtrl.valueChanges.pipe(
         map((tag: string | null) => tag ? this._filter(tag) : this.tagArray.slice()));
     }
@@ -59,12 +63,13 @@ export class StoryFormComponent implements OnInit {
   uploadFinished = (event) =>{
     
     this.response = event;
-    this.storyService.formData.imageUrl = this.response.dbPath;
+    this.storyService.formData.imageUrl = this.ResoucreUrl + this.response.dbPath;
   }
 
   returnToStory(){
-    this.submitSuccess.emit(false);
+    //this.submitSuccess.emit(false);
     this.storyService.formData = new Story();
+    this.router.navigate(['mystory']);
   }
   onSubmit(form:NgForm) {
     // console.log(form);
@@ -93,6 +98,7 @@ export class StoryFormComponent implements OnInit {
         this.resetForm(form);
         this.storyService.refreshList();
         this.submitSuccess.emit(false);
+        this.router.navigate(['mystory'])
         this.toastr.success("Add Story Success","Information")
       },
       err => {

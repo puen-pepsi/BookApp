@@ -73,7 +73,10 @@ namespace API.Data
             return await _context.Stories
                 .Include(s => s.Ratings)
                 .Include(s=> s.Author)
-                    .ThenInclude(a => a.Photos)  
+                    .ThenInclude(a => a.Photos)
+                .Include(s => s.ViewCount) 
+                .Include(s => s.Chapters)
+                    .ThenInclude(c => c.Published)
                 .Where(x => x.UserName == username)
                 .ToListAsync();
         }

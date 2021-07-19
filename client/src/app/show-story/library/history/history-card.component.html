@@ -1,3 +1,5 @@
+<p>{{history | json}}</p>
+
 <div class="card">
     <div class="additional">
       <div class="user-card">
@@ -15,9 +17,9 @@
           >
           </app-star-rating-show>
         </div>
-        <ng-container *ngIf="history.imageUrl.length > 50;then first else second"></ng-container>
+        <ng-container *ngIf="history.imageUrl;then first else second"></ng-container>
         <ng-template #first>
-                    <!-- <p>{{story | json}}</p> -->
+                    
             <img src="{{history.imageUrl}}"
             class="img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4">
         </ng-template>

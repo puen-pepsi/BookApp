@@ -1,6 +1,7 @@
 <!-- <div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5px"> -->
-    <div *ngFor="let row of news"  >
-        <app-news-card [row]="row" ></app-news-card>
+    <div *ngFor="let row of newsService.list"  >
+        <app-news-card [row]="row"
+                    (deleteId)="deleteNews($event)" ></app-news-card>
         <!-- {{row.topic}} -->
     </div>
 <!-- </div> -->

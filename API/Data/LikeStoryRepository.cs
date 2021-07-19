@@ -45,7 +45,7 @@ namespace API.Data
                 storyName = slike.StoryName,
                 genre = slike.Genre,
                 username = slike.UserName,
-                imageUrl = _config["ApiUrl"] + slike.ImageUrl,
+                imageUrl = slike.ImageUrl,
                 Rating = slike.Rating,
                 TotalRate = slike.Ratings.Count
             });

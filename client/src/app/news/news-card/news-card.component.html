@@ -1,7 +1,7 @@
 <mat-card>
     <div class="main">
         <div class="image">
-            <img src="{{row.pictureUrl}}"
+            <img src="{{row.pictureUrl || './assets/images/blackcover.png'}}"
                 alt="{{row.topic}}" 
                 class="img">
         </div>
@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <a (click)="populateForm(row)">Edit</a>|
-                    <a>Delete</a>
+                    <a (click)="deleteRow(row)">Delete</a>
                 </div>
             </div>
         </div>

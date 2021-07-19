@@ -54,17 +54,9 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit {
         () =>
           this.virtualScrollViewport.scrollTo({
             bottom: 0,
-            behavior: "auto",
+            behavior: 'smooth',
           }),
-        0
-      );
-      setTimeout(
-        () =>
-          this.virtualScrollViewport.scrollTo({
-            bottom: 0,
-            behavior: "auto",
-          }),
-        1000
+        3000
       );
     }
   onSubmit() {

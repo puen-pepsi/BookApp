@@ -15,7 +15,10 @@ export class NewsService {
     return this.http.post(this.baseUrl + 'News',this.formData);
   }
   putNews(){
-    return this.http.put(this.baseUrl + 'News/'+this.formData.id,this.formData)
+    return this.http.put(this.baseUrl + 'News/'+this.formData.id,this.formData);
+  }
+  deleteNews(id : number){
+    return this.http.delete(this.baseUrl + 'News/'+ id);
   }
   getNewsAll(){
     return this.http.get<News[]>(this.baseUrl + 'News');

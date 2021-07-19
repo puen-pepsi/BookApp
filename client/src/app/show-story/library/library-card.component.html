@@ -1,7 +1,7 @@
 <div class="card mb-4">
     <!-- <p>{{story | json}}</p> -->
     <div class="card-img-wrapper">
-         <ng-container *ngIf="story.imageUrl.length > 50;then first else second"></ng-container>
+         <ng-container *ngIf="story.imageUrl.length;then first else second"></ng-container>
              <ng-template #first>
                          <!-- <p>{{story | json}}</p> -->
                  <img src="{{story.imageUrl}}"

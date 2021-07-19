@@ -8,14 +8,14 @@ import { NewsService } from 'src/app/_services/news.service';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
-  news : News[];
-  constructor(private newsService:NewsService) { }
+  constructor(public newsService:NewsService) { }
 
   ngOnInit(): void {
-     this.newsService.getNewsAll().subscribe( res=>{
-        this.news = res;
-        console.log(this.news)
-     })
+     this.newsService.refreshList();
   }
-  
+  deleteNews(event){
+    this.newsService.deleteNews(event).subscribe( res =>{
+      this.newsService.refreshList();
+    })
+  }
 }

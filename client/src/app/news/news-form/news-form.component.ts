@@ -39,7 +39,7 @@ export class NewsFormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.newsService.refreshList();
+        this.router.navigate(['news']);
       },
       err => {
         console.log(err);

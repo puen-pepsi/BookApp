@@ -1,0 +1,46 @@
+
+<div class="top-between" >
+    <form #form="ngForm" (ngSubmit)="loadMembers()" autocomplete="off">
+            <div> 
+                <mat-button-toggle-group  [(ngModel)] = 'userParams.orderBy' name="orderBy" aria-label="Font Style">
+                <mat-button-toggle 
+                    (click)="loadMembers()"
+                    value="lastActive">
+                    Last Active</mat-button-toggle>
+                <mat-button-toggle 
+                    (click)="loadMembers()"
+                    value="created">
+                    Newest Author</mat-button-toggle>
+                </mat-button-toggle-group> 
+            </div>  
+            
+    </form>
+    <div fxFlexAlign="center end">
+         <span class="text-muted ">You Filter - {{pagination?.totalItems}} found</span>
+    </div>
+</div>
+<div class="showcard" *ngIf="members">
+    <carousel class="carousel-html-content" style="z-index: 2;"
+        [height]="'160'" 
+        [cellWidth]='100'
+        [overflowCellsLimit]="'3'">
+            <div *ngFor="let member of members" class="carousel-cell">
+                <app-member-card [member]="member"></app-member-card>
+            </div>
+    </carousel>
+</div>
+
+<!-- <div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;"> 
+    </pagination> 
+</div>-->
+

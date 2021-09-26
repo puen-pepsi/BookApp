@@ -1,6 +1,6 @@
 // import { Comment } from './../comment.model';
 import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
@@ -9,7 +9,7 @@ import { ShowStoryService } from '../../show-story.service';
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.css'],
+  styleUrls: ['./comment-list.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentListComponent implements OnInit, OnDestroy {
@@ -23,6 +23,7 @@ export class CommentListComponent implements OnInit, OnDestroy {
   constructor(
     public commentService:CommentService,
     private route: ActivatedRoute,
+    private router:Router,
     private confirmService:ConfirmService,
     private showService : ShowStoryService,
   ) {}
@@ -59,6 +60,9 @@ export class CommentListComponent implements OnInit, OnDestroy {
     this.showService.postReport(event).subscribe(res => {
       console.log(res)
     })
+  }
+  gotoMember(event){
+    this.router.navigate(['/members',event]);
   }
   ngOnDestroy() {
     // this.commentSub.unsubscribe();

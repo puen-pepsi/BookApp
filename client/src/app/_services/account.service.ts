@@ -11,6 +11,7 @@ import { ExternalAuthDto } from '../_models/externalAuthDto';
 import { CustomEncoder } from './custom-encoder';
 import { ForgotPasswordDto } from '../_models/forgotpasswordDto';
 import { ResetPasswordDto } from '../_models/ResetPasswordDto';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,9 +28,11 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/login',model).pipe(
       map((response:User)=>{
         const user = response;
+        // console.log(user)
         if(user) {
           this.setCurrentUser(user);
           this.presence.createHubConnection(user);
+          // console.log(user);
         }
       })
     )

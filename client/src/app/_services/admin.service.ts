@@ -9,7 +9,9 @@ import { User } from '../_models/user';
 export class AdminService {
   baseUrl = environment.apiUrl;
   constructor(private http:HttpClient) { }
-
+  getUserRoles(username:string){
+    return this.http.get<Partial<User>>(this.baseUrl + 'admin/user-with-roles/'+username.toLowerCase(),{});
+  }
   getUserWithRoles(){
     return this.http.get<Partial<User[]>>(this.baseUrl + 'admin/users-with-roles');
   }

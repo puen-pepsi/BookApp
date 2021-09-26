@@ -14,5 +14,5 @@ export class News{
         this.userName="";
         this.userPhoto="";
         this.newsCreated;
-}
+    }
 }

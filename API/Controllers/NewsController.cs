@@ -26,6 +26,26 @@ namespace API.Controllers
             var newsAll = _mapper.Map<IEnumerable<NewsShowDto>>(getnews);
             return Ok(newsAll);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<NewsShowDto>> GetNew(int id)
+        {
+            var news = await _unitOfWork.NewsRepository.GetNews(id);
+            return Ok(_mapper.Map<NewsShowDto>(news));
+        }
+        [HttpGet("take/{take}")]
+        public async Task<ActionResult<IEnumerable<NewsShowDto>>> GetNewsTake(int take)
+        {
+            var getnews = await _unitOfWork.NewsRepository.GetNewsList(take);
+            var newsAll = _mapper.Map<IEnumerable<NewsShowDto>>(getnews);
+            return Ok(newsAll);
+        }
+        [HttpGet("lazyload/{current}/{take}")]
+        public async Task<ActionResult<IEnumerable<NewsShowDto>>> GetLazyLoadNew(int current ,int take)
+        {
+            var getnews = await _unitOfWork.NewsRepository.GetNewsLazyLoad(current,take);
+            var newsAll = _mapper.Map<IEnumerable<NewsShowDto>>(getnews);
+            return Ok(newsAll);
+        } 
         [HttpPost]
         public async Task<ActionResult> CreatNews([FromBody] NewsDto newsDto)
         {

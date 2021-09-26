@@ -1,0 +1,60 @@
+.full-width{
+    position:absolute;
+    width: 100%;
+    top:64px;
+    /* top:-36px; */
+    left: 0;
+}
+.main{
+    margin-top: 500px;
+    position: relative;
+}
+.top-between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 9999;
+    width: 100%;
+    height:40px;
+}
+
+.member{
+    border:lightgray 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+.novel{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    margin-top:20px;
+}
+.hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(150, 197, 247, 1),rgba(2150, 197, 247, 0.2)); 
+    /* Set a specific height */
+    height: 500px;
+  
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top:64px;
+    left: 0;
+    width: 100%;
+  }
+  .toprank{
+    //  margin-top: 30px;
+    //   overflow: hidden;
+  }
+
+.recent{
+
+    height: 264px;
+    overflow-y: scroll;
+}
+h4{
+    color: #1489bb ;
+}

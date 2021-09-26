@@ -1,0 +1,97 @@
+.img-circle {
+    /* max-height: 35px; */
+    border:1px solid white;
+    /* box-shadow: 0 0 0 2px #007bff;;  */
+    background-clip: content-box;
+    display: inline;
+}
+.rank{
+    display:flex;
+    flex-direction: row;
+    gap:5px;
+    cursor: pointer;
+    height: 100%;
+    overflow-y: visible;
+}
+// .image{
+//     padding: 2px;
+//     align-self: center;
+// }
+.image{
+    position: relative;
+}
+.image .mat-icon{
+    position:absolute;
+    top:-15px;
+    left: 25px;
+}
+.image img{
+    display: block;
+}
+.image .fa-crown{
+    position:absolute;
+    top:-9px;
+    right: -9px;
+    color:gold;
+}
+.icon .fa-crown{
+    position: relative;
+    top: -12px;
+    right:15px;
+    width: 35px;
+    color:gold;
+}
+#crown {
+    width: 45px;
+}
+#crown .fa-crown{
+    position: relative;
+    top:-15px;
+    left: -10px;
+    color:gold;
+}
+// .image .fa-crown{
+//     // position: absolute;
+//     top: -2px;
+//     left: 25px;
+//     color:gold;
+// }
+// .fa-crown{
+//     padding-right: 5px;
+//     color:gold;
+// }
+.fa-rotate-45 {
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    transform: rotate(40deg);
+}
+.label_name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 5px;
+    z-index: 100;
+}
+.knownAs{
+    text-align: left;
+    line-height: 100%;
+}
+.knownAs .name{
+    font-weight: 500;
+    font-size: 1rem;
+}
+.knownAs .fa-crown{
+    color: gold;
+}
+.title{
+    /* position: relative;
+    top:-5px;
+    margin-top: 0; */
+    display: block;
+    padding-top:5px;
+    font-size: 0.5rem;
+    color:lightslategray;
+    line-height: 0;
+}

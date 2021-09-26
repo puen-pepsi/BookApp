@@ -1,12 +1,14 @@
 import { Input, Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivitiesType } from 'src/app/_models/activitiestype';
+import { ActivitiesService } from 'src/app/_services/activities.service';
 import { CommentService } from 'src/app/_services/comment.service';
 // import { ReplyService } from '../../reply.service';
 
 @Component({
   selector: 'app-reply-form',
   templateUrl: './reply.component.html',
-  styleUrls: ['./reply.component.css']
+  styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
   @Output('repCancel') repCancel: boolean;
@@ -14,10 +16,12 @@ export class ReplyComponent implements OnInit {
   @Input('replyId') replyId: string;
   @Input('storyName') storyname:string;
   replyForm: FormGroup;
-
+  activitiesType = ActivitiesType.writeComment;
+  activitiesTimer = true;
   constructor(
     private fb: FormBuilder,
     public commentService:CommentService,
+    private activitiesService:ActivitiesService
     ){}
 
 
@@ -46,7 +50,15 @@ export class ReplyComponent implements OnInit {
     //console.log(submittedVal);
     this.commentService.sendComment(submittedVal.story_name,submittedVal.content,+submittedVal.comment,null).then(()=>{
       this.replyForm.reset();
-      
+      if(this.activitiesTimer){
+        this.activitiesService.postActivities(this.activitiesType,submittedVal.story_name).subscribe(res =>{
+          console.log(res)
+          this.activitiesTimer = false;
+          setTimeout(() => {
+            this.activitiesTimer = true;
+          }, 300000);
+        })
+      }
   })
   }
 }

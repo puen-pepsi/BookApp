@@ -15,6 +15,8 @@ namespace API.DTOs
         public string Content { get; set; }
         public string UserName { get; set; }
         public string KnownAs { get; set; } 
+        public int Point { get; set; }
+        public string Title { get; set; }
         public string Image { get; set; }
 
         //list for user like

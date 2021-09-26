@@ -7,11 +7,12 @@ import { AdminService } from 'src/app/_services/admin.service';
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.css']
+  styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef:BsModalRef;
+  searchText;
   constructor(private adminService:AdminService,private modalService:BsModalService) { }
 
   ngOnInit(): void {
@@ -50,6 +51,7 @@ export class UserManagementComponent implements OnInit {
       {name :'Admin',value:'Admin'},
       {name :'Moderator',value:'Moderator'},
       {name :'Member',value:'Member'}
+      //add vip
     ];
 
     availableRoles.forEach(role => {

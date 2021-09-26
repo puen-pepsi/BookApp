@@ -12,6 +12,7 @@ export class Story{
         created:Date;
         username:string;
         userphoto:string;
+        totalChapter:number;
         tags:string;
         constructor(){
                 this.storyId=0;

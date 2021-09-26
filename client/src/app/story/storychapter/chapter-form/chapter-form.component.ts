@@ -1,30 +1,37 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { formatArrayBuffer } from '@microsoft/signalr/dist/esm/Utils';
+import { ConsoleLogger, formatArrayBuffer } from '@microsoft/signalr/dist/esm/Utils';
 import { ToastrService } from 'ngx-toastr';
 import { Chapter } from 'src/app/_models/chapter';
 import { StoryService } from 'src/app/_services/story.service';
 import { StorychapterService } from 'src/app/_services/storychapter.service';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as ClassicEditor from 'src/app/ckCustomBuild/build/ckeditor';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ActivitiesService } from 'src/app/_services/activities.service';
+import { ActivitiesType } from 'src/app/_models/activitiestype';
+import { C } from '@angular/cdk/keycodes';
 
 
 @Component({
   selector: 'app-chapter-form',
   templateUrl: './chapter-form.component.html',
-  styleUrls: ['./chapter-form.component.css']
+  styleUrls: ['./chapter-form.component.scss']
 })
-export class ChapterFormComponent implements OnInit {
+export class ChapterFormComponent implements OnInit,OnChanges{
+  @ViewChild('editor') editorComponent:CKEditorComponent;
+  @Input('isedit') isedit : boolean;
   @Output() goList = new EventEmitter();
+  activitiesType = ActivitiesType.writeChapter;
+  firstWriteChapter:ActivitiesType;
   publishCheck:boolean;
   user : User;
   baseApiUrl = environment.apiUrl;
   public Editor = ClassicEditor;
-  
+  public EditorData = '';
   public config = {
       toolbar: [ 'undo', 'redo','|',
                 'heading', '|',
@@ -111,12 +118,25 @@ export class ChapterFormComponent implements OnInit {
   constructor(public storyChapterService:StorychapterService,
               public storyService:StoryService,
               // private accountService:AccountService,
+              private activitiesService:ActivitiesService,
               private toastr:ToastrService) { 
                 // this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
               }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(this.isedit)
+    if(!this.isedit && this.EditorData != ''){
+      this.editorComponent.editorInstance.data.set('')
+    }
   }
+
+  ngOnInit(): void {
+      // console.log("oninit")
+      if(this.storyChapterService.formData.storyId > 0)this.EditorData=this.storyChapterService.formData.content;
+    }
+  // resetContent(){
+  //   console.log(this.editorComponent.editorInstance.data.set('')) ;
+  // }
   public onChange( { editor }: ChangeEvent ) {
     this.storyChapterService.formData.content = editor.getData();
   }
@@ -135,13 +155,25 @@ export class ChapterFormComponent implements OnInit {
         this.storyChapterService.refreshList(this.storyService.formData.storyId,false);
         this.goList.emit(false);
         this.toastr.success("Add Chapter Success","Infomation");
-
       },
       err => {
         this.toastr.error("!!!UnSuccess","Infomation");
         console.log(err);
       }
     );
+    //this.publishCheck => Addpoint
+    if(this.publishCheck){
+      this.activitiesService.postActivities(this.activitiesType,this.storyService.formData.storyName).subscribe(res =>{
+        if(this.storyService.formData.type == "novel"){
+          this.firstWriteChapter = ActivitiesType.FirstTimeWriteNovel;
+        }else{
+          this.firstWriteChapter =ActivitiesType.FirstTimeWriteManga;
+        }
+        this.activitiesService.postTitle(this.firstWriteChapter,0,"Add Chapter").subscribe(res=>{
+          console.log(res);
+        })
+      })
+    }
   }
   updateRecord(form: NgForm) {
     this.storyChapterService.putStoryChapter(this.publishCheck).subscribe(
@@ -154,11 +186,26 @@ export class ChapterFormComponent implements OnInit {
         console.log(err);
       }
     );
+    //this.publishCheck == true => Addpoint
+    if(this.publishCheck){
+      this.activitiesService.postActivities(this.activitiesType,this.storyService.formData.storyName).subscribe(res =>{
+        if(this.storyService.formData.type == "novel"){
+          this.firstWriteChapter = ActivitiesType.FirstTimeWriteNovel;
+        }else{
+          this.firstWriteChapter =ActivitiesType.FirstTimeWriteManga;
+        }
+        this.activitiesService.postTitle(this.firstWriteChapter,0,"Add Chapter").subscribe(res=>{
+          console.log(res);
+        })
+      })
+    };
   }
-  resetForm(form: NgForm) {
+  public resetForm(form: NgForm) {
     form.form.reset();
     this.storyChapterService.formData = new Chapter();
+    this.editorComponent.editorInstance.data.set('');
   }
+
   backToChapter(){
     this.storyChapterService.formData = new Chapter();
     this.goList.emit(false);

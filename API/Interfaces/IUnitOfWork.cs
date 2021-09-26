@@ -14,6 +14,10 @@ namespace API.Interfaces
         IRepository Repository {get;}
         IPhotoRepository PhotoRepository {get;}
         INewsRepository NewsRepository {get;}
+        IActivitiesRepository ActivitiesRepository{get;}
+        ITitleRepository TitleRepository{get;}
+        IScreen ScreenRepository{get;}
+        ITagRepository TagRepository{get;}
         Task<bool> Complete();
         bool HasChanges();
     }

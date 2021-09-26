@@ -1,0 +1,84 @@
+<div class="top-between" fxLayoutAlign="start end">
+    <h3>Top Rankers</h3>  
+    <button mat-icon-button 
+              matTooltip="All"
+              [routerLink]="['topviews']" >
+              <mat-icon >sort</mat-icon>
+    </button>   
+    <!-- <mat-icon >emoji_events</mat-icon> -->
+    <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+        color="warn"
+        (click)="GetRank(viewsParams.orderByViews)">
+        Set Rank
+    </button>
+    <mat-divider></mat-divider>
+  </div>
+<div *ngIf="listItems">
+        <div class="header">
+            <form #form="ngForm" (ngSubmit)="loadStory()" autocomplete="off">   
+                    <mat-button-toggle-group   style="width: 100%;"
+                    [(ngModel)] = 'viewsParams.orderByViews' 
+                    name="orderBy" aria-label="Font Style">
+                    <mat-button-toggle 
+                        style="width:100%"
+                        (click)="loadStory()"
+                        value="weekly">
+                        Weekly</mat-button-toggle>
+                    <mat-button-toggle 
+                        style="width:100%"
+                        (click)="loadStory()"
+                        value="monthly">
+                        Monthly</mat-button-toggle>
+                    <mat-button-toggle 
+                        style="width:100%"
+                        (click)="loadStory()"
+                        value="all-time">
+                        All-time</mat-button-toggle>
+                    </mat-button-toggle-group> 
+                
+        </form> 
+        </div>
+        
+        <!-- <ul class="header">
+            <li class="list-group-item" *ngFor="let sort of sortOptions"
+                [class.active]="sort.value === viewsParams.orderByViews" [value]="sort.value"
+                (click)="onTypeSelected(sort.value)">
+                {{sort.name}}
+            </li>
+        </ul> -->
+      
+</div>  
+    <cdk-virtual-scroll-viewport #scroller itemSize="50" class="content" (scrolledIndexChange)="nextBatch($event)">
+        <mat-list>
+            <ng-container *cdkVirtualFor="let item of listItems index as i">
+                <mat-list-item>
+                <!-- <img matListAvatar [src]="item.image"> -->
+                
+                <h3 matLine>
+                    {{i+1}}&nbsp;&nbsp; {{item.storyName | titlecase}} 
+                </h3>
+                <span matBadge={{item.views}}></span>
+                <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+                    <mat-icon>
+                        more_vert
+                    </mat-icon>
+                    <mat-menu #itemMenu="matMenu">
+                        <button mat-menu-item (click)="open(item)">
+                            <mat-icon>menu_book</mat-icon>
+                            <span>Read</span>
+                        </button>
+                        <button mat-menu-item (click)="bookmark(item)">
+                             <mat-icon>bookmark_border</mat-icon>    
+                             <span>Follow</span>  
+                        </button>
+                        <button mat-menu-item routerLink='/members/{{item.authorName}}' >
+                             <mat-icon>account_box</mat-icon>
+                             <span>Author</span>
+                        </button>
+                    </mat-menu>
+                </button>
+                <mat-divider></mat-divider>
+                </mat-list-item>
+            </ng-container>
+        </mat-list>
+    </cdk-virtual-scroll-viewport>

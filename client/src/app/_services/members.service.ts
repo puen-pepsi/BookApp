@@ -5,6 +5,7 @@ import { of, pipe } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
+import { MemberLike } from '../_models/memberlike';
 import { PaginatedResult, Pagination } from '../_models/pagination';
 import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
@@ -57,7 +58,7 @@ export class MembersService {
     return getPaginatedResult<Member[]>(this.baseUrl+'users',params,this.http)
       .pipe(map(response =>{
         this.memberCache.set(Object.values(UserParams).join('-'),response);
-        // console.log(response);
+        // console.log(this.memberCache.values());
         return response;
       }))
   }
@@ -82,6 +83,7 @@ export class MembersService {
       map(()=> {
         const index = this.members.indexOf(member);
         this.members[index] = member;
+        //console.log(member)
       })
     )
   }
@@ -89,18 +91,36 @@ export class MembersService {
   setMainPhoto(photoId:number){
     return this.http.put(this.baseUrl +'users/set-main-photo/' + photoId,{});
   }
-
+  setMainBanner(bannerId:number){
+    return this.http.put(this.baseUrl +'users/set-main-banner/' + bannerId,{});
+  }
+  setMainTitle(titleId:number){
+    return this.http.put(this.baseUrl +'users/set-main-title/' + titleId,{});
+  }
   deletePhoto(photoId:number){
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
-
-  addLike(username:string){
-    return this.http.post(this.baseUrl +'likes/' + username,{});
+  deleteBanner(bannerId:number){
+    return this.http.delete(this.baseUrl + 'users/delete-banner/' + bannerId);
+  }
+  deleteTitle(titleId:number){
+    return this.http.delete(this.baseUrl + 'users/delete-title/' + titleId);
   }
   getLikes(predicate:string,pageNumber,pageSize){
     let params = getPaginationHeaders(pageNumber,pageSize);
     params = params.append('predicate',predicate);
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes',params,this.http);
   }
-  
+  getMemberLiked(memberid:number){
+    return this.http.get<MemberLike>(this.baseUrl +'likes/'+memberid);
+  }
+  addLike(username:string){
+    return this.http.post(this.baseUrl +'likes/' + username,{});
+  }
+  getMemberByUserName(username:string){
+    return this.http.get<Member>(this.baseUrl +'users/'+username);
+  }
+  deletelikes(username:string){
+    return this.http.delete(this.baseUrl + 'likes/'+username,{});
+  }
 }

@@ -4,31 +4,30 @@
             [infiniteScrollThrottle]="300"
             (scrolled)="onScroll()">
     <div class="column pt-2">
-        <div class="col-md-12 p-1" *ngFor="let content of allContent">
-        <!-- single post card -->
-        <div class="card">
+        <div class="col-md-12 p-1" *ngFor="let content of allContent index as i">
+        <mat-card class="card mat-elevation-z0">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2 publish">
-                    <span class="card-title text-center ">Chapter : {{content.order}}</span>
+                    <span class="card-title text-center ">Chapter : {{content.order}}</span><span *ngIf="content.endChapter"> (End)</span>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <span>{{content.chapterName | titlecase}}</span>
                 </div>
-                <div class="col-md-3 publish">
+                <div class="col-md-4 publish">
                     <span>Published on {{content.publishedCreated | date:'d/MM/yyyy, h:mm a'}}</span>
                 </div>
                 <div class="col-md-1">
-                    <mat-button (click)="clickedRows(content)">
+                    <mat-button (click)="clickedRows(content.order)">
                         <mat-icon class="material-icons-outlined">find_in_page</mat-icon></mat-button>  
                 </div>
             </div>
         </div>
-        </div>
-    </div> 
+        </mat-card>
+    </div>
 </div>
 <!-- sinner -->
-<div class="row pb-5">
+<!-- <div class="row pb-5">
     <div class="col-md-12 p-5">
     <ngx-spinner
     bdOpacity = 0.9
@@ -40,7 +39,12 @@
     >
     </ngx-spinner>
   </div>
-</div>
+</div> -->
+<!-- <div *ngIf = "notEmptyPost" class="row pb-5">
+    <div class="col-md-12 d-flex justify-contetn-center">
+        <div class="text-muted h6 alert alert-secondary p-2">Scroll More</div>
+    </div>
+</div> -->
 <!-- Alert no more post -->
 <div *ngIf = "!notEmptyPost" class="row pb-5">
     <div class="col-md-12 d-flex justify-content-center">

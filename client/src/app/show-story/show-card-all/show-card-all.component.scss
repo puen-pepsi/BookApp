@@ -1,0 +1,84 @@
+.mat-card{
+    width: 100%;
+    /* margin-bottom: 1rem; */
+    // background-color: #212121;
+}
+#card{
+    height: 250px;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.image{
+     min-width: 180px;
+    height: 260px;
+    width: 180px;
+}
+
+.top{
+    position: relative;
+    color: whitesmoke;
+    overflow:scroll;
+}
+.top p{
+    font-size: 1rem;
+    color: rgb(114, 112, 112);
+}
+.create{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.genre{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+a:hover{
+    cursor: pointer;
+}
+h3{
+    margin-bottom: 0.5rem;
+}
+.chapter{
+    display: flex;
+    flex-direction : row;
+    /* align-items: flex-end; */
+
+}
+.rightbottom{
+    display: flex;
+    flex-direction: column;
+}
+.text{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+}
+ .example-spacer{
+    flex:1 0 auto;
+}
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    padding:0 1rem;
+    width: 100%;
+    justify-content: space-between;
+}
+.header{
+    line-height: 0.3;
+}
+.tag{
+   overflow-x: scroll;
+}

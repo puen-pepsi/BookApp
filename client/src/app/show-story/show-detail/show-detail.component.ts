@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router, RouterLink, Scroll } from '@angular/router';
 import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
@@ -19,17 +21,17 @@ import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-sho
 @Component({
   selector: 'app-show-detail',
   templateUrl: './show-detail.component.html',
-  styleUrls: ['./show-detail.component.css']
+  styleUrls: ['./show-detail.component.scss']
 })
 export class ShowDetailComponent implements OnInit ,OnDestroy{
-  @ViewChild('storyTabs',{static:true}) storyTabs:TabsetComponent;
+  // @ViewChild('storyTabs',{static:true}) storyTabs:TabsetComponent;
   starColor:StarRatingColor = StarRatingColor.lightblue;
   fSize : string = "2rem";
   showstory : ShowStory;
   userHistory : Userhistory;
   userLiked:any;
   user : User;
-  activeTab:TabDirective;
+  // activeTab:TabDirective;
   rating:number=0;
   starCount:number = 5;
   yourRate:any;
@@ -39,7 +41,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   tags:string[];
   hubOn:boolean=false;
   initContent:Chapter[]=[];
-  constructor(public showStoryService:ShowStoryService,
+  constructor(private showStoryService:ShowStoryService,
     private route:ActivatedRoute,
     private accountService:AccountService,
     private commentService:CommentService,
@@ -51,7 +53,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
           // this.bcService.set("@detail",'');
-
+         
     
     }
   ngOnInit(): void {
@@ -71,24 +73,14 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   //     this.comments = comment;
   //   })
   // }
-  onTabActivated(data: TabDirective){
-    this.activeTab = data;
-    if(this.activeTab.heading==='Table of Contents'){
-      // this.showStoryService.getStoryNameChapter(this.storyName).subscribe(res =>{
-      //   this.chapterList = res;
-      // });
-    }
-    // if(this.activeTab.heading==='Novel Comments' && this.comments.length === 0){
-    //   this.commentService.createHubConnection(this.user,this.storyName);
-    // }else{
-    //   this.commentService.stopHubConnection();
-    // }
-    if(this.activeTab.heading==='Chapter Comments' && this.comments.length === 0){
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    console.log('tabChangeEvent => ', tabChangeEvent); 
+    if(tabChangeEvent.tab.textLabel==="Chapter Comments" && this.comments.length === 0){
       if(!this.hubOn){
           this.commentService.createHubConnection(this.user,this.storyName);
           this.hubOn = true;
       }
-    }else if(this.activeTab.heading==='Novel Comments' && this.comments.length===0){
+    }else if(tabChangeEvent.tab.textLabel==="Novel Comments" && this.comments.length===0){
       if(!this.hubOn){
           this.commentService.createHubConnection(this.user,this.storyName);
           this.hubOn = true;
@@ -98,11 +90,41 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       this.hubOn = false;
     }
   }
+  // onTabActivated(data: TabDirective){
+  //   this.activeTab = data;
+  //   if(this.activeTab.heading==='Table of Contents'){
+  //     // this.showStoryService.getStoryNameChapter(this.storyName).subscribe(res =>{
+  //     //   this.chapterList = res;
+  //     // });
+  //   }
+  //   // if(this.activeTab.heading==='Novel Comments' && this.comments.length === 0){
+  //   //   this.commentService.createHubConnection(this.user,this.storyName);
+  //   // }else{
+  //   //   this.commentService.stopHubConnection();
+  //   // }
+  //   if(this.activeTab.heading==='Chapter Comments' && this.comments.length === 0){
+  //     if(!this.hubOn){
+  //         this.commentService.createHubConnection(this.user,this.storyName);
+  //         this.hubOn = true;
+  //     }
+  //   }else if(this.activeTab.heading==='Novel Comments' && this.comments.length===0){
+  //     if(!this.hubOn){
+  //         this.commentService.createHubConnection(this.user,this.storyName);
+  //         this.hubOn = true;
+  //     }   
+  //   }else{
+  //     this.commentService.stopHubConnection();
+  //     this.hubOn = false;
+  //   }
+  // }
   onRatingChanged(rating:number){
-    this.rating = rating;
-    this.showStoryService.getPostRate(rating,this.showstory).subscribe(() => {
-      //this.rating = res.rating;
-      this.refresh();
+    //this.rating = rating;
+    this.showStoryService.getPostRate(rating,this.showstory).subscribe(res => {
+      // this.showstory =res;
+      this.rating = res.rating;
+      this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
+        this.yourRate = res;
+      });
     });
   }
   refresh(){
@@ -132,6 +154,13 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     this.showStoryService.postReport(event).subscribe(res =>{
       console.log(res);
     })
+  }
+  goToTag(ele:string){
+    console.log(ele)
+    this.router.navigate(['stories/tag/',ele]);
+  }
+  gotoMember(event){
+    this.router.navigate(['/members',event]);
   }
   // getStoryName(){
   //   return this.route.snapshot.params.storyname;

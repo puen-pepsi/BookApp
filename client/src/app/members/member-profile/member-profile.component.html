@@ -1,0 +1,87 @@
+<!-- <div  [ngStyle]="{'background-image': 'url(' + getUrl() + ')'}" class="hero-image"> -->
+<div  [ngStyle]="{'background-image': getUrl()}" class="hero-image">
+    <div class="hero-text">
+        <h1>{{member.knownAs || member.username}}</h1>
+        <h3>{{member.title}}</h3>
+    </div>
+    <div class="top">  
+        <!-- <strong>Member Rank : </strong> -->
+        <span class="rank">{{rank}}</span>
+    </div>
+</div>
+<div class="picture">
+    <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}"
+                class="img-circle rounded-circle "> -->
+                <app-label-name 
+                [pHeight]='200'
+                [imageUrl]='member.photoUrl'
+                [point]='member.point'>
+                </app-label-name>
+</div>
+<div class="content">
+
+    <div class="mb-2 mt-2" *ngIf="(presence.onlineUsers$ | async).includes(member.username)">
+        <i class="fa fa-user-circle text-success"></i> Online now
+    </div>
+    <div>
+        <p><strong>Name : </strong>{{member.knownAs}}</p>
+    </div>
+    <div>
+        <p><strong>Location : </strong>{{member.city}}, {{member.country}}</p>
+    </div>
+    <div>
+         <p><strong>Last Active : </strong>{{member.lastActive | timeago}}</p>
+    </div>
+    <div>  
+        <p><strong>Member since : </strong>{{member.created | date:'dd MMM yyyy'}}</p>
+    </div>
+    <div>
+        <p><strong>Member Point : </strong>{{member.point | number}}</p>
+    </div>
+    
+            <div class="btn-group d-flex">
+                <button class="btn btn-primary">Follow</button>
+                <button (click)="selected.setValue(2)" class="btn btn-success">Message</button>
+            </div>
+            <br/>
+            
+</div>
+<div  class="detial">
+    <!-- <tabset class="member-tabset" #memberTabs>
+        <tab heading='About {{member.username | titlecase}}' (selectTab)="onTabActivated($event)">
+            <h4>Tales Of {{ member.username}}</h4>
+            <p>{{member.introduction}}</p>
+            <h4>Current Quest</h4>
+            <p>{{member.lookingFor}}</p>
+            <app-author-story [authorname]="author"></app-author-story>
+        </tab>
+        <tab heading='Gallery' (selectTab)="onTabActivated($event)">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 
+            style="display: inline-block; margin-bottom: 20px; "></ngx-gallery>
+        </tab>
+        <tab heading='Messages' (selectTab)="onTabActivated($event)">
+            <app-member-messages [username]="member.username"></app-member-messages>
+        </tab>
+    </tabset> -->
+    <div class="col-md-12">
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z0"
+            #tabGroup [selectedIndex]="selected.value"          
+            (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="About {{member.username | titlecase}}">
+            <h4>Tales Of {{ member.username}}</h4>
+            <p>{{member.introduction}}</p>
+            <h4>Current Quest</h4>
+            <p>{{member.lookingFor}}</p>
+            <app-author-story [authorname]="author"></app-author-story>
+        </mat-tab>
+        <mat-tab label="Gallery"> 
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 
+            style="display: inline-block; margin-bottom: 20px; "></ngx-gallery>
+        </mat-tab>
+        <mat-tab label="Messages">
+            <app-member-messages [username]="member.username"></app-member-messages>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+</div>
+

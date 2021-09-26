@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace API.Entities
 {
@@ -6,6 +7,12 @@ namespace API.Entities
     {
         public int Id { get; set; }
         public string TagName { get; set; }
-        //public ICollection<StoryTag> StoryTags { get; set; }    
+        //public ICollection<StoryTag> StoryTags { get; set; }  
+        public virtual ICollection<TagStory> TagStories { get; set; }  
+
+        public Tag()
+        {
+            TagStories = new Collection<TagStory>();
+        }
     }
 }

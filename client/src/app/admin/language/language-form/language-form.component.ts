@@ -6,7 +6,7 @@ import { LanguageService } from 'src/app/_services/language.service';
 @Component({
   selector: 'app-language-form',
   templateUrl: './language-form.component.html',
-  styleUrls: ['./language-form.component.css']
+  styleUrls: ['./language-form.component.scss']
 })
 export class LanguageFormComponent implements OnInit {
 

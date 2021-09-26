@@ -10,37 +10,53 @@ import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-  storyHistory : Partial<ShowHistory[]>;
+  storyHistory : Partial<ShowHistory[]> = [];
   // predicate = 'liked';
   pageNumber = 1;
-  pageSize = 3;
+  pageSize = 10;
   pagination:Pagination;
   rating:number=0;
   starColor:StarRatingColor = StarRatingColor.gold3;
   fSize : string = "1.2rem";
   starCount:number = 5;
   userLiked:UserLiked;
+  notEmptyPost = true;
+  notscrolly = true;
   constructor(public showStoryService:ShowStoryService) { 
   }
 
   ngOnInit(): void {
     this.loadStoryHistory();
-    // this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
-    //   this.userLiked = res;
-    //   console.log(res)
-    // });
   }
   loadStoryHistory(){
     this.showStoryService.getStoryHistory(this.pageNumber,this.pageSize).subscribe(response =>{
-      this.storyHistory = response.result;
-      this.pagination = response.pagination;
+      const newPost = response.result;
+      //  this.spinner.hide();
+       if (newPost.length === 0 ) {
+         this.notEmptyPost =  false;
+       }
+       // add newly fetched posts to the existing post
+      
+      this.storyHistory = this.storyHistory.concat(newPost);
+      this.pagination = response.pagination;//1,2,3,4..
+      console.log(this.storyHistory)
+      console.log(this.pagination)
+      this.notscrolly = true;
     })
-
-    // console.log(this.storyHistory.find(res => res.storyId == 1));
   }
+    onScroll() {
+      if (this.notscrolly && this.notEmptyPost) {
+        // this.spinner.show();
+        this.pageNumber++;
+        this.notscrolly = false;
+        console.log("scroll");
+        this.loadStoryHistory();
+      }
+    }
+    // console.log(this.storyHistory.find(res => res.storyId == 1));
   pageChanged(event:any){
     // this.pageNumber = event.page;
     this.pageNumber = event.pageIndex+1;

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +31,20 @@ namespace API.Controllers
             }
             return model;
         }
-
+        [HttpGet("taglist/{tagname}")]
+        public async Task<ActionResult<IEnumerable<StoryTagDto>>> GetTagAsync(string tagname)
+        {
+            var taglist =  await _unitOfWork.TagRepository.GetStoryByTagName(tagname);
+            var newlist  =    taglist.Select( t => new StoryTagDto{
+                                storyName = t.Stories.StoryName,
+                                Genre =t.Stories.Genre,
+                                Description = t.Stories.Description,
+                                imageUrl = t.Stories.ImageUrl,
+                                Tags = t.Stories.Tags,
+                                UserName = t.Stories.UserName
+                              });
+            return Ok(newlist);
+        }
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTag(int id,Tag tag)
         {

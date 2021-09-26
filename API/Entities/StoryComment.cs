@@ -15,11 +15,11 @@ namespace API.Entities
         public int? ParentId { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public string Content { get; set; }
-        public virtual ICollection<Activities> Liked { get; set; }
+        public virtual ICollection<LikeComment> Liked { get; set; }
 
         public StoryComment()
         {
-            Liked = new Collection<Activities>();
+            Liked = new Collection<LikeComment>();
         }
 
     }

@@ -4,15 +4,18 @@ export class StoryParams{
     genre :string;
     author : string;
     storyType:string;
+    language:string;
+    search:string;
     pageNumber = 1;
-    pageSize = 5;
+    pageSize = 10;
     // topViews = 'views'
     // topRate = 'rating'
-    orderBy = 'rating';
-    
+    orderBy = 'rating';   
     constructor(user:User){
-        this.genre ='';
+        this.genre ='All';
         this.author='';
         this.storyType='';
+        this.language='All';
+        this.search='';
     }
 }

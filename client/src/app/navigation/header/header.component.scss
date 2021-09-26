@@ -1,0 +1,129 @@
+
+a{
+    text-decoration: none;
+    color:#585858;
+    font-family: 'Montserrat', sans-serif;
+}
+a:hover,
+a:active{
+    color:lightgray;
+}
+.navigation-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-weight: lighter;
+    font-size: 1rem;
+}
+.nav-caption{
+    display:inline-block;
+    padding-left: 6px;
+}
+.dropdown{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.dropdown-toggle, .dropdown-item{
+    display: flex;
+    flex-direction: row;
+    cursor:pointer;
+    color:black;
+}
+.dropdown-toggle::after{
+    display: flex;
+    align-self:center;
+}
+:host .dropdown-menu{
+    right: 5px !important;
+}
+.img-circle {
+    max-height: 40px;
+    border:1px solid #ffffff;
+    box-shadow: 0 0 0 2px ;
+    box-shadow:#007bff;
+    background-clip: content-box;
+    display: inline;
+}
+img {
+    max-height: 40px;
+    background-clip: content-box;
+    display: inline;
+}
+mat-toolbar{
+    position: fixed;
+    z-index: 999;
+    font-weight: lighter;
+    box-shadow: 0 0px 4px 0px rgba(0,0,0,0.4);
+    
+}
+// .mat-toolbar.mat-primary {
+//     // background-color: #ffffff;
+//     box-shadow: 0 0px 4px 0px rgba(0,0,0,0.4);
+// }
+.mat-toolbar.dropdown-toggle {
+    color:black;
+}
+.mat-icon{
+    color:#585858;
+    vertical-align:middle;
+}
+button{
+    padding-right: 1px;
+    padding-left: 1px;
+}
+button.mat-menu-item {
+    width: 100%;
+    padding: 0 10px;
+}
+.cdk-overlay-pane {width: 100%;}
+.mat-menu-panel {width: 100%;}
+/* here's what you're looking for B-) */
+mat-nav-list.list-horizontal {
+    padding: 0;
+    display: flex;
+    .mat-list-item {
+      display: inline-flex;
+      height: auto;
+      width: auto;
+
+    }
+  }
+//   .mat-toolbar-row, .mat-toolbar-single-row{
+//     height: unset !important;
+//   }
+  
+//   .mat-list-item .mat-list-item-content {
+//     padding-left: 0px !important;
+//     padding-right: 0px !important;
+//   }
+// :host ::ng-deep button.mat-list-item{
+    
+// }
+.item-link{
+    padding:0 2px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: montserrat;
+    
+}
+.text-space{
+    padding-left: 5px;
+}
+.hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    // background-image: linear-gradient(rgba(150, 197, 247, 1),rgba(2150, 197, 247, 0.2)); 
+    background-image: linear-gradient(rgba(2150, 197, 247, 0.8),rgba(255, 255, 255, 0.0)); 
+    /* Set a specific height */
+    height: 400px;
+  
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top:64px;
+    left: 0;
+    width: 100%;
+    z-index: -999;
+  }

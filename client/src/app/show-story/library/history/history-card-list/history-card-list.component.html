@@ -1,0 +1,60 @@
+<mat-card class="mat-elevation-z0">
+    <div class="main">
+        <div class="image">
+            <img src="{{row.imageUrl || './assets/images/blackcover.png'}}"
+                alt="{{row.storyName}}" 
+                class="img">
+        </div>
+        <div class="body">
+            <div class="top">
+               <h6><b>{{row.storyName| titlecase}}</b>&nbsp;&nbsp;<small class="text-muted">({{row.genre}})</small></h6>
+               <div class="star">
+                <app-star-rating-show
+                [rating]="rating"  
+                [starCount]="starCount" 
+                [totalRate]="totalRate"
+                [color]="starColor" 
+                [fSize] = "fSize"
+                [wSize] = "fSize"
+                (ratingUpdated)="onRatingChanged($event)">
+                </app-star-rating-show>
+            </div>
+                <p class="text">{{row.description}}</p> 
+            </div>
+            <div class="create text-muted">
+                <div class="genre" >
+                    
+                <div fxLayoutAlign="end end">
+                    <!-- <small>{{row.created | timeago}}&nbsp;|&nbsp;</small> -->
+                    <span>By {{row.userName | titlecase}}</span>
+                </div>
+                </div>
+               
+                <!-- <span></span> -->
+                <div>
+                    <button type="button" class="btn btn-outline-light btn-sm"
+                    [routerLink]= "['/stories',row.storyName,'chapters']"
+                    fragment={{row.fregment}}>Continue..</button>
+
+                    <!-- <button *ngIf="!userLiked"
+                        type="button" class="btn btn-outline-primary" 
+                        (click)="addLikeStory(story)">
+                        <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
+                    <button *ngIf="userLiked"
+                        type="button" class="btn btn-outline-light" 
+                        (click)="addLikeStory(story)"> 
+                        <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button> -->
+                    <!-- <app-followstory [isActive]="userLiked != null"
+                        [storyid]="row.storyId" 
+                        [storyname]="row.storyName"
+                        (follow)="followthis($event)">
+                    </app-followstory> -->
+                </div>
+            </div>
+        </div>
+        <!-- <div class="rightCircle">
+            <mat-icon [inline]="true" (click)="deleteHistory(row.storyId)">close</mat-icon>
+          </div> -->
+    </div>
+   
+</mat-card>

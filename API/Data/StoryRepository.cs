@@ -22,6 +22,10 @@ namespace API.Data
             _context = context;
         }
 
+        public StoryRepository()
+        {
+        }
+
         public void AddStory(Story story)
         {
              _context.Stories.Add(story);
@@ -87,6 +91,7 @@ namespace API.Data
                                 .ThenInclude(sc => sc.Published)
                             .Include(s=> s.Author)
                                 .ThenInclude(a => a.Photos)  
+                            .Include(s => s.ViewCount)
                             .Include(p => p.PhotoStories)
                             .Include(s => s.Ratings)
                             .SingleOrDefaultAsync(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower());
@@ -112,6 +117,8 @@ namespace API.Data
         {
             return await _context.StoryChapters
                             .Include(p => p.Published)
+                            .Include(a => a.LikeChapters)
+                                .ThenInclude(a => a.UserActive)
                             .Where(c => c.Id == id)
                             .FirstOrDefaultAsync();
         }
@@ -121,7 +128,7 @@ namespace API.Data
             if(!published){
                 return await _context.StoryChapters
                             .Include(c => c.Published)
-                            .Where(c => c.StoryId == id)
+                            .Where(c => c.StoryId == id )
                             .OrderByDescending(c => c.Order)
                             .ToListAsync();
             }
@@ -137,19 +144,49 @@ namespace API.Data
         {
             throw new System.NotImplementedException();
         }
-
-      
-
+        public async Task<IEnumerable<Story>> GetStoriesAsynclazyload(int currentStory,int pageSize,string storyType)
+        {
+            return await _context.Stories
+                            .Include( s =>s.ViewCount)
+                            .Include( s => s.Ratings)
+                            .Include( s => s.Author)
+                            .ThenInclude( s => s.Photos)
+                            .Include( s => s.Chapters)
+                            .ThenInclude(sc => sc.Published)
+                            .Where( s => s.Type == storyType)
+                            .Skip(currentStory)
+                            .Take(pageSize)
+                            .ToListAsync();  
+        }
+         public async Task<IEnumerable<StoryDto>> GetStoriesAsyncRandom(int pageSize)
+        {
+            var allstory =  await _context.Stories
+                            .Include( s =>s.ViewCount)
+                            .Include( s => s.Ratings)
+                            .Include( s => s.Author)
+                            .Include( s => s.Chapters)
+                            .ToListAsync();  
+            var random = allstory.OrderBy(t => Guid.NewGuid()).Take(pageSize);
+            return _mapper.Map<IEnumerable<StoryDto>>(random);     
+        }
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {
             var query = _context.Stories.AsQueryable();
-            if(storyParams.Genre != ""){
+            if(storyParams.Genre != "All"){
                 query = query.Where(s => s.Genre == storyParams.Genre);
+            }
+            if(storyParams.Language != "All"){
+                query = query.Where(s => s.Language == storyParams.Language);
             }
             if(storyParams.StoryType !=""){
                 query =query.Where(s => s.Type == storyParams.StoryType);
             }
+            if(storyParams.Search !=""){
+                query = query.Where(s => s.StoryName.ToLower().Contains(storyParams.Search) 
+                    || s.Tags.ToLower().Contains(storyParams.Search.ToLower()));
+            }
             // query = query.Where(a => a.UserName == storyParams.Author);
+            
             query = storyParams.OrderBy switch
             {
                 "created" => query.OrderByDescending( s => s.Created),
@@ -157,12 +194,10 @@ namespace API.Data
                 "views" => query.OrderByDescending(s => s.ViewCount.Count),
                 _ => query.OrderBy(s=>s.Rating)
             };
-          
             // var pro = query.ProjectTo<StoryDto>(configuration).AsNoTracking();
             // var test = _mapper.ProjectTo<StoryDto>(query);
             return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                     storyParams.PageNumber,storyParams.PageSize);
-
         }
         public async Task<PagedList<StoryDto>> GetAuthorStory(AuthorStoryParams authorStoryParams)
         {
@@ -188,17 +223,54 @@ namespace API.Data
                             .Include(c => c.Published)
                             .Include(c => c.Story)
                                 .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
+                            .Include(c => c.LikeChapters)
+                                .ThenInclude( c=>c.UserActive)
                             .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
                                 &&  c.Published != null)
                             .OrderBy(c => c.Order)
                             .ToListAsync();          
         }
-        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize)
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterLazyload(string storyName,int currentChapter,int pageSize)
         {
             return await  _context.StoryChapters
                             .Include(c => c.Published)
                             .Include(c => c.Story)
                                 .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
+                            .Include(c => c.LikeChapters)
+                                .ThenInclude( c=>c.UserActive)
+                            .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
+                                &&  c.Published != null)
+                            .OrderBy(c => c.Order)
+                            .Skip(currentChapter)
+                            .Take(pageSize)
+                            .ToListAsync();          
+        }
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterLazyloadUp(string storyName,int currentChapter,int pageSize)
+        {
+            return await  _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Include(c => c.Story)
+                                .ThenInclude(c=> c.Author).ThenInclude(c=>c.Photos)
+                            .Include(c => c.LikeChapters)
+                                .ThenInclude( c=>c.UserActive)
+                            .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
+                                &&  c.Published != null && c.Order < currentChapter)
+                            .OrderByDescending(c => c.Order)
+                            .Take(pageSize).Reverse()
+                            .ToListAsync();
+        }
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize)
+        {
+            if(pageSize==0){//show all
+                return await  _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
+                                &&  c.Published != null)
+                            .OrderBy(c => c.Order)
+                            .ToListAsync(); 
+            }
+            return await  _context.StoryChapters
+                            .Include(c => c.Published)
                             .Where(c => c.Story.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower()
                                 &&  c.Published != null)
                             .OrderBy(c => c.Order)
@@ -245,17 +317,24 @@ namespace API.Data
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Activities> GetLikedComment(int commentId, int userId)
+        public async Task<LikeComment> GetLikedComment(int commentId, int userId)
         {
-            return await _context.Activities
-            .SingleOrDefaultAsync(x => x.UserActiveId == userId && x.ParentId == commentId);
+            return await _context.LikeComments
+            .SingleOrDefaultAsync(x => x.UserLikeCommentId == userId && x.ParentId == commentId);
         }
-
-        public void DeleteLikeComment(Activities activities)
+        public async Task<LikeChapter> GetLikedChapter(int chapterId, int userId)
         {
-            _context.Activities.Remove(activities);
+            return await _context.LikeChapters
+            .SingleOrDefaultAsync(x => x.UserActiveId == userId && x.ChapterId == chapterId);
         }
-
+        public void DeleteLikeComment(LikeComment likeComment)
+        {
+            _context.LikeComments.Remove(likeComment);
+        }
+        public void DeleteLikeChapter(LikeChapter likeChapter)
+        {
+            _context.LikeChapters.Remove(likeChapter);
+        }
         public async Task<IEnumerable<StoryChapter>> GetNewChaper(int take)
         {
             return   await  _context.StoryChapters
@@ -267,9 +346,51 @@ namespace API.Data
                             .ToListAsync();
         }
 
-        Task<StoryChapter> IStoryRepository.GetLastChapterByStoryName(string storyName)
+        public async Task<IEnumerable<StoryViewsDto>> GetViewsQuery(ViewsParams viewsParams)
         {
-            throw new NotImplementedException();
+             DateTime query;
+             query = viewsParams.OrderByViews switch
+            {
+                "weekly" => DateTime.UtcNow.AddDays(-7),
+                "monthly" => DateTime.UtcNow.AddMonths(-1),
+                _ => DateTime.MinValue
+            };
+            //novel or manga
+            return  await _context.Stories
+                    .Select((s) => new StoryViewsDto
+                    {
+                        // Select from every Patient only the properties you plan to use
+                        StoryId = s.Id,
+                        StoryName = s.StoryName,
+                        AuthorId = s.AuthorId,
+                        AuthorName = s.Author.UserName,
+                        Views = s.ViewCount.Where(v => v.RateCreated > query).Count(),
+                    })
+                    .OrderByDescending(v => v.Views)
+                    .ToListAsync();
+
+        }
+
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryIdNotPublish(int id)
+        {
+             return await _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Where(c => c.StoryId == id && c.Published == null)
+                            .OrderByDescending(c => c.Order)
+                            .ToListAsync();
+        }
+
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterRecent()
+        {
+            DateTime twoweek = DateTime.Now.AddDays(-14);
+             return await _context.StoryChapters
+                            .Include(c => c.Published)
+                            .Include(c => c.Story)
+                            .ThenInclude( c => c.Author)
+                            .ThenInclude( c => c.Photos)
+                            .Where(c => c.Published != null && c.Published.Created > twoweek )
+                            .OrderByDescending(c => c.Published.Created)
+                            .ToListAsync();
         }
     }
 }

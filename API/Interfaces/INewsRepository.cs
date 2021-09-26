@@ -12,6 +12,7 @@ namespace API.Interfaces
         Task<News> GetNews(int id);
         Task<IEnumerable<News>> GetNewsList(int tcount);
         Task<IEnumerable<News>> GetNewsAll();
+        Task<IEnumerable<News>> GetNewsLazyLoad(int current,int takesize);
         void DeleteNews(News news);
 
     }

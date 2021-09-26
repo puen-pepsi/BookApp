@@ -5,7 +5,7 @@ import { StatusService } from 'src/app/_services/status.service';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
 

@@ -4,11 +4,12 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 import { ShowStoryService } from '../show-story.service';
 import { Pagination } from '../../_models/pagination';
 import { ShowStory } from '../../_models/showstory';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
-  styleUrls: ['./library.component.css']
+  styleUrls: ['./library.component.scss']
 })
 export class LibraryComponent implements OnInit {
   @ViewChild('Library',{static:true}) libraryTab:TabsetComponent;
@@ -16,7 +17,7 @@ export class LibraryComponent implements OnInit {
   activeTab:TabDirective;
   // predicate = 'liked';
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 50;
   pagination:Pagination;
   constructor(private showstoryService:ShowStoryService) { 
   }
@@ -36,6 +37,22 @@ export class LibraryComponent implements OnInit {
     this.pageNumber = event.pageIndex+1;
     this.loadStoryLikes();
   }
+  pageNext(){
+    console.log("next")
+    //this.showStoryService.setStoryParams(this.storyParams);
+    
+    if(this.pageNumber + 1 > this.pagination.totalPages)return;
+    this.pageNumber++;
+    this.loadStoryLikes();
+  }
+  pagePrevios(){
+    console.log("previos")
+    //this.showStoryService.setStoryParams(this.storyParams);
+    
+    if(this.pageNumber -1 < 1)return;
+    this.pageNumber--;
+    this.loadStoryLikes();
+  }
   deleteStoryLike(storyid){
     this.showstoryService.deleteStoryLike(storyid).subscribe(()=>{
         this.loadStoryLikes();
@@ -53,5 +70,8 @@ export class LibraryComponent implements OnInit {
     // }else{
     //   this.commentService.stopHubConnection();
     // }
+  }
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    
   }
 }

@@ -22,22 +22,48 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime>("ActivitiesCreate")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("StoryCommentId")
+                    b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserActiveId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int>("storyId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("StoryCommentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserActiveId");
 
+                    b.HasIndex("storyId");
+
                     b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("API.Entities.ActivitiesPoint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActiveUserPoint")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ActivitiesName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AuthorPoint")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivitiesPoints");
                 });
 
             modelBuilder.Entity("API.Entities.AppRole", b =>
@@ -174,6 +200,31 @@ namespace API.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("API.Entities.Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Banner");
+                });
+
             modelBuilder.Entity("API.Entities.ChatMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -255,6 +306,57 @@ namespace API.Migrations
                     b.ToTable("Languages");
                 });
 
+            modelBuilder.Entity("API.Entities.LikeChapter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LikeChapterCreate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserActiveId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.HasIndex("UserActiveId");
+
+                    b.ToTable("LikeChapters");
+                });
+
+            modelBuilder.Entity("API.Entities.LikeComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LikeCommentCreate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("StoryCommentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserLikeCommentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryCommentId");
+
+                    b.HasIndex("UserLikeCommentId");
+
+                    b.ToTable("LikeComments");
+                });
+
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -309,7 +411,7 @@ namespace API.Migrations
                     b.Property<string>("PictureUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserNewsId")
+                    b.Property<int>("UserNewsId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("content")
@@ -348,6 +450,49 @@ namespace API.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("API.Entities.PhotoScreen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhotoScreens");
+                });
+
+            modelBuilder.Entity("API.Entities.PhotoSlide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GotoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhotoSlides");
                 });
 
             modelBuilder.Entity("API.Entities.PhotoStory", b =>
@@ -395,6 +540,29 @@ namespace API.Migrations
                     b.ToTable("Publishes");
                 });
 
+            modelBuilder.Entity("API.Entities.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxPoint")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MinPoint")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("color")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ranks");
+                });
+
             modelBuilder.Entity("API.Entities.Rating", b =>
                 {
                     b.Property<int>("Id")
@@ -420,6 +588,30 @@ namespace API.Migrations
                     b.HasIndex("UserRatedId");
 
                     b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("API.Entities.RecievePoint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActivitiesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RecievePointUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivitiesId");
+
+                    b.HasIndex("RecievePointUserId");
+
+                    b.ToTable("RecievePoints");
                 });
 
             modelBuilder.Entity("API.Entities.Report", b =>
@@ -542,6 +734,9 @@ namespace API.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("EndChapter")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("Order")
                         .HasColumnType("INTEGER");
 
@@ -603,6 +798,71 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("API.Entities.TagStory", b =>
+                {
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("TagId", "StoryId");
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("TagStories");
+                });
+
+            modelBuilder.Entity("API.Entities.TitleActive", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TitleCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleNameId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("TitleNameId");
+
+                    b.ToTable("titleActives");
+                });
+
+            modelBuilder.Entity("API.Entities.TitleName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("titleName");
                 });
 
             modelBuilder.Entity("API.Entities.UserHistory", b =>
@@ -766,15 +1026,19 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Activities", b =>
                 {
-                    b.HasOne("API.Entities.StoryComment", null)
-                        .WithMany("Liked")
-                        .HasForeignKey("StoryCommentId");
-
                     b.HasOne("API.Entities.AppUser", "UserActive")
                         .WithMany()
                         .HasForeignKey("UserActiveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("API.Entities.Story", "story")
+                        .WithMany()
+                        .HasForeignKey("storyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("story");
 
                     b.Navigation("UserActive");
                 });
@@ -798,6 +1062,17 @@ namespace API.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("API.Entities.Banner", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Banners")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("API.Entities.ChatMessage", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "UserChat")
@@ -815,6 +1090,40 @@ namespace API.Migrations
                         .WithMany("Connections")
                         .HasForeignKey("GroupName")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("API.Entities.LikeChapter", b =>
+                {
+                    b.HasOne("API.Entities.StoryChapter", "Chapter")
+                        .WithMany("LikeChapters")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "UserActive")
+                        .WithMany()
+                        .HasForeignKey("UserActiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+
+                    b.Navigation("UserActive");
+                });
+
+            modelBuilder.Entity("API.Entities.LikeComment", b =>
+                {
+                    b.HasOne("API.Entities.StoryComment", null)
+                        .WithMany("Liked")
+                        .HasForeignKey("StoryCommentId");
+
+                    b.HasOne("API.Entities.AppUser", "UserLikeComment")
+                        .WithMany()
+                        .HasForeignKey("UserLikeCommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserLikeComment");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -840,7 +1149,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", "UserNews")
                         .WithMany()
-                        .HasForeignKey("UserNewsId");
+                        .HasForeignKey("UserNewsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("UserNews");
                 });
@@ -895,6 +1206,25 @@ namespace API.Migrations
                     b.Navigation("UserRated");
                 });
 
+            modelBuilder.Entity("API.Entities.RecievePoint", b =>
+                {
+                    b.HasOne("API.Entities.Activities", "Activities")
+                        .WithMany("getPoint")
+                        .HasForeignKey("ActivitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "RecievePointUser")
+                        .WithMany("recievePoints")
+                        .HasForeignKey("RecievePointUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activities");
+
+                    b.Navigation("RecievePointUser");
+                });
+
             modelBuilder.Entity("API.Entities.Report", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "User")
@@ -945,6 +1275,44 @@ namespace API.Migrations
                     b.Navigation("Story");
 
                     b.Navigation("UserPost");
+                });
+
+            modelBuilder.Entity("API.Entities.TagStory", b =>
+                {
+                    b.HasOne("API.Entities.Story", "Stories")
+                        .WithMany("StoryTags")
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Tag", "Tags")
+                        .WithMany("TagStories")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stories");
+
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("API.Entities.TitleActive", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("titleAcitive")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.TitleName", "TitleName")
+                        .WithMany()
+                        .HasForeignKey("TitleNameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("TitleName");
                 });
 
             modelBuilder.Entity("API.Entities.UserHistory", b =>
@@ -1059,6 +1427,11 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Entities.Activities", b =>
+                {
+                    b.Navigation("getPoint");
+                });
+
             modelBuilder.Entity("API.Entities.AppRole", b =>
                 {
                     b.Navigation("UserRoles");
@@ -1066,6 +1439,8 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Banners");
+
                     b.Navigation("LikedByUsers");
 
                     b.Navigation("LikedStoryByUsers");
@@ -1078,9 +1453,13 @@ namespace API.Migrations
 
                     b.Navigation("Photos");
 
+                    b.Navigation("recievePoints");
+
                     b.Navigation("Stories");
 
                     b.Navigation("StoryComments");
+
+                    b.Navigation("titleAcitive");
 
                     b.Navigation("UserHistory");
 
@@ -1106,17 +1485,26 @@ namespace API.Migrations
 
                     b.Navigation("StoryLiked");
 
+                    b.Navigation("StoryTags");
+
                     b.Navigation("ViewCount");
                 });
 
             modelBuilder.Entity("API.Entities.StoryChapter", b =>
                 {
+                    b.Navigation("LikeChapters");
+
                     b.Navigation("Published");
                 });
 
             modelBuilder.Entity("API.Entities.StoryComment", b =>
                 {
                     b.Navigation("Liked");
+                });
+
+            modelBuilder.Entity("API.Entities.Tag", b =>
+                {
+                    b.Navigation("TagStories");
                 });
 #pragma warning restore 612, 618
         }

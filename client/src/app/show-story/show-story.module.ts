@@ -32,7 +32,29 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReportComponent } from './report/report.component';
 import { DialogComponent } from './report/dialog/dialog.component';
-
+import { ShowListHorizontalComponent } from './show-list-horizontal/show-list-horizontal.component';
+import { ShowViewComponent } from './show-view/show-view.component';
+import { LabelNameComponent } from './label-name/label-name.component';
+import { FollowstoryComponent } from './followstory/followstory.component';
+import { FollowAuthorComponent } from './follow-author/follow-author.component';
+import { ShowListVerticalComponent } from './show-list-vertical/show-list-vertical.component';
+import { ShowCardVerticalComponent } from './show-card-vertical/show-card-vertical.component';
+import { ShowRandomComponent } from './show-random/show-random.component';
+import { ShowSlideComponent } from './show-slide/show-slide.component';
+import { TitleComponent } from './title/title.component';
+import { DialogTitleComponent } from './title/dialog-title/dialog-title.component';
+import { ShowCardAllComponent } from './show-card-all/show-card-all.component';
+import { ShowListAllComponent } from './show-list-all/show-list-all.component';
+import { ShowCarouselComponent } from './show-carousel/show-carousel.component';
+import { HistoryCardListComponent } from './library/history/history-card-list/history-card-list.component';
+import { HistoryCarouselComponent } from './library/history/history-carousel/history-carousel.component';
+import { ShowNovelComponent } from './show-novel/show-novel.component';
+import { ShowTagComponent } from './show-tag/show-tag.component';
+import { ShowTagCardComponent } from './show-tag-card/show-tag-card.component';
+import { ShowTopRankComponent } from './show-top-rank/show-top-rank.component';
+import { RecentChapterComponent } from './recent-chapter/recent-chapter.component';
+import { RecentCardComponent } from './recent-chapter/recent-card/recent-card.component';
+import { ShowTopCardComponent } from './show-top-rank/show-top-card/show-top-card.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +81,30 @@ import { DialogComponent } from './report/dialog/dialog.component';
     ShowCommentChapterComponent,
     ShowTableContentComponent,
     ReportComponent,
-    DialogComponent
+    DialogComponent,
+    ShowListHorizontalComponent,
+    ShowViewComponent,
+    LabelNameComponent,
+    FollowstoryComponent,
+    FollowAuthorComponent,
+    ShowListVerticalComponent,
+    ShowCardVerticalComponent,
+    ShowRandomComponent,
+    ShowSlideComponent,
+    TitleComponent,
+    DialogTitleComponent,
+    ShowCardAllComponent,
+    ShowListAllComponent,
+    ShowCarouselComponent,
+    HistoryCardListComponent,
+    HistoryCarouselComponent,
+    ShowNovelComponent,
+    ShowTagComponent,
+    ShowTagCardComponent,
+    ShowTopRankComponent,
+    RecentChapterComponent,
+    RecentCardComponent,
+    ShowTopCardComponent,
   ],
   imports: [
     CommonModule,
@@ -73,11 +118,21 @@ import { DialogComponent } from './report/dialog/dialog.component';
     NgbModule,
     ScrollingModule,
     InfiniteScrollModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   exports: [
     ShowCardComponent,
-    LikeComponent
+    LikeComponent,
+    FollowAuthorComponent,
+    LabelNameComponent,
+    TitleComponent,
+    DialogTitleComponent,
+    ShowCarouselComponent,
+    HistoryComponent,
+    ShowTopRankComponent,
+    RecentChapterComponent,
+    RecentCardComponent,
+    ShowTopCardComponent
   ]
 })
 export class ShowStoryModule { }

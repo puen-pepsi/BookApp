@@ -20,8 +20,10 @@ export class AuthGuard implements CanActivate {
         if(user){
             return true;
         } else{
-          console.log("tst")
-          this.toastr.error('You shall not pass')
+          // not logged in so redirect to login page with the return url
+          this.router.navigate(['authentication/login'], { queryParams: { returnUrl: state.url }});
+          //this.toastr.error('You shall not pass')
+          return false;
         }
         
       })     

@@ -31,11 +31,26 @@
                 <app-reporttopic></app-reporttopic>
             </div>
         </tab>
-        <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
+        <tab heading='Rank' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-rank></app-rank>
+            </div>
+        </tab>
+        <tab heading='Activities Point' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-activities-point></app-activities-point>
+            </div>
+        </tab>
+        <tab heading='Title Name' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+                <app-titlename></app-titlename>
+            </div>
+        </tab>
+        <!-- <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
             <div class="container">
                 <app-photo-management></app-photo-management>
             </div>
-        </tab>
+        </tab> -->
 
     </tabset>
 </div>

@@ -1,0 +1,65 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-primary-scheme: (
+  100: #d1c4e9,
+  500: #23c5db,
+  700: #512da8,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff,
+  )
+);
+$mat-accent-scheme: (
+  100: #ffe57f,
+  500: #ff55b1,
+  700: #ffc400,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: rgba(255,255,255,0.87),
+    700: #ffffff,
+  )
+);
+$mat-primary-palette: mat-palette($mat-primary-scheme);
+$mat-accent-palette: mat-palette($mat-accent-scheme);
+
+$app-light-theme: mat-light-theme($mat-primary-palette, $mat-accent-palette);
+.light-mode{
+    @include angular-material-theme($app-light-theme);
+}
+
+// following section is for dark mode.
+// use appropriate class name for darkMode
+$app-dark-theme: mat-dark-theme($mat-primary-palette, $mat-accent-palette);
+.dark-mode{
+         @include angular-material-theme($app-dark-theme);
+}
+ 
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  /* font-family: Roboto,"Helvetica Neue", sans-serif; */
+  /* font-family: 'Roboto', "Helvetica Neue", sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+   /* background: #eee;  */
+}
+.btn {
+  border-radius: 20px;
+}
+input[type=text]{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+   border-radius: 20px;
+   border: 1px solid #2d9fd9;
+   color: #2780e3;
+   padding-left: 10px;
+  }
+  input[type=password]{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+     border-radius: 20px;
+     border: 1px solid #2d9fd9;
+     color: #2780e3;
+     padding-left: 10px;
+    }

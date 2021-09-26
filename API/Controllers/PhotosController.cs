@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace API.Controllers
 {
@@ -33,8 +36,8 @@ namespace API.Controllers
             var photos = await _unitOfWork.PhotoRepository.GetPhotos(storyId);
             return _mapper.Map<IEnumerable<PhotoStory>, IEnumerable<PhotoStoryResource>>(photos);
         }
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload()
+        [HttpPost("{mwidth}/{mheight}"), DisableRequestSizeLimit]
+        public async Task<IActionResult> Upload(int mwidth,int mheight)
         {
             try
             {
@@ -51,9 +54,18 @@ namespace API.Controllers
                     //var dbPath = Path.Combine(folderName, fileName);
                     //*edit path to db
                     var dbPath = Path.Combine("images",fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    // using (var stream = new FileStream(fullPath, FileMode.Create))
+                    // {
+                    //     file.CopyTo(stream);
+                    // }
+                    //resize 
+                    using(var image =Image.Load(file.OpenReadStream()))
                     {
-                        file.CopyTo(stream);
+                        string newSize = ResizeImage(image,mwidth,mheight);
+                        string[] aSize = newSize.Split(',');
+                        // image.Mutate(h => h.Resize(Convert.ToInt32(aSize[1]),Convert.ToInt32(aSize[0])));
+                        image.Mutate(h => h.Resize(Convert.ToInt32(aSize[1]),Convert.ToInt32(aSize[0])));
+                        image.Save(fullPath);
                     }
                     //Update Or Create
                     return Ok(new {dbPath});
@@ -68,8 +80,8 @@ namespace API.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
-        [HttpPut("{storyId}")]
-        public async Task<ActionResult> UpdatePhoto(int storyId)
+        [HttpPut("{storyId}/{mwidth}/{mheight}")]
+        public async Task<ActionResult> UpdatePhoto(int storyId,int mwidth,int mheight)
         {
              try
             {
@@ -86,9 +98,16 @@ namespace API.Controllers
                     //var dbPath = Path.Combine(folderName, fileName);
                     var dbPath = Path.Combine("images",fileName);
 
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    // using (var stream = new FileStream(fullPath, FileMode.Create))
+                    // {
+                    //     file.CopyTo(stream);
+                    // }
+                     using(var image =Image.Load(file.OpenReadStream()))
                     {
-                        file.CopyTo(stream);
+                        string newSize = ResizeImage(image,mwidth,mheight);
+                        string[] aSize = newSize.Split(',');
+                        image.Mutate(h => h.Resize(mwidth,mheight));
+                        image.Save(fullPath);
                     }
                     //Update Or Create
                     // var storyUpdate = await _unitOfWork.StoryRepository.GetStoryById(storyId,false);
@@ -112,8 +131,34 @@ namespace API.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
-
-      
+        [HttpDelete("{fname}")]
+        public IActionResult deletefile(string fname)
+        {
+            var folderName = Path.Combine("Resources", "images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var fileToDelete = Path.Combine(pathToSave,fname);
+            string _imageToBeDeleted = fileToDelete;
+            if ((System.IO.File.Exists(_imageToBeDeleted)))
+            {
+                System.IO.File.Delete(_imageToBeDeleted);
+            }
+            return Ok(fname);
+        }
+        public string ResizeImage (Image img,int maxWidth,int maxHeight)
+        {
+            if(img.Width > maxWidth || img.Height > maxHeight){
+                double widthRatio = (double)img.Width/(double)maxWidth;
+                double heightRatio = (double)img.Height/(double)maxHeight;
+                double ratio = Math.Max(widthRatio,heightRatio);
+                int newWidth = (int)(img.Width/ratio);
+                int newHeight =(int)(img.Height/ratio);
+                return newHeight.ToString()+","+newWidth.ToString();
+            }
+            else
+            {
+                 return img.Height.ToString()+","+img.Width.ToString();   
+            }
+        }
         // [HttpPost]
         // public async Task<IActionResult> Upload(int storyId,FormFile file)
         // {

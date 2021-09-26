@@ -1,0 +1,25 @@
+
+  
+<carousel class="carousel-html-content" style="z-index: 2;"
+        [height]="'200'" 
+        [cellsToShow]="'1'"
+        [autoplay]="true"
+        [loop]="true" 
+>
+    <div *ngFor="let row of newsHome"
+        class="carousel-cell" >
+        <div class="news">
+               <img src={{row.pictureUrl}} style="object-fit: cover;" >
+                <div class="content" >
+                     <p class="text">{{row.content}}</p>
+                </div>
+               
+        </div>
+        
+    </div>
+</carousel>
+<div *ngIf="newsService.list" class="newslist mt-1">
+    <div *ngFor="let row of newsHome">
+    <app-news-card [row]="row"></app-news-card>
+    <mat-divider></mat-divider>
+</div>  

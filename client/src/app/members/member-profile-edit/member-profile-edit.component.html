@@ -1,0 +1,114 @@
+<div *ngIf="member" >
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+        <p><strong>Infomation:</strong>You have mad change. Any unsaved change will be lost</p>
+    </div>
+    <div  [ngStyle]="{'background-image': getUrl()}" class="hero-image">
+        <div class="hero-text">
+            <h1>{{member.knownAs}}</h1>
+            <h3>{{member.title}}</h3>
+        </div>  
+    </div>
+<div class="picture">
+    <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}"
+                class="img-circle rounded-circle "> -->
+                    <app-label-name 
+                    [pHeight]='200'
+                    [imageUrl]='member.photoUrl'
+                    [point]='member.point'>
+                    </app-label-name>
+</div>
+<div class="content">
+    <div>
+        <p><strong>Name : </strong>{{member.knownAs}}</p>
+    </div>
+    <div>
+        <p><strong>Location : </strong>{{member.city}}, {{member.country}}</p>
+    </div>
+    <div>
+         <p><strong>Last Active : </strong>{{member.lastActive | timeago}}</p>
+    </div>
+    <div>  
+        <p><strong>Member since : </strong>{{member.created | date:'dd MMM yyyy'}}</p>
+    </div>
+    <div>
+        <p><strong>Member Point : </strong>{{member.point | number}}</p>
+    </div>
+    <div>  
+        <strong>Member Rank : </strong>
+        <span class="rank">{{rank}}</span>
+    </div>
+</div>
+<div class="detial">
+     <div class="col-md-4">
+        <h1>Your Profile</h1>
+    </div>
+    <div class="col-md-12">
+        <!-- <tabset class="member-tabset">
+            <tab heading='About {{member.knownAs}}'>
+                <form #editForm="ngForm" id="editForm" (ngSubmit)='updateMember()'>
+                    <h4 for="knownAs">KnownAs:</h4> 
+                    <textarea class="form-control" [(ngModel)]="member.knownAs"  name="knownAs"  rows="1"></textarea>
+                    <h4 class="mt-4">Your Tales of Adventure</h4>
+                    <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
+                    <h4 class="mt-4">Your Current Quest</h4>
+                    <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+                    <h4 class="mt-4">Location Details:</h4>
+                    <div class="form-inline">
+                        <label for="city">City:</label> 
+                        <input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2"> 
+                        <label for="country">Country:</label> 
+                        <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2"> 
+                    </div>    
+                </form>
+                <div class="card-footer">
+                    <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success btn-block">Save Changes</button>
+                </div>
+            </tab>
+            <tab heading='Edit  Gallery'>
+                <app-photo-editor [member]="member"></app-photo-editor>
+            </tab>
+            <tab heading="Edit Banner">
+                <app-photo-editor-single [member]="member"></app-photo-editor-single>
+            </tab>
+            <tab heading="Edit Title">
+                <app-title-editor [member]="member"></app-title-editor>
+            </tab>
+        </tabset> -->
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z0"
+            #tabGroup (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="About">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)='updateMember()'>
+                <h4 for="knownAs">KnownAs:</h4> 
+                <textarea class="form-control" [(ngModel)]="member.knownAs"  name="knownAs"  rows="1"></textarea>
+                <h4 class="mt-4">Your Tales of Adventure</h4>
+                <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
+                <h4 class="mt-4">Your Current Quest</h4>
+                <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+                <!-- <h4 class="mt-2">Your Hobby</h4>
+                <textarea class="form-control" [(ngModel)]="member.interests" name="interests" rows="6"></textarea> -->
+                <h4 class="mt-4">Location Details:</h4>
+                <div class="form-inline">
+                    <label for="city">City:</label> 
+                    <input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2"> 
+                    <label for="country">Country:</label> 
+                    <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2"> 
+                </div>    
+            </form>
+            <div class=" pt-3">
+                <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success btn-block">Save Changes</button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Edit Gallery">
+            <app-photo-editor [member]="member"></app-photo-editor>
+        </mat-tab>
+        <mat-tab label="Edit Banner"> 
+            <app-photo-editor-single [member]="member"></app-photo-editor-single>
+        </mat-tab>
+        <mat-tab label="Edit Title">
+            <app-title-editor [member]="member"></app-title-editor>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+</div>
+   
+</div>

@@ -1,0 +1,30 @@
+<mat-card class="mat-elevation-z0">
+    <div class="main">
+        <div class="image">
+            <img src="{{row.url || './assets/images/blackcover.png'}}"
+                alt="{{row.title}}" 
+                class="img">
+        </div>
+        <div class="body">
+            <div class="top">
+               <h6><b>{{row.title | titlecase}}</b></h6>
+                <p>{{row.descriptions}}</p> 
+            </div>
+            <span>{{row.gotoUrl}}</span>
+            <div class="create text-muted">
+                <div *appHasRole='["Admin","Moderator"]'>
+                    <button mat-stroked-button 
+                      (click)="populateForm(row)"
+                      color="primary"
+                      >Edit</button>
+                    <button mat-stroked-button 
+                    (click)="deleteRow(row)"
+                     color="warn"
+                      >Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</mat-card>
+

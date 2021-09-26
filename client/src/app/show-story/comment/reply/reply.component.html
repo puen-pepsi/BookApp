@@ -4,7 +4,8 @@
           (ngSubmit)="onSubmit()" [formGroup]="replyForm">
           <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <input formControlName="content" matInput placeholder="Ex. It makes me feel..." />
+                <input formControlName="content" matInput  autocomplete="off"
+                placeholder="Ex. It makes me feel..." />
                 <!-- <mat-error align ="end" *ngIf="commentForm.controls['content'].hasError('required')">Required</mat-error>    -->
           </mat-form-field>
           <mat-action-list fxFlexAlign="start">

@@ -11,7 +11,7 @@ import { ShowStoryService } from '../show-story.service';
 @Component({
   selector: 'app-show-chapters',
   templateUrl: './show-chapters.component.html',
-  styleUrls: ['./show-chapters.component.css']
+  styleUrls: ['./show-chapters.component.scss']
 })
 export class ShowChaptersComponent implements AfterViewInit{
   // @Input() ChapterList :Chapter;

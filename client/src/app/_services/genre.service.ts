@@ -13,16 +13,16 @@ export class GenreService {
   constructor(private http:HttpClient) { }
 
   postGenre(){
-    return this.http.post(this.baseUrl + 'Genre',this.formData);
+    return this.http.post(this.baseUrl + 'genre',this.formData);
   }
   putGenre(){
-    return this.http.put(this.baseUrl + 'Genre/'+ this.formData.id, this.formData);
+    return this.http.put(this.baseUrl + 'genre/'+ this.formData.id, this.formData);
   }
   deleteGenre(id:number){
-    return this.http.delete(this.baseUrl + 'Genre/' + id);
+    return this.http.delete(this.baseUrl + 'genre/' + id);
   }
   refreshList() {
-    this.http.get(this.baseUrl + 'Genre')
+    this.http.get(this.baseUrl + 'genre')
       .toPromise()
       .then(res => this.list = res as Genres[]);
   }

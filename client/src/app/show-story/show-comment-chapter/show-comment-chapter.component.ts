@@ -7,7 +7,7 @@ import { ShowStoryService } from '../show-story.service';
 @Component({
   selector: 'app-show-comment-chapter',
   templateUrl: './show-comment-chapter.component.html',
-  styleUrls: ['./show-comment-chapter.component.css']
+  styleUrls: ['./show-comment-chapter.component.scss']
 })
 export class ShowCommentChapterComponent implements OnInit {
   @Input() comments:StoryComment[];

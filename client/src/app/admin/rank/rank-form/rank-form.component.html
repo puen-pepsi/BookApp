@@ -1,0 +1,26 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id"
+           value="rankService.formData.id" />
+    <div class="row">
+      <div class="col-md-4 pr-0">
+        <input class="form-control" placeholder="Add a Rank Name"
+               name="name" #description="ngModel" [(ngModel)]="rankService.formData.name" required/>
+      </div>   
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="min Point"
+               name="minpoint" #description="ngModel" [(ngModel)]="rankService.formData.minPoint" required/>
+      </div> 
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="max Point"
+               name="maxpoint" #description="ngModel" [(ngModel)]="rankService.formData.maxPoint" required/>
+      </div> 
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="#color"
+               name="color" #description="ngModel" [(ngModel)]="rankService.formData.color" required/>
+      </div>
+      <div class="col-md-2 pl-1">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+      </div>
+    </div>
+  </form>

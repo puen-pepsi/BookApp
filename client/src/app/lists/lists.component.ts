@@ -6,13 +6,13 @@ import { MembersService } from 'src/app/_services/members.service';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css']
+  styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
   members :Partial<Member[]>;
   predicate = 'liked';
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 100;
   pagination: Pagination;
   constructor(private memberService:MembersService) { }
 
@@ -23,6 +23,7 @@ export class ListsComponent implements OnInit {
     this.memberService.getLikes(this.predicate,this.pageNumber,this.pageSize).subscribe(response => {
       this.members = response.result;
       this.pagination = response.pagination;
+      console.log(this.members)
     })
   }
 

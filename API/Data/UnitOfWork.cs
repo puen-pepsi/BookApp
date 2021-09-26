@@ -37,6 +37,14 @@ namespace API.Data
 
         public INewsRepository NewsRepository =>  new NewsRepository(_context);
 
+        public IActivitiesRepository ActivitiesRepository =>  new ActivitiesRepository(_context,_mapper);
+
+        public ITitleRepository TitleRepository =>  new TitleRepository(_context);
+
+        public IScreen ScreenRepository =>  new ScreenRepository(_context);
+
+        public ITagRepository TagRepository =>  new TagRepository(_context,_mapper);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

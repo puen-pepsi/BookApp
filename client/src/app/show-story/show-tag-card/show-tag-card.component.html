@@ -1,0 +1,39 @@
+
+<mat-card class="mat-elevation-z0" (click)="goToStory(story.storyName)">
+    <div class="main">
+        <div class="image">
+            <img src="{{story.imageUrl || './assets/images/blackcover.png'}}"
+                alt="{{story.storyName}}" 
+                class="img">
+        </div>
+        
+        <div class="body">
+            <div class="mb-1">
+                <mat-chip-list aria-label="tags">
+                    <mat-chip *ngFor="let ele of tag" (click)="goToTag(ele)">
+                        #{{ele}}
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="top">
+               <h6><b>{{story.storyName| titlecase}}</b>&nbsp;&nbsp;<small class="text-muted">({{story.genre}})</small></h6>
+                <p class="text">{{story.description}}</p> 
+            </div>
+            <div class="create text-muted">
+                <div class="genre" >
+                    
+                <div fxLayoutAlign="end end">
+                    <!-- <small>{{story.created | timeago}}&nbsp;|&nbsp;</small> -->
+                    <span>By {{story.userName | titlecase}}</span>
+                </div>
+                </div>
+               
+                <!-- <span></span> -->
+            </div>
+        </div>
+        <!-- <div class="rightCircle">
+            <mat-icon [inline]="true" (click)="deleteHistory(story.storyId)">close</mat-icon>
+          </div> -->
+    </div>
+   
+</mat-card>

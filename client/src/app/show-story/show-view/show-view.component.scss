@@ -1,0 +1,52 @@
+.content {
+    height: 500px;
+    overflow: auto;
+   
+}
+
+.mat-list-item{
+    height: 50px;
+}
+.mat-form-field
+{
+    padding: 0;
+}
+.mat-button-toggle{
+    font-size: 1rem;
+}
+.mat-button-toggle-checked{
+    /* background-color: #2979FF; */
+    background-color: #F2F4FF;
+    /* background-color: #ffffff; */
+    /* background-color:var(--highlight-toggle2); */
+    font-size: 1rem;
+    font-weight: bolder;
+  } 
+/* .mat-button-toggle-group{
+
+} */
+div.mat-expansion-panel-body {
+    padding:0;
+  }
+.button-fullwidth{
+    display: flex;
+    flex-direction:row;
+}
+.header{
+   
+    padding-top: 0px;
+}
+.toolbarname{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.top-between{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    //justify-content: space-between;
+    align-items: flex-end;
+    /* background-color: #ecf8fd; */
+}

@@ -46,7 +46,25 @@ namespace API.Controllers
 
             return BadRequest("Failed to like user");
         }
+        [HttpDelete("{username}")]
+        public async Task<ActionResult> unlike(string username)
+        {
+            var sourceUserId = User.GetUserId();
+            var unlikedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var sourceUser = await _unitOfWork.LikesRepository.GetUserWithLikes(sourceUserId);
 
+            if (unlikedUser == null) return NotFound();
+
+            if (sourceUser.UserName == username) return BadRequest("You cannot like yourself");
+
+            var userUnLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, unlikedUser.Id);
+
+            if (userUnLike == null) return BadRequest("You already unlike this user");
+            _unitOfWork.LikesRepository.DeleteMemberLike(userUnLike);
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to unlike user");
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
         {
@@ -57,6 +75,19 @@ namespace API.Controllers
                 users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(users);
+        }
+        [HttpGet("{memberid}")]
+        public async Task<ActionResult<MemberLikedDto>> GetUserLike(int memberid)
+        {
+            var userId = User.GetUserId();
+            var Liked = await _unitOfWork.LikesRepository.GetUserLike(userId,memberid);
+            if(Liked == null){
+                    return Ok(null);
+            }
+            var userliked = new MemberLikedDto{
+                MemberId = Liked.LikedUserId
+            };
+            return Ok(userliked);
         }
     }
 }

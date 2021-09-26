@@ -11,9 +11,13 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ScrollSpyModule } from 'ng-spy';
-
+import { HasRoleDirective } from '../_directives/has-role.directive';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
-  declarations: [],
+  declarations: [
+    HasRoleDirective
+  ],
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
@@ -28,8 +32,9 @@ import { ScrollSpyModule } from 'ng-spy';
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
     ModalModule.forRoot(),
-    ScrollSpyModule
-
+    ScrollSpyModule,
+    IvyCarouselModule,
+    Ng2SearchPipeModule
   ],
   exports:[
     BsDropdownModule,
@@ -43,6 +48,9 @@ import { ScrollSpyModule } from 'ng-spy';
     TimeagoModule,
     ModalModule,
     ScrollSpyModule,
+    HasRoleDirective,
+    IvyCarouselModule,
+    Ng2SearchPipeModule
   ]
 })
 export class SharedModule { }

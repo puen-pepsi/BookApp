@@ -1,18 +1,20 @@
+import { ɵangular_packages_common_http_http_h } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Chapter } from 'src/app/_models/chapter';
+import { ChapterList } from 'src/app/_models/chapterlist';
 import { ShowStoryService } from '../show-story.service';
 
 @Component({
   selector: 'app-show-table-content',
   templateUrl: './show-table-content.component.html',
-  styleUrls: ['./show-table-content.component.css']
+  styleUrls: ['./show-table-content.component.scss']
 })
 export class ShowTableContentComponent implements OnInit {
-  @Input() initContent:Chapter;
+  @Input() initContent:ChapterList;
   storyName;
-  allContent;
+  allContent:ChapterList[]=[];
   notEmptyPost = true;
   notscrolly = true;
   constructor(private showstoryService:ShowStoryService,private spinner: NgxSpinnerService,
@@ -24,7 +26,7 @@ export class ShowTableContentComponent implements OnInit {
     this.loadInitContent();
   }
   loadInitContent() {
-    this.showstoryService.getStoryNameChapterTake(this.storyName,0,3).subscribe(data =>{
+    this.showstoryService.getChapterList(this.storyName,0,10).subscribe(data =>{
       this.allContent = data;
       //console.log(this.allContent)
     });
@@ -32,9 +34,9 @@ export class ShowTableContentComponent implements OnInit {
 
   onScroll() {
     if (this.notscrolly && this.notEmptyPost) {
-      this.spinner.show();
+      //this.spinner.show();
       this.notscrolly = false;
-      // console.log("scroll")
+      console.log("scroll")
       this.loadNextPost();
      }
     }
@@ -42,10 +44,10 @@ export class ShowTableContentComponent implements OnInit {
 loadNextPost() {
   const countContent = this.allContent.length;
   // console.log(countContent)
-  this.showstoryService.getStoryNameChapterTake(this.storyName,countContent,3)
+  this.showstoryService.getChapterList(this.storyName,countContent,5)
   .subscribe( (data: any) => {
      const newPost = data;
-     this.spinner.hide();
+     //this.spinner.hide();
      if (newPost.length === 0 ) {
        this.notEmptyPost =  false;
      }
@@ -54,9 +56,9 @@ loadNextPost() {
      this.notscrolly = true;
    });
 }
-clickedRows(content){
-  console.log(content)
-  this.router.navigate(['/stories',this.storyName,'chapters'],{fragment:String(content.id)});
+clickedRows(index){
+  //console.log(index)
+  this.router.navigate(['/stories',this.storyName,'chapters'],{fragment:String(index)});
   // this.router.navigate(['/stories',this.storyName,'chapters']);
 }
 

@@ -5,7 +5,7 @@ import { ReporttopicService } from 'src/app/_services/reporttopic.service';
 @Component({
   selector: 'app-reporttopic',
   templateUrl: './reporttopic.component.html',
-  styleUrls: ['./reporttopic.component.css']
+  styleUrls: ['./reporttopic.component.scss']
 })
 export class ReporttopicComponent implements OnInit {
 

@@ -15,7 +15,7 @@
         </div>
       </div>
         
-    <p>{{newsService.formData | json}}</p>
+    <!-- <p>{{newsService.formData | json}}</p> -->
     <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
       <input type="hidden" name="id" value="newsService.formData.id" />
       <div class="mb-3">
@@ -25,12 +25,14 @@
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">Content <i class="fas fa-info-circle"></i></label>
-        <textarea class="form-control" placeholder="Content" rows="3" name="content" #content="ngModel"
+        <textarea class="form-control" 
+          
+          placeholder="Content" rows="8" name="content" #content="ngModel"
           [(ngModel)]="newsService.formData.content" required></textarea>
       </div>
       
 
-      <div class="col-md-4 pl-1">
+      <div class="col-md-12 pl-1">
         <button class="btn btn-primary" type="submit" [disabled]="editForm.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
         <button class="btn btn-danger" [disabled]="editForm.invalid" type="button"
           (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>

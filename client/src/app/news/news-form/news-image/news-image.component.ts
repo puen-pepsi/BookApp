@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-news-image',
   templateUrl: './news-image.component.html',
-  styleUrls: ['./news-image.component.css']
+  styleUrls: ['./news-image.component.scss']
 })
 export class NewsImageComponent implements OnInit {
   @Input() image:string;
@@ -41,7 +41,7 @@ export class NewsImageComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     if(id == 0){
-      this.http.post(this.baseUrl + 'story/photos', formData, {reportProgress: true, observe: 'events'})
+      this.http.post(this.baseUrl + 'story/photos/420/300', formData, {reportProgress: true, observe: 'events'})
             .subscribe(event => {
               if (event.type === HttpEventType.UploadProgress)
                 this.progress = Math.round(100 * event.loaded / event.total);
@@ -50,7 +50,7 @@ export class NewsImageComponent implements OnInit {
               }
             });
     }else{
-      this.http.put(this.baseUrl + 'story/photos/'+id, formData, {reportProgress: true, observe: 'events'})
+      this.http.put(this.baseUrl + 'story/photos/'+id+'/420/300', formData, {reportProgress: true, observe: 'events'})
           .subscribe(event => {
             if (event.type === HttpEventType.UploadProgress)
               this.progress = Math.round(100 * event.loaded / event.total);

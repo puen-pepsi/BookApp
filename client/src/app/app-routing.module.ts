@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
-import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AdminGuard } from './_guards/admin.guard';
@@ -16,13 +13,27 @@ import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 import { MemberDetailedResolver } from './_resolvers/member-detialed.resolver';
 import { StoryComponent } from './story/story.component';
 import { LibraryComponent } from './show-story/library/library.component';
-import { ShowStoryComponent } from './show-story/show-story.component';
 import { HistoryComponent } from './show-story/library/history/history.component';
 import { ShowListComponent } from './show-story/show-list/show-list.component';
 import { StoryFormComponent } from './story/story-form/story-form.component';
 import { ChattoComponent } from './chat/chatto.component';
 import { NewsListComponent } from './News/news-list/news-list.component';
 import { NewsFormComponent } from './news/news-form/news-form.component';
+import { MemberProfileComponent } from './members/member-profile/member-profile.component';
+import { MemberProfileEditComponent } from './members/member-profile-edit/member-profile-edit.component';
+import { CoverComponent } from './admin/cover/cover.component';
+import { CoverFormComponent } from './admin/cover/cover-form/cover-form.component';
+import { CoverListComponent } from './admin/cover/cover-list/cover-list.component';
+import { MemberPointComponent } from './members/member-point/member-point.component';
+import { SlideFormComponent } from './admin/Slide/slide-form/slide-form.component';
+import { SlideListComponent } from './admin/Slide/slide-list/slide-list.component';
+import { ShowSlideComponent } from './show-story/show-slide/show-slide.component';
+import { HomeComponent } from './home/home.component';
+import { NewsDetailComponent } from './news/news-detail/news-detail.component';
+import { MemberListCarouselComponent } from './members/member-list-carousel/member-list-carousel.component';
+import { RecentCardComponent } from './show-story/recent-chapter/recent-card/recent-card.component';
+import { RecentChapterComponent } from './show-story/recent-chapter/recent-chapter.component';
+import { PaypalComponent } from './admin/paypal/paypal.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -32,11 +43,14 @@ const routes: Routes = [
     children: [
       
       
-      {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+      // {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+      {path:'home',component:HomeComponent},
+      {path:'member/edit',component:MemberProfileEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
       {path:'library',component:LibraryComponent,
         // data:{breadcrumb:'My Library'}
       },
+      {path:'memberlist',component:MemberListCarouselComponent},
       {path:'mystory',component:StoryComponent},
       {path:'mystory/create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'mystory/edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
@@ -54,21 +68,36 @@ const routes: Routes = [
       //     },
       //   ]
       // },
-      {path:'messages',component:MessagesComponent,
+      {path:'messages',component:MessagesComponent,canActivate:[AuthGuard],
           // data:{breadcrumb:'Messages'}
         },
       {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
           // data:{breadcrumb:'admin'}
       },
+      {path:'paypal',component:PaypalComponent},
+      {path:'recent',component:RecentChapterComponent},
+      {path:'cover',component:CoverListComponent,canActivate: [AdminGuard]},
+      {path:'cover/create',component:CoverFormComponent,canActivate: [AdminGuard]},
+      {path:'cover/edit/:id',component:CoverFormComponent,canActivate: [AdminGuard]},
+      {path:'slide',component:SlideListComponent,canActivate: [AdminGuard]},
+      {path:'slide/create',component:SlideFormComponent,canActivate: [AdminGuard]},
+      {path:'slide/edit/:id',component:SlideFormComponent,canActivate: [AdminGuard]},
+      {path:'slideshow',component:ShowSlideComponent},
       {path:'members',component:MemberListComponent,
         // data:{breadcrumb:'Members'}
       },
-      {path:'members/:username',component:MemberDetailComponent,
+      // {path:'members/:username',component:MemberDetailComponent,
+      //     // data:{ breadcrumb: (data: any) => `${data.member.username}` },
+      //     resolve:{member:MemberDetailedResolver}
+      // },
+      {path:'members/:username',component:MemberProfileComponent,
           // data:{ breadcrumb: (data: any) => `${data.member.username}` },
           resolve:{member:MemberDetailedResolver}
       },
+      {path:'activities',component:MemberPointComponent},
       {
-        path: 'stories',component:ShowStoryComponent, loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
+        path: 'stories',
+         loadChildren: () => import('./show-story/show-story.module').then(mod => mod.ShowStoryModule),
         // data: { breadcrumb: 'Stories' }
       },
       {
@@ -76,15 +105,17 @@ const routes: Routes = [
         data:{storytype:'manga'},
       },
       {path:'news',component:NewsListComponent},
-      {path:'news/create',component:NewsFormComponent},
+      {path:'news/create',component:NewsFormComponent,data:{type:'create'}},
       {path:'news/edit/:id',component:NewsFormComponent},
+      {path:'news/:id',component:NewsDetailComponent},
       {
         path:'chatto',component:ChattoComponent
-      }
+      },
     ]  
   },
-  
-  {path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
+  // { path: '**', redirectTo: 'authentication/login' },
+
+  {path:'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
   {path:'history',component:HistoryComponent},
   {path:'errors',component:TestErrorsComponent},
   {path:'not-found',component:NotFoundComponent},
@@ -100,7 +131,8 @@ const routes: Routes = [
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
     //scrollOffset: [0, 150], // [x, y] - adjust scroll offset
-    scrollOffset: [0, 90], 
+    // scrollOffset: [0, 90], 
+    scrollOffset: [0, 64], 
     // onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]

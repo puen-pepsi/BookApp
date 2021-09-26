@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
     <div class="main">
         <div class="image">
             <img src="{{row.pictureUrl || './assets/images/blackcover.png'}}"
@@ -8,19 +8,48 @@
         <div class="body">
             <div class="top">
                <h6><b>{{row.topic | titlecase}}</b></h6>
-                <p>{{row.content}}</p> 
+                <p class="text">{{row.content}}</p> 
             </div>
             <div class="create text-muted">
                 <div>
+                    <small>{{row.newsCreated | date }}</small>
                     <small>{{row.newsCreated | timeago}}</small>
                 </div>
-                <div>
-                    <a (click)="populateForm(row)">Edit</a>|
-                    <a (click)="deleteRow(row)">Delete</a>
+                <div fxLayout="row" fxLayoutAlign=" end">
+                        <!-- <button mat-stroked-button>
+                           Read
+                        </button> -->
+                      <a routerLink="/news/{{row.id}}">Read</a>
+                      <div *appHasRole='["Admin","Moderator"]'>
+                        <button mat-stroked-button 
+                            (click)="populateForm(row)"
+                            color="primary"
+                            >Edit</button>
+                          <button mat-stroked-button 
+                              (click)="deleteRow(row)"
+                              color="warn"
+                            >Delete</button>
+                      </div>
                 </div>
+                
             </div>
         </div>
 
     </div>
 </mat-card>
 
+<!-- <div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{row.pictureUrl || './assets/images/blackcover.png'}}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{row.topic | titlecase}}</h5>
+          <p class="card-text">{{row.content}}</p>
+          <p class="card-text"><small class="text-muted">{{row.newsCreated | date }}
+            {{row.newsCreated | timeago}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div> -->

@@ -1,0 +1,25 @@
+.publish{
+    font-size: 0.8rem;
+    color: lightslategray;
+}
+.material-icons-outlined{
+    cursor: pointer;
+    color:rgb(109, 179, 250);
+    justify-items: center;
+    font-size: 1.5rem;
+    vertical-align:middle;
+
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+span{
+    text-align: left;
+}
+.mat-card{
+    padding: 0;
+    margin:0;
+}

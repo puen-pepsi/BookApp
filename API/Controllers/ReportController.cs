@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
@@ -17,6 +19,13 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
 
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ReportDto>>> getReport(){
+            var getReport = await _unitOfWork.UserRepository.GetAllReport();
+            if(getReport == null)return BadRequest("No Report");
+            var getReportReturn = _mapper.Map<IEnumerable<ReportDto>>(getReport);
+            return Ok(getReportReturn);
+        }
         [HttpPost]
         public async Task<ActionResult> InsertTab([FromBody]Report report)
         {
@@ -26,6 +35,16 @@ namespace API.Controllers
             await _unitOfWork.Repository.CreateAsync<Report>(report);
             return Ok();
 
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Report>> Delete(int id)
+        {
+            var model = await _unitOfWork.Repository.SelectById<Report>(id);
+            if(model == null){
+                return NotFound();
+            }
+            await _unitOfWork.Repository.DeleteAsync<Report>(model);
+            return model;
         }
         
     }

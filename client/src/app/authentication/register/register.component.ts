@@ -7,7 +7,7 @@ import { AccountService } from '../../_services/account.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister  = new EventEmitter();
@@ -38,8 +38,8 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-     // clientURI:['https://localhost:4200/authentication/emailconfirmation']
-      clientURI:['https://rainobunew.azurewebsites.net/authentication/emailconfirmation']
+      clientURI:['https://localhost:4200/authentication/emailconfirmation']
+      //clientURI:['https://rainobunew.azurewebsites.net/authentication/emailconfirmation']
    
     })
   }
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
     //   this.validationErrors = error;
     // })
     this.accountService.register(this.registerForm.value).subscribe(()=>{
-      console.log("here")
+      //console.log("here")
       this.router.navigateByUrl('/');
     })
   }

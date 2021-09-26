@@ -1,5 +1,5 @@
 import { Input, Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
@@ -8,7 +8,7 @@ import { ConfirmService } from 'src/app/_services/confirm.service';
 @Component({
   selector: 'app-reply-list',
   templateUrl: './reply-list.component.html',
-  styleUrls: ['./reply-list.component.css']
+  styleUrls: ['./reply-list.component.scss']
 })
 export class ReplyListComponent implements OnInit, OnDestroy {
   @Input('commentId') commentId: string;
@@ -20,7 +20,8 @@ export class ReplyListComponent implements OnInit, OnDestroy {
 
   constructor(
     public commentService:CommentService,
-    private confirmService:ConfirmService
+    private confirmService:ConfirmService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -52,6 +53,9 @@ export class ReplyListComponent implements OnInit, OnDestroy {
     this.commentService.addLikedComment(commentid).subscribe( res =>{
       console.log(res);
     });
+  }
+  gotoMember(event){
+    this.router.navigate(['/members',event]);
   }
   ngOnDestroy() {
     // this.replySub.unsubscribe();

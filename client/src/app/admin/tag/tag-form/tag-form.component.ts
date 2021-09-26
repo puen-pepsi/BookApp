@@ -6,7 +6,7 @@ import { TagsService } from 'src/app/_services/tags.service';
 @Component({
   selector: 'app-tag-form',
   templateUrl: './tag-form.component.html',
-  styleUrls: ['./tag-form.component.css']
+  styleUrls: ['./tag-form.component.scss']
 })
 export class TagFormComponent implements OnInit {
   constructor(public tagsService :TagsService,

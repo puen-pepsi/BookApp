@@ -1,35 +1,34 @@
-
+<!-- 
 <tabset class="member-tabset" #Library *ngIf="storylikes">
     <tab heading='My List' (selectTab)="onTabActivated($event)">
-
-            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="1rem"  >
-                <div  *ngFor="let storylike of storylikes" fxFlex="18">
-                    <app-library-card [story]="storylike"
-                        (unlike)="deleteStoryLike($event)"></app-library-card>
-                </div>
+    <div class="demo">
+        <carousel class="carousel-html-content" style="z-index: 2;"
+            [height]="'300'">
+            <div class="list" *ngFor="let storylike of storylikes" class="carousel-cell">
+                <app-library-card [story]="storylike"
+                    (unlike)="deleteStoryLike($event)">
+                </app-library-card>
             </div>
-        <mat-paginator 
-            [length]="pagination?.totalItems" 
-            [pageSizeOptions]="[5]"
-            [showFirstLastButtons]="true"
-            (page)="pageChanged($event)">
-        </mat-paginator>
-        <!-- <div class="d-flex justify-content-center" *ngIf="pagination">
-            <pagination 
-                [boundaryLinks]="true" 
-                [totalItems]="pagination.totalItems"
-                [itemsPerPage]="pagination.itemsPerPage"
-                [(ngModel)]="pagination.currentPage"
-                (pageChanged)="pageChanged($event)"
-                previousText="&lsaquo;" 
-                nextText="&rsaquo;" 
-                firstText="&laquo;" 
-                lastText="&raquo;"> 
-            </pagination>
-        </div> -->
+        
+        </carousel>
+    </div>
     </tab>
     <tab heading='History' (selectTab)="onTabActivated($event)">
         <app-history></app-history>
     </tab> 
-</tabset>
-
+</tabset> -->
+<mat-tab-group mat-stretch-tabs #tabGroup (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="My favorite" (selectTab)="onTabActivated($event)">
+        <div class="content">
+            <div class="" *ngFor="let storylike of storylikes" class="item" >
+                <app-library-card [story]="storylike"
+                    (unlike)="deleteStoryLike($event)">
+                </app-library-card>
+            </div> 
+        </div>
+       
+    </mat-tab>
+    <mat-tab label="History" (selectTab)="onTabActivated($event)">
+        <app-history></app-history>
+    </mat-tab>
+</mat-tab-group>

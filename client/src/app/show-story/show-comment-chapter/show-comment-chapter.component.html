@@ -1,14 +1,15 @@
-<mat-accordion >
-    <div *ngFor="let chapter of ChapterList;">
-        <mat-expansion-panel hideToggle>
+<mat-accordion class="mat-elevation-z0">
+    <div *ngFor="let chapter of ChapterList;"   class="mb-2">
+        <mat-expansion-panel hideToggle class="mat-elevation-z0">
         <mat-expansion-panel-header>
         <mat-panel-title>
             <mat-icon class="material-icons-outlined">comment</mat-icon>
-            &nbsp;&nbsp; Chapter. {{chapter.order}}          
+            &nbsp;&nbsp; Chapter. {{chapter.order}}     
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{chapter.chapterName | titlecase}}     
         </mat-panel-title>
-        <mat-panel-description>
+        <!-- <mat-panel-description>
            {{chapter.chapterName | titlecase}}
-        </mat-panel-description>
+        </mat-panel-description> -->
         </mat-expansion-panel-header>
         <app-comment [comments]="comments"
                     [commentChapter]="chapter.id"></app-comment>

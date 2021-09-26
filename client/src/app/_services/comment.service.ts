@@ -44,7 +44,7 @@ export class CommentService {
 
     this.hubConnection.on('NewComment', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
-        //console.log(comment)
+        console.log(comment)
         this.commentThreadSource.next([comment,...comments ])
       })
     })
@@ -92,6 +92,6 @@ export class CommentService {
         .catch(error => console.log(error));
   }
   addLikedComment(commentId:number){
-    return this.http.post(this.baseUrl+'comments/AddLiked/'+ commentId,{})
+    return this.http.post(this.baseUrl+'comments/addliked/'+ commentId,{})
   }
 }

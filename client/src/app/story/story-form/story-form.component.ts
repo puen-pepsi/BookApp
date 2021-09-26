@@ -6,7 +6,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import {  FormControl, NgForm } from '@angular/forms';
-import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Story } from 'src/app/_models/story.model';
@@ -14,10 +14,14 @@ import { StoryService } from 'src/app/_services/story.service';
 import { Tags } from 'src/app/_models/tag';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { StorychapterService } from 'src/app/_services/storychapter.service';
+import { Chapter } from 'src/app/_models/chapter';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-story-form',
   templateUrl: './story-form.component.html',
-  styleUrls: ['./story-form.component.css']
+  styleUrls: ['./story-form.component.scss']
 })
 export class StoryFormComponent implements OnInit {
   @Output() submitSuccess = new EventEmitter();
@@ -25,13 +29,14 @@ export class StoryFormComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   @ViewChild('TagInput') TagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  submitupload:boolean=false;
   isCreate:boolean;
+  isEdit:boolean;
   GenreList : any=[];
   LanguageList : any=[];
   StateList : any=[];
   response:{dbPath:''};
   ResoucreUrl = environment.resourceUrl;
-
   visible = true;
   selectable = true;
   removable = true;
@@ -41,13 +46,14 @@ export class StoryFormComponent implements OnInit {
   tags: string[] = ['Rainobu'];
   // allTags: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   tagArray :string[]=[];
-
   // @HostListener('window:beforeunload',['$event']) unloadNotification($event:any){
   //   if(this.editForm.dirty){
   //     $event.returnValue = true;
   //   }
   //}
+  selectedTab = 0;
   constructor(public storyService:StoryService,
+              public storyChapterService:StorychapterService,
               private router:Router,
               private toastr:ToastrService) { 
       this.filteredTags = this.tagCtrl.valueChanges.pipe(
@@ -60,10 +66,10 @@ export class StoryFormComponent implements OnInit {
     this.getAllTags(); 
     this.getTags();
   }
-  uploadFinished = (event) =>{
-    
+  uploadFinished(event){
     this.response = event;
     this.storyService.formData.imageUrl = this.ResoucreUrl + this.response.dbPath;
+    console.log(this.storyService.formData.imageUrl)
   }
 
   returnToStory(){
@@ -73,11 +79,14 @@ export class StoryFormComponent implements OnInit {
   }
   onSubmit(form:NgForm) {
     // console.log(form);
+    this.submitupload = true;
+    
     if(this.storyService.formData.storyId == 0) //we will use the id as identifier for updating or insertion
-    this.insertRecord(form);
+     this.insertRecord(form);
     else
     this.updateRecord(form);
   }
+
   insertRecord(form:NgForm) {
     this.storyService.postStory().subscribe(
       res => {
@@ -85,6 +94,7 @@ export class StoryFormComponent implements OnInit {
         // this.photoSevice.upload()
         this.resetForm(form);
         this.storyService.refreshList();
+        this.router.navigate(['mystory'])
         this.submitSuccess.emit(false);
       },
       err => {
@@ -137,12 +147,20 @@ export class StoryFormComponent implements OnInit {
       this.tags = this.storyService.formData.tags.split(",");
   }
   selectTab(tabId: number){
+    this.storyChapterService.formData = new Chapter();
     this.StoryTabs.tabs[tabId].active = true;
-    this.isCreate = true;
+    this.isCreate = true;  
+    this.isEdit = false;  
   }
-
+  tabChanged = (tab: number): void => {
+    this.selectedTab = tab;
+    this.storyChapterService.formData = new Chapter();
+    this.isCreate = true;  
+    this.isEdit = false;  
+  }
   ChangeForm(event){
     this.isCreate = event;
+    this.isEdit = true;
   }
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -160,9 +178,9 @@ export class StoryFormComponent implements OnInit {
 
   remove(tag: string): void {
     const index = this.tags.indexOf(tag);
-
     if (index >= 0) {
       this.tags.splice(index, 1);
+      this.storyService.formData.tags = this.tags.join();
     }
   }
 
@@ -178,4 +196,5 @@ export class StoryFormComponent implements OnInit {
     
     return this.tagArray.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
+ 
 }

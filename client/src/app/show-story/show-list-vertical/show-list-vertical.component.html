@@ -1,0 +1,8 @@
+<div class="card-vertical" *ngIf="showstory">
+            <div *ngFor="let story of showstory index as i">
+                <app-show-card-vertical
+                    [row]="story">
+                </app-show-card-vertical>
+                <mat-divider></mat-divider>
+            </div>
+</div>

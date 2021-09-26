@@ -22,6 +22,11 @@ namespace API.Data
             _context = context;
         }
 
+        public async Task<IEnumerable<Report>> GetAllReport()
+        {
+            return await _context.Reports.Include(e => e.User).ToListAsync();
+        }
+
         public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users
@@ -47,21 +52,28 @@ namespace API.Data
                 "created" => query.OrderByDescending(u => u.Created),
                 _ => query.OrderByDescending(u => u.LastActive)
             };
-            
+            //var users = _mapper.Map<IEnumerable<MemberDto>>(query);
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper
                 .ConfigurationProvider).AsNoTracking(), 
                     userParams.PageNumber, userParams.PageSize);
+   
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users
+                            .Include(u => u.recievePoints)
+                            .Include(t => t.titleAcitive).ThenInclude(t => t.TitleName)
+                            .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
+                .Include(p => p.Banners)
                 .Include(p => p.Photos)
+                .Include(p => p.recievePoints)
+                .Include(p => p.titleAcitive)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 

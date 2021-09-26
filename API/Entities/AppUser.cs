@@ -17,6 +17,7 @@ namespace API.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public ICollection<Banner> Banners { get; set; }
         public ICollection<Photo> Photos { get; set; }
         // Users Click Like
         public ICollection<UserLike> LikedByUsers { get; set; }
@@ -29,6 +30,8 @@ namespace API.Entities
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<Story> Stories { get; set; }
         public ICollection<StoryComment> StoryComments {get; set;}
+        public ICollection<RecievePoint> recievePoints { get; set; }
+        public ICollection<TitleActive> titleAcitive {get;set;}
         public AppUser()
         {
             Photos = new Collection<Photo>();
@@ -41,7 +44,8 @@ namespace API.Entities
             UserRoles = new Collection<AppUserRole>();
             Stories = new Collection<Story>();
             StoryComments = new Collection<StoryComment>();
-
+            recievePoints = new Collection<RecievePoint>();
+            titleAcitive = new Collection<TitleActive>();
         }
 
     }

@@ -6,7 +6,7 @@ import { ReporttopicService } from 'src/app/_services/reporttopic.service';
 @Component({
   selector: 'app-reporttopic-form',
   templateUrl: './reporttopic-form.component.html',
-  styleUrls: ['./reporttopic-form.component.css']
+  styleUrls: ['./reporttopic-form.component.scss']
 })
 export class ReporttopicFormComponent implements OnInit {
   constructor(public reportTopicService :ReporttopicService,

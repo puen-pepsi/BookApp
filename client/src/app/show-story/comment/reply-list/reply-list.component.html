@@ -1,21 +1,21 @@
 <ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
     <div class="ml-5 pt-0 pb-0 pl-2 pr-2" >
     <div *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
-        <div *ngIf="comment.parentId== commentId" >     
-          <div fxLayout="row" class="main" >   
-            <div class="created">
-              <small class="text-muted ">{{comment.created | timeago}}</small>
-            </div>   
+        <div *ngIf="comment.parentId== commentId" class="commentlist">        
             <div class="left">
-              <img 
-                    class="img-circle rounded-circle"
-                    src="{{comment.image || './assets/user.png'}}" 
-                    alt="{{comment.knownAs}}">     
-            <!-- <h5 matLine> {{comment.knownAs}} </h5> -->
+                    <app-label-name
+                    (username)="gotoMember($event)"
+                    [pHeight]= '35'
+                    [imageUrl]='comment.image'
+                    [knownAs]='comment.knownAs'
+                    [userName]='comment.userName'
+                    [title]='comment.title'
+                    [point]='comment.point'>
+                  </app-label-name>  
             </div>
-            <div class="right" style="width: 100%;">
-              <strong >{{comment.knownAs | titlecase}}</strong> <br/>
-              <div  id="rconners1">
+            <div class="right">
+              <div id="rconners1">
+                <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
                 <p>{{comment.content}}</p>
               </div>
               <div fxLayout="row" fxLayoutAlign="start center">
@@ -44,6 +44,4 @@
             [storyName]='this.storyName'></app-reply-form>
         </mat-action>
     </div>
-      
-  </div>
 </ng-container>

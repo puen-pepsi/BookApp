@@ -24,11 +24,15 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _unitOfWork;
+
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
         
-        ITokenService tokenService, IMapper mapper,IEmailSender emailSender)
+        ITokenService tokenService, IMapper mapper,IEmailSender emailSender,
+        IUnitOfWork unitOfWork)
         {
             _emailSender = emailSender;
+            _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _userManager = userManager;
             _mapper = mapper;
@@ -63,7 +67,18 @@ namespace API.Controllers
         var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
         if (!roleResult.Succeeded) return BadRequest(result.Errors);
-
+          var ActiveType = await _unitOfWork.TitleRepository.GetTitleName(ActivitiesType.FirstRegister);
+            var getTitle = new TitleActive{
+                AppUserId = user.Id,
+                AppUser = user,
+                TitleNameId = ActiveType.Id,
+                TitleName = ActiveType,
+                Name = ActiveType.Name,
+                IsMain =true,
+                Type = ActivitiesType.FirstRegister
+            };
+        user.titleAcitive.Add(getTitle);
+        if(!await _unitOfWork.Complete())return BadRequest("Problem Add Title");
         // return new UserDto
         // {
         //     Username = user.UserName,
@@ -82,11 +97,17 @@ namespace API.Controllers
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
+            .Include(r => r.recievePoints)
+            .Include(t => t.titleAcitive)
+                .ThenInclude(t => t.TitleName)
             .SingleOrDefaultAsync(x => x.Email == loginDto.Username.ToLower());
         }else{
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
+            .Include(r => r.recievePoints)
+            .Include(t => t.titleAcitive)
+                .ThenInclude(t => t.TitleName)
             .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower()); 
         }
 
@@ -113,8 +134,11 @@ namespace API.Controllers
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
+            Point = user.recievePoints.Sum(a => a.Point),
+            Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
             //Gender = user.Gender,
             //MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
+
         };
     }
     
@@ -216,8 +240,20 @@ namespace API.Controllers
                     Photos = { photo }
                 };
                 await _userManager.CreateAsync(user);
-                //prepare and send an email for the email confirmation
                 await _userManager.AddToRoleAsync(user, "Member");
+                var ActiveType = await _unitOfWork.TitleRepository.GetTitleName(ActivitiesType.FirstRegister);
+                    var getTitle = new TitleActive{
+                        AppUserId = user.Id,
+                        AppUser = user,
+                        TitleNameId = ActiveType.Id,
+                        TitleName = ActiveType,
+                        Name=ActiveType.Name,
+                        IsMain =true,
+                        Type = ActivitiesType.FirstRegister
+                    };
+                user.titleAcitive.Add(getTitle);
+                if(!await _unitOfWork.Complete())return BadRequest("Problem Add Title");
+                //prepare and send an email for the email confirmation
                 await _userManager.AddLoginAsync(user, info);
             }
             else
@@ -231,6 +267,10 @@ namespace API.Controllers
         //var token = await _tokenService.CreateToken(user);
         var main = await _userManager.Users
                             .Include(p => p.Photos)
+                            .Include(l => l.LikedStoryByUsers)
+                            .Include(r => r.recievePoints)
+                            .Include(t => t.titleAcitive)
+                                .ThenInclude(t => t.TitleName)
                             .SingleOrDefaultAsync(x => x.Id == user.Id);
         return new UserDto
         {
@@ -238,6 +278,8 @@ namespace API.Controllers
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = main.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
+            Point = user.recievePoints.Sum(p => p.Point),
+            Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
             //Gender = user.Gender,
         };
         // return Ok(new AuthResponseDto { Token = token, IsAuthSuccessful = true });

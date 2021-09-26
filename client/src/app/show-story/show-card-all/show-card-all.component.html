@@ -1,0 +1,108 @@
+    <!-- <div class="main">
+        <div class="image">
+            <app-show-card 
+                [story]="row">
+            </app-show-card>  
+        </div>
+        <div class="content">
+                <mat-card class="mat-elevation-z0">
+                    <mat-card-header>
+                    <mat-card-title>
+                        {{row.storyName| titlecase}}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        ({{row.genre}})
+                    </mat-card-subtitle>
+                    </mat-card-header>
+                
+                    <mat-card-content>
+                    {{row.description}}
+                </mat-card-content>
+               <div class="create text-muted">
+                <div *ngIf="row.lastChapterName" class="chapter" fxLayout.lt-md="column">
+                    <button type="button" class="btn btn-danger Header"
+                        *ngIf="NewChapter(row.lastChapterCreate)">
+                         New
+                    </button>
+                    <div class="pl-3" fxLayout="column">
+                        {{row.lastChapterName | uppercase}}
+                        <small>
+                            {{row.lastChapterCreate | date:'short'}}
+                        </small>
+                    </div>
+                    <div class="pl-3">
+                        Lastest Chapter : {{row.totalChapter}}
+                    </div>         
+                </div>  
+                <div *ngIf="!row.lastChapterName">
+                    <span class="pl-3">Lastest Chapter : N/A</span>
+                </div>   
+                <div class="rightbottom">
+                    <button mat-stroked-button (click)="goToDetial(row.storyName)"
+                        >See More</button>
+                    <div>
+                        <small>{{row.created | timeago}}&nbsp;|&nbsp;</small>
+                        <span>By {{row.userName}}</span> 
+                    </div>
+                </div>
+                </div>
+            </mat-card>
+        </div>
+    </div> -->
+    <mat-card class="mat-elevation-z0" #card>
+        <div class="main">
+            <div class="image">
+                <app-show-card 
+                [story]="row">
+                </app-show-card>  
+            </div>
+            <div class="body">
+                <div class="header">
+                        <h3>{{row.storyName| titlecase}} </h3>
+                      <span class="text-muted">
+                          ({{row.genre}})
+                      </span>                      
+                </div>
+                <div class="text pt-3">
+                        {{row.description}} 
+                </div> 
+                <div class="tag mb-1 mt-1" >
+                    <mat-chip-list aria-label="tags" >
+                        <mat-chip *ngFor="let ele of tag" (click)="goToTag(ele)">
+                            #{{ele}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <span class="example-spacer"></span>
+                <div class="create text-muted">
+                <div *ngIf="row.lastChapterName" class="chapter" fxLayout.lt-md="column">
+                    <button type="button" class="btn btn-danger Header"
+                        (click)="gotoChapter(row.storyName,row.totalChapter)"
+                        *ngIf="NewChapter(row.lastChapterCreate)">
+                         New
+                    </button>
+                    <div class="pl-3" fxLayout="column" fxHide.lt-sm>
+                        {{row.lastChapterName | uppercase}}
+                        <small>
+                            {{row.lastChapterCreate | date:'short'}}
+                        </small>
+                    </div>
+                    <div class="pl-3" fxHide.lt-sm>
+                            Lastest Chapter : {{row.totalChapter}}                        
+                    </div>         
+                </div>  
+                <div *ngIf="!row.lastChapterName" fxHide.lt-sm>
+                    <span class="pl-3">Lastest Chapter : N/A</span>
+                </div>   
+                <div class="rightbottom">
+                    <button mat-stroked-button (click)="goToDetial(row.storyName)"
+                        >See More</button>
+                    <div>
+                        <small>{{row.created | timeago}}&nbsp;|&nbsp;</small>
+                        <span>By {{row.userName}}</span> 
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>

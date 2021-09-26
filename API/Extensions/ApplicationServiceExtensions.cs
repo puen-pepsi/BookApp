@@ -21,6 +21,7 @@ namespace API.Extensions
             services.Configure<PhotoSettings>(config.GetSection("PhotoSettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             services.AddTransient<IPhotoStoryService, PhotoStorySevice>();
             services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

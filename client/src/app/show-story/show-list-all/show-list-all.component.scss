@@ -1,0 +1,124 @@
+.top-between{
+    color:white;
+    height: 60px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+}
+.example-spacer{
+    flex:1 0 auto;
+}
+
+.mat-list-base{
+    padding-top: 0;
+}
+.mat-form-field
+{
+    padding: 0;
+}
+.mat-button-toggle-checked{
+    /* background-color: #2979FF; */
+    /* background-color:var(--highlight-toggle2); */
+    font-weight: bolder;
+  } 
+/* .mat-icon{
+    height: 2rem;
+    color:gold;
+} */
+.body-card{
+    padding-top: 0;
+}
+.previos{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.next{
+    margin-top:auto;
+    margin-bottom: auto;
+}
+.mat-icon{
+    text-align: center;
+    justify-self: center;
+    /* width:16px; */
+}
+.list-group-item {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;   
+}
+.list-group-item:focus {
+    outline: none;
+}
+
+.list-group-item.active {
+    border-radius: 5px;
+}
+
+.list-group-item:not(.active):hover {
+    // color: #fff;
+    // background-color: rgba(233, 86, 32, 0.705);
+    border-radius: 5px;
+}
+.mat-expansion-panel-header
+{
+    font-size: 1rem;
+    font-weight: bold;
+    // background-color: #F2F4FF;
+    /* background-color: #4f5b62; */
+    ;
+}
+.mat-expansion-panel-body {
+    padding: 0 0px 0px;
+}
+.full-width{
+    position:absolute;
+    width: 100%;
+    top:64px;
+    /* top:-36px; */
+    left: 0;
+}
+.main{
+    margin-top: 320px;
+}
+.top-between{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    /* background-color: #ecf8fd; */
+}
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+
+}
+.item{
+    /* max-width: 20%; */
+    margin-left: 10px;
+    margin-bottom: 10px;
+    max-width:150px;
+}
+.red {
+    background-color: red;
+}
+
+.mat-list-base{
+    padding-top: 0;
+    cursor: pointer;
+}
+input[type=text]{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+     border-radius: 0;
+     border: 1px solid #c5c5c5;
+     color: #2780e3;
+     padding-left: 10px;
+    }

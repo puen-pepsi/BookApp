@@ -1,15 +1,20 @@
+
 <div class="row">
     <div class="col-md-3">
-        <div *ngFor="let member of (presence.onlineUsers$ | async)">
-            <p>{{member | json}}</p>
+        <div class="listname">
+            <mat-card *ngFor="let member of (presence.onlineUsers$ | async)" class="mb-1">
+            <app-label-tag 
+                [pHeight]= '30'
+                [knownAs]= member>
+            </app-label-tag>
+        </mat-card>
         </div>
+        
     </div>
     <div class="col-md-9">
-        <div class="card">
-        <div class="card-body">
-        <!-- <div class="card-body" 
-                #scrollMe style="overflow: scroll; height: 535px;" 
-                [scrollTop]="scrollMe.scrollHeight"> -->
+        <!-- <h1>Chatto</h1>
+        <mat-divider></mat-divider> -->
+        <!-- <div class="card-body">
             <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
                 No messages yet... say hi by using the message box below
             </div>
@@ -21,10 +26,7 @@
                         <div >
                                 <img class="rounded-circle pr-2" src="{{message.image || './assets/user.png'}}"
                                     alt="{{message.userName}}">
-                                 <small class="text-muted">
-                                     
-                                     <!-- <span class="fa fa-clock-o">{{message.created | timeago}}</span> -->
-                                </small>   
+                                
                             <div class="message last">
                                         <p><b>{{message.knownAs}}</b> | {{message.content}}</p>            
                             </div>
@@ -33,9 +35,6 @@
                     <div *ngIf="message.userName === user.username" class="mine messages">
                         <div class="message last">
                             <p>{{message.content}}</p>
-                            <!-- <small class="text-muted">
-                                <span class="fa fa-clock-o">{{message.created | timeago}}</span>
-                            </small> -->
                         </div>    
                     </div> 
                 </div>
@@ -55,8 +54,65 @@
                 <i class="fas fa-paper-plane fa-lg"></i></button>
             </mat-action-list> 
         </form>
-        </div>
-</div>
+        </div> -->
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>forum</mat-icon>
+              </button>
+              <span>Rainobu Chatto</span>
+              <!--<span class="example-spacer"></span>
+               <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+               <mat-icon>share</mat-icon>
+             </button> -->
+        </mat-toolbar>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-content>
+                <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
+                    No messages yet... say hi by using the message box below
+                </div>
+                <div *ngIf="(chatService.commentThread$ | async)?.length > 0">
+                    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="500" maxBufferPx="1000"
+                     class="container">
+                    <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)" class="commnet-items">
+                        <div  *ngIf="message.userName !== user.username" class="yours messages">
+                            <div class="d-flex">
+                                <div class="pic-msg">
+                                  <img class="rounded-circle " src="{{message.image || './assets/user.png'}}"
+                                        alt="{{message.userName}}">  
+                                </div>
+                                    
+                                <div class="message last" >
+                                            <p><b>{{message.knownAs}}</b> | {{message.content}}</p>            
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="message.userName === user.username" class="mine messages">
+                            <div class="message last">
+                                <p>{{message.content}}</p>
+                            </div>   
+                        </div>  
+                    </div>
+                    </cdk-virtual-scroll-viewport>
+                </div> 
+            </mat-card-content>
+            <mat-card-footer class="card-footer">
+                <form fxLayout="row" 
+                (ngSubmit)="onSubmit()" [formGroup]="commentForm">
+                <mat-form-field class="example-full-width">
+                        <mat-label>Leave a message</mat-label>
+                        <input formControlName="content" matInput  autocomplete="off"
+                        placeholder="Ex. It makes me feel..."/>
+                </mat-form-field>
+                <mat-action-list fxFlexAlign="start">
+                    <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
+                    <i class="fas fa-paper-plane fa-lg"></i></button>
+                </mat-action-list> 
+            </form>
+            </mat-card-footer>
+        </mat-card>
     </div>
 </div>
 

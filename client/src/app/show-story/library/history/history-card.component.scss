@@ -1,0 +1,227 @@
+
+.mat-card{
+  margin: 0;
+  padding:0;
+}
+
+.card{
+    // width: 550px;
+    height: 180px;
+    // background-color: #fff;
+    // background: linear-gradient(#f8f8f8, #fff);
+    // box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+    border-radius: 6px;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+  
+  .card h4 {
+    text-align: left;
+  }
+  
+  .card .additional {
+    // display: none;
+    padding: 2px;
+    position: absolute;
+    width: 140px;
+    min-width: 130px;
+    height: 100%;
+    background: linear-gradient(#000000, #878788);
+    transition: width 0.4s;
+    overflow: hidden;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .card:hover .additional {
+    width: 100%;
+    border-radius: 0 5px 5px 0;
+  }
+  .card:hover .additional .more-info{
+    opacity: 1;
+  }
+  .card .additional .genre-card {
+    margin-top:5px;
+    margin-left: 10px;
+    width: 140px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+  }
+  
+  .card .additional .genre-card::after {
+    content: "";
+    display: block;
+    // position: absolute;
+    // top: 10%;
+    // right: -2px;
+    height: 80%;
+    border-left: 2px solid rgba(0,0,0,0.025);
+  }
+  
+  .card .additional .genre-card .level,
+  .card .additional .genre-card .star {
+    /* top: 15%; */
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 0.125rem 0.75rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .card .additional .genre-card .level {
+    background: rgba(0,0,0,0.15);
+  }
+  .card .additional .genre-card .star {
+    width: 100%;
+  }
+  
+  .card .additional .genre-card svg {
+    top: 50%;
+  }
+  
+  .card .additional .more-info {
+    // width: 410px;
+    /* float: left; */
+    // position: absolute;
+    width: 100%;
+    left: 150px;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px;
+    opacity: 0;
+  }
+  
+  .card .additional .more-info h4 {
+      padding-top: 5px;
+    color: #fff;
+    margin-bottom: 0;
+  }
+  
+  /* .card.green .additional .more-info h1 {
+    color: #224C36;
+  } */
+  
+  .card .additional .author {
+    padding: 5px;
+    color: #fff;
+    font-size: 0.8rem;
+    /* right: 5px; */
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  /* .card .additional .coords span + span {
+    float: right;
+  } */
+  
+  .card .additional .stats {
+    width: 100%;
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    color: #fff;
+  }
+  
+  .card .additional .stats > div {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .card .additional .stats i {
+    display: block;
+  }
+  
+  .card .additional .stats div.title {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .card .additional .stats div.value {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1rem;
+  }
+  .card .additional .floatright {
+    margin: 0 1rem;
+    color: #fff;
+    font-size: 1rem;
+    right: 5px;
+    display:flex;
+    justify-content: flex-end;
+  }
+  
+  
+  .card .general {
+    // width: 410px;
+    margin-left: 140px;
+    height: 100%;
+    // background-color:#9b9a9a;
+    // color: #000000;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 1rem;
+    padding-top: 3px;
+  }
+  .card .general .synopsis{
+    height: 100px;
+    overflow: hidden;
+  }
+  .card .general .more {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.9em;
+  }
+  .img-thumbnail{
+      width:120px;
+      height:120px;
+  }
+  /* .box{ 
+      width:400px; 
+      height:100%; 
+      position:relative; 
+      margin-top:30px; } */
+  .rightCircle{ 
+      position:absolute; 
+      text-align: center;
+      align-items: center;
+      width:20px; 
+      height:20px; 
+      border-radius:50%; 
+      box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+      color: white; 
+      background-color: royalblue;
+      right:-10px; 
+      top:-10px;
+      z-index: 999;
+  }
+  .rightCircle :hover{
+    cursor: pointer;
+  }
+  .icon {
+    font-size: 1rem;
+    
+  }
+  .text{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+}

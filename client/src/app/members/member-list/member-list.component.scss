@@ -1,0 +1,29 @@
+.mat-form-field
+{
+    padding: 0;
+}
+.mat-button-toggle-checked{
+    // background-color: #2979FF;
+    /* background-color:var(--highlight-toggle2); */
+    font-weight: bolder;
+    // color: white;
+  } 
+.showcard{
+    display:flex;;
+    flex-flow:row wrap;
+    justify-content: flex-start;
+    box-sizing: border-box;
+
+}
+.item{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.top-between{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}

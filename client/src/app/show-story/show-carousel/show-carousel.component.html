@@ -1,0 +1,30 @@
+<!-- HTML content -->
+<div class="demo">
+    <h5>Hot {{storyType | titlecase}}</h5>
+    <carousel #myCarousel class="carousel-html-content" style="z-index: 2;"
+        [overflowCellsLimit]="'3'"
+        [cellWidth]='160'
+        [height]="'280'">
+        <div *ngFor="let story of showstory"
+            class="carousel-cell">
+            <app-show-card 
+                [story]="story"
+                (refesh)="refesh($event)">
+            </app-show-card>   
+        </div>
+       
+    </carousel>
+</div>
+
+<!-- <div class="demo">
+    <h3>Image slider</h3>
+    <carousel
+        [images]="imagesForSlider"
+        [objectFit]="'scale-down'"
+        [cellWidth]="'100%'"
+        [height]="300"
+        [autoplay]="true"
+        [dots]="true"
+        [loop]="true">
+    </carousel>
+</div> -->

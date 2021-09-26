@@ -6,7 +6,7 @@ import { StatusService } from 'src/app/_services/status.service';
 @Component({
   selector: 'app-status-form',
   templateUrl: './status-form.component.html',
-  styleUrls: ['./status-form.component.css']
+  styleUrls: ['./status-form.component.scss']
 })
 export class StatusFormComponent implements OnInit {
   constructor(public statusService:StatusService,

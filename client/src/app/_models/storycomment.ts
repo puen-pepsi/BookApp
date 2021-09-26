@@ -1,4 +1,3 @@
-import { Activities } from "./activities";
 
 export interface StoryComment{
     id:number;
@@ -9,6 +8,8 @@ export interface StoryComment{
     content:string;
     userName:string;
     knownAs:string;
+    point:number;
+    title:string;
     image:string;
     liked:string[];
     /**

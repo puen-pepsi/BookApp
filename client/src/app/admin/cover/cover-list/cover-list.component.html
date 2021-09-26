@@ -1,0 +1,15 @@
+
+<div class="top-between">
+    <h3>Rainobu Cover</h3>  
+    <!-- <mat-icon >emoji_events</mat-icon> -->
+    <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+        color="warn"
+        routerLink="create">
+        Create Cover
+    </button>
+</div>
+<div *ngFor="let row of coverService.list"  >
+    <app-cover-card [row]="row"
+                (deleteId)="deleteNews($event)" ></app-cover-card>
+    <mat-divider></mat-divider>
+</div>

@@ -1,0 +1,26 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id"
+           value="activitiesService.formData.id" />
+    <div class="row">
+      <div class="col-md-4 pr-0">
+        <input class="form-control" placeholder="Add a Activities Name"
+               name="name" #description="ngModel" [(ngModel)]="activitiesService.formData.activitiesName" required/>
+      </div>   
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="Activities Type"
+               name="type" #description="ngModel" [(ngModel)]="activitiesService.formData.type" required/>
+      </div> 
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="activeUserPoint"
+               name="activeUserPoint" #description="ngModel" [(ngModel)]="activitiesService.formData.activeUserPoint" required/>
+      </div> 
+      <div class="col-md-2 pr-0">
+        <input class="form-control" placeholder="authorPoint"
+               name="authorPoint" #description="ngModel" [(ngModel)]="activitiesService.formData.authorPoint" required/>
+      </div>
+      <div class="col-md-2 pl-1">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+      </div>
+    </div>
+  </form>

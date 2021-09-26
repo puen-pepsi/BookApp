@@ -21,6 +21,7 @@ namespace API.Controllers
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StoryDto>>> Get()
         {
@@ -72,10 +73,30 @@ namespace API.Controllers
                     var Alltag = await _unitOfWork.Repository.SelectAll<Tag>();
                     foreach (string tag in  storyDto.Tags.Split(","))
                     {
+                        
                         if(!Alltag.Exists(t=>t.TagName.ToLower().Trim() == tag.ToLower().Trim())){
                             var addTag = new Tag{TagName = tag};
                             await _unitOfWork.Repository.CreateAsync<Tag>(addTag);
+                            //Add storylist
+                            var newTag = new TagStory{
+                                Tags = addTag,
+                                Stories = createStory
+                            };
+                            createStory.StoryTags.Add(newTag);
+                            await _unitOfWork.Complete();
                         }
+                    }
+                     foreach (string tag in  storyDto.Tags.Split(","))
+                    {
+                           var oldTag = _unitOfWork.TagRepository.GetTagName(tag);
+                           var getOld = new TagStory{
+                                TagId = oldTag.Id,
+                                Tags = oldTag,
+                                StoryId = createStory.Id,
+                                Stories = createStory
+                            };
+                            createStory.StoryTags.Add(getOld);
+                            await _unitOfWork.Complete();
                     }
                 }
                 var storyToReturn = _mapper.Map<StoryDto>(createStory);
@@ -87,7 +108,6 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStory(int id,[FromBody] StoryDto storyDto)
         {
-
             var storyUpdate = await _unitOfWork.StoryRepository.GetStoryById(id);
             if(storyUpdate == null)
                 return NotFound();
@@ -97,7 +117,7 @@ namespace API.Controllers
             _mapper.Map<StoryDto,Story>(storyDto,storyUpdate);
             _unitOfWork.StoryRepository.UpdateStory(storyUpdate);
             if(await _unitOfWork.Complete()){
-                
+                 _unitOfWork.TagRepository.DeleteStoryTag(storyUpdate.Id);
                 if(storyDto.Tags != null){
                     var Alltag = await _unitOfWork.Repository.SelectAll<Tag>();
                     foreach (string tag in  storyDto.Tags.Split(","))
@@ -106,9 +126,22 @@ namespace API.Controllers
                             var addTag = new Tag{TagName = tag};
                             await _unitOfWork.Repository.CreateAsync<Tag>(addTag);
                         }
+
                     }
                 }
-                
+                 foreach (string tag in  storyDto.Tags.Split(","))
+                    {
+                       var curtag = _unitOfWork.TagRepository.GetTagName(tag);
+                        var ctag = new TagStory{
+                                TagId = curtag.Id,
+                                Tags = curtag,
+                                StoryId = storyUpdate.Id,
+                                Stories = storyUpdate
+                            };
+                            storyUpdate.StoryTags.Add(ctag);
+                            await _unitOfWork.Complete();
+                        
+                    }
                 var storyToReturn = _mapper.Map<StoryDto>(storyUpdate);
                 return Ok(storyToReturn);
             }
@@ -194,5 +227,7 @@ namespace API.Controllers
             return _mapper.Map<IEnumerable<TagDto>>(TagList);
 
         }
+
+
     }
 }

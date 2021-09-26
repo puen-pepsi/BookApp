@@ -1,0 +1,14 @@
+        <div class="top-between">
+            <h3>Rainobu Slide</h3>  
+            <!-- <mat-icon >emoji_events</mat-icon> -->
+            <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+                color="warn"
+                routerLink="create">
+                Create Slide
+            </button>
+        </div>
+<div *ngFor="let row of slideService.list"  >
+    <app-slide-card [row]="row"
+                (deleteId)="deleteNews($event)" ></app-slide-card>
+    <mat-divider></mat-divider>
+</div>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-storychapter',
   templateUrl: './storychapter.component.html',
-  styleUrls: ['./storychapter.component.css']
+  styleUrls: ['./storychapter.component.scss']
 })
 export class StorychapterComponent implements OnInit {
   public isCreate :boolean;

@@ -1,0 +1,29 @@
+/* ngb-carousel .wrapper {
+    position: relative;
+    padding-top: 35%; 
+    
+  }
+  ngb-carousel .wrapper>img {
+    position: absolute;
+      object-fit:cover;
+      top: 0;
+      left: 0;
+      bottom:0;
+      right:0;
+      width: 100%;
+      height: 100%;
+    object-fit: contain;
+  } */
+  .carousel-slide{
+      width: 100px;
+  }
+
+  .desc{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    height:100%;
+    color:whitesmoke;
+  }

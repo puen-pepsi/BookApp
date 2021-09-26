@@ -7,8 +7,13 @@
     </mat-sidenav>
     
     <mat-sidenav-content>
-        <app-header (sidenavtoggle)="sidenav.toggle()"></app-header>
+        <app-header (sidenavtoggle)="sidenav.toggle()"
+                (toggleMode)="toggleDarkMode()"
+                [headlogo]="headlogo"
+                [bgtool]="bgtool"
+                [isDarkMode]='isDarkMode'></app-header>
         <!-- <app-section-header></app-section-header> -->
+        <!-- <main class="container"> -->
         <main class="container">
              <router-outlet></router-outlet>
         </main>

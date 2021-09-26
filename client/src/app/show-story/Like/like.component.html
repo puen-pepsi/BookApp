@@ -6,7 +6,9 @@
                 >bakery_dining</mat-icon>
 </span>
 <span   [class.normal]="!isActive"
-        [class.highlighted]="isActive">{{(isActive)?"Liked":"Like"}} </span>
+        [class.highlighted]="isActive"
+        [matTooltip]="usersLike"
+        >{{(isActive)?"Liked":"Like"}} </span>
 <span [class.normal]="!isActive" 
         [class.highlighted]="isActive"> {{likeCount>0?likeCount:''}}</span>
 </div>

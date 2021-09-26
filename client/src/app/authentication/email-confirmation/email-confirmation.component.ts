@@ -5,7 +5,7 @@ import { AccountService } from 'src/app/_services/account.service';
 @Component({
   selector: 'app-email-confirmation',
   templateUrl: './email-confirmation.component.html',
-  styleUrls: ['./email-confirmation.component.css']
+  styleUrls: ['./email-confirmation.component.scss']
 })
 export class EmailConfirmationComponent implements OnInit {
   public showSuccess: boolean;

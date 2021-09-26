@@ -6,7 +6,7 @@ import { BreadcrumbService } from '../_services/breadcrumb.service';
 @Component({
   selector: 'app-section-header',
   templateUrl: './section-header.component.html',
-  styleUrls: ['./section-header.component.css']
+  styleUrls: ['./section-header.component.scss']
 })
 export class SectionHeaderComponent  {
   breadcrumbs$: Observable<Breadcrumb[]>; 

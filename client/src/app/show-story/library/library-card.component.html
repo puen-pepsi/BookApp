@@ -1,4 +1,4 @@
-<div class="card mb-4">
+<div class="card">
     <!-- <p>{{story | json}}</p> -->
     <div class="card-img-wrapper">
          <ng-container *ngIf="story.imageUrl.length;then first else second"></ng-container>
@@ -35,7 +35,7 @@
                     <mat-icon>menu_book</mat-icon>
                 </button>
             </li>        
-            <li *ngIf="!userLiked" class="list-inline-item">
+            <!-- <li *ngIf="!userLiked" class="list-inline-item">
                 <button mat-mini-fab aria-label="Action icon" (click)="addLikeStory(story)">
                     <mat-icon>bookmark_border</mat-icon>
                 </button>
@@ -45,6 +45,12 @@
                     aria-label="Action icon" (click)="deletLikeStory(story.storyId)">
                     <mat-icon>bookmark_added</mat-icon>
                 </button>
+            </li> -->
+            <li class="list-inline-item">               
+                <app-followstory [isActive]="userLiked != null"
+                    [storyid]="story.storyId" 
+                    [storyname]="story.storyName"
+                    (click)="deletLikeStory(story.storyId)"></app-followstory>
             </li>
             <li class="list-inline-item">
                 <!-- <button routerLink='/members/{{story.userName}}' class="btn btn-primary">
@@ -73,9 +79,6 @@
                 [wSize] = "fSize"
                 (ratingUpdated)="onRatingChanged($event)">
             </app-star-rating-show>
-            <!-- <span>Author : {{story.userName}}</span>
-            <small class="float-right text-muted "
-                > {{yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"}}</small>
     </div>
 </div>
 

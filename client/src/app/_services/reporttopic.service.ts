@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ReportList } from '../_models/reportlist';
 import { ReportTopic } from '../_models/reporttopic';
 
 @Injectable({
@@ -21,9 +22,15 @@ export class ReporttopicService {
   deleteTags(id:number){
     return this.http.delete(this.baseUrl + 'reporttopic/' + id);
   }
+  deleteReport(id:number){
+    return this.http.delete(this.baseUrl + 'report/' + id);
+  }
   refreshList() {
     this.http.get(this.baseUrl + 'reporttopic')
       .toPromise()
       .then(res => this.list = res as ReportTopic[]);
+  }
+  getAllReport(){
+    return this.http.get<ReportList[]>(this.baseUrl + 'report');
   }
 }

@@ -13,16 +13,16 @@ export class StatusService {
   constructor(private http:HttpClient) { }
 
   postStatus(){
-    return this.http.post(this.baseUrl + 'Statuses',this.formData);
+    return this.http.post(this.baseUrl + 'statuses',this.formData);
   }
   putStatus(){
-    return this.http.put(this.baseUrl + 'Statuses/'+ this.formData.id, this.formData);
+    return this.http.put(this.baseUrl + 'statuses/'+ this.formData.id, this.formData);
   }
   deleteStatus(id:number){
-    return this.http.delete(this.baseUrl + 'Statuses/' + id);
+    return this.http.delete(this.baseUrl + 'statuses/' + id);
   }
   refreshList() {
-    this.http.get(this.baseUrl + 'Statuses')
+    this.http.get(this.baseUrl + 'statuses')
       .toPromise()
       .then(res => this.list = res as Status[]);
   }

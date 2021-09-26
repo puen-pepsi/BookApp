@@ -1,18 +1,19 @@
 
+<div class="search-results"
+            infinite-scroll
+            [infiniteScrollDistance]="1"
+            [infiniteScrollThrottle]="150"
+            (scrolled)="onScroll()">
 <ng-container *ngIf="storyHistory?.length == 0">
   <div class="py-3">No History Now..</div>
 </ng-container>
 <ng-container *ngIf="storyHistory?.length > 0" >
-  <div fxLayout="column" fxLayoutAlign="center" >
-   <div *ngFor="let history of storyHistory">
-      <app-history-card [history]="history"
-        (deleteId)="deleteHistory($event)"></app-history-card>
-  </div>
+   <div *ngFor="let history of storyHistory " class="items">
+      <!-- <app-history-card [history]="history"
+        (deleteId)="deleteHistory($event)"></app-history-card> -->
+    <app-history-card-list [row]="history"
+      (deleteId)="deleteHistory($event)"> 
+    </app-history-card-list>
 </div>
-  <mat-paginator 
-  [length]="pagination?.totalItems" 
-  [pageSizeOptions]="[5]"
-  [showFirstLastButtons]="true"
-  (page)="pageChanged($event)">
-</mat-paginator>
 </ng-container>
+</div>

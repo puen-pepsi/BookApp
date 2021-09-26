@@ -10,7 +10,7 @@ import { ShowStory } from 'src/app/_models/showstory';
 @Component({
   selector: 'app-author-story',
   templateUrl: './author-story.component.html',
-  styleUrls: ['./author-story.component.css']
+  styleUrls: ['./author-story.component.scss']
 })
 export class AuthorStoryComponent implements OnInit {
   @Input() authorname:string;

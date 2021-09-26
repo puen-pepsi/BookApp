@@ -7,7 +7,7 @@ import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-
 @Component({
   selector: 'app-history-card',
   templateUrl: './history-card.component.html',
-  styleUrls: ['./history-card.component.css']
+  styleUrls: ['./history-card.component.scss']
 })
 export class HistoryCardComponent implements OnInit {
   @Input('history') history:ShowHistory;
@@ -31,9 +31,9 @@ export class HistoryCardComponent implements OnInit {
       this.userLiked = res;
     });
   }
-  createSynopsis(content:string){
-    return content.substr(0,180)+".....";
-  }
+  // createSynopsis(content:string){
+  //   return content.substr(0,180)+".....";
+  // }
   deleteHistory(storyId:number){
     this.deleteId.emit(storyId);
   }

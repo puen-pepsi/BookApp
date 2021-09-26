@@ -3,7 +3,7 @@
           (ngSubmit)="onSubmit()" [formGroup]="commentForm">
           <mat-form-field class="example-full-width">
                 <mat-label>Leave a comment</mat-label>
-                <input formControlName="content" matInput 
+                <input formControlName="content" matInput  autocomplete="off"
                 placeholder="Ex. It makes me feel..." />
           </mat-form-field>
           <mat-action-list fxFlexAlign="start">
@@ -11,10 +11,11 @@
               <i class="fas fa-paper-plane fa-lg"></i></button>
           </mat-action-list> 
       </form>
+      </div>
       <!-- <div class="comment">
         <app-comment-pop [username]="username" (message)="onSubmit($event)"></app-comment-pop>
       </div> -->
       <app-comment-list [commentChapter]="commentChapter"></app-comment-list>
-    </div>
+    
     
   

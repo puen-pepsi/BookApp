@@ -1,0 +1,44 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Your Activities</span>
+      <span class="example-spacer"></span>
+       <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+       <mat-icon>share</mat-icon> 
+     </button>-->
+     <mat-label>Total : {{user.point | number}} Point</mat-label>
+</mat-toolbar>
+<mat-card class="mat-elevation-z0">
+    <mat-card-content>
+        <div *ngIf="activitieslist">
+            <cdk-virtual-scroll-viewport #scroller itemSize="50" class="content" (scrolledIndexChange)="nextBatch($event)">
+                <mat-list>
+                    <ng-container *cdkVirtualFor="let item of activitieslist">
+                        <mat-list-item >
+                        <h3 matLine fxLayout.lt-sm="column" fxLayout.gt-sm="row">
+                            <span fxFlex="30">
+                                {{item.storyName | titlecase}} 
+                            </span>
+                             <span fxFlex="30">
+                                Active user :{{item.userName | titlecase}}
+                             </span>
+                             <span fxFlex="30">
+                                Type : {{activitiesType[item.type]}}
+                           </span>  
+                        </h3>
+                        <span matLine class="text-muted">{{item.activitiesCreated | date:'short'}}</span>
+                        <span matline matBadge=+{{item.point}}></span>
+                        <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </ng-container>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+

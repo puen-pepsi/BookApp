@@ -7,5 +7,8 @@ namespace API.Helpers
         public string Author { get; set; }
         public string StoryType { get; set; }
         public string OrderBy { get; set; } = "created";
+        public string OrderByViews { get; set; } ="weekly";
+        public string Language { get; set; }
+        public string Search { get; set;}
     }
 }

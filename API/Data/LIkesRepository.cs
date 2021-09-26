@@ -17,7 +17,6 @@ namespace API.Data
         {
             _context = context;
         }
-
         public async Task<UserLike> GetUserLike(int sourceUserId, int likedUserId)
         {
             return await _context.Likes.FindAsync(sourceUserId, likedUserId);
@@ -47,7 +46,8 @@ namespace API.Data
                 Age = user.DateOfBirth.CalculateAge(),
                 PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain).Url,
                 City = user.City,
-                Id = user.Id
+                Id = user.Id,
+                Title = user.titleAcitive.FirstOrDefault(x => x.IsMain).Name
             });
 
             return await PagedList<LikeDto>.CreateAsync(likedUsers, 
@@ -59,6 +59,10 @@ namespace API.Data
             return await _context.Users
                 .Include(x => x.LikedUsers)
                 .FirstOrDefaultAsync(x => x.Id == userId);
+        }
+        public void DeleteMemberLike(UserLike userLike)
+        {
+             _context.Likes.Remove(userLike);
         }
     }
 }

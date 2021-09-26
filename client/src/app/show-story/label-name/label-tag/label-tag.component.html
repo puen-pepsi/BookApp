@@ -1,0 +1,13 @@
+<div class="rank">
+    <div class="image">
+        <img src="{{imageUrl || './assets/user.png'}}" 
+        [ngStyle]="{'box-shadow':rank,'height':pHeight+'px'}"
+        alt="{{knownAs}}" [matTooltip]="tooltip"
+        class="img-circle rounded-circle">
+    </div>
+    <div class="label_name" *ngIf="knownAs && title">
+        <div class="knownAs"><strong >{{knownAs | titlecase}}</strong>
+            <span class="title">{{title}}</span>
+        </div>
+    </div>
+</div>

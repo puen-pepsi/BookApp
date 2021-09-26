@@ -29,6 +29,7 @@ namespace API.Entities
         public virtual ICollection<View> ViewCount { get; set; }
         public virtual  ICollection<UserStory> StoryLiked { get; set; }
         public virtual ICollection<UserHistory> StoryHistory { get; set; }
+        public virtual ICollection<TagStory> StoryTags { get; set;}
         public Story()
         {
             Chapters = new Collection<StoryChapter>();
@@ -39,6 +40,7 @@ namespace API.Entities
             ViewCount = new Collection<View>();
             StoryLiked = new Collection<UserStory>();
             StoryHistory =new Collection<UserHistory>();
+            StoryTags =new Collection<TagStory>();
         }
     }
 }

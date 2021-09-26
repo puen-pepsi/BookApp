@@ -1,0 +1,33 @@
+<form novalidate #form="ngForm" (submit) ="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="id"
+           value="titlenameService.formData.id" />
+    <div class="row">
+      <div class="col-md-4 pr-0">
+        <input class="form-control" placeholder="Add a Title Name"
+               name="name" #description="ngModel" [(ngModel)]="titlenameService.formData.name" required/>
+      </div>   
+      <div class="col-md-3">
+        <!-- <input class="form-control" placeholder="Type"
+               name="type" #description="ngModel" [(ngModel)]="titlenameService.formData.type" required/> -->
+            <!-- <select>
+                <option value='' disabled selected>Activities</option>
+                <option *ngFor="let name of enumKeys" [value]="name">
+                         {{activitiesType[name]}} 
+                </option>
+             </select> -->
+             <mat-form-field>
+                <mat-select placeholder="Select Activities" 
+                    [(ngModel)]="titlenameService.formData.type" name="active">
+                    <mat-option *ngFor="let active of enumKeys " [value]="active">
+                        {{activitiesType[active]}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+     </div> 
+      <div class="col-md-2 pl-1">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-danger" [disabled]="form.invalid" type="button" (click) ="resetForm(form)">reset</button>
+      </div>
+    </div>
+  </form>
+

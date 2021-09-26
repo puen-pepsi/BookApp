@@ -7,7 +7,7 @@ namespace API.DTOs
         public string reportType { get; set; }//story /comment
         public int reportId { get; set; } //id 
         public string comment { get; set; }
-        public int UserName { get; set; }
+        public string UserName { get; set; }
 
     }
 }

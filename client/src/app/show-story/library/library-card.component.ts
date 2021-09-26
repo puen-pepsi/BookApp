@@ -8,7 +8,7 @@ import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-sho
 @Component({
   selector: 'app-library-card',
   templateUrl: './library-card.component.html',
-  styleUrls: ['./library-card.component.css']
+  styleUrls: ['./library-card.component.scss']
 })
 export class LibraryCardComponent implements OnInit {
   @Input() story : ShowStory;
@@ -41,6 +41,7 @@ export class LibraryCardComponent implements OnInit {
       console.log(rating);
       this.rating = rating;
     }
+
     addLikeStory(story:ShowStory){
       this.showStoryService.addLikeStory(story.storyName).subscribe(() =>{
         this.toastr.success('You have liked '+ story.storyName);

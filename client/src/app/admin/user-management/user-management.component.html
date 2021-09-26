@@ -1,3 +1,6 @@
+<div class="search-hero">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Search..">
+  </div>
 <div class="row">
     <table class="table">
         <tr>
@@ -6,7 +9,7 @@
             <th style="width: 30%;"></th>
 
         </tr> 
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users | filter:searchText">
             <td>{{user.username}}</td>
             <td>{{user.roles}}</td>
             <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>

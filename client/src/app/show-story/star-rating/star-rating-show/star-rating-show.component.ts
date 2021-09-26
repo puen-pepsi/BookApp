@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-star-rating-show',
   templateUrl: './star-rating-show.component.html',
-  styleUrls: ['./star-rating-show.component.css']
+  styleUrls: ['./star-rating-show.component.scss']
 })
 export class StarRatingShowComponent implements OnInit {
   @Input('rating')  rating: number=0;

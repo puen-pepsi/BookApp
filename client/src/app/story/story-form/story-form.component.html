@@ -1,23 +1,28 @@
-<p>{{storyService.formData | json}}</p>
-
-<h1>{{(storyService.formData.storyName | titlecase) || "My Story"}}</h1>
-<div class="tab-panel header">
-  <button type="button" class="btn btn-outline-primary Header" (click)="returnToStory()">
+<!-- <p>{{storyChapterService.formData | json}}</p> -->
+<div class="top-between">
+  <h3>{{(storyService.formData.storyName | titlecase) || "My Story"}}</h3>
+  <div>
+       <button mat-flat-button color="primary" (click)="returnToStory()">
     <i class="fas fa-arrow-left"></i> Back to Stories
   </button>
-  <button *ngIf="storyService.formData.storyId" class="btn btn-outline-success Header" (click)="selectTab(1)">
+  <button mat-flat-button  color="accent" 
+    *ngIf="storyService.formData.storyId"  (click)="tabChanged(1)">
     <i class="fas fa-plus"></i> Add Chapter
   </button>
-  <tabset class="member-tabset" #StoryTabs>
+  </div>
+ 
+</div>
+
+  <!-- <tabset class="member-tabset" #StoryTabs>
     <tab heading='Stories Details'>
       <div class="container">
-        <!-- <p>{{ storyService.formData| json}}</p> -->
         <div class="row">
           <div class="col-md-4">
-            <app-story-form-image [image]="storyService.formData.imageUrl" (imageChange)="uploadFinished($event)">
+             <app-story-form-image 
+                      [image]="storyService.formData.imageUrl" 
+                       (pathImage)="uploadFinished($event)">
             </app-story-form-image>
           </div>
-
           <div class="col-md-8">
             <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
               <input type="hidden" name="id" value="statusService.formData.id" />
@@ -28,7 +33,7 @@
               </div>
               <div class="mb-3">
                 <label for="description" class="form-label">Synopsis <i class="fas fa-info-circle"></i></label>
-                <textarea class="form-control" placeholder="Synopsis" rows="3" name="description" #description="ngModel"
+                <textarea class="form-control" placeholder="Synopsis" rows="8" name="description" #description="ngModel"
                   [(ngModel)]="storyService.formData.description" required></textarea>
               </div>
               <div class="mb-3 row">
@@ -42,7 +47,6 @@
                     <option *ngFor="let m of GenreList" value="{{ m.description }}">{{ m.description }}</option>
                   </select>
                 </div>
-
               </div>
               <div class="mb-3 row">
                 <div class="col-md-3">
@@ -55,21 +59,6 @@
                     <option *ngFor="let m of LanguageList" value="{{ m.description }}">{{ m.description }}</option>
                   </select>
                 </div>
-
-              </div>
-              <div class="mb-3 row">
-                <div class="col-md-3">
-                  <label for="state" class="form-label">State <i class="fas fa-info-circle"></i></label>
-                </div>
-                <div class="col-md-6">
-                  <select id="state" class="form-control" [(ngModel)]="storyService.formData.state"
-                    [disabled]="true"
-                    name="state" required #genre="ngModel">
-                    <option value="" selected>--Select State--</option>
-                    <option *ngFor="let r of StateList" value="{{ r.description }}">{{ r.description }}</option>
-                  </select>
-                </div>
-
               </div>
               <div class="mb-3 row">
                  <div class="col-md-3">
@@ -113,31 +102,143 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
-              <div class="col-md-4 pl-1">
+              <div class="col-md-12 pl-1">
                 <button class="btn btn-primary" type="submit" [disabled]="editForm.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
                 <button class="btn btn-danger" [disabled]="editForm.invalid" type="button"
                   (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
-
     </tab>
-    <tab heading="Chaptor">
-      <!-- <app-storychapter></app-storychapter> -->
+    <tab heading='Chapters'>
       <section class="list" *ngIf="!isCreate">
         <app-chapter-list (goForm)="ChangeForm($event)">
           Story list
         </app-chapter-list>
       </section>
-      <section class="create" *ngIf="isCreate">
-        <app-chapter-form (goList)="ChangeForm($event)">
+      <section class="edit" *ngIf="isCreate">
+        <app-chapter-form (goList)="ChangeForm($event)" [isedit]="isEdit" >
           Story form
         </app-chapter-form>
       </section>
     </tab>
-  </tabset>
-</div>
+  </tabset> -->
+
+  <mat-tab-group mat-tabs #tabGroup [selectedIndex]="selectedTab">
+    <mat-tab label="Stories Details" >
+      <mat-card class="container">
+        <!-- <p>{{ storyService.formData| json}}</p> -->
+        <div class="row">
+          <div class="col-md-4">
+            <!-- <app-story-form-image [image]="storyService.formData.imageUrl" (imageChange)="uploadFinished($event)">
+            </app-story-form-image> -->
+             <app-story-form-image 
+                      [image]="storyService.formData.imageUrl" 
+                       (pathImage)="uploadFinished($event)">
+            </app-story-form-image>
+          </div>
+          <div class="col-md-8">
+            <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
+              <input type="hidden" name="id" value="statusService.formData.id" />
+              <div class="mb-3">
+                <label for="storyname" class="form-label">Story Name <i class="fas fa-info-circle"></i></label>
+                <input class="form-control" placeholder="Story Name" name="storyname" #storyName="ngModel"
+                  [(ngModel)]="storyService.formData.storyName" required />
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Synopsis <i class="fas fa-info-circle"></i></label>
+                <textarea class="form-control" placeholder="Synopsis" rows="8" name="description" #description="ngModel"
+                  [(ngModel)]="storyService.formData.description" required></textarea>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-md-3">
+                  <label for="genre" class="form-label">Genre <i class="fas fa-info-circle"></i></label>
+                </div>
+                <div class="col-md-6">
+                  <select id="genre" class="form-control" [(ngModel)]="storyService.formData.genre" name="genre"
+                    required #genre="ngModel">
+                    <option value="">--Select Genre--</option>
+                    <option *ngFor="let m of GenreList" value="{{ m.description }}">{{ m.description }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-md-3">
+                  <label for="language" class="form-label">Languages <i class="fas fa-info-circle"></i></label>
+                </div>
+                <div class="col-md-6">
+                  <select id="language" class="form-control" [(ngModel)]="storyService.formData.language"
+                    name="language" required #genre="ngModel">
+                    <option value="" selected>--Select Language--</option>
+                    <option *ngFor="let m of LanguageList" value="{{ m.description }}">{{ m.description }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                 <div class="col-md-3">
+                      <label class="control-label" style="margin-right: 10px;">Type <i class="fas fa-info-circle"></i></label>
+                 </div>
+                 <div class="col-md-6">
+                      <label class="radio-inline">
+                          <input type="radio" value='novel' name="type" 
+                          [(ngModel)] = "storyService.formData.type" 
+                          checked> Novel
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" value='manga' name="type" 
+                          [(ngModel)] = "storyService.formData.type" class="ml-3"> Manga
+                      </label>
+                 </div>
+              </div>
+              <mat-form-field class="example-chip-list">
+                <mat-label>Tags</mat-label>
+                <mat-chip-list #chipList aria-label="Tag selection">
+                  <mat-chip
+                    *ngFor="let tag of tags"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(tag)">
+                    #{{tag}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New Tag..."
+                    #TagInput
+                    [formControl]="tagCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of filteredTags | async" [value]="tag" >
+                    {{tag}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="col-md-12 pl-1">
+                <button class="btn btn-primary" type="submit" [disabled]="editForm.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
+                <button class="btn btn-danger" [disabled]="editForm.invalid" type="button"
+                  (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Chapters" >
+      <section class="list" *ngIf="!isCreate">
+        <app-chapter-list (goForm)="ChangeForm($event)">
+          Story list
+        </app-chapter-list>
+      </section>
+      <section class="edit" *ngIf="isCreate">
+        <app-chapter-form (goList)="ChangeForm($event)" [isedit]="isEdit" >
+          Story form
+        </app-chapter-form>
+      </section>
+    </mat-tab>
+</mat-tab-group>
 

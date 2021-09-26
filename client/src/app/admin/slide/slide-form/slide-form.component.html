@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-4">
+        <app-slide-form-image [image]="slideService.formData.url" 
+                        (imageChange)="uploadFinished($event)"></app-slide-form-image >
+    </div>
+    <div class="col-md-8">
+      <div class="header">
+        <div>
+          <h1>Create Photo Slide</h1>
+        </div>
+        <div>
+          <button mat-flat-button class=" Header" (click)="returnToSlideList()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+        </div>
+      </div>
+    <br/>
+    <!-- <p>{{slideService.formData | json}}</p> -->
+    <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
+      <input type="hidden" name="id" value="slideService.formData.id" />
+      <div class="mb-3">
+        <label for="topic" class="form-label">Title <i class="fas fa-info-circle"></i></label>
+        <input class="form-control" placeholder="Title" name="topic" #topic="ngModel"
+          [(ngModel)]="slideService.formData.title"  />
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Content <i class="fas fa-info-circle"></i></label>
+        <textarea class="form-control" placeholder="Content" rows="8" name="descriptions" #content="ngModel"
+          [(ngModel)]="slideService.formData.descriptions" ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="gotoUrl" class="form-label">gotoUrl <i class="fas fa-info-circle"></i></label>
+        <input class="form-control" placeholder="gotoUrl" name="gotoUrl" #gotoUrl="ngModel"
+          [(ngModel)]="slideService.formData.gotoUrl"  />
+      </div>
+
+      <div class="col-md-12 pl-1">
+        <button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid"><i class="far fa-bookmark"></i> SUBMIT</button>
+        <button mat-flat-button color="warn" [disabled]="editForm.invalid" type="button"
+          (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>

@@ -1,5 +1,25 @@
-<div class="Header" >
-  <h4>Chapter {{index}} :&nbsp;{{chapter.chapterName}}</h4>
+<mat-card class="mat-elevation-z0" [ngStyle]="{'font-family': fontName}">
+<mat-card-header>
+  <mat-card-title>
+    <h4>Chapter {{chapter.order}} :&nbsp;{{chapter.chapterName | titlecase}}<span *ngIf="chapter.endChapter">  (End)</span></h4>
+  </mat-card-title>
+  <mat-card-subtitle>
+    <div class="">
+        <img 
+                    class="img-circle rounded-circle mr-2"
+                    src="{{chapter.authorImageUrl || './assets/user.png'}}" 
+                    alt="{{chapter.authorName}}">  
+        <span class="text-muted">{{(chapter.authorName | titlecase)  + ' : Author'}} | {{'Published : '+ (chapter.publishedCreated | timeago)}}</span>
+      </div>
+  </mat-card-subtitle>
+</mat-card-header>
+<mat-card-content class="Body" [ngStyle]="{'font-size':fSize+'rem'}" #content>
+    <div [innerHtml] = "chapter.content" ></div>
+</mat-card-content>
+</mat-card>
+    
+<!-- <div class="Header" >
+  <h4>Chapter {{chapter.order}} :&nbsp;{{chapter.chapterName}}<span *ngIf="chapter.endChapter">  (End)</span></h4>
   <div class="">
     <img 
                 class="img-circle rounded-circle mr-2"
@@ -11,6 +31,4 @@
 </div>
 <div class="Body" [ngStyle]="{'font-size':fSize+'rem'}" #content>
     <div [innerHtml] = "chapter.content" ></div>
-</div>
-
-    
+</div> -->

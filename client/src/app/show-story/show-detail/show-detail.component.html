@@ -1,4 +1,6 @@
-<div class="row mb-4"  >
+<div *ngIf="showstory">
+    <!-- <p>{{showstory | json}}</p> -->
+<div class="row mb-4">
     <div class="col-md-4">
         <div class="card">
             <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
@@ -34,7 +36,7 @@
                     <p><i class="fas fa-list-alt"></i>&nbsp;&nbsp;{{showstory.genre}}</p>
                 </div>
                 <div >
-                    <p><i class="fas fa-compass"></i>&nbsp;&nbsp;{{showstory.state || 0}}</p>
+                    <p><i class="fas fa-compass"></i>&nbsp;&nbsp;{{showstory.getState || 0}}</p>
                 </div>
                 <div >
                     <p><i class="fas fa-file-alt"></i>&nbsp;&nbsp;{{showstory.totalChapter}} Chapters </p>
@@ -45,12 +47,22 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="3rem">
                 <div> 
-                    <img 
+                    <!-- <img 
                         class="img-circle rounded-circle mr-2"
                         src="{{showstory.userPhoto || './assets/user.png'}}" 
                         alt="{{showstory.userName}}">
-                    <strong>{{showstory.userName | titlecase}}</strong>
-                    <span> : Author</span>
+                    <strong>{{showstory.userName | titlecase}}</strong> -->
+                    
+                    <app-label-name
+                      (username)="gotoMember($event)"
+                      [imageUrl]='showstory.userPhoto'
+                      [knownAs]='showstory.userName'
+                      [userName]='showstory.userName'
+                      [pHeight]='35'
+                      [title]='showstory.title'
+                      [point]='showstory.point'>
+                    </app-label-name>
+                    <!-- <span class="author">Author</span> -->
                 </div>
                 <div >
                     <b>Created : </b>{{showstory.created | timeago}}
@@ -80,12 +92,11 @@
             </div>
 
             <br/>
-            <!-- <hr/> -->
-            <!-- <h5>Synopsis :</h5>
-            <p>{{showstory.description}}</p> -->
             <div class="pt-2" >
                 <mat-chip-list aria-label="tags">
-                    <mat-chip *ngFor="let ele of tags">#{{ele}}</mat-chip>
+                    <mat-chip *ngFor="let ele of tags" (click)="goToTag(ele)">
+                        #{{ele}}
+                    </mat-chip>
                 </mat-chip-list>
             </div>
         </div>
@@ -109,10 +120,10 @@
                     (click)="addLikeStory(showstory)"> 
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
             </div>
-            <div fxLayout="row"  fxHide.gt-xs
+            <div fxLayout="column"  fxHide.gt-xs
                 fxLayoutGap="0.2rem" class="buttongroupxs">
-                <button *ngIf="!userHistory"
-                    type="button" class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
+                <button type="button" *ngIf="!userHistory"
+                    class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
                 <button *ngIf="userHistory" 
                         type="button" class="btn btn-primary" 
@@ -135,16 +146,14 @@
 <!-- <p>{{showstory | json}}</p> -->
 <!-- <p>{{userHistory | json}}</p> -->
 
-<tabset class="member-tabset" #storyTab>
+<!-- <tabset class="member-tabset" #storyTab>
     <tab heading='Synopsis' (selectTab)="onTabActivated($event)">
         <div class="row">
             
         </div>
-        <!-- <h5>Synopsis :</h5> -->
         <p>{{showstory.description}}</p>
     </tab>
     <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
-        <!-- <app-show-chapters ></app-show-chapters> -->
         <app-show-table-content [initContent]="initContent"></app-show-table-content>
     </tab> 
     <tab heading='Novel Comments' (selectTab)="onTabActivated($event)">
@@ -153,5 +162,28 @@
     <tab heading='Chapter Comments' (selectTab)="onTabActivated($event)">
         <app-show-comment-chapter></app-show-comment-chapter>
     </tab> 
-</tabset>
+</tabset> -->
 
+    <mat-tab-group mat-stretch-tabs #tabGroup (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="Synopsis" (selectTab)="onTabActivated($event)">
+            <mat-card-content>
+               <p>{{showstory.description}}</p> 
+            </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Table of Contents" (selectTab)="onTabActivated($event)">
+            <ng-template matTabContent>
+                 <app-show-table-content [initContent]="initContent"></app-show-table-content>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Novel Comments" (selectTab)="onTabActivated($event)">
+            <ng-template matTabContent>
+                <app-comment [comments]="comments"></app-comment>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Chapter Comments" (selectTab)="onTabActivated($event)">
+           <ng-template matTabContent>
+            <app-show-comment-chapter></app-show-comment-chapter>
+           </ng-template>
+        </mat-tab>
+  </mat-tab-group>
+</div>

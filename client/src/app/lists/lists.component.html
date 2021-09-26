@@ -1,24 +1,28 @@
-<div class="text-center mt-3">
-    <h2>{{predicate === 'liked' ? 'Members I like' : 'Members who like me'}}</h2>
-</div>
-
-<div class="container mt-3">
+<div class="top-between">
     <div class="row">
-        <div class="btn-group" name="predicate">
-            <button class="btn btn-primary" btnRadio="liked" 
-                [(ngModel)]="predicate" (click)="loadLikes()">Members I follow</button>
-            <button class="btn btn-primary" btnRadio="likedBy" 
-                [(ngModel)]="predicate" (click)="loadLikes()">Members who follow me</button>
-        </div>
+            <div class="btn-group" name="predicate">
+                <button class="btn btn-primary" btnRadio="liked" 
+                    [(ngModel)]="predicate" (click)="loadLikes()">Members I follow</button>
+                <button class="btn btn-primary" btnRadio="likedBy" 
+                    [(ngModel)]="predicate" (click)="loadLikes()">Members who follow me</button>
+            </div>
+     </div>
+    <div>
+        <h3>{{predicate === 'liked' ? 'Members I follow' : 'Members who follow me'}}</h3>
     </div>
-
-    <div class="row mt-3">
-        <div class="col-2" *ngFor="let member of members">
+</div>
+<div class="container mt-3 ">
+        <carousel class="carousel-html-content" style="z-index: 2;"
+        [height]="'150'" 
+        [cellWidth]='100'
+        [overflowCellsLimit]="'8'">
+        <div  *ngFor="let member of members" class="carousel-cell">
             <app-member-card [member]="member"></app-member-card>
         </div>
-    </div>
+       
+    </carousel>
 </div>
-<div class="d-flex justify-content-center" *ngIf="pagination">
+<!-- <div class="d-flex justify-content-center" *ngIf="pagination">
     <pagination 
         [boundaryLinks]="true" 
         [totalItems]="pagination.totalItems"
@@ -30,4 +34,4 @@
         firstText="&laquo;" 
         lastText="&raquo;"> 
     </pagination>
-</div>
+</div> -->

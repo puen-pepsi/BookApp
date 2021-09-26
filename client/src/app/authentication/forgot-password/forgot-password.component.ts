@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
   public forgotPasswordForm: FormGroup
@@ -38,8 +38,8 @@ export class ForgotPasswordComponent implements OnInit {
     const forgotPass = { ...forgotPasswordFormValue };
     const forgotPassDto: ForgotPasswordDto = {
       email: forgotPass.email,
-      //clientURI: 'https://localhost:4200/authentication/resetpassword'
-      clientURI: 'https://rainobunew.azurewebsites.net/authentication/resetpassword'
+      clientURI: 'https://localhost:4200/authentication/resetpassword'
+      //clientURI: 'https://rainobunew.azurewebsites.net/authentication/resetpassword'
     }
 
     this.accountService.forgotPassword('account/forgotpassword', forgotPassDto)

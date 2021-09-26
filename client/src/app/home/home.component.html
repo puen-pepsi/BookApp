@@ -1,25 +1,89 @@
-<div class="container mt-5">
-    <div  class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-            <img src="./assets/images/logo.png" >
-        </div>
-            <div *ngIf="!registerMode">
-                <p class="lead text-center">Whether it be reading an epic tale of an isekai-ed hero or having a 
-                        peaceful online tea time conversation with your friends, you can find them all here in 
-                        this Guild! Join our rich community of anime/manga/lightnovel -loving readers,
-                        writers and illustrators here at Rainobu!!
-                </p>
-                        <div class="text-center">
-                            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
-                            <button class="btn btn-info btn-lg">Learn more</button>
-                        </div>
-            </div>
-
-    <div class="container" *ngIf="registerMode">
-        <div class="row justify-content-center">
-            <div class="col-xl-4 col-md-8 col-sm-10">
-                <app-register (cancelRegister)="cancelRegisterMode()"></app-register>
-            </div>
-        </div>
+<!-- <div  class="hero-image">
+    <div class="hero-text">
     </div>
+</div> -->
+<app-cover></app-cover>
+  <div class="full-width">
+   <carousel style="z-index: 2;"
+       [images]="imagesForSlider"
+       [objectFit]="'cover'"
+       [cellWidth]="'100%'"
+       [height]="500"
+       [autoplay]="true"
+       [dots]="true"
+       [loop]="true"
+       [arrows]="false">
+   </carousel>
 </div>
+  <!-- <div class="col-md-7">
+      <h5>Recent Chapter</h5>
+      <div class="recent">
+        <app-recent-chapter></app-recent-chapter>
+      </div> 
+  </div>-->
+<!-- <div class="demo" fxHide.lt-sm>
+  <carousel style="z-index: 2;"
+      [images]="imagesForSlider"
+      [objectFit]="'cover'"
+      [cellWidth]="'100%'"
+      [height]="400"
+      [autoplay]="true"
+      [dots]="true"
+      [loop]="true"
+      [arrows]="false">
+  </carousel>
+</div> -->
+<div class="main"></div>
+<div class="row mt-5"  >
+    <div class="col-md-7">
+        <!-- <div class="demo">
+            <carousel style="z-index: 2;"
+                [images]="imagesForSlider"
+                [objectFit]="'cover'"
+                [cellWidth]="'100%'"
+                [height]="400"
+                [autoplay]="true"
+                [dots]="true"
+                [loop]="true"
+                [arrows]="false">
+            </carousel>
+        </div> -->
+        
+        <div class="toprank pt-4 ">
+            <div class="top-between">
+                <h4>Rainobu Top Rank</h4>  
+                <button mat-button color="primary" [routerLink]="['stories/all','novel']">More..</button>
+              </div>
+              <!-- <h5>Rainobu Top Rank</h5> -->
+            <app-show-top-rank></app-show-top-rank>
+        </div>
+        <!-- <div class="member mt-5">
+          <app-member-list-carousel></app-member-list-carousel>
+        </div> -->
+       
+    </div>
+    <!-- <div class="col-md-5 "> 
+             <div class="top-between">
+                    <h5>Rainobu News</h5>  
+                    <button mat-button color="primary" routerLink="/news">More..</button>
+                </div>
+            <app-news-carousel></app-news-carousel>
+            <div class="member pb-4">
+              <h4>Recent Chapter</h4>
+              <mat-divider></mat-divider>
+             <div class="recent">
+               <app-recent-chapter></app-recent-chapter>
+             </div>
+           </div>
+         
+    </div> -->
+</div>
+
+<!-- <div class="novel">
+     <app-show-carousel
+        [storyType]= "'novel'"></app-show-carousel>   
+  
+    
+   <app-show-carousel
+    [storyType]= "'manga'"></app-show-carousel>   
+</div> -->

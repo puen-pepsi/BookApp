@@ -36,7 +36,7 @@ namespace API.Data
         {
             return await _context.Set<T>().FindAsync(id);
         }
-
+        
         public async Task UpdateAsync<T>(T entity) where T : class
         {
             _context.Entry<T>(entity).State = EntityState.Modified;

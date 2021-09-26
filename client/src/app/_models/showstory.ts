@@ -1,3 +1,4 @@
+import { ChapterList } from "./chapterlist";
 import { Photo } from "./photo";
 
 export interface ShowStory {
@@ -13,9 +14,14 @@ export interface ShowStory {
     views:number;
     created:Date;
     state:string;
+    getState:string;
     userName:string;
     userPhoto:string;
+    title:string;
+    point:number;
     tags:string;
+    lastChapterName: string;
+    lastChapterCreate: Date;
     //photos: Photo[];
     
 }

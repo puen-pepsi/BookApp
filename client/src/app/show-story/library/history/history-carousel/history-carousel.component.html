@@ -1,0 +1,14 @@
+<div class="demo">
+    <carousel #myCarousel class="carousel-html-content" style="z-index: 2;"
+        [height]="'160'"
+        [cellWidth]='300'
+        [overflowCellsLimit]="'3'">
+            <div *ngFor="let history of storyHistory" class="carousel-cell">
+               <!-- <app-history-card [history]="history"
+                 (deleteId)="deleteHistory($event)"></app-history-card> -->
+             <app-history-card-list [row]="history"
+               (deleteId)="deleteHistory($event)">
+             </app-history-card-list>
+         </div>
+    </carousel>
+</div>

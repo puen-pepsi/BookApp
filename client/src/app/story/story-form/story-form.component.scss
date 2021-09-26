@@ -1,0 +1,19 @@
+.example-chip-list {
+    width: 100%;
+  }
+
+  .top-between{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    /* background-color: #ecf8fd; */
+}
+.container{
+  padding:2rem;
+}
+.form-control{
+  background-color: #eee !important;
+}

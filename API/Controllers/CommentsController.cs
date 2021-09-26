@@ -57,7 +57,7 @@ namespace API.Controllers
         }
         [Route("AddLiked/{commentId}")]
         [HttpPost]
-        public async Task<ActionResult> AddLiked(int commentId)
+        public async Task<ActionResult<StoryCommentDto>> AddLiked(int commentId)
         {
             var userId = User.GetUserId();
             var comment = await _unitOfWork.StoryRepository.GetStoryCommentById(commentId);
@@ -66,18 +66,19 @@ namespace API.Controllers
                 _unitOfWork.StoryRepository.DeleteLikeComment(existliked);
             }else{
                 var currentUser = await _unitOfWork.UserRepository.GetUserByIdAsync(userId);
-                var userLiked = new Activities{
-                    UserActive = currentUser,
-                    UserActiveId  = userId,
+                var userLiked = new LikeComment{
+                    UserLikeComment = currentUser,
+                    UserLikeCommentId  = userId,
                     ParentId = commentId
                 };
                 comment.Liked.Add(userLiked); 
             }
             
             if( await _unitOfWork.Complete()){
-                return Ok();
+                var commentToReturn =  _mapper.Map<StoryCommentDto>(comment);
+                return Ok(commentToReturn);
             }
-            return BadRequest("Problem like comment");
+            return BadRequest("Problem like chapter");
         }
     }
 }

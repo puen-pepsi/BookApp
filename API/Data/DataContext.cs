@@ -16,6 +16,7 @@ namespace API.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
+            
         }
 
         public DbSet<UserLike> Likes { get; set; }
@@ -32,6 +33,7 @@ namespace API.Data
         public DbSet<StoryChapter> StoryChapters { get; set; }
         public DbSet<Published> Publishes { get; set; }
         public DbSet<Tag> Tags {get;set;}
+        public DbSet<TagStory> TagStories { get; set; }
         //public DbSet<StoryTag> StoryTags { get; set; }
         public DbSet<StoryComment> StoryComments {get;set;}
         public DbSet<PhotoStory> PhotoStories { get; set; }
@@ -40,7 +42,16 @@ namespace API.Data
         public DbSet<Report> Reports {get;set;}
         public DbSet<ReportTopic> ReportTopics {get; set;}
         public DbSet<News> Newses {get; set;}
-        public DbSet<Activities> Activities {get; set;}
+        public DbSet<LikeComment> LikeComments {get; set;}
+        public DbSet<LikeChapter> LikeChapters { get; set; }
+        public DbSet<Activities> Activities { get; set; }
+        public DbSet<RecievePoint> RecievePoints { get; set; }
+        public DbSet<ActivitiesPoint> ActivitiesPoints { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
+        public DbSet<TitleName> titleName { get; set; }
+        public DbSet<TitleActive> titleActives { get; set; }
+        public DbSet<PhotoScreen>  PhotoScreens { get; set; }
+        public DbSet<PhotoSlide> PhotoSlides { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -118,6 +129,22 @@ namespace API.Data
                 .WithMany(l => l.StoryHistory)
                 .HasForeignKey(s => s.HistoryStoryId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TagStory>()
+                .HasKey(k => new { k.TagId , k.StoryId });
+
+            builder.Entity<TagStory>()
+                .HasOne(s => s.Tags)
+                .WithMany(l => l.TagStories)
+                .HasForeignKey(s => s.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TagStory>()
+                .HasOne(s => s.Stories)
+                .WithMany(l => l.StoryTags)
+                .HasForeignKey(s => s.StoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // builder.Entity<StoryTag>()
             //     .HasKey(k => new {k.StoryId,k.TagId});
 

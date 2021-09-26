@@ -14,6 +14,7 @@ export class SaveHistoryGuard implements CanDeactivate<unknown> {
     component: ShowTChapterComponent): Observable<boolean> |  boolean  {
       console.log(component.current);
       console.log(component.storyname);
+      if(component.current == undefined)return true;
       this.showstoryService.addHistoryUser(component.storyname,component.current)
         .subscribe(res => console.log(res));
     return true;

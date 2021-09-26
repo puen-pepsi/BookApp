@@ -31,8 +31,19 @@ namespace API.Data
         public async Task<IEnumerable<News>> GetNewsList(int tcount)
         {
             return  await _context.Newses
-                        .OrderBy(n => n.NewsCreated)
+                        .OrderByDescending(n => n.NewsCreated)
                         .Take(tcount)
+                        .ToListAsync();
+        }
+
+        public async Task<IEnumerable<News>> GetNewsLazyLoad(int current, int takesize)
+        {
+            return await _context.Newses
+                        .Include(x=>x.UserNews)
+                            .ThenInclude(x => x.Photos)
+                        .OrderByDescending(x => x.NewsCreated)
+                        .Skip(current)
+                        .Take(takesize)
                         .ToListAsync();
         }
         public async Task<IEnumerable<News>> GetNewsAll()
@@ -40,7 +51,7 @@ namespace API.Data
             return  await _context.Newses
                         .Include(x => x.UserNews)
                             .ThenInclude(x => x.Photos)
-                        .OrderBy(n => n.NewsCreated)
+                        .OrderByDescending(n => n.NewsCreated)
                         .ToListAsync();
         }
         public void RemoveNews(News news)
@@ -57,5 +68,6 @@ namespace API.Data
         {
             _context.Newses.Remove(news);
         }
+
     }
 }

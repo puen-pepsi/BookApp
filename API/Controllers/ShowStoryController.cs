@@ -6,6 +6,7 @@ using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -33,6 +34,28 @@ namespace API.Controllers
             var storylist = _mapper.Map<IEnumerable<StoryDto>>(storyAuthor);
             return Ok(storylist);
         }
+        [HttpGet("getviews")]
+        public async Task<ActionResult<IEnumerable<StoryViewsDto>>> getviews([FromQuery] ViewsParams viewsParams)
+        {
+            var views = await _unitOfWork.StoryRepository.GetViewsQuery(viewsParams);
+            return Ok(views);
+        }
+        [AllowAnonymous]
+        [HttpGet("getStoryLazyLoad/{currentItem}/{takeSize}/{storyType}")]
+        public async Task<ActionResult<IEnumerable<StoryDto>>> getStoryLazyLoad(int currentItem,int takeSize,string storyType)
+        {
+            var story = await _unitOfWork.StoryRepository
+                    .GetStoriesAsynclazyload(currentItem,takeSize,storyType);
+             var storyreturn = _mapper.Map<IEnumerable<StoryDto>>(story);  
+            return Ok(storyreturn);
+        }
+        [HttpGet("getStoryRandom/{takesize}")]
+        public async Task<ActionResult<IEnumerable<StoryDto>>> getStoryRandom(int takesize)
+        {
+            var story = await _unitOfWork.StoryRepository
+                    .GetStoriesAsyncRandom(takesize);
+            return Ok(story);
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StoryDto>>> GetStory([FromQuery] StoryParams storyParams)
          {
@@ -41,6 +64,19 @@ namespace API.Controllers
                 storyParams.Genre = "";
             if (string.IsNullOrEmpty(storyParams.StoryType))
                 storyParams.StoryType = "";
+            if (string.IsNullOrEmpty(storyParams.Language))
+                storyParams.Language ="";
+            if (string.IsNullOrEmpty(storyParams.Search))
+                storyParams.Search="";
+            if(!string.IsNullOrEmpty(storyParams.Search)){
+                char c = storyParams.Search[0];
+                if(c.Equals('#')){
+                    string search = storyParams.Search;
+                    storyParams.Search = search.Substring(1);
+                }
+                  
+                 
+            }
             var story = await _unitOfWork.StoryRepository.GetStoriesAsync(storyParams);
 
             Response.AddPaginationHeader(story.CurrentPage, story.PageSize,

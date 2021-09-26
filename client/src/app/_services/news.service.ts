@@ -20,8 +20,17 @@ export class NewsService {
   deleteNews(id : number){
     return this.http.delete(this.baseUrl + 'News/'+ id);
   }
+  getNews(id : number){
+    return this.http.get<News>(this.baseUrl + 'News/'+id);
+  }
   getNewsAll(){
     return this.http.get<News[]>(this.baseUrl + 'News');
+  }
+  getNewsTake(take:number){
+    return this.http.get<News[]>(this.baseUrl + 'News/take/'+take);
+  }
+  getNewsLazyLoad(current:number,take:number){
+    return this.http.get<News[]>(this.baseUrl+'News/lazyload/'+current+'/'+take);
   }
   refreshList() {
     // this.formData

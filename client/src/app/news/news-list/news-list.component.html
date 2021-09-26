@@ -1,8 +1,60 @@
-<!-- <div class="show mt-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5px"> -->
-    <div *ngFor="let row of newsService.list"  >
+<!-- <div class="top-between">
+    <h3>Rainobu News</h3>  
+    <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+        color="warn"
+        routerLink="create">
+        Create News
+    </button>
+  </div> -->
+<!-- <div class="card border-light mb-3" >
+    <div class="card-header">Rainobu News</div>
+        <div class="card-body">
+            <div *ngIf="newsService.list">
+                <div *ngFor="let row of newsService.list i as index" >
+                <app-news-card [row]="row"
+                            (deleteId)="deleteNews($event)" ></app-news-card>
+                <mat-divider></mat-divider>
+            </div> 
+        </div>
+  </div>
+</div> -->
+<div class="search-results"
+infinite-scroll
+[infiniteScrollDistance]="1"
+[infiniteScrollThrottle]="150"
+(scrolled)="onScroll()">
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Rainobu News</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button *appHasRole='["Admin","Moderator"]'
+        class="example-icon favorite-icon" 
+        [routerLink]="['/news/create']"
+        aria-label="Example icon-button with heart icon">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+       <mat-icon>share</mat-icon>
+     </button>
+</mat-toolbar>
+  <mat-card-content>
+    <div *ngIf="news">
+        <div *ngFor="let row of news i as index" >
         <app-news-card [row]="row"
                     (deleteId)="deleteNews($event)" ></app-news-card>
-        <!-- {{row.topic}} -->
+        <mat-divider></mat-divider>
+        </div> 
     </div>
-<!-- </div> -->
+</mat-card-content>  
+<div *ngIf = "!notEmptyPost" class="row pb-5 pt-5">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="text-muted h6 alert alert-dark p-2">No More News</div>
+  </div>
+</div>
+</div>
+
+  
+
 

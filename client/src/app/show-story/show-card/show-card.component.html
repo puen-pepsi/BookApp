@@ -1,9 +1,11 @@
-<div class="card mb-4">
+<div class="card">
+    <div class="new btn btn-danger btn-sm" *ngIf="story.getState==='New'">
+        New
+    </div>
     <div class="card-img-wrapper">
         <ng-container *ngIf="story.imageUrl;then first else second"></ng-container>
             <ng-template #first>
-                        <!-- <p>{{story | json}}</p> -->
-                <img src="{{story.imageUrl}}"
+            <img src="{{story.imageUrl}}"
                 alt="{{story.storyName}}" 
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">
@@ -21,58 +23,38 @@
                     <h6>&copy; Rainobu</h6>
                 </div>
             </ng-template>
-        
-
         <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">
-                <!-- <button #show
-                    [routerLink]= "['/stories',story.storyName]"
-                    class="btn btn-primary">
-                    <i class="fas fa-book-open"></i>
-                </button> -->
                 <button  #show id="show" color="primary" 
+                    matTooltip="Read"
                     (click)="goToDetial(story.storyName)"
                     mat-mini-fab aria-label="Action icon">
                     <mat-icon>menu_book</mat-icon>
                 </button>
             </li>     
-            <li *ngIf="!userLiked" class="list-inline-item">
-                <button mat-mini-fab aria-label="Action icon" (click)="addLikeStory(story)">
-                    <mat-icon>bookmark_border</mat-icon>
-                </button>
-            </li>
-            <li *ngIf="userLiked" class="list-inline-item">
-                <button mat-mini-fab
-                    aria-label="Action icon" >
-                    <mat-icon>bookmark_added</mat-icon>
-                </button>
+            <li class="list-inline-item">               
+                    <app-followstory [isActive]="userLiked != null"
+                        [storyid]="story.storyId" 
+                        [storyname]="story.storyName"
+                        (follow)="followthis($event)"></app-followstory>
             </li>
             <li class="list-inline-item">
-                <!-- <button routerLink='/members/{{story.userName}}' class="btn btn-primary">
-                <i class="fas fa-user-edit"></i></button>-->
-                
                 <button  color="warn" mat-mini-fab 
-                    routerLink='/members/{{story.userName}}'  
+                    matTooltip="Info Author"
+                    [routerLink]="['/members',story.userName.toLowerCase()]"
                     aria-label="Action icon">
                     <mat-icon>account_box</mat-icon>
                 </button>
             </li> 
         </ul>
     </div>
-    <div class="Awards">
-        <!-- <i class="fa fa-trophy"></i> -->
-        
-        <!-- <mat-icon *ngIf="index>-1"
-            matBadge={{index+1}} 
-            matBadgeColor="warn">emoji_events</mat-icon> -->
-        <mat-icon >emoji_events</mat-icon>
-        <span *ngIf="index > -1" class="number">{{index+1}} </span>
-            
-    </div>
-    <div class="card-body p-1">
-            <b>{{story.storyName | titlecase}}</b><br/>
+    <div class="card-body p-2">
+            <div class="truncate">
+               {{story.storyName | titlecase}}
+            </div>
             <span class="text-muted">{{story.genre}}</span><br/>
-            <app-star-rating-show
+            <div class="star-award">
+                <app-star-rating-show
                 [rating]="rating"  
                 [starCount]="starCount" 
                 [totalRate]="totalRate"
@@ -80,12 +62,87 @@
                 [fSize] = "fSize"
                 [wSize] = "fSize"
                 (ratingUpdated)="onRatingChanged($event)">
-            </app-star-rating-show>
-            <!-- <span>Author : {{story.userName}}</span>
-            <small class="float-right text-muted "
-                > {{yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"}}</small>
+                </app-star-rating-show> 
+                <div class="Awards">
+                    <mat-icon >emoji_events</mat-icon>
+                    <span *ngIf="index > -1" class="number">{{(index+1)+((page-1)*pagesize)}} </span>
+                </div>
+            </div>
+           
     </div>
 </div>
 
-<!-- <p>{{story | json}}</p> -->
-
+<!-- <mat-card class="card">
+    <div class="new btn btn-danger btn-sm" *ngIf="story.getState==='New'">
+        New
+    </div>
+    <div class="card-img-wrapper">
+        <ng-container *ngIf="story.imageUrl;then first else second"></ng-container>
+            <ng-template #first>
+            <img src="{{story.imageUrl}}"
+                alt="{{story.storyName}}" 
+                (click)="goToDetial(story.storyName)"
+                class="card-img-top">
+            </ng-template>
+            <ng-template #second>
+                <img src="./assets/images/blackcover.png"
+                alt="{{story.storyName}}" 
+                (click)="goToDetial(story.storyName)"
+                class="card-img-top">
+                <div class="text_up" (click)="goToDetial(story.storyName)">
+                    <h5>{{story.storyName | titlecase }}</h5>
+                </div>
+                <div id="benmark" (click)="goToDetial(story.storyName)">
+                    <span>{{story.userName}}</span>
+                    <h6>&copy; Rainobu</h6>
+                </div>
+            </ng-template>
+        <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item">
+                <button  #show id="show" color="primary" 
+                    matTooltip="Read"
+                    (click)="goToDetial(story.storyName)"
+                    mat-mini-fab aria-label="Action icon">
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+            </li>     
+            <li class="list-inline-item">               
+                    <app-followstory [isActive]="userLiked != null"
+                        [storyid]="story.storyId" 
+                        [storyname]="story.storyName"
+                        (follow)="followthis($event)"></app-followstory>
+            </li>
+            <li class="list-inline-item">
+                <button  color="warn" mat-mini-fab 
+                    matTooltip="Info Author"
+                    [routerLink]="['/members',story.userName.toLowerCase()]"
+                    aria-label="Action icon">
+                    <mat-icon>account_box</mat-icon>
+                </button>
+            </li> 
+        </ul>
+    </div>
+    <mat-card-header>
+        <mat-card-title class="truncate">
+                {{story.storyName | titlecase}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{story.genre}}
+        </mat-card-subtitle>
+    </mat-card-header>
+        <div class="star-award">
+            <app-star-rating-show
+            [rating]="rating"  
+            [starCount]="starCount" 
+            [totalRate]="totalRate"
+            [color]="starColor" 
+            [fSize] = "fSize"
+            [wSize] = "fSize"
+            (ratingUpdated)="onRatingChanged($event)">
+            </app-star-rating-show> 
+            <div class="Awards">
+                <mat-icon >emoji_events</mat-icon>
+                <span *ngIf="index > -1" class="number">{{(index+1)+((page-1)*pagesize)}} </span>
+            </div>
+        </div>
+</mat-card> -->

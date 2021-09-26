@@ -7,7 +7,7 @@ import { GenreService } from 'src/app/_services/genre.service';
 @Component({
   selector: 'app-genre-form',
   templateUrl: './genre-form.component.html',
-  styleUrls: ['./genre-form.component.css']
+  styleUrls: ['./genre-form.component.scss']
 })
 export class GenreFormComponent implements OnInit {
   constructor(public genreService:GenreService,

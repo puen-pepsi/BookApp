@@ -1,3 +1,5 @@
 export interface Activities{
-    userName:string;
+        userActiveId: number;
+        type:number;
+        storyId:number;        
 }

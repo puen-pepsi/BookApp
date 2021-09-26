@@ -3,7 +3,8 @@ export interface User{
     token:string;
     photoUrl:string;
     knownAs:string;
-    // gender:string;
+    point:number;
+    title:string;
     roles:string[];
     //myList:number[];
 }

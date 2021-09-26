@@ -1,0 +1,138 @@
+.header{
+  padding: 1rem;
+  font-size: 0.5rem;
+  font-family: montserrat;
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.container{
+  height: calc(100vh - 200px);
+}  
+.item{
+  height: 30px;
+}
+/* The side navigation menu */
+.sidebar {
+   /*  right:0; */
+    /* width: 25%; */
+    /* background-color: #f1f1f1; */
+    /* height: 100vmax;
+    overflow: auto;
+    color:#333; */
+    padding-left: 3px;
+    /* border-left: 2px solid #efefef; */
+    width: 100%;
+     
+  }
+  .spacer{
+    flex:1 1 auto;
+  }
+  /* Sidebar links */
+  .sidebar a {
+    text-decoration: none;
+    display: block;
+    padding: .125rem 10px;
+    color:#ccc;
+    transition: all 50ms ease-in-out;
+  }
+  
+  /* Active/current link */
+  /* .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+  .sidebar__link--active{
+    color:#666 !important;
+    font-weight: 600;
+  }
+  /* ul li::marker {
+    font-size: 150%;
+    color: lightgreen;
+  } */
+  
+  .sidebar__link:hover {
+    color: #ccc;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  /* Links on mouse-over */
+.sidebar a:hover,
+.sidebar-nav a:focus {
+  color: #666;
+  font-weight: 500;
+}
+.section-nav {
+  position: sticky;
+  padding-top: 0;
+  top: 64px;
+  /* margin-left: 1rem; */
+  /* margin-right:  -30px; */
+  width: 100%;
+  overflow-y:scroll;
+  overflow-x: hidden;
+  height: 100vh;
+  align-self: start;
+  // border-left: 1px solid rgb(218, 223, 228);
+  box-sizing: border-box;
+}
+// .section-nav .header{
+//   padding-top: 1rem;
+//   padding-left: 1rem;
+//   padding-bottom: 0;
+//   position:sticky;
+//   top:0px;
+//   right:-30px;
+//   background-color: white;
+//   z-index: 999;
+// }
+  /* 2. Make nav sticky */
+  
+  
+  /* 3. ScrollSpy active styles (see JS tab for activation) */
+
+.content{
+  padding:10px 10px;
+  font-size: 1rem;
+}
+  
+/* Sidebar links */
+
+  /* Active/current link */
+  /* .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+  /* Links on mouse-over */
+  /* .section-nav a:hover,
+  .section-nav a:focus {
+    color: #666;
+    cursor: pointer;
+  } */
+  .rightCircle{ 
+    position:absolute;
+    text-align: center;
+    align-items: center;
+    width:20px; 
+    height:20px; 
+    border-radius:50%; 
+    color: #ccc; 
+    font-size: 1.5rem;
+    /* background-color: royalblue; */
+    right:0rem; 
+    top:0.5rem;
+    z-index: 999;
+}
+.rightCircle :hover{
+  cursor: pointer;
+  color:#666;
+}
+ 
+.truncate {
+  width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* font-weight: bold; */
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Story } from '../_models/story.model';
@@ -12,6 +12,9 @@ export class StoryService {
   baseUrl = environment.apiUrl;
   formData : Story = new Story() ;
   list : Story[]=[];
+  public progress: number;
+  public message: string;
+
   constructor(private http:HttpClient) { }
   postStory(){
     return this.http.post(this.baseUrl + 'story',this.formData);
@@ -39,5 +42,28 @@ export class StoryService {
   }
   getAllTags(){
     return this.http.get<Tags[]>(this.baseUrl + 'story/GetAllTags');
+  }
+  uploadImage(fileToUpload:File,id:number){
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    if(id == 0){
+        return this.http.post(this.baseUrl + 'story/photos', formData, {reportProgress: true, observe: 'events'});
+              // .subscribe(event => {
+              //   if (event.type === HttpEventType.UploadProgress)
+              //     this.progress = Math.round(100 * event.loaded / event.total);
+              //   else if (event.type === HttpEventType.Response) {
+              //         return event.body;
+              //   }
+              // });
+    }else{
+       return this.http.put(this.baseUrl + 'story/photos/'+id, formData, {reportProgress: true, observe: 'events'});
+            // .subscribe(event => {
+            //   if (event.type === HttpEventType.UploadProgress)
+            //     this.progress = Math.round(100 * event.loaded / event.total);
+            //   else if (event.type === HttpEventType.Response) {
+            //     return event.body;
+            //   }
+            // });
+    } 
   }
 }

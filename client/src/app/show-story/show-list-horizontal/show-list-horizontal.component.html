@@ -1,0 +1,15 @@
+
+<div class="cdk-virtual-scroll-data-source-example" >
+    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="170" class="example-viewport">
+        <div *cdkVirtualFor="let story of showstory index as i" class="example-item">
+            <app-show-card 
+                [story]="story"
+                [index]="i" 
+                [page]="pagination.currentPage" 
+                [pagesize]="storyParams.pageSize">
+            </app-show-card>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>
+
+

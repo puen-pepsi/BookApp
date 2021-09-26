@@ -10,7 +10,7 @@ import { MembersService } from 'src/app/_services/members.service';
 @Component({
   selector: 'app-member-edit',
   templateUrl: './member-edit.component.html',
-  styleUrls: ['./member-edit.component.css']
+  styleUrls: ['./member-edit.component.scss']
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
@@ -35,7 +35,7 @@ export class MemberEditComponent implements OnInit {
     })
   }
   updateMember(){
-    console.log(this.member)
+    //console.log(this.member)
     this.memberServcice.updateMember(this.member).subscribe(() => {
        this.toastr.success('Profile update successfully');
        this.editForm.reset(this.member);

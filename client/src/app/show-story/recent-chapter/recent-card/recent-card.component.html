@@ -1,0 +1,31 @@
+<mat-card class="mat-elevation-z0">
+    <div class="main">
+        <div class="image">
+            <img src="{{row.imageUrl || './assets/images/blackcover.png'}}"
+                alt="{{row.storyName}}" 
+                class="img">
+        </div>
+        <div class="body">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span class="title">{{row.storyName| titlecase}}</span>
+                <span> Chapter {{row.order}} : {{row.chapterName | titlecase}}</span>
+                <span class="spacer"></span>
+                <span>
+                    <mat-icon [inline]="true" class="is-new">edit</mat-icon>
+                </span>
+              </div>
+            <div class="top">
+                <!-- <p >{{row.content}}</p> -->
+                <div innerHtml = {{row.content}} class="text"></div>
+            </div>
+            <div fxLayoutAlign="end end">
+                <small>{{row.publishedCreated | timeago}}&nbsp;|&nbsp;</small>
+                <span>By {{row.authorName | titlecase}}</span>
+            </div>
+        </div>
+        <!-- <div class="rightCircle">
+            <mat-icon [inline]="true" (click)="deleteHistory(row.storyId)">close</mat-icon>
+          </div> -->
+    </div>
+   
+</mat-card>

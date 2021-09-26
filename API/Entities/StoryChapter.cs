@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace API.Entities
 {
@@ -11,7 +13,14 @@ namespace API.Entities
         public int views { get; set; }
         public int StoryId { get; set; }
         public Story Story { get; set; }
+        public bool EndChapter { get; set; }
         public Published Published { get; set; }
+        public virtual ICollection<LikeChapter> LikeChapters { get; set; }
+
+        public StoryChapter()
+        {
+            LikeChapters = new Collection<LikeChapter>();
+        }
 
     }
 }

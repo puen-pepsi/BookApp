@@ -1,0 +1,9 @@
+<div @slidey class="cover" *ngIf="Cover && screen">
+    <!-- <img src="https://localhost:5001/Resources/images/slice1.png" alt=""> -->
+    <img src="{{screen.url}}" alt="">
+    <button mat-fab color="second" (click)="close()"><mat-icon>fingerprint</mat-icon></button>
+    <div class="hero-text">
+        <h2>{{screen.title | titlecase}}</h2>
+        <p>{{screen.descriptions}}</p>
+    </div>
+</div>

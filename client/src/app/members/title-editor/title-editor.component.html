@@ -1,0 +1,28 @@
+<!-- <div *ngFor="let item of member.titleActives ">
+    {{item.name}} {{item.titleCreate}} {{item.isMain}}
+</div> -->
+    <mat-list>
+        <ng-container *ngFor="let item of member.titleActives index as i">
+            <mat-list-item>
+            <!-- <img matListAvatar [src]="item.image"> -->
+            
+            <h3 matLine>
+                {{item.name}}
+            </h3>
+
+            <span matLine class="text-muted">{{item.titleCreate | date:'short'}}</span>
+                <button 
+                    [disabled]="item.isMain"
+                    (click)="setMainTitle(item)"
+                    [ngClass]='item.isMain ? "btn-success active" : "btn-outline-success"'
+                    class="btn btn-sm"
+                >Main</button>
+                <button 
+                    [disabled]="item.isMain"
+                    (click)="deleteTitle(item.id)"
+                    class="btn btn-sm btn-danger"
+                ><i class="fa fa-trash"></i></button>
+            <mat-divider></mat-divider>
+            </mat-list-item>
+        </ng-container>
+    </mat-list>

@@ -1,12 +1,18 @@
 <div>
     <!-- <p>{{storyService.formData.imageUrl}}</p> -->
-    <img src ="{{storyService.formData.imageUrl || './assets/images/blackcover.png'}}" 
+    <div >
+            <img src ="{{storyService.formData.imageUrl || './assets/images/default.jpeg'}}" 
     class="img-thumbnail image" (click)="fileInput.click($event)">
-    <!-- <button
-        class="btn btn-secondary btn-sm "
-        (click)="fileInput.click($event)"><i class="far fa-image"></i>
-        Choose a picture
-    </button> -->
+        <div class="upload">
+                <button
+                    class="btn btn-secondary btn-sm "
+                    (click)="fileInput.click($event)"><i class="far fa-image"></i>
+                    Choose a Image
+                </button>
+            </div>
+    </div>
     <input #fileInput type = "file" accept="image/png,image/jpeg" class="invisible" (change)="UploadImage(fileInput.files,storyService.formData.storyId)" >
-    <div class="upload"><h5>Upload Picture</h5></div>
+    
+    <!-- <img [src]="imageUrl"  >
+    <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)"> -->
 </div>

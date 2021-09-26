@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { News } from 'src/app/_models/news.model';
 import { NewsService } from 'src/app/_services/news.service';
@@ -9,17 +9,21 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-news-form',
   templateUrl: './news-form.component.html',
-  styleUrls: ['./news-form.component.css']
+  styleUrls: ['./news-form.component.scss']
 })
 export class NewsFormComponent implements OnInit {
   response:{dbPath:''};
   ResoucreUrl = environment.resourceUrl;
-
+  type;
   constructor(public newsService:NewsService,
               private router : Router,
-              private toastr:ToastrService) { }
+              private route : ActivatedRoute,
+              private toastr:ToastrService) {
+                 this.type = this.route.snapshot.data.type;
+               }
 
   ngOnInit(): void {
+    if(this.type == "create")this.newsService.formData = new News();
   }
   onSubmit(form:NgForm) {
     console.log(form);

@@ -14,11 +14,10 @@ import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { ShowStoryService } from 'src/app/show-story/show-story.service';
-import { ShowStory } from 'src/app/_models/showstory';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.css']
+  styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit,OnDestroy {
   @ViewChild('memberTabs',{static:true}) memberTabs: TabsetComponent;

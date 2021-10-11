@@ -41,6 +41,9 @@ export class HistoryCardListComponent implements OnInit {
   onRatingChanged(event){
 
   }
+  goToDetial(storyname:string){
+    this.router.navigate(['/stories',storyname]);
+  }
   followthis(event){
     if(event.active){
       this.addLikeStory(event.storyname);
@@ -68,9 +71,9 @@ export class HistoryCardListComponent implements OnInit {
       }, 300000);
     })
   }
-  deleteHistory(storyId:number){
-    console.log(storyId)
-    this.deleteId.emit(storyId);
+  deleteHistory(story){
+    // console.log(storyId)
+    this.deleteId.emit(story);
   }
 
 }

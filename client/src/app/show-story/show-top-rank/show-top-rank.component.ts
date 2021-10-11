@@ -36,10 +36,8 @@ export class ShowTopRankComponent implements OnInit {
     this.loadStorytoprank();
   }
   loadStorytoprank(){
-    console.log(this.lazyloadParams)
     this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(res =>{
         this.storytop = res;
-        console.log(this.storytop)
     });
   }
 }

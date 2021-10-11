@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output,EventEmitter, Self } from '@angular/co
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Alert } from 'selenium-webdriver';
+import { environment } from 'src/environments/environment';
 import { AccountService } from '../../_services/account.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm :FormGroup;
   maxDate:Date;
   validationErrors:string[] = [];
-
+  urladdress = environment.urlAddress;
   constructor(private accountService:AccountService,private toastr: ToastrService,
       private fb:FormBuilder,private router: Router) { }
 
@@ -38,10 +40,12 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      clientURI:['https://localhost:4200/authentication/emailconfirmation']
+      // clientURI:['https://localhost:4200/authentication/emailconfirmation']
+      clientURI:[`${this.urladdress}authentication/emailconfirmation`]
       //clientURI:['https://rainobunew.azurewebsites.net/authentication/emailconfirmation']
    
     })
+    console.log(this.registerForm)
   }
 
   matchValues(matchTo:string): ValidatorFn{
@@ -58,6 +62,7 @@ export class RegisterComponent implements OnInit {
     // })
     this.accountService.register(this.registerForm.value).subscribe(()=>{
       //console.log("here")
+      this.toastr.warning("Please Confirm Your Email","Rainobu Register");
       this.router.navigateByUrl('/');
     })
   }

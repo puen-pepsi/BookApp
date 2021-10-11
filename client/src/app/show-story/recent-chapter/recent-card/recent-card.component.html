@@ -8,19 +8,19 @@
         <div class="body">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <span class="title">{{row.storyName| titlecase}}</span>
-                <span> Chapter {{row.order}} : {{row.chapterName | titlecase}}</span>
                 <span class="spacer"></span>
-                <span>
-                    <mat-icon [inline]="true" class="is-new">edit</mat-icon>
-                </span>
               </div>
             <div class="top">
+                <span> Chapter {{row.order}} : {{row.chapterName | titlecase}}</span>
                 <!-- <p >{{row.content}}</p> -->
-                <div innerHtml = {{row.content}} class="text"></div>
+                <!-- <div [innerHtml] = "row.content | sanitizeHtml" class="text" style="margin-bottom: 0;"></div> -->
+                <!-- <div [innerHtml] = {{row.content | sanitizeHtml}} class="text" style="margin-bottom: 0;"></div> -->
             </div>
+            <div class="spacer"></div>
             <div fxLayoutAlign="end end">
                 <small>{{row.publishedCreated | timeago}}&nbsp;|&nbsp;</small>
                 <span>By {{row.authorName | titlecase}}</span>
+                <mat-icon [inline]="true" class="is-new">edit</mat-icon>
             </div>
         </div>
         <!-- <div class="rightCircle">

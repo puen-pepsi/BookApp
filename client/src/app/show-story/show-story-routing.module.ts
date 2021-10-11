@@ -13,6 +13,7 @@ import { ShowNovelComponent } from './show-novel/show-novel.component';
 import { ShowTagComponent } from './show-tag/show-tag.component';
 import { ShowViewComponent } from './show-view/show-view.component';
 import { RecentChapterComponent } from './recent-chapter/recent-chapter.component';
+import { AuthGuard } from '../_guards/auth.guard';
 
 const routes : Routes =[
     // {path :'',component:ShowListComponent,
@@ -31,15 +32,16 @@ const routes : Routes =[
     {path:'all/:storytype',component:ShowListAllComponent},
     {path:'list',component:ShowListVerticalComponent,data:{storytype:'novel'}},
     {path:'topviews',component:ShowViewComponent},
+    {path:'recent',component:RecentChapterComponent},
     //{path:'',component:ShowStoryComponent},
     {path:'',component:ShowNovelComponent,data:{storytype:'novel'}},
     {path:':storyname',
             component:ShowDetailComponent,
             // data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },
-            resolve:{showstory:ShowDetailedResolver},
+            resolve:{showstory:ShowDetailedResolver}
     },    
     {path :':storyname/chapters',
-            component:ShowTChapterComponent,canDeactivate:[SaveHistoryGuard]
+           component:ShowTChapterComponent,canDeactivate:[SaveHistoryGuard]
     },
     {path :'tag/:tagname',component:ShowTagComponent},
   ]

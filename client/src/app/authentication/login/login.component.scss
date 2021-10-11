@@ -41,7 +41,10 @@ img{
   cursor: pointer;
 }
 
-  input{
-    padding-left: 20px;
-    // height: 20px;
-  }
+input{
+  padding-left: 20px;
+  // height: 20px;
+}
+.form-control::placeholder  {
+    font-family: FontAwesome;
+}

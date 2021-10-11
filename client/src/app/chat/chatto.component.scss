@@ -32,15 +32,15 @@
 }
 .pic-msg{
   position: relative;
-  padding-right: 10px;
+  padding-right: 0px;
   bottom: -15px;
 }
 .container{
   /* height: calc(100vh - 325px); */
-  height: 500px;
+  height: 600px;
 }
 .commnet-items{
-  height: 50px;
+  height: 55px;
   /* border:solid 1px; */
   margin-bottom: 0.5rem;
 }
@@ -74,9 +74,9 @@ p {
   
   .message {
     border-radius: 20px;
-    padding: 8px 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding: 1px 15px;
+    // margin-top: 5px;
+    // margin-bottom: 5px;
     display: inline-block;
   }
   
@@ -87,10 +87,15 @@ p {
   .yours .message {
     /* margin-right: 25%; */
     display: inline-flex;
-    background-color: rgb(170, 170, 170);
+    flex-direction: column;
     position: relative;
   }
-  
+  .yours .message p{
+    /* margin-right: 25%; */
+    border-radius: 20px;
+    padding: 8px 15px;
+    background-color: rgb(170, 170, 170);
+  }
   // .yours .message.last:before {
   //   content: "";
   //   position: absolute;
@@ -122,6 +127,7 @@ p {
   .mine .message {
     color: white;
     margin-left: 25%;
+    padding: 8px 15px;
     background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
     background-attachment: fixed;
     position: relative;
@@ -161,4 +167,7 @@ p {
   border:solid 1px rgb(202, 201, 201);
   border-radius: 5px;
 
+}
+a{
+  text-decoration: none;
 }

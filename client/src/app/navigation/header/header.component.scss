@@ -49,6 +49,7 @@ img {
     max-height: 40px;
     background-clip: content-box;
     display: inline;
+    cursor: pointer;
 }
 mat-toolbar{
     position: fixed;
@@ -126,4 +127,11 @@ mat-nav-list.list-horizontal {
     left: 0;
     width: 100%;
     z-index: -999;
+  }
+  .theme{
+      display:block;
+      background-color: blue;
+      width: 50px;
+      height: 25px;
+      align-self: stretch;
   }

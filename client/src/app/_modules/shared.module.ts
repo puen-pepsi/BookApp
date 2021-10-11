@@ -14,9 +14,14 @@ import { ScrollSpyModule } from 'ng-spy';
 import { HasRoleDirective } from '../_directives/has-role.directive';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { GetRoleDirective } from '../_directives/get-role.directive';
+import { SanitizeHtmlPipe } from '../sanitize-html.pipe';
+
 @NgModule({
   declarations: [
-    HasRoleDirective
+    HasRoleDirective,
+    GetRoleDirective,
+    SanitizeHtmlPipe,
   ],
   imports: [
     CommonModule,
@@ -34,7 +39,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ModalModule.forRoot(),
     ScrollSpyModule,
     IvyCarouselModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   exports:[
     BsDropdownModule,
@@ -49,8 +54,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ModalModule,
     ScrollSpyModule,
     HasRoleDirective,
+    GetRoleDirective,
     IvyCarouselModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    SanitizeHtmlPipe
   ]
 })
 export class SharedModule { }

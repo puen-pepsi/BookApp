@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using AutoMapper;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace API.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class StoryController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -70,22 +71,22 @@ namespace API.Controllers
             _unitOfWork.StoryRepository.AddStory(createStory);
             if(await _unitOfWork.Complete()) {          
                 if(storyDto.Tags != null){       
-                    var Alltag = await _unitOfWork.Repository.SelectAll<Tag>();
-                    foreach (string tag in  storyDto.Tags.Split(","))
-                    {
-                        
-                        if(!Alltag.Exists(t=>t.TagName.ToLower().Trim() == tag.ToLower().Trim())){
-                            var addTag = new Tag{TagName = tag};
-                            await _unitOfWork.Repository.CreateAsync<Tag>(addTag);
-                            //Add storylist
-                            var newTag = new TagStory{
-                                Tags = addTag,
-                                Stories = createStory
-                            };
-                            createStory.StoryTags.Add(newTag);
-                            await _unitOfWork.Complete();
+                        var Alltag = await _unitOfWork.Repository.SelectAll<Tag>();
+                        foreach (string tag in  storyDto.Tags.Split(","))
+                        {
+                            if(!Alltag.Exists(t=>t.TagName.ToLower().Trim() == tag.ToLower().Trim())){
+                                var addTag = new Tag{TagName = tag};
+                                await _unitOfWork.Repository.CreateAsync<Tag>(addTag);
+                                //Add storylist
+                                var newTag = new TagStory{
+                                    Tags = addTag,
+                                    Stories = createStory
+                                };
+                                createStory.StoryTags.Add(newTag);
+                                await _unitOfWork.Complete();
+                            }
                         }
-                    }
+                        
                      foreach (string tag in  storyDto.Tags.Split(","))
                     {
                            var oldTag = _unitOfWork.TagRepository.GetTagName(tag);
@@ -128,8 +129,7 @@ namespace API.Controllers
                         }
 
                     }
-                }
-                 foreach (string tag in  storyDto.Tags.Split(","))
+                    foreach (string tag in  storyDto.Tags.Split(","))
                     {
                        var curtag = _unitOfWork.TagRepository.GetTagName(tag);
                         var ctag = new TagStory{
@@ -142,6 +142,8 @@ namespace API.Controllers
                             await _unitOfWork.Complete();
                         
                     }
+                }
+                 
                 var storyToReturn = _mapper.Map<StoryDto>(storyUpdate);
                 return Ok(storyToReturn);
             }

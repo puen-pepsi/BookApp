@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let row of activitiesPointService.list">
           <td (click)="populateForm(row)">{{row.activitiesName}}</td>
-          <td (click)="populateForm(row)">{{row.type}}</td>
+          <td (click)="populateForm(row)">{{activitiesType[row.type]}}</td>
           <td (click)="populateForm(row)">{{row.activeUserPoint}}</td>
           <td (click)="populateForm(row)">{{row.authorPoint}}</td>
           <td>

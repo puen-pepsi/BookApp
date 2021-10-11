@@ -5,7 +5,7 @@ export class ViewsParams{
     pageSize = 3;
     orderByViews = 'weekly';
     
-    constructor(user:User){
+    constructor(user?:User){
         this.orderByViews = 'weekly';
     }
 }

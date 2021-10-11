@@ -1,9 +1,13 @@
+import { I } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { take } from 'rxjs/operators';
 import { ShowStoryService } from 'src/app/show-story/show-story.service';
 import { StarRatingColor } from 'src/app/show-story/star-rating/star-rating-show/star-rating-show.component';
 import { Pagination } from 'src/app/_models/pagination';
 import { ShowHistory } from 'src/app/_models/ShowHistory';
+import { User } from 'src/app/_models/user';
 import { UserLiked } from 'src/app/_models/userLiked';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-history-carousel',
@@ -23,11 +27,17 @@ export class HistoryCarouselComponent implements OnInit {
   userLiked:UserLiked;
   notEmptyPost = true;
   notscrolly = true;
-  constructor(public showStoryService:ShowStoryService) { 
+  user:User;
+  constructor(public showStoryService:ShowStoryService,
+              private accountService:AccountService) { 
+               this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
   }
 
   ngOnInit(): void {
-    this.loadStoryHistory();
+    if(this.user){
+       this.loadStoryHistory();
+    }
+   
   }
   loadStoryHistory(){
     this.showStoryService.getStoryHistory(this.pageNumber,this.pageSize).subscribe(response =>{
@@ -40,8 +50,7 @@ export class HistoryCarouselComponent implements OnInit {
       
       this.storyHistory = this.storyHistory.concat(newPost);
       this.pagination = response.pagination;//1,2,3,4..
-      console.log(this.storyHistory)
-      console.log(this.pagination)
+      // console.log(this.pagination)
       this.notscrolly = true;
     })
   }
@@ -50,7 +59,7 @@ export class HistoryCarouselComponent implements OnInit {
         // this.spinner.show();
         this.pageNumber++;
         this.notscrolly = false;
-        console.log("scroll");
+        // console.log("scroll");
         this.loadStoryHistory();
       }
     }
@@ -62,7 +71,6 @@ export class HistoryCarouselComponent implements OnInit {
   }
  
   deleteHistory(storyId:number){
-    console.log(storyId)
     this.showStoryService.deletHistoryUser(storyId).subscribe(() =>{
       this.loadStoryHistory();
     })

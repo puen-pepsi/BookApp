@@ -12,6 +12,7 @@ import { EmailConfirmationComponent } from './email-confirmation/email-confirmat
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MaterialModule } from '../material.module';
+import { ConfirmEmailComponent } from './confirm-email.component';
 
 
 
@@ -23,7 +24,8 @@ import { MaterialModule } from '../material.module';
     DateInputComponent,
     EmailConfirmationComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,7 @@ import { ExternalAuthDto } from '../_models/externalAuthDto';
 import { CustomEncoder } from './custom-encoder';
 import { ForgotPasswordDto } from '../_models/forgotpasswordDto';
 import { ResetPasswordDto } from '../_models/ResetPasswordDto';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
+import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,8 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-
+  helper = new JwtHelperService();
+  clearTimeout: any;
   constructor(private http: HttpClient,
             private _externalAuthService: SocialAuthService,
             private presence:PresenceService) { }
@@ -49,19 +50,35 @@ export class AccountService {
     // )
     return this.http.post(this.baseUrl + 'account/register',model);
   }
-
+  isAuthenticated(){
+    const user = JSON.parse(localStorage.getItem("user"));
+    return !this.helper.isTokenExpired(user.token);
+  }
   setCurrentUser(user:User){
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
+    // console.log(this.getDecodedToken(user.token).exp);
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-    
-    localStorage.setItem('user',JSON.stringify(user));
-    this.currentUserSource.next(user);
+      localStorage.setItem('user',JSON.stringify(user));
+      this.currentUserSource.next(user);
+      // let date = new Date();
+      // let expirationDate = this.helper.getTokenExpirationDate(user.token);
+      // var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
+      //  this.autoLogout(secondBetweenTwoDate);
   }
+  // autoLogout(expirationDate: number) {
+  //   console.log(expirationDate);
+  //   this.clearTimeout = setTimeout(() => {
+  //     this.logout();
+  //   }, expirationDate *1000);
+  // }
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
+    // if (this.clearTimeout) {
+    //   clearTimeout(this.clearTimeout);
+    // }
   }
   public forgotPassword = (route: string, body: ForgotPasswordDto) => {
     return this.http.post(this.createCompleteRoute(route, this.baseUrl), body);

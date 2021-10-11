@@ -4,7 +4,7 @@ import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
 import { ViewportScroller } from '@angular/common';
-import { Router, Scroll } from '@angular/router';
+import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ThemeService } from './_services/theme.service';
@@ -15,40 +15,45 @@ import { ThemeService } from './_services/theme.service';
 })
 export class AppComponent implements OnInit{
   headlogo:string;
+  footerlogo:string;
   bgtool:string;
   title = 'Rainobu';
   users: any;
   isDarkMode:boolean;
+  datatype;
   constructor(private accountService:AccountService,
               private themeService: ThemeService,
               private presence:PresenceService,
+              private route :ActivatedRoute
               ){
                 this.themeService.initTheme();
                 this.isDarkMode = this.themeService.isDarkMode();
-                console.log(this.isDarkMode)
                 if(!this.isDarkMode){
                   this.headlogo ="./assets/images/logo.png"
+                  this.footerlogo ="./assets/images/logo.png"
                   this.bgtool = 'white';
                   }else{
                     this.headlogo ="./assets/images/logotransparent.png"
+                    this.footerlogo ="./assets/images/logotransparent.png"
                     this.bgtool = 'black';
                   }
               }
 
   ngOnInit() {
-    this.setCurrentUser(); 
+     this.setCurrentUser();
   }
   toggleDarkMode() {
     this.isDarkMode = this.themeService.isDarkMode();
-
     this.isDarkMode
       ? this.themeService.update('light-mode')
       : this.themeService.update('dark-mode');
       if(this.isDarkMode){
       this.headlogo ="./assets/images/logo.png"
+      this.footerlogo ="./assets/images/logo.png"
       this.bgtool = 'white';
       }else{
         this.headlogo ="./assets/images/logotransparent.png"
+        this.footerlogo ="./assets/images/logotransparent.png"
         this.bgtool = 'black';
       }
   }

@@ -90,7 +90,11 @@ namespace API.Data
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
                             .Include(s=> s.Author)
-                                .ThenInclude(a => a.Photos)  
+                                .ThenInclude(s => s.Photos)  
+                            // .Include(s => s.Author)
+                            //     .ThenInclude(s => s.titleAcitive)  
+                            // .Include( s => s.Author)
+                            //     .ThenInclude( s => s.recievePoints)
                             .Include(s => s.ViewCount)
                             .Include(p => p.PhotoStories)
                             .Include(s => s.Ratings)
@@ -388,8 +392,9 @@ namespace API.Data
                             .Include(c => c.Story)
                             .ThenInclude( c => c.Author)
                             .ThenInclude( c => c.Photos)
-                            .Where(c => c.Published != null && c.Published.Created > twoweek )
+                            // .Where(c => c.Published != null && c.Published.Created > twoweek )
                             .OrderByDescending(c => c.Published.Created)
+                            .Take(10)
                             .ToListAsync();
         }
     }

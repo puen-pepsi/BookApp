@@ -59,7 +59,6 @@ export class ShowNovelComponent implements OnInit {
 
   randomChild(){
     this.random = !this.random;
-    console.log(this.random)
   }
   ngOnDestroy(): void {
     // if (this.dataSource) { 

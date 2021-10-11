@@ -49,21 +49,26 @@
                       [fSize]='fSize'>
                   </app-show-achapter> 
                   <mat-divider></mat-divider>
-                  <mat-card class="mat-elevation-z0">
-                  <mat-card-content>
-                    <button mat-button>
-                      <like [likeCount]="chapter.likeChapter.length"
-                    [isActive]="chapter.likeChapter.includes(user.username)"
-                    (commentId)="addLikeChapter(chapter.id)"></like>
-                    </button>
-                  </mat-card-content>
+                  <mat-card class="mat-elevation-z0" *ngIf="user">
+                      <mat-card-content>
+                        <button mat-button>
+                          <like [likeCount]="chapter.likeChapter.length"
+                        [isActive]="chapter.likeChapter.includes(user.username)"
+                        (commentId)="addLikeChapter(chapter.id)"></like>
+                        </button>
+                      </mat-card-content> 
                   </mat-card>
+                </div>
+                
+                <!-- Ads Rainobu -->
+                <div class="ads" *appGetRole='["VIP"]'>
+                  <img *ngIf="bannerchapter" src={{bannerchapter.url}}>
                 </div>
                 <!-- <h5>&copy; Rainobu</h5> -->
           </div>  
         </div>  
         <!-- sinner -->
-    <div class="row pb-5">
+    <!-- <div class="row pb-5">
       <div class="col-md-12 p-5">
       <ngx-spinner
       bdOpacity = 0.9
@@ -75,7 +80,7 @@
       >
       </ngx-spinner>
     </div>
-    </div>
+    </div> -->
     <!-- Alert no more post -->
     <div *ngIf = "!notEmptyPost" class="row pb-5">
       <div class="col-md-12 d-flex justify-content-center">
@@ -84,17 +89,6 @@
     </div> 
     </div> 
     <div @slidex fxFlex="30"  fxHide.xs *ngIf="ShowTableContent" >
-        <!-- <nav class="section-nav" >
-          <div class="header">
-            <h5>Table of Contents</h5> 
-            <div class="rightCircle">
-                <mat-icon (click)="toggletableContents()" >close</mat-icon>
-            </div>
-          </div>
-            <app-nav-sidebar [storyName] = 'showstory.storyName'
-             (target)="goTo($event)"       
-            (Show)="toggletableContents($event)"></app-nav-sidebar>
-        </nav> -->
         <app-nav-sidebar [storyName] = 'showstory.storyName'
              (target)="goTo($event)"       
             (Show)="toggletableContents($event)"></app-nav-sidebar>
@@ -108,9 +102,13 @@
               <mat-icon (click)="toggleCommentChapter()" >close</mat-icon>
           </div>
         </mat-card >
-        <mat-card class="p-0 mat-elevation-z0">
-          <app-comment [comments]="comments"
+        <mat-card class="p-0 mat-elevation-z0" >
+          <app-comment [comments]="comments" *ngIf="user"
                     [commentChapter]="commentChapter"></app-comment>
+          <div class="memberarea">
+            <span><mat-icon>groups</mat-icon></span>
+            <h5 *ngIf="!user">Members’ area</h5>
+          </div>
         </mat-card>
         
         </div>
@@ -131,7 +129,11 @@
         </mat-card>
         <mat-card class="p-0 mat-elevation-z0">
             <mat-card-content>
-              <app-comment [comments]="comments"></app-comment>
+              <app-comment *ngIf="user" [comments]="comments"></app-comment>
+              <div class="memberarea">
+                <span><mat-icon>groups</mat-icon></span>
+                <h5 *ngIf="!user">Members’ area</h5>
+              </div>
             </mat-card-content>
         </mat-card>
       </div>

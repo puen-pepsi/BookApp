@@ -10,13 +10,12 @@ import { NewsService } from 'src/app/_services/news.service';
 })
 export class NewsCarouselComponent implements OnInit {
   newsHome : News[]=[];
-  take:number=3;
+  take:number=4;
   constructor(public newsService:NewsService,private router:Router) { }
 
   ngOnInit(): void {
      this.newsService.getNewsTake(this.take).subscribe(res => {
         this.newsHome = res;
-        console.log(this.newsHome)
      });
   }
   gotoCreate(){

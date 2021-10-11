@@ -4,59 +4,47 @@
        <button mat-icon-button (click)="onToggleSidenav()">
        <mat-icon>menu</mat-icon></button>
    </div>
-   <div class="mr-5"><img src="{{headlogo}}" (click)="logoClick($event)"></div>
+   <div class="mr-5"><img [src]="headlogo" (click)="logoClick($event)"></div>
    <div fxFlex="80" fxLayout fxLayoutAlign="flex-start" fxHide.xs> 
      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
        <ng-container *ngIf="accountService.currentUser$|async"> 
         <mat-nav-list class="list-horizontal">
-          <!-- <mat-list-item class="item-link"
-            routerLink='/home' routerLinkActive='active'>
-            <mat-icon>home</mat-icon>
-            <span class="text-space">Home</span>
-          </mat-list-item>
-          <mat-list-item class="item-link"
-            routerLink='/members' routerLinkActive='active'>
-            <mat-icon >account_circle</mat-icon>
-            <span class="text-space">Member</span>
-          </mat-list-item> -->
-          <!-- <mat-list-item class="item-link"
-            routerLink='/stories' routerLinkActive='active'>
-            <mat-icon>auto_stories</mat-icon>
-            <span class="text-space">Novel</span>
-          </mat-list-item> -->
-          <mat-list-item class="item-link" [matMenuTriggerFor]="novel"
+          
+          <mat-list-item class="item-link" 
             #menuTrigger="matMenuTrigger"
+            [matMenuTriggerFor]="novel"
             (mouseover)="menuTrigger.openMenu()" 
             routerLink='/stories' routerLinkActive='active'>
             <mat-icon >auto_stories</mat-icon>
             <span class="text-space">Novel</span>
+           
           </mat-list-item>
-            <!-- <mat-menu #novel="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="browe">Browe</button>
-              <button mat-menu-item [matMenuTriggerFor]="ranking">Rankings</button>
-            </mat-menu> -->
-            <mat-menu #novel="matMenu" [overlapTrigger]="false">
+             <mat-menu #novel="matMenu" >
               <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item
-                    [routerLink]="['/stories']" routerLinkActive='active'
-                      [matMenuTriggerFor]="browse">
-                      <mat-icon>explore</mat-icon>
-                      Browse
+                  <button mat-menu-item style="width: 300px;"
+                    routerLink='/stories'  routerLinkActive='active'>
+                      <mat-icon>apps</mat-icon>
+                        All Novel
                   </button>
-                  <button mat-menu-item
-                      routerLink='/stories/all/novel' routerLinkActive='active'
-                      [matMenuTriggerFor]="ranking">
+                  <button mat-menu-item style="width: 300px;"
+                  routerLink='/stories/all/novel'  routerLinkActive='active'>
+                      <mat-icon>explore</mat-icon>
+                       Browse
+                  </button>
+                  <button mat-menu-item 
+                      routerLink='/stories/topviews' routerLinkActive='active'>
                       <mat-icon>sort</mat-icon>
                       Rankings
                     </button>
-                    <button mat-menu-item
-                      routerLink='/stories/topviews'>
+                    <button mat-menu-item 
+                      routerLink='/stories/recent'>
                       <mat-icon>create</mat-icon>
                       Recent
                     </button>
-              </span>
+                  </span>
             </mat-menu>
-          <mat-list-item class="item-link"
+
+          <mat-list-item class="item-link" 
             routerLink='/manga' routerLinkActive='active'>
             <i class="fas fa-hat-wizard"></i>
             <!-- <mat-icon>auto_stories</mat-icon> -->
@@ -73,81 +61,83 @@
             <span class="text-space">Chatto</span>
           </mat-list-item>
           <mat-list-item class="item-link" *appHasRole='["Admin","Moderator"]'
-            [matMenuTriggerFor]="admin"
             routerLink='/admin' routerLinkActive='active'>
             <mat-icon>settings</mat-icon>
             <span class="text-space">Admin</span>
           </mat-list-item>
-          <mat-menu #admin="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item
-            routerLink='/cover' routerLinkActive='active'>
-              <mat-icon>fit_screen</mat-icon>
-              <span class="text-space">Cover</span>
-            </button>
-            <button mat-menu-item
-            routerLink='/slide' routerLinkActive='active'>
-              <mat-icon>smart_display</mat-icon>
-              <span class="text-space">Slide</span>
-            </button>
-            <button mat-menu-item
-            routerLink='/slide' routerLinkActive='active'>
-              <mat-icon>smart_display</mat-icon>
-              <span class="text-space">Slide</span>
-            </button>
-          </mat-menu>
+          <mat-list-item >
+            <!-- <button mat-icon-button ><mat-icon>arrow_right</mat-icon></button> -->
+            <mat-slide-toggle 
+            (click)="toggleDarkMode($event)" 
+            labelPosition="before" [(ngModel)]="isDarkMode">
+              <mat-icon>bedtime</mat-icon>
+            </mat-slide-toggle>
+          </mat-list-item>
         </mat-nav-list>
-              <!-- <li >
-                <a  routerLink='/members' routerLinkActive='active'><mat-icon >account_circle</mat-icon> Author</a>
-              </li>
-              <li>
-                <a  routerLink='/stories' routerLinkActive='active'><mat-icon>auto_stories</mat-icon>  Novel</a>
-              </li>
-              <li>
-                <a  routerLink='/manga' routerLinkActive='active'><i class="fas fa-hat-wizard"></i> Manga</a>
-              </li>
-              <li>
-                <a  routerLink='/news' routerLinkActive='active'><mat-icon>feed</mat-icon> News</a>
-              </li>
-              <li>
-                <a  routerLink='/chatto' routerLinkActive='active'><mat-icon class="material-icons-round">mode_comment</mat-icon> Chatto</a>
-              </li>
-              <li *appHasRole='["Admin","Moderator"]' >
-                <a  routerLink='/cover' routerLinkActive='active'><mat-icon>fit_screen</mat-icon> Cover</a>
-              </li>
-              <li *appHasRole='["Admin","Moderator"]' >
-                <a  routerLink='/slide' routerLinkActive='active'><mat-icon>smart_display</mat-icon> Slide</a>
-              </li>
-              <li *appHasRole='["Admin","Moderator"]' >
-                <a  routerLink='/admin' routerLinkActive='active'><mat-icon>settings</mat-icon> Admin</a>
-              </li> -->
        </ng-container>
-       <ng-container *ngIf="(accountService.currentUser$|async)===null">
-        <li >
-          <a  routerLink='/members' routerLinkActive='active'><mat-icon>account_circle</mat-icon> Author</a>
-        </li>
-        <li>
-          <a  routerLink='/stories' routerLinkActive='active'><mat-icon>auto_stories</mat-icon>  Novel</a>
-        </li>
-        <li>
-          <a  routerLink='/manga' routerLinkActive='active'><i class="fas fa-hat-wizard"></i> Manga</a>
-        </li>
-       </ng-container>
+       <ng-container *ngIf="(accountService.currentUser$|async)==null"> 
+        <mat-nav-list class="list-horizontal">
+          
+          <mat-list-item class="item-link" 
+            #menuTrigger="matMenuTrigger"
+            [matMenuTriggerFor]="novel"
+            (mouseover)="menuTrigger.openMenu()" 
+            routerLink='/stories' routerLinkActive='active'>
+            <mat-icon >auto_stories</mat-icon>
+            <span class="text-space">Novel</span>
+           
+          </mat-list-item>
+             <mat-menu #novel="matMenu" >
+              <span (mouseleave)="menuTrigger.closeMenu()">
+                  <button mat-menu-item style="width: 300px;"
+                    routerLink='/stories'  routerLinkActive='active'>
+                      <mat-icon>apps</mat-icon>
+                        All Novel
+                  </button>
+                  <button mat-menu-item style="width: 300px;"
+                  routerLink='/stories/all/novel'  routerLinkActive='active'>
+                      <mat-icon>explore</mat-icon>
+                       Browse
+                  </button>
+                  <button mat-menu-item 
+                      routerLink='/stories/topviews' routerLinkActive='active'>
+                      <mat-icon>sort</mat-icon>
+                      Rankings
+                    </button>
+                    <button mat-menu-item 
+                      routerLink='/stories/recent'>
+                      <mat-icon>create</mat-icon>
+                      Recent
+                    </button>
+                  </span>
+            </mat-menu>
 
-     </ul>
-     &nbsp;&nbsp;
-     <mat-slide-toggle    
-     (click)="toggleDarkMode($event)" 
-     labelPosition="before"
-     [(ngModel)]="isDarkMode"><mat-icon>bedtime</mat-icon></mat-slide-toggle>
+          <mat-list-item class="item-link" 
+            routerLink='/manga' routerLinkActive='active'>
+            <i class="fas fa-hat-wizard"></i>
+            <!-- <mat-icon>auto_stories</mat-icon> -->
+            <span class="text-space">Manga</span>
+          </mat-list-item>
+          <mat-list-item class="item-link"
+          routerLink='/news' routerLinkActive='active'>
+          <mat-icon>feed</mat-icon>
+          <span class="text-space">News</span>
+        </mat-list-item>
+          <mat-list-item >
+            <mat-slide-toggle 
+             (click)="toggleDarkMode($event)" 
+             labelPosition="before" [(ngModel)]="isDarkMode">
+              <mat-icon>bedtime</mat-icon>
+            </mat-slide-toggle>
+          </mat-list-item>
+        </mat-nav-list>
+       </ng-container>
+     </ul> 
    </div>
 
    <div fxFlex="fill" fxLayout fxLayoutAlign="flex-end">
-     
-        
-       <ul fxLayout fxLayoutGap="0px" class="navigation-items" >
-                
-        <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-          
+       <ul fxLayout fxLayoutGap="0px" class="navigation-items" >       
+        <li class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
                     <!-- <app-label-name
                       [imageUrl]='user.photoUrl'
                       [knownAs]='user.knownAs'
@@ -177,7 +167,8 @@
                 [overlapTrigger]="false"
                 xPosition="before">
               <span (mouseleave)="menuTrigger.closeMenu()">
-              <button mat-menu-item routerLink='/mystory'>
+               
+              <button mat-menu-item routerLink='/mystory' style="width: 150px;">
                 <mat-icon>create</mat-icon> 
                 <span class="text-space" >My Novel</span>
               </button>
@@ -192,89 +183,60 @@
               </button>
               <button mat-menu-item routerLink='/lists'>
                 <mat-icon>people</mat-icon> 
-                <span class="text-space" >Activities</span>
+                <span class="text-space" >Follow</span>
               </button>
+              
+              <button mat-menu-item routerLink='/activities'>
+                <mat-icon>timeline</mat-icon> 
+                <span class="text-space" >My Point</span>
+              </button>
+              <button mat-menu-item routerLink='/paypal' *appGetRole='["VIP"]'>
+                <mat-icon>workspace_premium</mat-icon> 
+                <span class="text-space" >Become VIP</span>
+              </button>
+              <button mat-menu-item routerLink='/paypal' *appHasRole='["VIP"]'>
+                <mat-icon>workspace_premium</mat-icon> 
+                <span class="text-space" >You are VIP</span>
+              </button>
+              <mat-divider></mat-divider>
               <button mat-menu-item routerLink='/member/edit'>
                 <mat-icon>edit_note</mat-icon> 
                 <span class="text-space" >Profile</span>
               </button>
+             
               <mat-divider></mat-divider>
-              <button mat-menu-item (click)="logout()">
+              <button mat-menu-item (click)="logout()" >
                 <mat-icon>input</mat-icon> 
                 <span class="text-space" >Logout</span>
               </button>
             </span>
             </mat-menu>
-          <!-- <a class="dropdown-toggle ml-2" dropdownToggle >
-            <app-label-name fxHide.lt-sm
-                      [imageUrl]='user.photoUrl'
-                      [knownAs]='user.knownAs'
-                      [pHeight]='35'
-                      [point]='user.point'
-                      [title]='user.title'>
-                    </app-label-name>
-                    &nbsp;&nbsp;
-                    
-           </a>
-          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a  routerLink='/mystory' class="dropdown-item">
-                <mat-icon>
-                  create
-                </mat-icon> My Novel</a>
-                <div class="dropdown-divider"></div>
-             <a  routerLink='/library' class="dropdown-item"><mat-icon>bookmarks</mat-icon> Library</a>
-             <a  routerLink='/messages' class="dropdown-item"><mat-icon>local_post_office</mat-icon> Messages</a>
-             <a  routerLink='/lists'  class="dropdown-item">
-              <mat-icon>people</mat-icon> Activities</a>
-             <div class="dropdown-divider"></div>
-             <a routerLink='/member/edit' class="dropdown-item"><mat-icon>edit_note</mat-icon> Profile</a>
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" (click)="logout()"><mat-icon>input</mat-icon> Logout</a>
-          </div>-->
-       </div> 
-       <!-- <ng-container *ngIf="(accountService.currentUser$|async) as user" >
-          <mat-form-field appearance="fill">
-            <mat-label><span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span>
-            </mat-label>
-            <mat-select>
-              <mat-option >
-                <span fxHide.xs>Welcome {{user.knownAs|| user.username |titlecase}}</span>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container> -->
-       <!-- <form *ngIf="(accountService.currentUser$|async) === null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()"
-            autocomplete="off">
-            <button class="btn" type="button" (click)="loginWithGoogle()">
-              <img src="https://img.icons8.com/color/24/000000/google-logo.png"/>
-            </button>
-          <input 
-            name="username"
-            [(ngModel)]="model.username"
-            class="form-control mr-sm-2" 
-            type="text" 
-            placeholder="UserName">
-          <input 
-            name="password"
-            [(ngModel)]="model.password"
-            class="form-control mr-sm-2" 
-            type="password" 
-            placeholder="Password">
-          <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-          
-        </form> -->
+      
+          </li> 
+      
         <div *ngIf="(accountService.currentUser$|async)===null">
-          <a routerLink='/authentication/login'><mat-icon>face</mat-icon> SignIn </a>|
-          <!-- <a routerLink='/'> Register</a> -->
-          <button class="btn" type="button" (click)="loginWithGoogle()">
-            <img src="https://img.icons8.com/color/24/000000/google-logo.png"/>
+          <!-- <a routerLink='/authentication/login'><mat-icon>face</mat-icon> Log In</a>| -->
+          <button mat-stroked-button (click)="loginWithGoogle()">
+            <span class="p-2">
+              <img src="https://img.icons8.com/color/24/000000/google-logo.png"/>
+            </span>
           </button>
+          <button mat-stroked-button routerLink='/authentication/login'>
+            <span class="p-2">
+              <mat-icon>face</mat-icon> Log In
+            </span>
+            </button>
+          <!-- <a routerLink='/'> Register</a> -->
+          <!-- <button class="btn" type="button" (click)="loginWithGoogle()">
+            <img src="https://img.icons8.com/color/24/000000/google-logo.png"/>
+          </button> -->
+          
         </div>
 
        </ul>
       </div>
 </mat-toolbar>
-<div  *ngIf="!isDarkMode" class="hero-image">
+<!-- <div  *ngIf="!isDarkMode" class="hero-image">
   <div class="hero-text">
   </div>
-</div>
+</div> -->

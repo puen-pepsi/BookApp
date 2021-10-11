@@ -9,6 +9,9 @@
     margin-top: 500px;
     position: relative;
 }
+.container{
+    background-color: white;
+}
 .top-between{
     display: flex;
     flex-direction: row;
@@ -45,16 +48,17 @@
     left: 0;
     width: 100%;
   }
-  .toprank{
-    //  margin-top: 30px;
-    //   overflow: hidden;
-  }
+
 
 .recent{
-
-    height: 264px;
+    height:500px;
     overflow-y: scroll;
 }
-h4{
-    color: #1489bb ;
+// h4{
+//     color: #0096C7 ;
+// }
+
+.toprank{
+    margin-top: 20px;
+    height: 100%;
 }

@@ -4,12 +4,15 @@
           </button>
           <span>#{{tagName | titlecase}}</span>
           <span class="example-spacer"></span>
-          <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-            <mat-icon>favorite</mat-icon>
-          </button>
-          <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-           <mat-icon>share</mat-icon>
-         </button>
+          <div style="font-size: 14px;">
+            <mat-form-field appearance="outline" class="searchTerm" >
+              <mat-label>Search..</mat-label>
+              <input #search matInput 
+                        (keyup.enter)="onSearch()"
+                        placeholder="Search">
+                <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>    
+            </mat-form-field>
+            </div>
     </mat-toolbar>
         <mat-card *ngFor="let row of storylist" class="mat-elevation-z0">
             <app-show-tag-card
@@ -18,5 +21,12 @@
                 [story]="row">
             </app-show-tag-card>
         </mat-card>
-
+      <div class="alltag p-5">
+        <mat-chip-list aria-label="tags">
+          <mat-chip *ngFor="let ele of tagArray" (click)="tagchange(ele)">
+              #{{ele}}
+          </mat-chip>
+       </mat-chip-list>
+      </div>
+       
 

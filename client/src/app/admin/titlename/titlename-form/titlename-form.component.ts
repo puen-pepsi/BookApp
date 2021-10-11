@@ -13,7 +13,9 @@ export class TitlenameFormComponent implements OnInit {
     activitiesType = ActivitiesType;
     enumKeys=[];
   constructor(public titlenameService :TitlenameService,
-    private fb:FormBuilder) { this.enumKeys=Object.keys(this.activitiesType).filter(f => !isNaN(Number(f)));}
+    private fb:FormBuilder) { 
+        this.enumKeys=Object.keys(this.activitiesType).filter(f => !isNaN(Number(f)));
+      }
 
   ngOnInit(): void {
   }

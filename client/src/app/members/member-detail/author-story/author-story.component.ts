@@ -16,7 +16,7 @@ export class AuthorStoryComponent implements OnInit {
   @Input() authorname:string;
   showstory : Partial<ShowStory[]>;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 10;
   pagination:Pagination;
   rating:number=0;
   starColor:StarRatingColor = StarRatingColor.lightblue;

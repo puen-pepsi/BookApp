@@ -34,7 +34,7 @@ export class ShowSlideComponent implements OnInit {
   }
   gotoUrl(event){
     // console.log(event)
-    this.router.navigateByUrl(event);
-    //window.open(event, '_blank');
+    this.router.navigate([event]);
+    // window.open(event, '_blank');
   }
 }

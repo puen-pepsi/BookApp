@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
+import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { ShowStory } from 'src/app/_models/showstory';
+import { User } from 'src/app/_models/user';
 import { UserLiked } from 'src/app/_models/userLiked';
+import { AccountService } from 'src/app/_services/account.service';
+import { ActivitiesService } from 'src/app/_services/activities.service';
 import { ShowStoryService } from '../../show-story.service';
 import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-show.component';
 
@@ -11,6 +17,8 @@ import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-
 })
 export class ShowTopCardComponent implements OnInit {
   @Input('topcard') topcard:ShowStory;
+  activitiesType = ActivitiesType.followStory;
+  activitiesTimer = true;
   rating:number=0;
   starColor:StarRatingColor = StarRatingColor.gold3;
   fSize : string = "1.2rem";
@@ -18,7 +26,12 @@ export class ShowTopCardComponent implements OnInit {
   totalRate:number;
   yourRate:any;
   userLiked:UserLiked;
-  constructor(public showStoryService:ShowStoryService) { }
+  user:User;
+  constructor(public showStoryService:ShowStoryService,
+              private activitiesService:ActivitiesService,
+              private toastr:ToastrService) {
+
+               }
 
   ngOnInit(): void {
     this.rating = this.topcard.rating;
@@ -26,10 +39,29 @@ export class ShowTopCardComponent implements OnInit {
     // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
     //   this.yourRate = res;
     // });
-    this.showStoryService.getUserLiked(this.topcard.storyId).subscribe(res =>{
-      this.userLiked = res;
-    });
+
   }
+  // addLikeStory(storyname:string){
+  //   this.showStoryService.addLikeStory(storyname).subscribe(() => {
+  //     this.toastr.success('You have liked '+ storyname);
+  //     if(this.activitiesTimer){
+  //       this.activitiesService.postActivities(this.activitiesType,storyname).subscribe(res =>{
+  //       console.log(res);
+  //     })
+  //     }
+      
+  //   })
+  // }
+
+  // deletLikeStory(storyid:number,storyname:string){
+  //   this.showStoryService.deleteStoryLike(storyid).subscribe(()=>{
+  //     this.toastr.success('You have unliked '+storyname);
+  //     this.activitiesTimer = false;
+  //     setTimeout(() => {
+  //       this.activitiesTimer = true;
+  //     }, 300000);
+  //   })
+  // }
   // createSynopsis(content:string){
   //   return content.substr(0,180)+".....";
   // }

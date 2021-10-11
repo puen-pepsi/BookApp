@@ -1,9 +1,7 @@
 import { ViewportScroller } from '@angular/common';
-import { typeSourceSpan } from '@angular/compiler';
 import { AfterViewInit, Component,  ElementRef,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { ScrollSpyService } from 'ng-spy';
-import { NgxSpinnerService } from 'ngx-spinner';
 import {  Unsubscribable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import {  slideX } from 'src/app/animation';
@@ -11,12 +9,16 @@ import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { Chapter } from 'src/app/_models/chapter';
 import { ChapterList } from 'src/app/_models/chapterlist';
 import { ShowStory } from 'src/app/_models/showstory';
-import { StoryComment } from 'src/app/_models/storycomment';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { ActivitiesService } from 'src/app/_services/activities.service';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ShowStoryService } from '../show-story.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAdsComponent } from './dialog-ads/dialog-ads.component';
+import { BannerService } from 'src/app/_services/banner.service';
+import { BannerDialogService } from 'src/app/_services/banner-dialog.service';
+import { Slide } from 'src/app/_models/slide.model';
 @Component({
   selector: 'app-show-tchapter',
   templateUrl: './show-tchapter.component.html',
@@ -56,10 +58,13 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   notscrolly = true;
   notscrollyUp = true;
   list;
+  bannerchapter:Slide;
+  bannerdialog:Slide;
   fontNow:string='montserrat';
   fontType = [
     {name: 'Montserrat', value: 'montserrat'},
     {name: 'Lato', value: 'lato'},
+    {name: 'Roboto',value:'roboto'}
   ]
   constructor(private showStoryService:ShowStoryService,
               private route:ActivatedRoute, 
@@ -68,8 +73,10 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
               private accountService:AccountService,
               private commentService:CommentService,
               private scroller:ViewportScroller,
-              private spinner: NgxSpinnerService,
-              private activitiesService:ActivitiesService
+              private activitiesService:ActivitiesService,
+              public  dialog : MatDialog,
+              private bannerService:BannerService,
+              private bannerdialogService:BannerDialogService
             ) { 
               this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
               // this.router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
@@ -118,7 +125,6 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     this.showStoryService.getStorybyName(this.storyname).subscribe(res => {
       this.showstory = res;
     });
-    this.AddViews(this.storyname);
     if(this.chapter == undefined){
       this.loadInitial(0);
     }else{
@@ -134,29 +140,57 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   
       }
     );
-    if(this.activitiesTimer1){
-        this.activitiesService.postActivities(this.activitiesType1,this.storyname).subscribe(res =>{
-        //console.log(res);
-        this.activitiesTimer1 = false;
-        setTimeout(() => {
-          this.activitiesTimer1 = true;
-        }, 300000);
+    this.bannerdialogService.getphotobannerdialogId(1).subscribe(res => {
+      this.bannerdialog = res;
+      console.log(this.bannerdialog)
+    })
+    if(this.user){
+      this.AddViews(this.storyname);
+      if(this.activitiesTimer1){
+          this.activitiesService.postActivities(this.activitiesType1,this.storyname).subscribe(res =>{
+          //console.log(res);
+          this.activitiesTimer1 = false;
+          setTimeout(() => {
+            this.activitiesTimer1 = true;
+          }, 300000);
+        })
+      }
+      this.activitiesService.postTitle(this.firstRead,0,"Read Chapter").subscribe(res =>{
+        console.log(res);
       })
     }
-    this.activitiesService.postTitle(this.firstRead,0,"Read Chapter").subscribe(res =>{
-      console.log(res);
+    setTimeout(() => {
+      this.openDialog();
+    }, 4000);
+    this.bannerService.getphotobannerId(1).subscribe(res => {
+        this.bannerchapter = res;
+        console.log(this.bannerchapter)
     })
   }
   ngAfterViewInit() {
      this.scroller.scrollToAnchor(this.goto);
      this.spyService.spy({ thresholdBottom: 50 });  
+     
   }
-  
+  openDialog(): void {
+    const timeout = 5000;
+    const dialogRef = this.dialog.open(DialogAdsComponent, {
+      width: '80%',
+      data: {
+              title : this.bannerdialog.title,
+              url:this.bannerdialog.url,
+            }
+    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+         dialogRef.close();
+      }, timeout)
+    })
+  }
   // getStoryName(){
   //   return this.route.snapshot.params.storyname;
   // }
   onFontSelected(font:string){
-    console.log(font)
     if(font === this.fontNow)return;
     this.fontNow = font;
   }
@@ -236,10 +270,8 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   addLikeChapter(id:number){
     console.log(id);
     this.showStoryService.addLikeChapter(id).subscribe(res =>{
-      console.log(res)
       if(this.activitiesTimer2 != id && res){
         this.activitiesService.postActivities(this.activitiesType2,this.storyname).subscribe(res =>{
-          console.log(res);
           this.activitiesTimer2 = id;
           setTimeout(() => {
             this.activitiesTimer2 = 0;
@@ -252,7 +284,6 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();
       this.notscrolly = false;
-      console.log("scrolldown")
       this.loadNextPost();
      }
     }
@@ -277,8 +308,6 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   loadInitial(chapter:number){
       this.showStoryService.getChapterLazy(this.storyname,chapter-1,3).subscribe(res =>{
         this.chapterList = res;
-        console.log(chapter)
-        console.log(this.chapterList)
         setTimeout(() => {
           this.scroller.scrollToAnchor(String(chapter));
         }, 3000);
@@ -311,10 +340,8 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   loadNextPost() {
   //const countContent = this.chapterList.length;
     const countContent = this.chapterList[this.chapterList.length-1].order;
-    console.log(countContent)
     this.showStoryService.getChapterLazy(this.storyname,countContent,2)
     .subscribe( (data: any) => {
-      console.log(data)
       const newPost = data;
       //this.spinner.hide();
       if (newPost.length === 0 ) {

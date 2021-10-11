@@ -22,7 +22,6 @@ export class ReportListComponent implements OnInit {
   }
   onDelete(id:number)
   {
-    console.log(id);
     this.reportTopicService.deleteReport(id)
     .subscribe(
       res=>{

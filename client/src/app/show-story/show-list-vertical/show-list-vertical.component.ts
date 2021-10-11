@@ -23,12 +23,10 @@ export class ShowListVerticalComponent implements OnInit,OnChanges {
              ) { 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.random)
     this.loadStory();
   }
 
   ngOnInit(): void {
-    console.log(this.random)
     this.loadStory();
   }
   // onScroll() {

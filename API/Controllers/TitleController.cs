@@ -36,9 +36,13 @@ namespace API.Controllers
             }
             
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(titleActive.AppUserId);
-            var title = user.titleAcitive.FirstOrDefault(x => x.Type == titleActive.Type 
-                                    && x.Type != ActivitiesType.Ranking);
-            if( title != null )return NoContent();
+            //Ranking , GiveTitle Repeatable 
+            if(!(titleActive.Type == ActivitiesType.Ranking || titleActive.Type == ActivitiesType.GiveTitle) ){
+                var title = user.titleAcitive.FirstOrDefault(x => x.Type == titleActive.Type);
+                if( title != null )return NoContent();
+            }
+            
+            //Get Name from titleActive.Type
             var ActiveType = await _unitOfWork.TitleRepository.GetTitleName(titleActive.Type);
             //var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
             //activities.story = story;
@@ -64,6 +68,10 @@ namespace API.Controllers
                 getTitle.Name = ranking;
             }
             user.titleAcitive.Add(getTitle);
+            //Add title to AppUser
+            user.Title = getTitle.Name;
+            _unitOfWork.UserRepository.Update(user);
+            
             if(!await _unitOfWork.Complete()) return BadRequest("Problem Add Title");
               
             return Ok();

@@ -20,7 +20,6 @@ export class RankComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
      this.rankService.deleteRank(id)
      .subscribe(
        res=>{

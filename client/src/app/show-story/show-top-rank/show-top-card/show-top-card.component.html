@@ -63,18 +63,18 @@
           </div> 
           <div class="floatright">
              <button type="button" 
-                [routerLink]="['/stories/' + topcard.storyName]"
-                class="btn btn-outline-success">
+                [routerLink]="['/stories/' , topcard.storyName]"
+                class="btn btn-outline-primary">
                 <i class="fas fa-book-open"></i>&nbsp;Details
              </button>
-             <button *ngIf="!userLiked"
+             <!-- <button *ngIf="!userLiked"
                      type="button" class="btn btn-outline-primary" 
-                     (click)="addLikeStory(story)">
+                     (click)="addLikeStory(topcard)">
                      <i class="fas fa-plus"></i>&nbsp;LIBRARY</button>
                  <button *ngIf="userLiked"
                      type="button" class="btn btn-outline-light" 
-                     (click)="addLikeStory(story)"> 
-                     <i class="fas fa-check"></i>&nbsp;LIBRARY</button>
+                     (click)="deletLikeStory(topcard)"> 
+                     <i class="fas fa-check"></i>&nbsp;LIBRARY</button> -->
           </div>    
         </div>
       </div>

@@ -24,18 +24,13 @@ export class EmailConfirmationComponent implements OnInit {
     const token = this._route.snapshot.queryParams['token'];
     const email = this._route.snapshot.queryParams['email'];
 
-    console.log(token);
-    console.log(email);
-
     this.accountService.confirmEmail('account/emailconfirmation', token, email)
     .subscribe(_ => {
       this.showSuccess = true;
-      console.log("true")
     },
     error => {
       this.showError = true;
       this.errorMessage = error;
-      console.log("false")
     })
   }
 

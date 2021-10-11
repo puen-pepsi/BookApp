@@ -26,12 +26,12 @@ export class MembersService {
   constructor(private http:HttpClient,private accountService:AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user =>{
       this.user = user;
-      this.userParams = new UserParams(user);
+      // this.userParams = new UserParams(user);
     })
    }
 
   getUserParams(){
-    return this.userParams;
+    return this.userParams = new UserParams(this.user);
   }
 
   setUserParams(params: UserParams){

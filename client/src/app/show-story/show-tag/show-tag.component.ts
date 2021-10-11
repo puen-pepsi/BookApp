@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShowStory } from 'src/app/_models/showstory';
+import { Tags } from 'src/app/_models/tag';
+import { StoryService } from 'src/app/_services/story.service';
 import { ShowStoryService } from '../show-story.service';
 
 @Component({
@@ -10,9 +12,12 @@ import { ShowStoryService } from '../show-story.service';
 
 })
 export class ShowTagComponent implements OnInit {
+  @ViewChild('search',{static:true}) seachTerm:ElementRef;
   tagName:string;
   storylist:Partial<ShowStory[]>;
+  tagArray;
   constructor(private showStoryService:ShowStoryService,
+              private storyService:StoryService,
               private router:Router,
               private route:ActivatedRoute) { 
                 
@@ -21,6 +26,7 @@ export class ShowTagComponent implements OnInit {
   ngOnInit(): void {
     this.tagName = this.route.snapshot.params.tagname;
     this.loadstory(this.tagName);
+    this.getAllTags();
   }
   tagchange(event){
     this.loadstory(event)
@@ -33,5 +39,14 @@ export class ShowTagComponent implements OnInit {
       this.storylist = res;
       this.tagName = tagname;
    })
+  }
+  getAllTags(){
+    this.storyService.getAllTags()
+         .subscribe( (res:Tags[]) => {
+             this.tagArray = res.map(res => res.tagName);
+         });
+   }
+   onSearch(){
+    if(this.seachTerm.nativeElement.value)this.loadstory(this.seachTerm.nativeElement.value);
   }
 }

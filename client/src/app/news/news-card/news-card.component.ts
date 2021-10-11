@@ -23,7 +23,6 @@ export class NewsCardComponent implements OnInit {
     this.router.navigate(['news/edit',this.newsService.formData.id]);
   }
   deleteRow(selectedRow:News){
-    console.log(selectedRow.id)
     this.deleteId.emit(selectedRow.id);
   }
 }

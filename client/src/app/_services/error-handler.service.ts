@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandlerService implements HttpInterceptor{
 
-  constructor(private _router:Router) { }
+  constructor(private _router:Router,private accountService:AccountService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
     .pipe(catchError((error:HttpErrorResponse)=> {
@@ -25,6 +26,8 @@ export class ErrorHandlerService implements HttpInterceptor{
       return this.handleBadRequest(error);
     }
     else if(error.status === 401) {
+      // this._router.navigate(['/authentication/login'], { queryParams: { returnUrl: this._router.url }});
+      //this.accountService.logout();
       return this.handleUnauthorized(error);
     }
     else if(error.status === 403) {

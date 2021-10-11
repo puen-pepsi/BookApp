@@ -20,18 +20,18 @@ export class RecentChapterComponent implements OnInit {
   ngOnInit(): void {
     this.showstorySevice.getChapterRecent().subscribe(res => {
        this.chapters = res;
-       console.log(this.chapters)
     })
   }
   onScroll() {
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();
       this.notscrolly = false;
-      console.log("scroll");
       this.lazyLoad();
     }
   }
-
+  gotoChapter(storyname:string,index){
+    this.router.navigate(['/stories',storyname,'chapters'],{fragment:String(index)});
+  }
   lazyLoad(){
     //next page => page ++
     // const countContent = this.news.length;
@@ -45,7 +45,6 @@ export class RecentChapterComponent implements OnInit {
     //});
   }
   gotoStory(row){
-      console.log(row)
       this.router.navigate(['/stories',row.storyName]);
   }
 }

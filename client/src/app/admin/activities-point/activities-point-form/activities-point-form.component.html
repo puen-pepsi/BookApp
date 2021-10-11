@@ -7,8 +7,16 @@
                name="name" #description="ngModel" [(ngModel)]="activitiesService.formData.activitiesName" required/>
       </div>   
       <div class="col-md-2 pr-0">
-        <input class="form-control" placeholder="Activities Type"
-               name="type" #description="ngModel" [(ngModel)]="activitiesService.formData.type" required/>
+        <!-- <input class="form-control" placeholder="Activities Type"
+               name="type" #description="ngModel" [(ngModel)]="activitiesService.formData.type" required/> -->
+               <mat-form-field>
+                <mat-select placeholder="Select Activities" 
+                    [(ngModel)]="activitiesService.formData.type" name="active">
+                    <mat-option *ngFor="let active of enumKeys " [value]="active">
+                        {{activitiesType[active]}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
       </div> 
       <div class="col-md-2 pr-0">
         <input class="form-control" placeholder="activeUserPoint"

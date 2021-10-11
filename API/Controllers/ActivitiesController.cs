@@ -53,6 +53,7 @@ namespace API.Controllers
             //activities.UserActiveId = userid;
             _unitOfWork.ActivitiesRepository.AddActivities(activities);
             if (!await _unitOfWork.Complete()) return BadRequest("Problem Add Activities");
+            //Author write Chapter
             if (activities.Type == ActivitiesType.writeChapter)
             {
                 var authorPoint = new RecievePoint
@@ -63,6 +64,9 @@ namespace API.Controllers
                 };
                 activities.getPoint.Add(authorPoint);
                 author.recievePoints.Add(authorPoint);
+                //Add point to AppUser.Point
+                author.Point += authorPoint.Point;
+                 _unitOfWork.UserRepository.Update(author);
             }
             else
             {
@@ -75,6 +79,9 @@ namespace API.Controllers
                 };
                 activities.getPoint.Add(userPoint);
                 user.recievePoints.Add(userPoint);
+                //Add point to Appuser.Point
+                  user.Point += userPoint.Point;
+                 _unitOfWork.UserRepository.Update(user);
                 //AuthorPoint
                 if (PointType.AuthorPoint != 0 && story.AuthorId != activities.UserActiveId)
                 {
@@ -86,6 +93,9 @@ namespace API.Controllers
                     };
                     activities.getPoint.Add(authorPoint);
                     author.recievePoints.Add(authorPoint);
+                    //Add point to AppUser.Point
+                    author.Point += authorPoint.Point;
+                    _unitOfWork.UserRepository.Update(author);
                 }
             }
 

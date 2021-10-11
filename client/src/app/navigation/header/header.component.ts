@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   public showError: boolean;
   public theme:string;
   allRank:Rank[] = [];
+  ShowToggle = false;
   // bgtool:string = 'white';
   // getTheme: 'dark-mode' | 'light-mode';
   constructor(public accountService: AccountService ,
@@ -37,10 +38,15 @@ export class HeaderComponent implements OnInit {
     ) { 
         //this.headlogo ="./assets/images/logo.png"
         //this.headlogo ="./assets/images/logotransparent.png"
+         
        
       }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log("change")
+  // }
 
   ngOnInit(): void {
+    
     // this.headlogo = this.route.snapshot.data.headlogo;
     this.rankService.getAllRank().subscribe( (res:Rank[]) => {
       this.allRank = res;
@@ -52,6 +58,9 @@ export class HeaderComponent implements OnInit {
   onToggleSidenav(){
     this.sidenavtoggle.emit();
   }
+  // mangaLogo(){
+  //   if(!this.isDarkMode)this.headlogo ="./assets/images/logo_red.png";
+  // }
   toggleDarkMode(event) {
     // this.isDarkMode = this.themeService.isDarkMode();
 

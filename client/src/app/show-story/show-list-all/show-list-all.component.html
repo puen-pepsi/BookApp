@@ -82,8 +82,8 @@
             <!-- <div class="top-between">
                 <h3>Novel</h3>  
               </div> -->
-            <mat-toolbar>
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-toolbar class="custom-toolbar">
+                 <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
                     <mat-icon>menu</mat-icon>
                   </button>
                   <span>Rainobu {{storyParams.storyType | titlecase}}</span>
@@ -92,8 +92,8 @@
                   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
                    <mat-icon>share</mat-icon>
                  </button> -->
-                 <div style="font-size: 15px">
-                  <mat-form-field appearance="outline" class="searchTerm">
+                 <div style="font-size: 14px;">
+                  <mat-form-field appearance="outline" class="searchTerm" >
                     <mat-label>Search..</mat-label>
                     <input #search matInput 
                               (keyup.enter)="onSearch()"

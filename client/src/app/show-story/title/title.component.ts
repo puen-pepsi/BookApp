@@ -8,6 +8,8 @@ import { DialogTitleComponent } from './dialog-title/dialog-title.component';
   styleUrls: ['./title.component.scss']
 })
 export class TitleComponent  {
+  @Input() userId:number;
+  @Input() userName:string;
   @Input() reportType: string;
   @Input() reportId: number;
   @Output() message = new EventEmitter();
@@ -19,12 +21,15 @@ export class TitleComponent  {
              comment: '',
              }
     });
-    
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');
        if(result !== undefined){
           if(!(result.comment == '')){
-            this.message.emit(result.comment);
+            this.message.emit({
+              data:result.comment,
+              userid:this.userId,
+              username:this.userName
+            });
           }
        }     
     });

@@ -69,7 +69,6 @@ export class StoryFormComponent implements OnInit {
   uploadFinished(event){
     this.response = event;
     this.storyService.formData.imageUrl = this.ResoucreUrl + this.response.dbPath;
-    console.log(this.storyService.formData.imageUrl)
   }
 
   returnToStory(){
@@ -96,6 +95,7 @@ export class StoryFormComponent implements OnInit {
         this.storyService.refreshList();
         this.router.navigate(['mystory'])
         this.submitSuccess.emit(false);
+
       },
       err => {
         console.log(err);

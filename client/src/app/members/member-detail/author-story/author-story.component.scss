@@ -1,0 +1,14 @@
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    // height: 100%;
+    box-sizing: border-box;
+
+}
+.item{
+    /* max-width: 20%; */
+    margin-left: 10px;
+    margin-bottom: 10px;
+    max-width:150px;
+}

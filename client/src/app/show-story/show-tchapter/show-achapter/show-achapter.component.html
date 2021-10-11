@@ -14,7 +14,8 @@
   </mat-card-subtitle>
 </mat-card-header>
 <mat-card-content class="Body" [ngStyle]="{'font-size':fSize+'rem'}" #content>
-    <div [innerHtml] = "chapter.content" ></div>
+    <!-- <div [innerHtml] = "chapter.content" ></div> -->
+    <div [innerHtml] = "chapter.content | sanitizeHtml" ></div>
 </mat-card-content>
 </mat-card>
     

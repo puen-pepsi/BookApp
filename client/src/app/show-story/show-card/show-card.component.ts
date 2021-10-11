@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { UserLiked } from 'src/app/_models/userLiked';
 import { ActivitiesService } from 'src/app/_services/activities.service';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
+import { AccountService } from 'src/app/_services/account.service';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-show-card',
   templateUrl: './show-card.component.html',
@@ -29,11 +31,16 @@ totalRate:number;
 yourRate:any;
 mylist : number[]=[];
 userLiked : UserLiked;
-
+user:User;
   constructor(private showStoryService:ShowStoryService,
               private activitiesService:ActivitiesService,
               private router:Router,
-              private toastr:ToastrService) { }
+              private accountService:AccountService,
+              private toastr:ToastrService) { 
+                this.accountService.currentUser$.pipe(take(1)).subscribe(user =>{
+                  this.user = user;
+                })
+              }
 
   ngOnInit(): void {
     this.rating = this.story.rating;
@@ -41,9 +48,11 @@ userLiked : UserLiked;
     // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
     //   this.yourRate = res;
     // });
-    this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
-      this.userLiked = res;
-    });
+    if(this.user){
+      this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
+        this.userLiked = res;
+      });      
+    }
   }
   goToDetial(storyname:string){
     this.router.navigate(['/stories',storyname]);

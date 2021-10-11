@@ -23,10 +23,8 @@ export class MemberPointComponent implements OnInit {
   ngOnInit(): void {
     this.activitiesService.getActivities().subscribe(res => {
       this.activitieslist = res;
-      console.log(this.activitieslist)
     })
   }
   nextBatch(index) {
-    console.log(index)
   }
 }

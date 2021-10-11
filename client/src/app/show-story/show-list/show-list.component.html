@@ -28,25 +28,11 @@
             </button>       
     </div>
      <span class="spacer"></span>
-     
-      <!-- <div class="input-group " style="width: 30%;">
-        <input  #search (keyup.enter)="onSearch()"
-          type="text" class="form-control" 
-          placeholder="Search ......" aria-label="Recipient's username">
-        <div class="input-group-append" (click)="onSearch()">
-          <span class="input-group-text"><i class="fa fa-search"></i></span>
-          <span class="input-group-text">
-            <i class="fas fa-undo"></i>
-          </span>
-          <span class="input-group-text">
-              <i class="fas fa-bars"></i>
-            </span>
-        </div>
-      </div>  -->
-      <div fxFlex="50" fxLayout="row" fxLayoutAlign="flex-end center" style="font-size: 15px;">
+    
+      <div  style="font-size: 15px;">
       <mat-form-field appearance="outline" class="searchTerm">
         <mat-label>Search..</mat-label>
-        <input #search matInput 
+         <input #search matInput 
                   (keyup.enter)="onSearch()"
                   placeholder="Search">
           <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>    

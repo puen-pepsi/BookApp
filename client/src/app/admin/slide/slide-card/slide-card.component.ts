@@ -18,10 +18,9 @@ export class SlideCardComponent implements OnInit {
   populateForm(selectedRecord: Slide) {
     this.slideService.formData = Object.assign({},selectedRecord);
     //this.StoryDetail.emit(true);
-    this.router.navigate(['slide/edit',this.slideService.formData.id]);
+    this.router.navigate(['admin/slide/edit',this.slideService.formData.id]);
   }
   deleteRow(selectedRow:Slide){
-    console.log(selectedRow.id)
     this.deleteId.emit(selectedRow.id);
   }
 

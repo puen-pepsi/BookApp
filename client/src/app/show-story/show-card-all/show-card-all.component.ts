@@ -30,7 +30,7 @@ export class ShowCardAllComponent implements OnInit {
 
   }
   goToTag(ele:string){
-    this.router.navigate(['/stories/tag',ele]);
+    this.router.navigate(['/stories/tag',ele.toLowerCase()]);
   }
   goToDetial(storyname:string){
     this.router.navigate(['/stories',storyname]);

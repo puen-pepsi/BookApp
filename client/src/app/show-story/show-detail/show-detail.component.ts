@@ -46,7 +46,6 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     private accountService:AccountService,
     private commentService:CommentService,
     private toastr:ToastrService,
-    private bcService:BreadcrumbService,
     private router:Router,
     ) { 
           this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
@@ -74,21 +73,21 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   //   })
   // }
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
-    console.log('tabChangeEvent => ', tabChangeEvent); 
-    if(tabChangeEvent.tab.textLabel==="Chapter Comments" && this.comments.length === 0){
-      if(!this.hubOn){
-          this.commentService.createHubConnection(this.user,this.storyName);
-          this.hubOn = true;
-      }
-    }else if(tabChangeEvent.tab.textLabel==="Novel Comments" && this.comments.length===0){
-      if(!this.hubOn){
-          this.commentService.createHubConnection(this.user,this.storyName);
-          this.hubOn = true;
-      }   
-    }else{
-      this.commentService.stopHubConnection();
-      this.hubOn = false;
-    }
+    console.log(tabChangeEvent)
+      if(tabChangeEvent.tab.textLabel==="Chapter Comments" && this.comments.length === 0){
+        if(!this.hubOn){
+            this.commentService.createHubConnection(this.user,this.storyName);
+            this.hubOn = true;
+        }
+        }else if(tabChangeEvent.tab.textLabel==="Novel Comments" && this.comments.length===0){
+          if(!this.hubOn){
+              this.commentService.createHubConnection(this.user,this.storyName);
+              this.hubOn = true;
+          }   
+        }else{
+          this.commentService.stopHubConnection();
+          this.hubOn = false;
+        }    
   }
   // onTabActivated(data: TabDirective){
   //   this.activeTab = data;
@@ -132,31 +131,31 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
       this.showstory = data.showstory;
       this.rating = this.showstory.rating;
     });
-    this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
-      this.yourRate = res;
-    });
-    this.showStoryService.getUserHistory(this.showstory.storyId).subscribe(res =>{
-      this.userHistory = res;
-    });
-    this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
-      this.userLiked = res;
-      // console.log(this.userLiked)
-    })
+    if(this.user){
+         this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
+            this.yourRate = res;
+         });
+         this.showStoryService.getUserHistory(this.showstory.storyId).subscribe(res =>{
+            this.userHistory = res;
+          });
+         this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
+            this.userLiked = res;
+          }) 
+    }
+    
   }
   addLikeStory(story:ShowStory){
-    this.showStoryService.addLikeStory(story.storyName).subscribe(() =>{
+    this.showStoryService.addLikeStory(story.storyName).subscribe(()=>{
       this.refresh();
       this.toastr.success('You have liked '+ story.storyName);
     })
   }
   onReport(event){
-    console.log(event);
     this.showStoryService.postReport(event).subscribe(res =>{
       console.log(res);
     })
   }
   goToTag(ele:string){
-    console.log(ele)
     this.router.navigate(['stories/tag/',ele]);
   }
   gotoMember(event){

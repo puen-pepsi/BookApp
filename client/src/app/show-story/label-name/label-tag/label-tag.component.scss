@@ -28,3 +28,16 @@
     color:lightslategray;
     line-height: 0;
 }
+#crown .fa-crown{
+    position: relative;
+    top:-15px;
+    left: -10px;
+    color:gold;
+}
+.fa-rotate-45 {
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    transform: rotate(40deg);
+}

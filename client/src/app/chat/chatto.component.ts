@@ -31,7 +31,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
                   this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
               }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("change")
+    // console.log("change")
   }
   ngAfterViewInit(): void {
     // this.virtualScrollViewport.scrollTo({bottom:0});
@@ -43,7 +43,6 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
     this.commentForm = this.fb.group({
       content: [''],
     });
-     this.theme = localStorage.getItem('user-theme');
   } 
   loadNext(){
     //this.chatService.commentThread$.

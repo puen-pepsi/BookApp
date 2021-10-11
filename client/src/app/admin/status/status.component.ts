@@ -19,7 +19,6 @@ export class StatusComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
      this.statusService.deleteStatus(id)
      .subscribe(
        res=>{

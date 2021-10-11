@@ -1,7 +1,5 @@
-
-  
 <carousel class="carousel-html-content" style="z-index: 2;"
-        [height]="'200'" 
+        [height]="'250'" 
         [cellsToShow]="'1'"
         [autoplay]="true"
         [loop]="true" 
@@ -9,17 +7,17 @@
     <div *ngFor="let row of newsHome"
         class="carousel-cell" >
         <div class="news">
-               <img src={{row.pictureUrl}} style="object-fit: cover;" >
+               <img src={{row.pictureUrl}}  >
                 <div class="content" >
                      <p class="text">{{row.content}}</p>
                 </div>
-               
         </div>
-        
     </div>
 </carousel>
-<div *ngIf="newsService.list" class="newslist mt-1">
-    <div *ngFor="let row of newsHome">
-    <app-news-card [row]="row"></app-news-card>
-    <mat-divider></mat-divider>
+<div *ngIf="newsService.list" class="newslist ">
+    <div *ngFor="let row of newsHome" class="mt-1">
+        <!-- <mat-divider></mat-divider> -->
+    <!-- <app-news-card [row]="row"></app-news-card> -->
+    <app-news-small-card [row]="row"></app-news-small-card>
+    
 </div>  

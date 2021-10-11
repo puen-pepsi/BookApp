@@ -1,1 +1,37 @@
-<div id="payments"></div>
+<div class="header pb-3">
+    <h3>VIP Membership</h3>
+</div>
+
+<!-- <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>workspace_premium</mat-icon>
+      </button>
+      <span>VIP Membership</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+       <mat-icon>share</mat-icon>
+     </button>
+</mat-toolbar> -->
+<mat-card class="mat-elevation-z0" >
+    <div class="p-3" *appHasRole='["VIP"]'>
+        <h3>You are VIP Membership</h3>
+        <h5>Expired Date : {{expireddate | date:'medium'}}</h5>
+         <span class="jumbotron py-2" style="color: black;">Remainder : {{days}} Days</span>
+    </div>
+    
+   
+    <div fxLayout="row" style="font-size: larger;" class="pt-5 pb-5">
+        <ul>
+            <li>No Ads</li>
+            <li>Support Author Us</li>
+            <li>Just 5$ for 30 Days</li>
+            <li>Instant Activation after Payment</li>
+         </ul> 
+    </div>
+   <h5>Note: VIP Membership for Support Rainobu..</h5>
+    <div id="payments" ></div>  
+</mat-card>
+
+
+
+

@@ -34,6 +34,7 @@ export class CommentComponent implements OnInit,AfterViewInit{
     this.commentForm = this.fb.group({
       content: [''],
     });
+    
     this.username = this.commentService.user.username;
 
   }

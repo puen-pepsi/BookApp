@@ -17,7 +17,10 @@
         <main class="container">
              <router-outlet></router-outlet>
         </main>
-       <app-footer></app-footer>
+       <app-footer 
+        [footerlogo]="footerlogo"
+        [bgtool]="bgtool">
+        </app-footer>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

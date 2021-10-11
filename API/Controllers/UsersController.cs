@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly IMapper _mapper;
@@ -192,7 +192,9 @@ namespace API.Controllers
         var currentMain = user.titleAcitive.FirstOrDefault(x => x.IsMain);
         if (currentMain != null) currentMain.IsMain = false;
         title.IsMain = true;
-
+        //Update User.Title
+        user.Title = title.Name;
+        _unitOfWork.UserRepository.Update(user);
         if (await _unitOfWork.Complete()) return NoContent();
 
         return BadRequest("Failed to set main title");

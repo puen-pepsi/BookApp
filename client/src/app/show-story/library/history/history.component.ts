@@ -42,8 +42,8 @@ export class HistoryComponent implements OnInit {
       
       this.storyHistory = this.storyHistory.concat(newPost);
       this.pagination = response.pagination;//1,2,3,4..
-      console.log(this.storyHistory)
-      console.log(this.pagination)
+      // console.log(this.storyHistory)
+      // console.log(this.pagination)
       this.notscrolly = true;
     })
   }
@@ -52,7 +52,6 @@ export class HistoryComponent implements OnInit {
         // this.spinner.show();
         this.pageNumber++;
         this.notscrolly = false;
-        console.log("scroll");
         this.loadStoryHistory();
       }
     }
@@ -63,10 +62,9 @@ export class HistoryComponent implements OnInit {
     this.loadStoryHistory();
   }
  
-  deleteHistory(storyId:number){
-    console.log(storyId)
-    this.showStoryService.deletHistoryUser(storyId).subscribe(() =>{
-      this.loadStoryHistory();
+  deleteHistory(story:ShowHistory){
+    this.showStoryService.deletHistoryUser(story.storyId).subscribe(() =>{
+        this.storyHistory = this.storyHistory.filter(x => x.storyId != story.storyId);
     })
   }
 }

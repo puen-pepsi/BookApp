@@ -34,13 +34,16 @@ export class LabelNameComponent implements OnInit,AfterViewInit{
   ngAfterViewInit(): void {
     // console.log(this.imageUrl);
     // console.log(this.point);
-    this.isVIP = this.createCrown(this.role);
+    // this.isVIP = this.createCrown(this.role);
   }
   ngOnInit(): void {
     //  this.setHeight = this.pHeight;
+    this.isVIP = false;
      this.adminSevice.getUserRoles(this.userName).subscribe(res =>{
-       console.log(res)
-       this.role = res.roles;
+       if(res.roles){
+          this.role = res.roles;
+          this.isVIP = this.role.includes("VIP");
+       }
      })
      this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;
@@ -79,7 +82,7 @@ export class LabelNameComponent implements OnInit,AfterViewInit{
     this.username.emit(this.userName.toLowerCase());
   }
   createCrown(vip:string[]):boolean{
-     return (this.role.includes('Admin'))?true:false;
+     return (this.role.includes('VIP'))?true:false;
   }
   // getColor(title:string) {
   //   switch (title.substring(0,3)) {

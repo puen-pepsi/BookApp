@@ -163,7 +163,13 @@ namespace API.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Point")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -223,6 +229,52 @@ namespace API.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Banner");
+                });
+
+            modelBuilder.Entity("API.Entities.BannerChapter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GotoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BannerChapters");
+                });
+
+            modelBuilder.Entity("API.Entities.BannerDialog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GotoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BannerDialogs");
                 });
 
             modelBuilder.Entity("API.Entities.ChatMessage", b =>
@@ -493,6 +545,29 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhotoSlides");
+                });
+
+            modelBuilder.Entity("API.Entities.PhotoSlide2", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GotoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhotoSlides2");
                 });
 
             modelBuilder.Entity("API.Entities.PhotoStory", b =>
@@ -938,6 +1013,34 @@ namespace API.Migrations
                     b.HasIndex("UserViewId");
 
                     b.ToTable("Views");
+                });
+
+            modelBuilder.Entity("API.Entities.VipUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ActiveDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ExpiredDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserVipId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserVipId");
+
+                    b.ToTable("VipUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1391,6 +1494,17 @@ namespace API.Migrations
                     b.Navigation("UserView");
                 });
 
+            modelBuilder.Entity("API.Entities.VipUser", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "UserVip")
+                        .WithMany("VipUsers")
+                        .HasForeignKey("UserVipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserVip");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("API.Entities.AppRole", null)
@@ -1464,6 +1578,8 @@ namespace API.Migrations
                     b.Navigation("UserHistory");
 
                     b.Navigation("UserRoles");
+
+                    b.Navigation("VipUsers");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>

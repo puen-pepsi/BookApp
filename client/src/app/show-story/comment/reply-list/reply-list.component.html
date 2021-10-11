@@ -3,15 +3,15 @@
     <div *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
         <div *ngIf="comment.parentId== commentId" class="commentlist">        
             <div class="left">
-                    <app-label-name
-                    (username)="gotoMember($event)"
-                    [pHeight]= '35'
-                    [imageUrl]='comment.image'
-                    [knownAs]='comment.knownAs'
-                    [userName]='comment.userName'
-                    [title]='comment.title'
-                    [point]='comment.point'>
-                  </app-label-name>  
+              <app-label-name
+                (username)="gotoMember($event)"
+                [pHeight]= '35'
+                [imageUrl]='comment.image'
+                [userName]='comment.userName'
+                [knownAs]='comment.knownAs'
+                [title]='comment.title'
+                [point]='comment.point'>
+            </app-label-name> 
             </div>
             <div class="right">
               <div id="rconners1">

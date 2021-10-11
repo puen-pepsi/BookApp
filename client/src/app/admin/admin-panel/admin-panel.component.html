@@ -1,6 +1,78 @@
-<h4>Admin Panel</h4>
-<div class="tab-panel">
-    <tabset class="member-tabset">
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" class="sidenav" opened>
+        <!-- <a routerLink="genre" routerLinkActive="active" class="item">Genre</a>
+        <a routerLink="status" routerLinkActive="active" class="item">Status</a> -->
+        <mat-nav-list>
+            <a mat-list-item routerLink="/admin">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Admin</span>
+            </a>
+            <a mat-list-item routerLink="genre">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Genre</span>
+            </a>
+            <a mat-list-item routerLink="status">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Status</span>
+            </a>
+            <a mat-list-item routerLink="language">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">language</span>
+            </a>
+            <a mat-list-item routerLink="tag">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Tag</span>
+            </a>
+            <a mat-list-item routerLink="report">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Report Topic </span>
+            </a>
+            <a mat-list-item routerLink="rank">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Rank </span>
+            </a>
+            <a mat-list-item routerLink="activities">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Activities</span>
+            </a>
+            <a mat-list-item routerLink="title">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Title</span>
+            </a>
+            <a mat-list-item routerLink="vip-user">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">VIP user</span>
+            </a>
+            <a mat-list-item routerLink="slide">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Slide Novel</span>
+            </a>
+            <a mat-list-item routerLink="slide2">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Slide Home</span>
+            </a>
+            <a mat-list-item routerLink="cover">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Cover</span>
+            </a>
+            <a mat-list-item routerLink="banner">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Banner</span>
+            </a>
+            <a mat-list-item routerLink="bannerdialog">
+                <mat-icon>arrow_right</mat-icon>
+                <span class="nav-caption">Banner Dialog</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-drawer>
+    <mat-drawer-content class="body">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+<!-- <tabset class="member-tabset">
         <tab heading='User management' *appHasRole='["Admin"]'>
             <div class="container">
                 <app-user-management></app-user-management>
@@ -46,11 +118,62 @@
                 <app-titlename></app-titlename>
             </div>
         </tab>
-        <!-- <tab heading='Photo management' *appHasRole='["Admin", "Moderator"]'>
-            <div class="container">
-                <app-photo-management></app-photo-management>
-            </div>
-        </tab> -->
 
-    </tabset>
-</div>
+    </tabset> -->
+
+<!-- <mat-tab-group mat-stretch-tabs #tabGroup >
+        <mat-tab label="User management"  *appHasRole='["Admin"]'>
+            <ng-template matTabContent>
+                <div class="container">
+                    <app-user-management></app-user-management>
+                </div>
+           </ng-template>
+        </mat-tab>
+        <mat-tab label="Genre" >
+            <ng-template matTabContent>
+                <app-genre></app-genre>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Status" >
+            <ng-template matTabContent>
+                <app-status></app-status>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Languages" >
+           <ng-template matTabContent>
+            <app-language></app-language>
+           </ng-template>
+        </mat-tab>
+        <mat-tab label="Tags" >
+            <ng-template matTabContent>
+                <app-tag></app-tag>
+            </ng-template>
+         </mat-tab>
+         <mat-tab label="Report Topic" >
+            <ng-template matTabContent>
+                <app-reporttopic></app-reporttopic>
+            </ng-template>
+         </mat-tab> 
+         <mat-tab label="Rank" >
+            <ng-template matTabContent>
+                <app-rank></app-rank>
+            </ng-template>
+         </mat-tab> 
+         <mat-tab label="Activities Point" >
+            <ng-template matTabContent>
+                <app-activities-point></app-activities-point>
+            </ng-template>
+         </mat-tab>
+         <mat-tab label="Title Name" >
+            <ng-template matTabContent>
+                <app-titlename></app-titlename>
+            </ng-template>
+         </mat-tab>
+         <mat-tab label="Vip User" >
+            <ng-template matTabContent>
+                <div class="container"></div>
+                 <app-vip-user></app-vip-user>
+                <div class="container"></div>
+            </ng-template>
+         </mat-tab>
+  </mat-tab-group> -->

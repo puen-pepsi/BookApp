@@ -51,7 +51,6 @@ export class ShowListAllComponent implements OnInit {
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();
       this.notscrolly = false;
-      console.log("scroll");
       this.lazyLoad();
     }
   }
@@ -63,11 +62,9 @@ export class ShowListAllComponent implements OnInit {
   // }
   loadStory(){
     this.showStoryService.setStoryParams(this.storyParams);
-    console.log(this.storyParams);
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
-      console.log(this.pagination)
     });
   }
   lazyLoad(){

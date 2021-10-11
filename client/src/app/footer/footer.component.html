@@ -37,17 +37,18 @@
 </footer>
 </div> -->
  <!----------- Footer ------------>
- <footer class="footer-bs">
+ <footer class="footer-bs" [ngStyle]="{'background-color':bgtool}">
     <div class="row">
         <div class="col-md-3 footer-brand animated fadeInLeft">
-            <img src="./assets/images/logotransparent.png" alt="Rainobu">
-            
+            <!-- <img src="./assets/images/logotransparent.png" alt="Rainobu"> -->
+            <img [src]="footerlogo" (click)="logoClick($event)">
             <p>
                 Whether it be reading an epic tale of an isekai-ed hero or having a 
                         peaceful online tea time conversation with your friends, you can find them all here in 
                         this Guild! Join our rich community of anime/manga/lightnovel -loving readers,
                         writers and illustrators here at Rainobu!!
             </p>
+            <div style="height:50px;"></div>
             <!-- <p>© 2021 Rianobu, All rights reserved</p> -->
             <div class="col-xl-8 col-md-3 col-sm-3 col-auto my-md-0 mt-5 order-sm-1 order-3 align-self-end">
                 <p class="social text-muted mb-0 pb-0 bold-text"> 
@@ -64,7 +65,7 @@
             <!-- <h4>Menu —</h4> -->
             <div class="col-md-6">
                 <ul class="pages">
-                    <li><a href="#">About Us</a></li>
+                    <li><a routerLink="/aboutus">About Us</a></li>
                     <li><a href="#">Contacts</a></li>
                     <li><a href="#">Terms & Condition</a></li>
                     <li><a href="#">Privacy Policy</a></li>
@@ -77,11 +78,10 @@
         <div class="col-md-2 footer-social animated fadeInDown">
             <h4>Navigate</h4>
             <ul class="list"> 
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Member</a></li>
-                <li><a href="#">Novel</a></li>
-                <li><a href="#">Manga</a></li>
-                <li><a href="#">Chatto</a></li>
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/stories">Novel</a></li>
+                <li><a routerLink="/manga">Manga</a></li>
+                <li><a routerLink="/chatto">Chatto</a></li>
             </ul>
             <!--<h4>Follow Us</h4>
              <ul>
@@ -92,16 +92,14 @@
             </ul> -->
         </div>
         <div class="col-md-3 footer-ns animated fadeInRight">
-            <h4>Newsletter</h4>
-            <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
-            <!-- <p>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
-                  </span>
-                </div>
-            </p> -->
+            <h4>#Rainobu</h4>
+            <div class="alltag p-1">
+                <mat-chip-list aria-label="tags">
+                  <mat-chip *ngFor="let ele of tagArray" (click)="tagchange(ele)">
+                      #{{ele}}
+                  </mat-chip>
+               </mat-chip-list>
+              </div>
         </div>
     </div>
 </footer>

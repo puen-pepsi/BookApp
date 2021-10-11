@@ -38,7 +38,7 @@ namespace API.Data
         {
             return await _context.TagStories
                             .Include(x => x.Stories)
-                            .Where(x => x.Tags.TagName.ToLower() == name.ToLower())
+                            .Where(x => x.Tags.TagName.ToLower().Contains(name.ToLower()))
                             .ToListAsync();
         }
 

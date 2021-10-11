@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { initHour } from 'ngx-bootstrap/chronos/units/hour';
 import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -27,14 +28,20 @@ export class ShowStoryService {
   showStoryCache = new Map();
   user :User;
   storyParams:StoryParams;
-  viewsParams:ViewsParams;
+  viewsParams:ViewsParams ;
   list : Chapter[];
   constructor(private http:HttpClient,private accountService:AccountService) { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
-      this.user = user;
-      this.storyParams = new StoryParams(user);
-      this.viewsParams = new ViewsParams(user);
+        this.user = user;
+        this.storyParams = new StoryParams(user);
+        this.viewsParams = new ViewsParams(user);
     })
+    if(!this.user){
+      this.storyParams = new StoryParams();
+      console.log(this.storyParams)
+      this.viewsParams = new ViewsParams();
+      console.log(this.viewsParams)
+    }
   }
   getStoryParams(init:string){
     this.storyParams.storyType=init;
@@ -155,7 +162,6 @@ export class ShowStoryService {
         //console.log(res)
         const index = this.showStories.indexOf(story);
         this.showStories[index] = res;
-        console.log(this.showStories[index])
         return this.showStories[index];
       })
     );
@@ -184,6 +190,7 @@ export class ShowStoryService {
   getStoryTag(tagname:string){
     return this.http.get<Partial<ShowStory[]>>(this.baseUrl+'tags/taglist/'+ tagname);
   }
+
   postReport(model:any){
     return this.http.post(this.baseUrl + 'report',model);
   }

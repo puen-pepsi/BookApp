@@ -17,6 +17,9 @@ namespace API.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        //edit faster
+        public int Point { get; set; }
+        public string Title { get; set; }
         public ICollection<Banner> Banners { get; set; }
         public ICollection<Photo> Photos { get; set; }
         // Users Click Like
@@ -32,6 +35,7 @@ namespace API.Entities
         public ICollection<StoryComment> StoryComments {get; set;}
         public ICollection<RecievePoint> recievePoints { get; set; }
         public ICollection<TitleActive> titleAcitive {get;set;}
+        public ICollection<VipUser> VipUsers { get; set; }
         public AppUser()
         {
             Photos = new Collection<Photo>();
@@ -46,6 +50,7 @@ namespace API.Entities
             StoryComments = new Collection<StoryComment>();
             recievePoints = new Collection<RecievePoint>();
             titleAcitive = new Collection<TitleActive>();
+            VipUsers = new Collection<VipUser>();
         }
 
     }

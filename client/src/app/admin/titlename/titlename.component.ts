@@ -21,7 +21,6 @@ export class TitlenameComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
      this.titlenameService.deletetitlename(id)
      .subscribe(
        res=>{

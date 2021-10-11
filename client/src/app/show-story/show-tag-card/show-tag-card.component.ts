@@ -22,7 +22,6 @@ tag:string[];
     this.tagchange.emit(ele);
   }
   goToStory(story){
-    console.log(story)
     this.showStory.emit(story);
   }
 }

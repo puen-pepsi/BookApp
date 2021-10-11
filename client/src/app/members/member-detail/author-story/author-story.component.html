@@ -1,6 +1,6 @@
 <h4>Stories by {{authorname|titlecase}}</h4>
-<div class="show mt-4 mb-4" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5px" >
-    <div *ngFor="let story of showstory" fxLayout fxFlex="20" >
+<div class="content mt-4 mb-4" >
+    <div *ngFor="let story of showstory"  class="item" >
         <app-show-card [story]="story"></app-show-card>
     </div>
 </div>
@@ -13,7 +13,7 @@
 ></mat-paginator> -->
 <mat-paginator 
   [length]="pagination?.totalItems" 
-  [pageSizeOptions]="[5]"
+  [pageSizeOptions]="[10]"
   [showFirstLastButtons]="true"
   (page)="pageChanged($event)">
 </mat-paginator>

@@ -1,20 +1,13 @@
+<div class="jumbotron py-2 mb-4">
+  <h4 class="display-6 text-center">Create Cover Screen</h4>
+</div>
 <div class="row">
     <div class="col-md-4">
         <app-cover-image [image]="coverService.formData.url" 
                         (imageChange)="uploadFinished($event)"></app-cover-image>
     </div>
     <div class="col-md-8">
-      <div class="header">
-        <div>
-          <h1>Create Photo Screen</h1>
-        </div>
-        <div>
-          <button type="button" class="btn btn-outline-primary Header" (click)="returnToCoverList()">
-            <i class="fas fa-arrow-left"></i> Back
-          </button>
-        </div>
-      </div>
-    <br/>
+    
     <!-- <p>{{coverService.formData | json}}</p> -->
     <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
       <input type="hidden" name="id" value="coverService.formData.id" />
@@ -36,7 +29,14 @@
           (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
       </div>
     </form>
-
+    <div class="header">
+      <span class="spacer"></span>
+      <div>
+        <button mat-flat-button class=" Header" (click)="returnToCoverList()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+      </div>
+    </div>
   </div>
 
 </div>

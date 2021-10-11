@@ -31,6 +31,7 @@ export class HistoryCardComponent implements OnInit {
       this.userLiked = res;
     });
   }
+
   // createSynopsis(content:string){
   //   return content.substr(0,180)+".....";
   // }

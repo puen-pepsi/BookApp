@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Slide } from 'src/app/_models/slide.model';
 import { SlideService } from 'src/app/_services/slide.service';
@@ -16,10 +16,14 @@ export class SlideFormComponent implements OnInit {
 
   constructor(
               public slideService:SlideService,
+              private route : ActivatedRoute,
               private router : Router,
               private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    if(this.route.snapshot.data.slidetype == "create"){
+      this.slideService.formData = new Slide();
+    };
   }
   onSubmit(form:NgForm) {
     console.log(form);
@@ -51,7 +55,7 @@ export class SlideFormComponent implements OnInit {
       res => {
         this.resetForm(form);
         this.slideService.refreshList();
-        this.router.navigate(['slide']);
+        this.router.navigate(['admin/slide']);
         this.toastr.success("Edit Photo slide Success","Information")
       },
       err => {
@@ -60,7 +64,8 @@ export class SlideFormComponent implements OnInit {
     );
   }
   returnToSlideList(){
-    this.router.navigate(['slide']);
+    this.router.navigate(['admin/slide']);
+
   }
   resetForm(form: NgForm) {
     form.form.reset();

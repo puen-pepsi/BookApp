@@ -13,11 +13,11 @@
               autocomplete="off">
                   <div class="form-group">
                     <input 
-                    name="username"
-                    [(ngModel)]="model.username"
-                    class="form-control mr-sm-2" 
-                    type="text" 
-                    placeholder="UserName/Email">
+                        name="username"
+                        [(ngModel)]="model.username"
+                        class="form-control mr-sm-2" 
+                        type="text" 
+                        placeholder="&#61447; UserName/Email">
                     </div>
                     
                     <div class="form-group">
@@ -26,24 +26,24 @@
                         [(ngModel)]="model.password"
                         class="form-control mr-sm-2" 
                         type="password" 
-                        placeholder="Password">
+                        placeholder="&#61475; Password">
                     </div>
             <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
             </div>
             <div class="form-group d-md-flex">
-                <div class="w-50">
-                    <label class="checkbox-wrap checkbox-primary">Remember Me
+                <div class="w-50" style="color: rgb(175, 175, 175);">
+                             <label class="checkbox-wrap checkbox-primary" >Remember Me
                                   <input type="checkbox" checked>
                                   <span class="checkmark"></span>
-                                </label>
+                            </label>
                             </div>
                             <div class="w-50 text-md-right">                                
-                                <a [routerLink]="['/authentication/forgotpassword']" style="color: #666"> Forgot Password </a>
+                                <a [routerLink]="['/authentication/forgotpassword']"> Forgot Password </a>
                             </div>
             </div>
             </form>
-            <p class="w-100 text-center">&mdash; Or Sign Up With &mdash;</p>
+            <p class="w-100 text-center" style="color: rgb(150, 150, 150);">&mdash; Or Sign Up With &mdash;</p>
             <div  fxLayoutAlign="center center">
                 <div><button class="btn" type="button" (click)="loginWithGoogle()" >
                     <img src="https://img.icons8.com/color/32/000000/google-logo.png"/>

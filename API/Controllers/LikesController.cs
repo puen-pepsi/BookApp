@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class LikesController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -80,6 +80,7 @@ namespace API.Controllers
         public async Task<ActionResult<MemberLikedDto>> GetUserLike(int memberid)
         {
             var userId = User.GetUserId();
+            if(userId == 0)return Ok(null);
             var Liked = await _unitOfWork.LikesRepository.GetUserLike(userId,memberid);
             if(Liked == null){
                     return Ok(null);

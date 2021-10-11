@@ -129,7 +129,6 @@ export class MemberProfileComponent implements OnInit {
   //   }
   // }
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
-    console.log('tabChangeEvent => ', tabChangeEvent); 
     if(tabChangeEvent.tab.textLabel==="Messages" && this.messages.length === 0){
       this.messageService.createHubConnection(this.user,this.member.username);
     }else{

@@ -1,5 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SlideService } from 'src/app/_services/slide.service';
 import { environment } from 'src/environments/environment';
 @Component({

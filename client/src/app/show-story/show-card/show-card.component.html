@@ -32,7 +32,7 @@
                     <mat-icon>menu_book</mat-icon>
                 </button>
             </li>     
-            <li class="list-inline-item">               
+            <li class="list-inline-item" *ngIf="user">               
                     <app-followstory [isActive]="userLiked != null"
                         [storyid]="story.storyId" 
                         [storyname]="story.storyName"

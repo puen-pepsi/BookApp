@@ -58,7 +58,6 @@ export class ChapterListComponent implements OnInit {
     // this.storyChapterService.formData = Object.assign({},selectedRow);
     this.storyChapterService.putChapterUp(selectedRow.order).subscribe(
       res=>{
-        console.log(res);
         this.loadpublish()
       },
       err=>{
@@ -71,7 +70,6 @@ export class ChapterListComponent implements OnInit {
     // this.storyChapterService.formData = Object.assign({},selectedRow);
     this.storyChapterService.putChapterDown(selectedRow.order).subscribe(
       res=>{
-        console.log(res);
         this.loadpublish();
       },
       err=>{

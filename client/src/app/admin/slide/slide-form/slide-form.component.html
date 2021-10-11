@@ -1,20 +1,12 @@
+<div class="jumbotron py-2 mb-4">
+  <h4 class="display-6 text-center">Create Slide Novel</h4>
+</div>
 <div class="row">
     <div class="col-md-4">
         <app-slide-form-image [image]="slideService.formData.url" 
                         (imageChange)="uploadFinished($event)"></app-slide-form-image >
     </div>
     <div class="col-md-8">
-      <div class="header">
-        <div>
-          <h1>Create Photo Slide</h1>
-        </div>
-        <div>
-          <button mat-flat-button class=" Header" (click)="returnToSlideList()">
-            <i class="fas fa-arrow-left"></i> Back
-          </button>
-        </div>
-      </div>
-    <br/>
     <!-- <p>{{slideService.formData | json}}</p> -->
     <form novalidate #editForm="ngForm" id="Editform" (submit)="onSubmit(editForm)" autocomplete="off">
       <input type="hidden" name="id" value="slideService.formData.id" />
@@ -40,7 +32,14 @@
           (click)="resetForm(editForm)"><i class="fas fa-eraser"></i> RESET</button>
       </div>
     </form>
-
+    <div class="header">
+      <span class="spacer"></span>
+      <div>
+        <button mat-flat-button class=" Header" (click)="returnToSlideList()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+      </div>
+    </div>
   </div>
 
 </div>

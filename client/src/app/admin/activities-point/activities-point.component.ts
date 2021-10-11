@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivitiesPoint } from 'src/app/_models/activitiespoint.model';
+import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { ActivitiesPointService } from 'src/app/_services/activities-point.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { ActivitiesPointService } from 'src/app/_services/activities-point.servi
   styleUrls: ['./activities-point.component.scss']
 })
 export class ActivitiesPointComponent implements OnInit {
+  activitiesType = ActivitiesType;
   constructor(public activitiesPointService :ActivitiesPointService) { }
 
   ngOnInit(): void {
@@ -19,7 +21,6 @@ export class ActivitiesPointComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
      this.activitiesPointService.deleteActivitiesPoint(id)
      .subscribe(
        res=>{

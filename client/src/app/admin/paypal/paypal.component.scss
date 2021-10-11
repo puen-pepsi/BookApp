@@ -1,0 +1,16 @@
+
+.example-spacer{
+ flex:1;
+}
+.content{
+    width: 100%;
+    display: block;
+    justify-content: center;
+}
+
+.header{
+    display:flex;
+    align-items: flex-end;
+    height: 150px;
+}
+

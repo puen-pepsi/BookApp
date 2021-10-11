@@ -66,7 +66,7 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
   }
   nextBatch(index) {
     
-      console.log(index)
+      // console.log(index)
 
   }
   ngOnInit(): void {
@@ -77,13 +77,11 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
     //console.log(this.storyParams);
    this.showStoryService.getShowStoryViews(this.viewsParams).subscribe(response =>{
                       this.listItems = response.result; 
-                      console.log(this.listItems);
                 });
 
   }
 
   GetRank(order:string){
-    console.log(order)
     //order = weekly,mothly
     let arrRank = [];
           this.listItems.slice(0,10).forEach((doc,index) => {
@@ -95,7 +93,6 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
             }
           });
       from(arrRank).pipe(distinct(e=>e.authorId)).subscribe(res => {
-        console.log(res)
         this.activitiesService.postTitle(this.activitiesType,res.authorId,res.text ).subscribe(res =>{
             this.toastr.success(`Give Rank to Author ${order}`,"Rank")
         })  

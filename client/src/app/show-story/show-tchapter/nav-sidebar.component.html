@@ -17,7 +17,7 @@
             <a  spyOn="{{list.order}}"
                 activeClass="sidebar__link--active" 
                 class="sidebar__link truncate" 
-                (click)="goTo(list.order)">{{list.chapterName | titlecase}}
+                (click)="goTo(list.order)">Chapter {{list.order}} {{list.chapterName | titlecase}}
             </a>
         </div>
         </cdk-virtual-scroll-viewport>

@@ -97,17 +97,19 @@ namespace API.Controllers
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
-            .Include(r => r.recievePoints)
-            .Include(t => t.titleAcitive)
-                .ThenInclude(t => t.TitleName)
+            // .Include(r => r.recievePoints)
+            // .Include(t => t.titleAcitive)
+            //     .ThenInclude(t => t.TitleName)
+            .Include( v => v.VipUsers)
             .SingleOrDefaultAsync(x => x.Email == loginDto.Username.ToLower());
         }else{
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
-            .Include(r => r.recievePoints)
-            .Include(t => t.titleAcitive)
-                .ThenInclude(t => t.TitleName)
+            // .Include(r => r.recievePoints)
+            // .Include(t => t.titleAcitive)
+            //     .ThenInclude(t => t.TitleName)
+            .Include( v => v.VipUsers)
             .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower()); 
         }
 
@@ -127,15 +129,27 @@ namespace API.Controllers
             .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded) return Unauthorized("Invalid Password");
-
+        //get role
+        var userRoles = await _userManager.GetRolesAsync(user);
+        if(userRoles.Contains("VIP") ){
+            DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
+            DateTime current = DateTime.Now;
+            int resualtDate = DateTime.Compare(expired, current);
+            if(resualtDate < 0){
+                var resultRemoveRole = await _userManager.RemoveFromRoleAsync(user,"VIP");
+                if (!resultRemoveRole.Succeeded) return BadRequest("Failed to remove from roles");
+            }
+        }
         return new UserDto
         {
             Username = user.UserName,
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
-            Point = user.recievePoints.Sum(a => a.Point),
-            Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
+            // Point = user.recievePoints.Sum(a => a.Point),
+            Point = user.Point,
+            // Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
+            Title = user.Title
             //Gender = user.Gender,
             //MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
 
@@ -268,18 +282,32 @@ namespace API.Controllers
         var main = await _userManager.Users
                             .Include(p => p.Photos)
                             .Include(l => l.LikedStoryByUsers)
-                            .Include(r => r.recievePoints)
-                            .Include(t => t.titleAcitive)
-                                .ThenInclude(t => t.TitleName)
+                            // .Include(r => r.recievePoints)
+                            // .Include(t => t.titleAcitive)
+                            //     .ThenInclude(t => t.TitleName)
+                            .Include( v => v.VipUsers)
                             .SingleOrDefaultAsync(x => x.Id == user.Id);
+         //get role
+        var userRoles = await _userManager.GetRolesAsync(user);
+        if(userRoles.Contains("VIP")){
+            DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
+            DateTime current = DateTime.Now;
+            int resualtDate = DateTime.Compare(expired, current);
+            if(resualtDate < 0){
+                var resultRemoveRole = await _userManager.RemoveFromRoleAsync(user,"VIP");
+                if (!resultRemoveRole.Succeeded) return BadRequest("Failed to remove from roles");
+            }
+        }
         return new UserDto
         {
             Username = user.UserName,
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = main.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
-            Point = user.recievePoints.Sum(p => p.Point),
-            Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
+            // Point = user.recievePoints.Sum(p => p.Point),
+            Point = user.Point,
+            // Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
+            Title = user.Title
             //Gender = user.Gender,
         };
         // return Ok(new AuthResponseDto { Token = token, IsAuthSuccessful = true });

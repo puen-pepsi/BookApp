@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { RolesModalComponent } from 'src/app/Modals/roles-modal/roles-modal.component';
+import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { User } from 'src/app/_models/user';
+import { ActivitiesService } from 'src/app/_services/activities.service';
 import { AdminService } from 'src/app/_services/admin.service';
 
 @Component({
@@ -13,11 +16,17 @@ export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef:BsModalRef;
   searchText;
-  constructor(private adminService:AdminService,private modalService:BsModalService) { }
+  activitiesType = ActivitiesType.GiveTitle;
+
+  constructor(private adminService:AdminService,
+              private toastr:ToastrService,
+              private activitiesService:ActivitiesService,
+              private modalService:BsModalService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
   }
+
   getUsersWithRoles(){
     this.adminService.getUserWithRoles().subscribe(users => {
       this.users = users;
@@ -71,4 +80,10 @@ export class UserManagementComponent implements OnInit {
     })
     return roles;
   }
+  giveTitle(event){
+    this.activitiesService.postTitle(this.activitiesType,event.userid,event.data ).subscribe(res =>{
+      this.toastr.success(`Give Title to Member ${event.username}`,"Give Title")
+    }) 
+  }
+
 }

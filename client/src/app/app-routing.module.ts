@@ -31,15 +31,17 @@ import { ShowSlideComponent } from './show-story/show-slide/show-slide.component
 import { HomeComponent } from './home/home.component';
 import { NewsDetailComponent } from './news/news-detail/news-detail.component';
 import { MemberListCarouselComponent } from './members/member-list-carousel/member-list-carousel.component';
-import { RecentCardComponent } from './show-story/recent-chapter/recent-card/recent-card.component';
 import { RecentChapterComponent } from './show-story/recent-chapter/recent-chapter.component';
 import { PaypalComponent } from './admin/paypal/paypal.component';
+import { Slide2ListComponent } from './admin/slide2/slide2-list/slide2-list.component';
+import { Slide2FormComponent } from './admin/slide2/slide2-form/slide2-form.component';
+import { IntoduceComponent } from './home/intoduce/intoduce.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
     path:'',
     runGuardsAndResolvers:'always',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       
       
@@ -47,41 +49,23 @@ const routes: Routes = [
       {path:'home',component:HomeComponent},
       {path:'member/edit',component:MemberProfileEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'lists',component:ListsComponent},
-      {path:'library',component:LibraryComponent,
-        // data:{breadcrumb:'My Library'}
-      },
+      {path:'library',component:LibraryComponent},
       {path:'memberlist',component:MemberListCarouselComponent},
       {path:'mystory',component:StoryComponent},
       {path:'mystory/create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'mystory/edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
-      // {path:'stories',
-      //   component:ShowstoryComponent,data:{breadcrumb:'Stories'},
-      //   children:[
-      //     {path :'',
-      //     component:ShowListComponent},
-      //     {path :':storyname',
-      //     component:ShowDetailComponent,data:{breadcrumb:{alias:'detial'}},
-      //       resolve:{showstory:ShowDetailedResolver},
-      //     },    
-      //     {path :':storyname/chapters',
-      //     component:ShowTChapterComponent
-      //     },
-      //   ]
+      {path:'messages',component:MessagesComponent,canActivate:[AuthGuard]},
+      {path:'aboutus',component:IntoduceComponent},
+      // {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
+      //     // data:{breadcrumb:'admin'}
       // },
-      {path:'messages',component:MessagesComponent,canActivate:[AuthGuard],
-          // data:{breadcrumb:'Messages'}
-        },
-      {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
-          // data:{breadcrumb:'admin'}
+      {
+        path: 'admin',
+         loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
+        // data: { breadcrumb: 'Stories' }
       },
       {path:'paypal',component:PaypalComponent},
       {path:'recent',component:RecentChapterComponent},
-      {path:'cover',component:CoverListComponent,canActivate: [AdminGuard]},
-      {path:'cover/create',component:CoverFormComponent,canActivate: [AdminGuard]},
-      {path:'cover/edit/:id',component:CoverFormComponent,canActivate: [AdminGuard]},
-      {path:'slide',component:SlideListComponent,canActivate: [AdminGuard]},
-      {path:'slide/create',component:SlideFormComponent,canActivate: [AdminGuard]},
-      {path:'slide/edit/:id',component:SlideFormComponent,canActivate: [AdminGuard]},
       {path:'slideshow',component:ShowSlideComponent},
       {path:'members',component:MemberListComponent,
         // data:{breadcrumb:'Members'}
@@ -109,7 +93,7 @@ const routes: Routes = [
       {path:'news/edit/:id',component:NewsFormComponent},
       {path:'news/:id',component:NewsDetailComponent},
       {
-        path:'chatto',component:ChattoComponent
+        path:'chatto',component:ChattoComponent,canActivate:[AuthGuard]
       },
     ]  
   },

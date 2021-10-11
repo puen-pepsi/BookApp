@@ -1,0 +1,17 @@
+<div class="top-between">
+    <h3>Banner Dialog</h3>  
+    <!-- <mat-icon >emoji_events</mat-icon> -->
+    <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+        color="warn"
+        routerLink="create">
+        Create Banner Dialog
+    </button>
+</div>
+<div *ngIf="bannerdialogService.list">
+    <div *ngFor="let row of bannerdialogService.list"  >
+    <app-banner-dialog-card [row]="row"
+            (deleteId)="deleteNews($event)" ></app-banner-dialog-card>
+    <mat-divider></mat-divider>
+    </div>
+</div>
+

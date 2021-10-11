@@ -60,13 +60,14 @@
           class="commentlist"> 
             <div class="left">
               <app-label-name
-                      [imageUrl]='comment.image'
-                      [knownAs]='comment.knownAs'
-                      [userName]='comment.userName'
-                      [pHeight]='35'
-                      [title]='comment.title'
-                      [point]='comment.point'>
-               </app-label-name>
+              (username)="gotoMember($event)"
+              [pHeight]= '35'
+              [imageUrl]='comment.image'
+              [userName]='comment.userName'
+              [knownAs]='comment.knownAs'
+              [title]='comment.title'
+              [point]='comment.point'>
+            </app-label-name>
             </div>
             <!-- <div class="right">
               <div class="righttop">

@@ -1,0 +1,25 @@
+<div class="jumbotron py-2 mb-4">
+    <h4 class="display-6 text-center">VIP User</h4>
+  </div>
+<div class="search-hero">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Search..">
+  </div>
+<div class="row">
+    <table class="table">
+        <tr>
+            <th style="width: 20% ;">Active</th>
+            <th style="width: 30%;">Description</th>
+            <th style="width: 20%;">User Name</th>
+            <th style="width: 10%;">Amount</th>
+            <th style="width: 20%;">Expired Date</th>
+            <!-- <th style="width: 10%"></th> -->
+        </tr> 
+        <tr *ngFor="let vip of  vipuser | filter:searchText">
+            <td>{{vip.activeDate | date:'short'}}</td>
+            <td>{{vip.description}}</td>
+            <td>{{vip.userName}}</td>
+            <td>{{vip.amount | currency}}</td>
+            <td>{{vip.expiredDate | date:'short'}}</td>
+        </tr>
+    </table>
+</div>

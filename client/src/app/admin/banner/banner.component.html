@@ -1,0 +1,18 @@
+<div class="top-between">
+    <h3>Banner</h3>  
+    <!-- <mat-icon >emoji_events</mat-icon> -->
+    <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+        color="warn"
+        routerLink="create">
+        Create Banner
+    </button>
+</div>
+<div *ngIf="bannerService.list">
+    <div *ngFor="let row of bannerService.list"  >
+    <app-banner-card [row]="row"
+            (deleteId)="deleteNews($event)" ></app-banner-card>
+    <mat-divider></mat-divider>
+    </div>
+</div>
+
+  

@@ -27,6 +27,14 @@ namespace API.Data
             return await _context.Reports.Include(e => e.User).ToListAsync();
         }
 
+        public async Task<IEnumerable<VipUserDto>> GetAllVipUser()
+        {
+            return await     _context.VipUsers
+                                .Include(v => v.UserVip)
+                                .ProjectTo<VipUserDto>(_mapper.ConfigurationProvider)
+                                .ToListAsync();
+        }
+
         public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users

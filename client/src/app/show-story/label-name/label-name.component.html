@@ -5,7 +5,7 @@
             [ngStyle]="{'box-shadow':rank,'height':pHeight+'px'}"
             alt="{{knownAs}}" [matTooltip]="tooltip"
             class="img-circle rounded-circle">
-            <i class="fas fa-crown fa-rotate-45" *ngIf="role.includes('Admin')"></i>         
+            <i class="fas fa-crown fa-rotate-45" *ngIf="isVIP"></i>         
     </div>
     <div class="label_name" *ngIf="knownAs && title">
         <div class="knownAs"> 

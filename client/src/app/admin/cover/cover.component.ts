@@ -20,7 +20,6 @@ export class CoverComponent implements OnInit {
     this.Cover = true;
     this.coverService.getRandom().subscribe(res => {
         this.screen = res;
-        console.log(this.screen)
     })
   }
   close(){

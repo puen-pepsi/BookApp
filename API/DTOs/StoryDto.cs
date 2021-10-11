@@ -19,6 +19,7 @@ namespace API.DTOs
         public string GetState { get; set; }
         // public string LastChapter { get; set; }
         public int Views { get; set; }
+        //user author
         public string UserName { get; set; }
         public int AuthorId { get; set; }
         public string UserPhoto { get; set; }
@@ -32,6 +33,7 @@ namespace API.DTOs
         public string Tags { get; set; }
         public string LastChapterName { get; set; }    
         public string LastChapterCreate { get; set; }    
+        public int MyProperty { get; set; }
         // public StoryDto()
         // {   
         //     Chapters = new Collection<StoryChapterDto>();

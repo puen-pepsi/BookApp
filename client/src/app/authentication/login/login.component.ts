@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public errorMessage: string = '';
   public showError: boolean;
   registerMode = false;
+  returnUrl:string;
   constructor(public accountService: AccountService ,
     private router : Router,
     private route :ActivatedRoute,
@@ -24,10 +25,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerMode=false;
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   login(){
     this.accountService.login(this.model).subscribe(response => {
-      this.router.navigateByUrl('/stories');
+      this.router.navigateByUrl(this.returnUrl);
       this.toastr.success("LogIn success","Infomation");
     },(error) => {
       this.errorMessage = error;

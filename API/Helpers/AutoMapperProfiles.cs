@@ -60,10 +60,13 @@ namespace API.Helpers
             CreateMap<Published, PublishedDto>().ReverseMap();
             CreateMap<Story, StoryDto>()
                 .ForMember(dest => dest.UserName, ex => ex.MapFrom(src => src.Author.KnownAs))
+                // .ForMember(dest => dest.Title, opt => opt.MapFrom(src => 
+                //     src.Author.titleAcitive.FirstOrDefault(x => x.IsMain).Name))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => 
-                    src.Author.titleAcitive.FirstOrDefault(x => x.IsMain).Name))
+                    src.Author.Title))
                 .ForMember(dest => dest.UserPhoto, ex => ex.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(dest => dest.Point, ex => ex.MapFrom(src => src.Author.recievePoints.Sum(x => x.Point)))
+                // .ForMember(dest => dest.Point, ex => ex.MapFrom(src => src.Author.recievePoints.Sum(x => x.Point)))
+                .ForMember(dest => dest.Point, ex => ex.MapFrom(src => src.Author.Point))
                 .ForMember(dest => dest.LastChapterName, 
                              opt => {
                                 opt.PreCondition(src => (src.Chapters.Count() > 0));
@@ -136,6 +139,9 @@ namespace API.Helpers
                 .ForMember(dest => dest.Point,ex => ex.MapFrom(src => src.Point));
             CreateMap<Report,ReportDto>()
                 .ForMember(dest => dest.UserName,ex => ex.MapFrom(src => src.User.UserName));  
+
+            CreateMap<VipUser,VipUserDto>()
+                .ForMember(dest => dest.UserName,ex => ex.MapFrom(src => src.UserVip.UserName));
         }
     }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Rank } from 'src/app/_models/rank.model';
+import { AdminService } from 'src/app/_services/admin.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { RankService } from 'src/app/_services/rank.service';
 
@@ -10,6 +11,7 @@ import { RankService } from 'src/app/_services/rank.service';
 })
 export class LabelTagComponent implements OnInit {
   @Input('imageUrl') imageUrl:string;
+  @Input('username') username:string;
   @Input('knownAs') knownAs:string;
   @Input('pHeight') pHeight:number;
   @Input('point') point:number;
@@ -20,7 +22,10 @@ export class LabelTagComponent implements OnInit {
   rank:string;
   border:number;
   tooltip:string;
+  role:string[]=[];
+  isVIP:boolean;
   constructor(private rankService : RankService,
+              private adminSevice:AdminService,
               private memberService:MembersService) {
      
    }
@@ -31,17 +36,26 @@ export class LabelTagComponent implements OnInit {
   }
   ngOnInit(): void {
     //  this.setHeight = this.pHeight;
-     this.memberService.getMemberByUserName(this.knownAs).subscribe(res => {
+     this.memberService.getMemberByUserName(this.username).subscribe(res => {
         this.imageUrl = res.photoUrl;
         this.point = res.point;
         this.title = res.title;
      })
+    //  this.adminSevice.getUserRoles(this.knownAs).subscribe(res =>{
+    //   this.role = res.roles;
+    // })
+      this.adminSevice.getUserRoles(this.username).subscribe(res =>{
+        if(res.roles){
+          this.role = res.roles;
+          this.isVIP = this.role.includes("VIP");
+        }
+      });
      this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;
         this.rank = this.CreateColor(this.point);
         this.tooltip =this.CreateRank(this.point);
      });
-     this.border = this.pHeight * 0.05;
+     this.border = this.pHeight * 0.07;
   }
   CreateRank(point:number){
     for (let i = 0; i < this.allRank.length ; i++) {

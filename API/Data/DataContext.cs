@@ -52,6 +52,10 @@ namespace API.Data
         public DbSet<TitleActive> titleActives { get; set; }
         public DbSet<PhotoScreen>  PhotoScreens { get; set; }
         public DbSet<PhotoSlide> PhotoSlides { get; set; }
+        public DbSet<PhotoSlide2> PhotoSlides2 { get; set; }
+        public DbSet<BannerChapter> BannerChapters { get; set; }
+        public DbSet<BannerDialog> BannerDialogs { get; set; }
+        public DbSet<VipUser> VipUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

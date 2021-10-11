@@ -11,10 +11,10 @@ export class StoryParams{
     // topViews = 'views'
     // topRate = 'rating'
     orderBy = 'rating';   
-    constructor(user:User){
+    constructor(user?:User){
         this.genre ='All';
         this.author='';
-        this.storyType='';
+        this.storyType='novel';
         this.language='All';
         this.search='';
     }

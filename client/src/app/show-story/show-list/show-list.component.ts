@@ -80,12 +80,9 @@ export class ShowListComponent implements OnInit,OnDestroy {
     });
   }
   pageChanged(event:any){
-    console.log(event)
     
     this.showStoryService.setStoryParams(this.storyParams);
     // this.storyParams.pageNumber++;
-    console.log(this.storyParams)
-    console.log(this.pagination)
     //this.storyParams.pageNumber = event.page;
     this.storyParams.pageNumber=event.pageIndex+1;
     this.loadStory();

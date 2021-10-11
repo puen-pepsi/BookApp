@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  imagesForSlider = [
-    {path: '../../assets/images/slice1.png'},
-    {path: '../../assets/images/slice2.png'},
-    {path: '../../assets/images/slice3.png'},
-    {path: '../../assets/images/slice4.png'},
-    {path: '../../assets/images/slice5.png'},
-    {path: '../../assets/images/slice6.png'},
-  ];
+  // imagesForSlider = [
+  //   {path: '../../assets/images/slice1.png'},
+  //   {path: '../../assets/images/slice2.png'},
+  //   {path: '../../assets/images/slice3.png'},
+  //   {path: '../../assets/images/slice4.png'},
+  //   {path: '../../assets/images/slice5.png'},
+  //   {path: '../../assets/images/slice6.png'},
+  // ];
   constructor() { }
 
   ngOnInit(): void {

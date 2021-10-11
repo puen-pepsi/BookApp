@@ -38,7 +38,6 @@ export class LibraryCardComponent implements OnInit {
       this.router.navigate(['/stories',storyname]);
     }
     onRatingChanged(rating){
-      console.log(rating);
       this.rating = rating;
     }
 

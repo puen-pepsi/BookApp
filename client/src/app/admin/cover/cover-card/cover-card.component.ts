@@ -19,10 +19,9 @@ export class CoverCardComponent implements OnInit {
   populateForm(selectedRecord: Cover) {
     this.coverService.formData = Object.assign({},selectedRecord);
     //this.StoryDetail.emit(true);
-    this.router.navigate(['cover/edit',this.coverService.formData.id]);
+    this.router.navigate(['admin/cover/edit',this.coverService.formData.id]);
   }
   deleteRow(selectedRow:Cover){
-    console.log(selectedRow.id)
     this.deleteId.emit(selectedRow.id);
   }
 }

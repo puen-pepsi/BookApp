@@ -165,24 +165,32 @@
 </tabset> -->
 
     <mat-tab-group mat-stretch-tabs #tabGroup (selectedTabChange)="tabChanged($event)">
-        <mat-tab label="Synopsis" (selectTab)="onTabActivated($event)">
+        <mat-tab label="Synopsis" >
             <mat-card-content>
                <p>{{showstory.description}}</p> 
             </mat-card-content>
         </mat-tab>
-        <mat-tab label="Table of Contents" (selectTab)="onTabActivated($event)">
+        <mat-tab label="Table of Contents" >
             <ng-template matTabContent>
                  <app-show-table-content [initContent]="initContent"></app-show-table-content>
             </ng-template>
         </mat-tab>
-        <mat-tab label="Novel Comments" (selectTab)="onTabActivated($event)">
+        <mat-tab label="Novel Comments" >
             <ng-template matTabContent>
-                <app-comment [comments]="comments"></app-comment>
+                <app-comment [comments]="comments" *ngIf="user"></app-comment>
+                <div class="memberarea">
+                    <span><mat-icon>groups</mat-icon></span>
+                    <h4 *ngIf="!user">Members’ area</h4>
+                </div>
             </ng-template>
         </mat-tab>
-        <mat-tab label="Chapter Comments" (selectTab)="onTabActivated($event)">
+        <mat-tab label="Chapter Comments" >
            <ng-template matTabContent>
-            <app-show-comment-chapter></app-show-comment-chapter>
+            <app-show-comment-chapter *ngIf="user"></app-show-comment-chapter>
+            <div class="memberarea">
+                <span><mat-icon>groups</mat-icon></span>
+                <h4 *ngIf="!user">Members’ area</h4>
+            </div>
            </ng-template>
         </mat-tab>
   </mat-tab-group>

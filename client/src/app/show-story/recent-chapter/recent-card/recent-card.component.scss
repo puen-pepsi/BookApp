@@ -17,6 +17,7 @@
     // height: 130px;
     height: 100%;
     width:100%;
+    border-radius: 5px;
     overflow: hidden;
     border:white solid 0.2px;
 }
@@ -31,6 +32,7 @@
     flex-direction: column;
     padding:0 1rem;
     width: 100%;
+    line-height: normal;
 }
 .top{
     // color: whitesmoke;
@@ -41,6 +43,8 @@ a:hover{
     cursor: pointer;
 }
 .text{
+    font-weight: 300;
+    font-size: 0.8rem;
     overflow:hidden;
     text-overflow:ellipsis;
     display:-webkit-box;
@@ -48,6 +52,7 @@ a:hover{
     -webkit-box-orient: vertical;
 
 }
+
 
 .spacer{
     flex:1;

@@ -19,7 +19,6 @@ export class ReporttopicComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
      this.reportTopicSersvice.deleteTags(id)
      .subscribe(
        res=>{

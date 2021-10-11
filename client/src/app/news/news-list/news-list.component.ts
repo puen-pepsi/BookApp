@@ -12,7 +12,7 @@ export class NewsListComponent implements OnInit {
   news : News[]=[];
   notEmptyPost = true;
   notscrolly = true;
-  take =3;
+  take =10;
   constructor(public newsService:NewsService,private router:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +22,6 @@ export class NewsListComponent implements OnInit {
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();
       this.notscrolly = false;
-      console.log("scroll");
       this.lazyLoad();
     }
   }

@@ -75,6 +75,13 @@ namespace API.Data
                             .FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<AppUser> GetUserByKnowAs(string knowas,string username)
+        {
+            return await _context.Users
+            .Where(x => x.UserName != username)
+            .SingleOrDefaultAsync(x => x.KnownAs == knowas.Trim());
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users

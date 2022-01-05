@@ -1,0 +1,38 @@
+[
+    {
+        "Id":1,
+        "Description":"Action/Adventures"
+    },
+    {
+        "Id":2,
+        "Description":"Fantasy"
+    },
+    {
+        "Id":3,
+        "Description":"Romance"
+    },
+    {
+        "Id":4,
+        "Description":"Science Fiction"
+    },
+    {
+        "Id":5,
+        "Description":"Horror"
+    },
+    {
+        "Id":6,
+        "Description":"Mystery/Thriller"
+    },
+    {
+        "Id":7,
+        "Description":"Short Story"
+    },
+    {
+        "Id":8,
+        "Description":"Fan-Fiction"
+    },
+    {
+        "Id":9,
+        "Description":"Random"
+    }
+]

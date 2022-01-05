@@ -12,11 +12,10 @@
     [useKeyboard]="true"
     [useMouseWheel]="false">
     <mat-carousel-slide
-        #matCarouselSlide 
+        #matCarouselSlide
         *ngFor="let slide of slides; let i = index"
         [image]="slide.url"
-        overlayColor="#00000040"
-        [hideOverlay]="false">
+        [hideOverlay]="true">
     <div class="desc" (click)="gotoUrl(slide.gotoUrl)">
       <h1>{{slide.title | uppercase }}</h1>
       <p>{{slide.descriptions | titlecase}}</p>
@@ -29,5 +28,5 @@
       </button> -->
     </div>
     </mat-carousel-slide>
-</mat-carousel> 
+</mat-carousel>
 

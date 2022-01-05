@@ -43,7 +43,7 @@ namespace API.Controllers
     public async Task<ActionResult> Register(RegisterDto registerDto)
     {
         if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
-
+        if(await UserExists(registerDto.KnownAs)) return BadRequest("KnownAs is taken");
         var user = _mapper.Map<AppUser>(registerDto);
 
         user.UserName = registerDto.Username.ToLower();
@@ -59,8 +59,8 @@ namespace API.Controllers
             {"email", user.Email }
         };
         var callback = QueryHelpers.AddQueryString(registerDto.ClientURI, param);
-        var message = new MailMessage(new string[] { user.Email }, "Rainobu Email Confirmation", 
-                $"Please Email Confirmation by clicking this : <a href='{callback}'>link</a>", 
+        var message = new MailMessage(new string[] { user.Email }, "Rainobu Email Verification", 
+                $"Please verify your email by clicking this : <a href='{callback}'>link</a>", 
                 null);
         await _emailSender.SendEmailAsync(message);
 
@@ -114,26 +114,35 @@ namespace API.Controllers
         }
 
         // var user = await _userManager.FindByNameAsync(userForAuthentication.Email);
-        if (user == null)
-            return BadRequest("Invalid Request");
+        if (user == null) return Unauthorized("Invalid username");
 
         if (!await _userManager.IsEmailConfirmedAsync(user))
             return Unauthorized("Email is not confirmed");
 
-        if (user == null) return Unauthorized("Invalid username");
-
-        if (!await _userManager.IsEmailConfirmedAsync(user))
-            return Unauthorized(new AuthResponseDto { ErrorMessage = "Email is not confirmed" });
+        // if (!await _userManager.IsEmailConfirmedAsync(user))
+        //     return Unauthorized(new AuthResponseDto { ErrorMessage = "Email is not confirmed" });
 
         var result = await _signInManager
             .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded) return Unauthorized("Invalid Password");
         //get role
-        var userRoles = await _userManager.GetRolesAsync(user);
-        if(userRoles.Contains("VIP") ){
-            DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
-            DateTime current = DateTime.Now;
+        // var userRoles = await _userManager.GetRolesAsync(user);
+        // if(userRoles.Contains("VIP") ){
+        //     DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
+        //     DateTime current = DateTime.Now;
+        //     int resualtDate = DateTime.Compare(expired, current);
+        //     if(resualtDate < 0){
+        //         var resultRemoveRole = await _userManager.RemoveFromRoleAsync(user,"VIP");
+        //         if (!resultRemoveRole.Succeeded) return BadRequest("Failed to remove from roles");
+        //     }
+        // }
+        var isVIP = await _userManager.IsInRoleAsync(user, "VIP");
+        if(isVIP){
+            // DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
+            DateTime expired = user.VipUsers
+                    .Any()? user.VipUsers.Max(x => x.ExpiredDate): DateTime.UtcNow.AddDays(1);
+            DateTime current = DateTime.UtcNow;
             int resualtDate = DateTime.Compare(expired, current);
             if(resualtDate < 0){
                 var resultRemoveRole = await _userManager.RemoveFromRoleAsync(user,"VIP");
@@ -146,13 +155,8 @@ namespace API.Controllers
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
-            // Point = user.recievePoints.Sum(a => a.Point),
             Point = user.Point,
-            // Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
             Title = user.Title
-            //Gender = user.Gender,
-            //MyList =  user.LikedStoryByUsers.Select(s => s.LikedStoryId).ToArray()
-
         };
     }
     
@@ -176,8 +180,8 @@ namespace API.Controllers
         var callback = QueryHelpers.AddQueryString(forgotPasswordDto.ClientURI, param);
 
         var message = new MailMessage
-        (new string[] { user.Email }, "Rainobu Reset password",   
-        $"Please Reset password by clicking this : <a href='{callback}'>link</a>",
+        (new string[] { user.Email }, "Rainobu Password Reset",   
+        $"Please reset your password by clicking this: <a href='{callback}'>link</a>",
          null);
         await _emailSender.SendEmailAsync(message);
 
@@ -288,8 +292,9 @@ namespace API.Controllers
                             .Include( v => v.VipUsers)
                             .SingleOrDefaultAsync(x => x.Id == user.Id);
          //get role
-        var userRoles = await _userManager.GetRolesAsync(user);
-        if(userRoles.Contains("VIP")){
+        // var userRoles = await _userManager.GetRolesAsync(user);
+        var isVIP = await _userManager.IsInRoleAsync(user, "VIP");
+        if(isVIP){
             DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
             DateTime current = DateTime.Now;
             int resualtDate = DateTime.Compare(expired, current);

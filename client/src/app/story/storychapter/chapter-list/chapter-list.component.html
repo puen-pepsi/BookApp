@@ -6,24 +6,24 @@
           Draft Chapter
         </mat-panel-title>
       </mat-expansion-panel-header>
-     
+
 
       <!-- <table class="table table-borderless table-dark">
-          <tbody>  
+          <tbody>
             <ng-container *ngFor="let row of storyChapterService.list  " >
               <tr *ngIf="row.publishedCreated === '0001-01-01T00:00:00'">
-                  <td>             
-          
+                  <td>
+
                 </td>
               <td>{{row.chapterName}}</td>
               <td>{{row.publishedCreated !== "0001-01-01T00:00:00"? (row.publishedCreated | date:'short' ): "Waiting to Publish"}}</td>
-             
+
               <td>
                 <button (click)="populateForm(row)" class='btn btn-primary btn-sm '><i class="fas fa-edit"></i> EDIT</button>
-                <button  [disabled]="row.publishedCreated !== '0001-01-01T00:00:00'" (click)="publish(row)" class='btn btn-success btn-sm '><i class="fas fa-check"></i> PUBLISH</button>           
+                <button  [disabled]="row.publishedCreated !== '0001-01-01T00:00:00'" (click)="publish(row)" class='btn btn-success btn-sm '><i class="fas fa-check"></i> PUBLISH</button>
               </td>
               </tr>
-            </ng-container>     
+            </ng-container>
           </tbody>
     </table> -->
     <mat-table [dataSource]="notpublish"  class="mat-elevation-z0">
@@ -46,7 +46,7 @@
           <button (click)="populateForm(item)" class='btn btn-primary btn-sm '>
             <i class="fas fa-edit"></i> EDIT</button>
           <button  [disabled]="item.publishedCreated !== '0001-01-01T00:00:00'" (click)="publish(item)" class='btn btn-success btn-sm '>
-            <i class="fas fa-check"></i> PUBLISH</button>           
+            <i class="fas fa-check"></i> PUBLISH</button>
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns2;"></mat-header-row>
@@ -94,7 +94,7 @@
             <button (click)="populateForm(item)" class='btn btn-primary btn-sm '>
               <i class="fas fa-edit"></i> EDIT</button>
             <button  [disabled]="item.publishedCreated !== '0001-01-01T00:00:00'" (click)="publish(item)" class='btn btn-success btn-sm '>
-              <i class="fas fa-check"></i> PUBLISH</button>           
+              <i class="fas fa-check"></i> PUBLISHED</button>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>

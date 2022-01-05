@@ -11,9 +11,16 @@
 .Body{
     // min-width: ;
     max-width: 756px;
-    overflow: hidden;
+    //overflow:scroll;
+    img{
+      width: auto;
+    }
+}
+:host ::ng-deep .image img {
+  width: 100%;
 }
 .mat-card{
     min-height: 100vh;
     // font-family: montserrat;
+
 }

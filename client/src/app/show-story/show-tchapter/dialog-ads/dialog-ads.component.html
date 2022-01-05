@@ -1,9 +1,12 @@
-<div mat-dialog-title class="dialog-title">
-    <h2>Advertisement Rainobu</h2>
-    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
+<div class="dialog">
+  <button mat-icon-button  aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+<!-- <div mat-dialog-title class="dialog-title">
+
+    <span></span>
+
+  </div> -->
 
 <mat-dialog-content>
   <!-- This is advertisement Rainobu -->
@@ -14,11 +17,14 @@
   <script>
   (adsbygoogle = window.adsbygoogle || []).push({});
   </script> -->
-  <div class="ads">
-    <h4>{{data.title}}</h4>
-    <img [src]= "data.url">
+  <div class="ads" *ngIf="data.descriptions"
+      innerHtml = "{{data.descriptions}}">
   </div>
+  <!-- <div *ngIf="data.descriptions.length == 0">
+    <img [src]= "data.url">
+  </div> -->
 </mat-dialog-content>
-<mat-dialog-actions>
-    
-</mat-dialog-actions>
+<!-- <mat-dialog-actions>
+
+</mat-dialog-actions> -->
+</div>

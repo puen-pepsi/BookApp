@@ -21,9 +21,9 @@ export class ShowCommentChapterComponent implements OnInit {
     this.storyName = this.route.snapshot.params.storyname;
     this.showstoryService.getStoryNameChapter(this.storyName).subscribe(res =>{
        this.ChapterList = res;
-       //console.log(this.ChapterList)
+      //  console.log(this.ChapterList)
     });
   }
-  
- 
+
+
 }

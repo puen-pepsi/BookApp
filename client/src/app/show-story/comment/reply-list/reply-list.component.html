@@ -1,7 +1,7 @@
 <ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
     <div class="ml-5 pt-0 pb-0 pl-2 pr-2" >
     <div *ngFor="let comment of (commentService.commentThread$ | async);let i =index ">
-        <div *ngIf="comment.parentId== commentId" class="commentlist">        
+        <div *ngIf="comment.parentId== commentId" class="commentlist">
             <div class="left">
               <app-label-name
                 (username)="gotoMember($event)"
@@ -11,7 +11,7 @@
                 [knownAs]='comment.knownAs'
                 [title]='comment.title'
                 [point]='comment.point'>
-            </app-label-name> 
+            </app-label-name>
             </div>
             <div class="right">
               <div id="rconners1">
@@ -25,13 +25,21 @@
                         (commentId)="addLike(comment.id)">
                     </like>
                 </button>
-                <!-- <button 
+                <!-- <button
                   mat-button color="primary"
                   (click)="togglePanel[i] = !togglePanel[i]">Reply</button> -->
                 <button *ngIf="comment.userName === commentService.user.username"
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove</button>
-                  
+                  <button *appHasRole='["Admin"]'
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove
+                </button>
+                <app-report *ngIf="comment.userName !== commentService.user.username"
+                    [reportType]="'comment'"
+                    [reportId]="comment.id"
+                    (message)="onReport($event)">
+                </app-report>
               </div>
             </div>
             <!-- <div class="created">

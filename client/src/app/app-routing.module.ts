@@ -36,6 +36,8 @@ import { PaypalComponent } from './admin/paypal/paypal.component';
 import { Slide2ListComponent } from './admin/slide2/slide2-list/slide2-list.component';
 import { Slide2FormComponent } from './admin/slide2/slide2-form/slide2-form.component';
 import { IntoduceComponent } from './home/intoduce/intoduce.component';
+import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -43,8 +45,8 @@ const routes: Routes = [
     runGuardsAndResolvers:'always',
     // canActivate: [AuthGuard],
     children: [
-      
-      
+
+
       // {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'home',component:HomeComponent},
       {path:'member/edit',component:MemberProfileEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
@@ -56,6 +58,9 @@ const routes: Routes = [
       {path:'mystory/edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'messages',component:MessagesComponent,canActivate:[AuthGuard]},
       {path:'aboutus',component:IntoduceComponent},
+      {path:'termofservice',component:TermOfServiceComponent},
+      {path:'privacypolicy',component:PrivacyPolicyComponent},
+
       // {path:'admin',component:AdminPanelComponent,canActivate: [AdminGuard],
       //     // data:{breadcrumb:'admin'}
       // },
@@ -95,7 +100,7 @@ const routes: Routes = [
       {
         path:'chatto',component:ChattoComponent,canActivate:[AuthGuard]
       },
-    ]  
+    ]
   },
   // { path: '**', redirectTo: 'authentication/login' },
 
@@ -115,8 +120,8 @@ const routes: Routes = [
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
     //scrollOffset: [0, 150], // [x, y] - adjust scroll offset
-    // scrollOffset: [0, 90], 
-    scrollOffset: [0, 64], 
+    // scrollOffset: [0, 90],
+    scrollOffset: [0, 64],
     // onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]

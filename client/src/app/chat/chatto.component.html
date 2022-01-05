@@ -3,9 +3,9 @@
     <div class="col-md-3" fxHide.lt-sm>
         <div class="listname">
             <mat-card *ngFor="let member of (presence.onlineUsers$ | async)" class="mb-1">
-            <a routerLink='/members/{{member}}' 
+            <a routerLink='/members/{{member}}'
             [queryParams]='{tab:2}'>
-                    <app-label-tag 
+                    <app-label-tag
                         [pHeight]= '35'
                         [username]=member
                         [knownAs]= member>
@@ -13,7 +13,7 @@
                 </a>
         </mat-card>
         </div>
-        
+
     </div>
     <div class="col-md-9">
         <mat-toolbar>
@@ -34,40 +34,44 @@
                 <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
                     No messages yet... say hi by using the message box below
                 </div>
-                <div *ngIf="(chatService.commentThread$ | async)?.length > 0">
-                    <cdk-virtual-scroll-viewport itemSize="60" minBufferPx="1260" maxBufferPx="2400"
+                <div *ngIf="(chatService.commentThread$ | async )?.length > 0">
+                    <cdk-virtual-scroll-viewport itemSize="60" minBufferPx="1260" maxBufferPx="6000"
                      class="container">
-                    <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)" class="commnet-items">
+                    <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)"
+                            class="commnet-items">
                         <div  *ngIf="message.userName !== user.username" class="yours messages">
                             <div class="d-flex">
                                 <div class="pic-msg">
                                   <img class="rounded-circle " src="{{message.image || './assets/user.png'}}"
-                                        alt="{{message.userName}}">  
+                                        alt="{{message.userName}}">
                                 </div>
-                                    
+
                                 <div class="message last" >
-                                            <p><b>{{message.knownAs}}</b> | {{message.content}}</p>            
+                                            <p><b>{{message.knownAs}}</b> | {{message.content}}</p>
                                             <small class="text-muted">
                                                 <span class="fa fa-clock-o">{{message.created | timeago}}</span>
                                             </small>
                                  </div>
-                                
+
                             </div>
                         </div>
                         <div *ngIf="message.userName === user.username" class="mine messages">
-                            <div class="message last">
+                            <!-- <div class="message last">
                                 <p>{{message.content}}</p>
-                            </div> 
+                            </div>  -->
+                            <div class="message">
+                                <p>{{message.content}}</p>
+                            </div>
                             <small class="text-muted">
                                 <span class="fa fa-clock-o">{{message.created | timeago}}</span>
-                            </small>  
-                        </div>  
+                            </small>
+                        </div>
                     </div>
                     </cdk-virtual-scroll-viewport>
-                </div> 
+                </div>
             </mat-card-content>
             <mat-card-footer class="card-footer">
-                <form fxLayout="row" 
+                <form fxLayout="row"
                 (ngSubmit)="onSubmit()" [formGroup]="commentForm">
                 <mat-form-field class="example-full-width">
                         <mat-label>Leave a message</mat-label>
@@ -77,7 +81,7 @@
                 <mat-action-list fxFlexAlign="start">
                     <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
                     <i class="fas fa-paper-plane fa-lg"></i></button>
-                </mat-action-list> 
+                </mat-action-list>
             </form>
             </mat-card-footer>
         </mat-card>

@@ -30,6 +30,6 @@ export class BannerDialogService {
     // this.formData
     this.http.get(this.baseUrl + 'photobannerdialog')
       .toPromise()
-      .then(res => this.list = res as Slide[]); 
+      .then(res => this.list = res as Slide[]);
   }
 }

@@ -22,17 +22,17 @@ export class RecentChapterComponent implements OnInit {
        this.chapters = res;
     })
   }
-  onScroll() {
-    if (this.notscrolly && this.notEmptyPost) {
-      // this.spinner.show();
-      this.notscrolly = false;
-      this.lazyLoad();
-    }
-  }
+  // onScroll() {
+  //   if (this.notscrolly && this.notEmptyPost) {
+  //     // this.spinner.show();
+  //     this.notscrolly = false;
+  //     this.lazyLoad();
+  //   }
+  // }
   gotoChapter(storyname:string,index){
     this.router.navigate(['/stories',storyname,'chapters'],{fragment:String(index)});
   }
-  lazyLoad(){
+  //lazyLoad(){
     //next page => page ++
     // const countContent = this.news.length;
     // this.newsService.getNewsLazyLoad(countContent,this.take).subscribe(res => {
@@ -43,7 +43,7 @@ export class RecentChapterComponent implements OnInit {
     //   this.news = this.news.concat(newpost);
     //   this.notscrolly = true;
     //});
-  }
+  //}
   gotoStory(row){
       this.router.navigate(['/stories',row.storyName]);
   }

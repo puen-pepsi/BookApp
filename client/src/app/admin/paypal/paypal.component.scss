@@ -10,7 +10,14 @@
 
 .header{
     display:flex;
-    align-items: flex-end;
-    height: 150px;
+    align-items: center;
+    height: 100px;
 }
-
+#payments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#payments .left{
+   width: 71%;
+}

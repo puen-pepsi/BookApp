@@ -7,13 +7,14 @@
           <div style="font-size: 14px;">
             <mat-form-field appearance="outline" class="searchTerm" >
               <mat-label>Search..</mat-label>
-              <input #search matInput 
+              <input #search matInput
                         (keyup.enter)="onSearch()"
                         placeholder="Search">
-                <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>    
+                <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>
             </mat-form-field>
             </div>
     </mat-toolbar>
+    <div class="item">
         <mat-card *ngFor="let row of storylist" class="mat-elevation-z0">
             <app-show-tag-card
                 (showStory)="showStory($event)"
@@ -21,12 +22,13 @@
                 [story]="row">
             </app-show-tag-card>
         </mat-card>
-      <div class="alltag p-5">
+      </div>
+      <div class="alltag mt-5">
         <mat-chip-list aria-label="tags">
           <mat-chip *ngFor="let ele of tagArray" (click)="tagchange(ele)">
               #{{ele}}
           </mat-chip>
        </mat-chip-list>
       </div>
-       
+
 

@@ -15,13 +15,15 @@ import { HasRoleDirective } from '../_directives/has-role.directive';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { GetRoleDirective } from '../_directives/get-role.directive';
-import { SanitizeHtmlPipe } from '../sanitize-html.pipe';
+import { SanitizeHtmlPipe } from 'src/pipe/sanitize-html.pipe';
+import { TruncatePipe } from 'src/pipe/truncate.pipe';
 
 @NgModule({
   declarations: [
     HasRoleDirective,
     GetRoleDirective,
     SanitizeHtmlPipe,
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { SanitizeHtmlPipe } from '../sanitize-html.pipe';
     GetRoleDirective,
     IvyCarouselModule,
     Ng2SearchPipeModule,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    TruncatePipe
   ]
 })
 export class SharedModule { }

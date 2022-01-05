@@ -14,16 +14,17 @@ import { ShowTagComponent } from './show-tag/show-tag.component';
 import { ShowViewComponent } from './show-view/show-view.component';
 import { RecentChapterComponent } from './recent-chapter/recent-chapter.component';
 import { AuthGuard } from '../_guards/auth.guard';
+import { ShowTopSpecialComponent } from './show-top-special/show-top-special.component';
 
 const routes : Routes =[
     // {path :'',component:ShowListComponent,
     //   children:[
     //     {path :':storyname',
     //         component:ShowDetailComponent,
-            
-            
+
+
     //         resolve:{showstory:ShowDetailedResolver}
-    //         },    
+    //         },
     //     {path :':storyname/chapters',
     //     component:ShowTChapterComponent
     //     },
@@ -31,7 +32,8 @@ const routes : Routes =[
     // },
     {path:'all/:storytype',component:ShowListAllComponent},
     {path:'list',component:ShowListVerticalComponent,data:{storytype:'novel'}},
-    {path:'topviews',component:ShowViewComponent},
+    // {path:'topviews',component:ShowViewComponent},
+    {path:'topviews',component:ShowTopSpecialComponent},
     {path:'recent',component:RecentChapterComponent},
     //{path:'',component:ShowStoryComponent},
     {path:'',component:ShowNovelComponent,data:{storytype:'novel'}},
@@ -39,7 +41,7 @@ const routes : Routes =[
             component:ShowDetailComponent,
             // data: { breadcrumb: (data: any) => `${data.showstory.storyName}` },
             resolve:{showstory:ShowDetailedResolver}
-    },    
+    },
     {path :':storyname/chapters',
            component:ShowTChapterComponent,canDeactivate:[SaveHistoryGuard]
     },

@@ -44,7 +44,7 @@ export class Slide2FormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.router.navigate(['slide2']);
+        this.router.navigate(['admin/slide2']);
       },
       err => {
         console.log(err);

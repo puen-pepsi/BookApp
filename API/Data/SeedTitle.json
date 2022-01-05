@@ -1,0 +1,32 @@
+[
+    {
+      "Id": 1,
+      "Name": "Citizen",
+      "Type": 6
+    },
+    {
+      "Id": 2,
+      "Name": "Dweller",
+      "Type": 7
+    },
+    {
+      "Id": 3,
+      "Name": "Swordsman",
+      "Type": 8
+    },
+    {
+      "Id": 4,
+      "Name": "Magic Swordsman",
+      "Type": 9
+    },
+    {
+      "Id": 5,
+      "Name": "Elite Chevalier: Rank#",
+      "Type": 12
+    },
+    {
+      "Id": 6,
+      "Name": "anything",
+      "Type": 13
+    }
+  ]

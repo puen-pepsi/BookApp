@@ -18,7 +18,7 @@ export class CommentService {
   private commentThreadSource = new BehaviorSubject<StoryComment[]>([]);
   commentThread$ = this.commentThreadSource.asObservable();
   user:User;
-  constructor(private http:HttpClient,private accountService:AccountService) { 
+  constructor(private http:HttpClient,private accountService:AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user =>{
       this.user = user;
     })
@@ -44,13 +44,13 @@ export class CommentService {
 
     this.hubConnection.on('NewComment', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
-        console.log(comment)
+        // console.log(comment)
         this.commentThreadSource.next([comment,...comments ])
       })
     })
     this.hubConnection.on('DeleteComment', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
-        comments = comments.filter(comments => comments.id != comment.id);     
+        comments = comments.filter(comments => comments.id != comment.id);
         this.commentThreadSource.next([...comments].reverse());
       })
     })
@@ -74,9 +74,9 @@ export class CommentService {
       this.hubConnection.stop();
     }
   }
-
+    
   addComment(data){
-    return this.http.post<StoryComment>(this.baseUrl + 'comments/' + data.storyName,data); 
+    return this.http.post<StoryComment>(this.baseUrl + 'comments/' + data.storyName,data);
   }
 
   async sendComment(storyname:string,content:string,parentId:number,chapterId:number){

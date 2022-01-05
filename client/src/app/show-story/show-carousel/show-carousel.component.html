@@ -3,16 +3,16 @@
     <h4>Hot {{storyType | titlecase}}</h4>
     <carousel #myCarousel class="carousel-html-content" style="z-index: 2;"
         [overflowCellsLimit]="'3'"
-        [cellWidth]='160'
+        [cellWidth]='150'
         [height]="'280'">
         <div *ngFor="let story of showstory"
             class="carousel-cell">
-            <app-show-card 
+            <app-show-card
                 [story]="story"
                 (refesh)="refesh($event)">
-            </app-show-card>   
+            </app-show-card>
         </div>
-       
+
     </carousel>
 </div>
 

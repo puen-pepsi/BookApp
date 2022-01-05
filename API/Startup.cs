@@ -27,7 +27,8 @@ namespace API
             _config = config;
         }
 
-        //public IConfiguration Configuration { get; }
+       // public IConfiguration Configuration { get; }
+       
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => {

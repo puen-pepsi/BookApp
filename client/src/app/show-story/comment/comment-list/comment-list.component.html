@@ -4,8 +4,8 @@
   <div  *cdkVirtualFor="let comment of (commentService.commentThread$ | async);let i =index ">
     <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
       <ng-template #first>
-        <div *ngIf="comment.parentId==null  && comment.chapterId==null " 
-          class="commentlist">         
+        <div *ngIf="comment.parentId==null  && comment.chapterId==null "
+          class="commentlist">
             <!-- <div class="created">
             </div> -->
             <div class="left ">
@@ -31,7 +31,7 @@
                       [usersLike]="comment.liked"
                       (commentId)="addLike(comment.id)"></like>
                 </button>
-                <button 
+                <button
                   mat-button color="primary"
                   (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
                 </button>
@@ -39,15 +39,19 @@
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove
                 </button>
-                <app-report 
+                <button *appHasRole='["Admin"]'
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove
+                </button>
+                <app-report *ngIf="comment.userName !== commentService.user.username"
                     [reportType]="'comment'"
                     [reportId]="comment.id"
                     (message)="onReport($event)">
                 </app-report>
               </div>
               <mat-divider></mat-divider>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div>
           <mat-action>
             <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
@@ -56,8 +60,8 @@
         </div>
       </ng-template>
       <ng-template #second>
-        <div *ngIf="comment.chapterId===commentChapter" 
-          class="commentlist"> 
+        <div *ngIf="comment.chapterId===commentChapter"
+          class="commentlist">
             <div class="left">
               <app-label-name
               (username)="gotoMember($event)"
@@ -83,13 +87,13 @@
                       [usersLike]="comment.liked"
                       (commentId)="addLike(comment.id)"></like>
                 </button>
-                <button 
+                <button
                   mat-button color="primary"
                   (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
                 <button *ngIf="comment.userName === commentService.user.username"
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove</button>
-                  <app-report 
+                  <app-report
                     [reportType]="'comment'"
                     [reportId]="comment.id"
                     (message)="onReport($event)">
@@ -108,7 +112,7 @@
                       [usersLike]="comment.liked"
                       (commentId)="addLike(comment.id)"></like>
                 </button>
-                <button 
+                <button
                   mat-button color="primary"
                   (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
                 </button>
@@ -116,13 +120,17 @@
                   mat-button (click)="onDeleteComment(comment.id)">
                   Remove
                 </button>
-                <app-report 
+                <button *appHasRole='["Admin"]'
+                  mat-button (click)="onDeleteComment(comment.id)">
+                  Remove
+                </button>
+                <app-report *ngIf="comment.userName !== commentService.user.username"
                     [reportType]="'comment'"
                     [reportId]="comment.id"
                     (message)="onReport($event)">
                 </app-report>
               </div>
-            </div> 
+            </div>
           </div>
           <div>
             <mat-action>
@@ -130,7 +138,7 @@
                 [storyName]='this.storyName'></app-reply-form>
             </mat-action>
           </div>
-          
+
       </ng-template>
   </div>
  </cdk-virtual-scroll-viewport>

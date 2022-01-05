@@ -35,10 +35,10 @@
 }
 .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(150, 197, 247, 1),rgba(2150, 197, 247, 0.2)); 
+    background-image: linear-gradient(rgba(150, 197, 247, 1),rgba(2150, 197, 247, 0.2));
     /* Set a specific height */
     height: 500px;
-  
+
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
     background-repeat: no-repeat;
@@ -51,8 +51,8 @@
 
 
 .recent{
-    height:500px;
-    overflow-y: scroll;
+    height:600px;
+    overflow: hidden;
 }
 // h4{
 //     color: #0096C7 ;
@@ -60,5 +60,5 @@
 
 .toprank{
     margin-top: 20px;
-    height: 100%;
+    //height: 100%;
 }

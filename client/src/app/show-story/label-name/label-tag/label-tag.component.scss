@@ -9,9 +9,27 @@
     display:flex;
     flex-direction: row;
 }
+// .image{
+//     padding: 2px;
+//     align-self: center;
+// }
+.image img{
+  display: block;
+}
+// .image .fa-crown{
+//   position:absolute;
+//   top:-9px;
+//   right: -9px;
+//   color:gold;
+// }
 .image{
-    padding: 2px;
-    align-self: center;
+  position: relative;
+}
+.image .fa-crown{
+  position:absolute;
+  top:-9px;
+  right: -9px;
+  color:gold;
 }
 .label_name{
     display: flex;
@@ -28,12 +46,12 @@
     color:lightslategray;
     line-height: 0;
 }
-#crown .fa-crown{
-    position: relative;
-    top:-15px;
-    left: -10px;
-    color:gold;
-}
+// #crown .fa-crown{
+//     position: relative;
+//     top:-15px;
+//     left: -10px;
+//     color:gold;
+// }
 .fa-rotate-45 {
     -webkit-transform: rotate(40deg);
     -moz-transform: rotate(40deg);

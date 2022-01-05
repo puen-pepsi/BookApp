@@ -10,3 +10,13 @@
     width: 100%;
   }
 }
+.dialog{
+  position: relative;
+  button{
+    position:absolute;
+    right:-25px;
+    top:-25px;
+    z-index: 999999;
+  }
+  overflow:visible;
+}

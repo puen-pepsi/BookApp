@@ -7,12 +7,12 @@
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
                 (click)="gotoStory(showstory.storyName)"
-                alt="{{showstory.storyName}}" 
+                alt="{{showstory.storyName}}"
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
                   <img src="./assets/images/blackcover.png"
-                    alt="{{showstory.storyName}}" 
+                    alt="{{showstory.storyName}}"
                     (click)="gotoStory(showstory.storyName)"
                     class="card-img-top">
                 <div class="text_up">
@@ -39,15 +39,15 @@
             [infiniteScrollThrottle]="50"
             (scrolled)="onScrollDown()">
           <div  *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
-              spyTarget="{{chapter.order}}" style="margin-bottom: 50px;"> 
+              spyTarget="{{chapter.order}}" style="margin-bottom: 50px;">
                 <div #content class="chapter">
                   <!-- {{chapter | json}} -->
-                  <app-show-achapter 
+                  <app-show-achapter
                       [chapter] = 'chapter'
                       [index]='i+1'
                       [fontName]='fontNow'
                       [fSize]='fSize'>
-                  </app-show-achapter> 
+                  </app-show-achapter>
                   <mat-divider></mat-divider>
                   <mat-card class="mat-elevation-z0" *ngIf="user">
                       <mat-card-content>
@@ -56,17 +56,25 @@
                         [isActive]="chapter.likeChapter.includes(user.username)"
                         (commentId)="addLikeChapter(chapter.id)"></like>
                         </button>
-                      </mat-card-content> 
+                      </mat-card-content>
                   </mat-card>
                 </div>
-                
+
                 <!-- Ads Rainobu -->
-                <div class="ads" *appGetRole='["VIP"]'>
+                <!-- <div class="ads" *appGetRole='["VIP"]'>
+                  <a href="https://www.SmarterASP.NET/index?r=rainobu">
+                    <img src="https://www.SmarterASP.NET/affiliate/728X90.gif" border="0">
+                  </a>
                   <img *ngIf="bannerchapter" src={{bannerchapter.url}}>
+              </div> -->
+                 <div *ngIf="bannerchapter" class="ads">
+                  <div  *appGetRole='["VIP"]'>
+                    <div  innerHtml="{{bannerchapter[0].descriptions}}" ></div>
+                  </div>
                 </div>
                 <!-- <h5>&copy; Rainobu</h5> -->
-          </div>  
-        </div>  
+          </div>
+        </div>
         <!-- sinner -->
     <!-- <div class="row pb-5">
       <div class="col-md-12 p-5">
@@ -86,18 +94,18 @@
       <div class="col-md-12 d-flex justify-content-center">
         <div class="text-muted h6 alert alert-secondary p-2">No more Chapter</div>
       </div>
-    </div> 
-    </div> 
+    </div>
+    </div>
     <div @slidex fxFlex="30"  fxHide.xs *ngIf="ShowTableContent" >
         <app-nav-sidebar [storyName] = 'showstory.storyName'
-             (target)="goTo($event)"       
+             (target)="goTo($event)"
             (Show)="toggletableContents($event)"></app-nav-sidebar>
     </div>
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowCommentChapter" >
       <div class="section-nav" >
         <mat-card class="header mat-elevation-z0">
-          <h5>Chapter Comment<span>&nbsp;&nbsp; {{current}}</span></h5> 
-          
+          <h5>Chapter Comment<span>&nbsp;&nbsp; {{current}}</span></h5>
+
           <div class="rightCircle">
               <mat-icon (click)="toggleCommentChapter()" >close</mat-icon>
           </div>
@@ -110,13 +118,13 @@
             <h5 *ngIf="!user">Members’ area</h5>
           </div>
         </mat-card>
-        
+
         </div>
     </div>
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowComment" >
       <div class="section-nav" >
         <!-- <div class="header">
-          <h5>Novel Comment</h5> 
+          <h5>Novel Comment</h5>
           <div class="rightCircle">
               <mat-icon (click)="toggleComment()" >close</mat-icon>
           </div>
@@ -141,13 +149,13 @@
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowSetting" >
       <div class="section-nav" >
         <!-- <div class="header">
-          <h5>Settings</h5> 
+          <h5>Settings</h5>
           <div class="rightCircle">
               <mat-icon (click)="toggleSetting()" [inline]="true">close</mat-icon>
           </div>
         </div> -->
         <mat-card class="header mat-elevation-z0">
-          <h5>Settings</h5> 
+          <h5>Settings</h5>
           <div class="rightCircle">
               <mat-icon (click)="toggleSetting()" [inline]="true">close</mat-icon>
           </div>
@@ -176,7 +184,7 @@
       </div>
     </div>
 <div>
-    <nav class="navbar" fxLayout fxHide.lt-md>
+    <nav class="navbar" fxLayout fxHide.lt-md >
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" (click)=toggletableContents()>
@@ -184,7 +192,7 @@
               <span class="link-text">Table Of Contents</span>
             </a>
           </li>
-    
+
           <li class="nav-item">
             <a class="nav-link" (click)=toggleCommentChapter()>
               <mat-icon>insert_comment</mat-icon>

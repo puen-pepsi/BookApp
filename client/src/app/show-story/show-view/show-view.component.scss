@@ -1,11 +1,21 @@
 .content {
     height: 500px;
-    overflow: auto;
-   
+    overflow-y: scroll;
+
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.content::-webkit-scrollbar {
+  display: none;
 }
 
+/* Hide scrollbar for IE, Edge and Firefox */
+.content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 .mat-list-item{
     height: 50px;
+    // word-wrap: break-word;
 }
 .mat-form-field
 {
@@ -21,7 +31,7 @@
     /* background-color:var(--highlight-toggle2); */
     font-size: 1rem;
     font-weight: bolder;
-  } 
+  }
 /* .mat-button-toggle-group{
 
 } */
@@ -33,7 +43,7 @@ div.mat-expansion-panel-body {
     flex-direction:row;
 }
 .header{
-   
+
     padding-top: 0px;
 }
 .toolbarname{

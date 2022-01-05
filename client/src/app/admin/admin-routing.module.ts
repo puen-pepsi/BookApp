@@ -19,6 +19,7 @@ import { Slide2FormComponent } from './slide2/slide2-form/slide2-form.component'
 import { Slide2ListComponent } from './slide2/slide2-list/slide2-list.component';
 import { StatusComponent } from './status/status.component';
 import { TagComponent } from './tag/tag.component';
+import { TermOfServiceComponent } from '../term-of-service/term-of-service.component';
 import { TitlenameComponent } from './titlename/titlename.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { VipUserComponent } from './vip-user/vip-user.component';

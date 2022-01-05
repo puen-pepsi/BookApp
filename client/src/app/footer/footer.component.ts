@@ -29,5 +29,5 @@ export class FooterComponent implements OnInit {
    }
    logoClick(event){
     this.router.navigate(["/"]);
-  }  
+  }
 }

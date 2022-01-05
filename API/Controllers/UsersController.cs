@@ -78,9 +78,12 @@ namespace API.Controllers
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
     {
-
-        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-
+        var username = User.GetUsername();
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+        var existKnowAs = await _unitOfWork.UserRepository.GetUserByKnowAs(memberUpdateDto.KnownAs,username);
+        if(existKnowAs != null){
+            return BadRequest("User KnowAs is taken");
+        }
         _mapper.Map(memberUpdateDto, user);
 
         _unitOfWork.UserRepository.Update(user);

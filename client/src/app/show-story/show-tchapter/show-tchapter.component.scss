@@ -1,11 +1,7 @@
 :host ::ng-deep html {
   scroll-behavior: smooth;
 }
-div.ads {
-  position: -webkit-sticky;
-  position: sticky;
-  top:64px;
-}
+
 .memberarea{
    display: flex;
     height: 80vh;
@@ -29,7 +25,7 @@ div.ads {
     margin-right: -30px;
     margin-left: -30px;
     padding-left: 30px;
-    // background-color: rgb(255, 255, 255); 
+    // background-color: rgb(255, 255, 255);
     justify-content: center;
 }
 
@@ -90,12 +86,22 @@ div.ads {
   /* margin-right:  -30px; */
   width: 100%;
   overflow-y:scroll;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   height: 100vh;
   align-self: start;
   // border-left: 1px solid rgb(218, 223, 228);
   box-sizing: border-box;
+}/* Hide scrollbar for Chrome, Safari and Opera */
+.section-nav::-webkit-scrollbar {
+  display: none;
 }
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.section-nav {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .section-nav .header{
   padding-top: 1rem;
   padding-left: 1rem;
@@ -122,16 +128,16 @@ div.ads {
   font-family: montserrat;
 
 }
-.rightCircle{ 
+.rightCircle{
   text-align: center;
   align-items: center;
-  width:20px; 
-  height:20px; 
-  border-radius:50%; 
-  color: #ccc; 
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  color: #ccc;
   font-size: 1.5rem;
   /* background-color: royalblue; */
-  /* right:0.5rem; 
+  /* right:0.5rem;
   top:-0.5rem;
   z-index: 999; */
 }
@@ -188,6 +194,10 @@ div.ads {
  padding-left: 2rem;
  padding-top: 2rem;
 }
+
+:host ::ng-deep .ads img {
+  width: 100%;
+}
 /* :host ::ng-deep body {
   color: black;
   background-color: white;
@@ -211,7 +221,7 @@ div.ads {
   // background-color: var(--bg-primary);
   background-color: #23232e;
   transition: width 600ms ease;
-  overflow: scroll;
+  //overflow: scroll;
 
 }
 
@@ -240,7 +250,7 @@ div.ads {
   filter: grayscale(100%) opacity(0.7);
   transition: var(--transition-speed);
   margin-top: 1rem;
-  
+
 }
 
 .nav-link:hover {
@@ -373,6 +383,6 @@ div.ads {
   color:white;
   width: 90%;
   word-wrap: break-word;
-  
+
 } */
 

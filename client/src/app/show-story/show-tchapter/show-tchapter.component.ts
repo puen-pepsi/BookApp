@@ -19,6 +19,7 @@ import { DialogAdsComponent } from './dialog-ads/dialog-ads.component';
 import { BannerService } from 'src/app/_services/banner.service';
 import { BannerDialogService } from 'src/app/_services/banner-dialog.service';
 import { Slide } from 'src/app/_models/slide.model';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 @Component({
   selector: 'app-show-tchapter',
   templateUrl: './show-tchapter.component.html',
@@ -58,8 +59,8 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   notscrolly = true;
   notscrollyUp = true;
   list;
-  bannerchapter:Slide;
-  bannerdialog:Slide;
+  bannerchapter:Slide[];
+  bannerdialog:Slide[];
   fontNow:string='montserrat';
   fontType = [
     {name: 'Montserrat', value: 'montserrat'},
@@ -67,7 +68,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     {name: 'Roboto',value:'roboto'}
   ]
   constructor(private showStoryService:ShowStoryService,
-              private route:ActivatedRoute, 
+              private route:ActivatedRoute,
               private router:Router,
               private spyService:ScrollSpyService,
               private accountService:AccountService,
@@ -77,23 +78,8 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
               public  dialog : MatDialog,
               private bannerService:BannerService,
               private bannerdialogService:BannerDialogService
-            ) { 
+            ) {
               this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
-              // this.router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
-              //  console.log(e);
-          
-              //   // this is fix for dynamic generated(loaded..?) content
-              //   setTimeout(() => {
-              //     if (e.position) {
-              //       this.scroller.scrollToPosition(e.position);
-              //     } else if (e.anchor) {
-              //       this.scroller.scrollToAnchor(e.anchor);
-              //     } else {
-              //       this.scroller.scrollToPosition([0, 0]);
-              //     }
-              //   },3000);
-              //  });
-
               this.sub = this.router.events.pipe(filter((e): e is Scroll => e instanceof Scroll)
               ).subscribe(e => {
                 //  console.log(e);
@@ -109,15 +95,6 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
                   setTimeout(() => {scroller.scrollToPosition([0, 0]); }, 0);
                 }
               });
-
-              // this.route.fragment.subscribe(params => {
-              //   // let id = fragment['id'];
-              //   // let guid = params['guid'];
-              //     console.log(params);
-              //     this.scroller.scrollToAnchor(params);
-              //   // console.log(`${id},${guid}`);
-              //   });
-
             }
   ngOnInit(): void {
     this.storyname = this.route.snapshot.params.storyname;
@@ -137,12 +114,15 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
           this.commentChapter = +this.current;
           //console.log(this.current)
         }
-  
+
       }
     );
-    this.bannerdialogService.getphotobannerdialogId(1).subscribe(res => {
+    this.bannerdialogService.getphotobannerdialogAll().subscribe(res => {
       this.bannerdialog = res;
-      console.log(this.bannerdialog)
+       //console.log(this.bannerdialog)
+    })
+    this.bannerService.getphotobannerAll().subscribe(res => {
+      this.bannerchapter = res;
     })
     if(this.user){
       this.AddViews(this.storyname);
@@ -155,36 +135,42 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
           }, 300000);
         })
       }
-      this.activitiesService.postTitle(this.firstRead,0,"Read Chapter").subscribe(res =>{
+      this.activitiesService.postTitle(this.firstRead,0,"ReadChapter").subscribe(res =>{
         console.log(res);
       })
+      if(!this.user.roles.includes("VIP")){
+        this.getDialog();
+      }
     }
-    setTimeout(() => {
-      this.openDialog();
-    }, 4000);
-    this.bannerService.getphotobannerId(1).subscribe(res => {
-        this.bannerchapter = res;
-        console.log(this.bannerchapter)
-    })
+    if(this.user == null){
+        // console.log(this.user.roles)
+      this.getDialog();
+    }
+
   }
   ngAfterViewInit() {
      this.scroller.scrollToAnchor(this.goto);
-     this.spyService.spy({ thresholdBottom: 50 });  
-     
+     this.spyService.spy({ thresholdBottom: 50 });
+  }
+  getDialog(){
+    setTimeout(() => {
+      this.openDialog();
+      }, 4000);
   }
   openDialog(): void {
-    const timeout = 5000;
+   // const timeout = 5000;
     const dialogRef = this.dialog.open(DialogAdsComponent, {
-      width: '80%',
+
       data: {
-              title : this.bannerdialog.title,
-              url:this.bannerdialog.url,
+              // title : this.bannerdialog.title,
+              // url:this.bannerdialog.url,
+              descriptions:this.bannerdialog[0].descriptions
             }
     });
     dialogRef.afterOpened().subscribe(_ => {
-      setTimeout(() => {
-         dialogRef.close();
-      }, timeout)
+      // setTimeout(() => {
+      //    dialogRef.close();
+      // }, timeout)
     })
   }
   // getStoryName(){
@@ -196,7 +182,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   }
   AddViews(storyname :string){
     this.showStoryService.getAddViews(storyname).subscribe(()=>{
-      
+
     })
   }
   gotoStory(storyname:string){
@@ -227,7 +213,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     this.ShowCommentChapter=false;
     this.ShowSetting = false;
     this.ShowTableContent = !this.ShowTableContent;
-   
+
   }
   toggleComment(event){
      this.ShowTableContent = false;
@@ -239,7 +225,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     }else{
       this.commentService.stopHubConnection();
     }
-   
+
   }
   toggleCommentChapter(event){
     this.ShowTableContent = false;
@@ -251,7 +237,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     }else{
       this.commentService.stopHubConnection();
     }
-   
+
   }
   toggleSetting(event){
     this.ShowComment =false;
@@ -293,7 +279,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   //     this.notscrollyUp = false;
   //     this.loadPrePost();
   //   }
-    
+
   // }
   // loadInitial(chapter:number){
   //   this.showStoryService.getChapterLazy(this.storyname,chapter-2,3).subscribe(res =>{
@@ -306,10 +292,12 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   //   });
   // }
   loadInitial(chapter:number){
-      this.showStoryService.getChapterLazy(this.storyname,chapter-1,3).subscribe(res =>{
+      var getChapter = chapter -1 < 0 ? 0 : chapter-1;
+      this.showStoryService.getChapterLazy(this.storyname,getChapter,3).subscribe(res =>{
         this.chapterList = res;
+        // console.log(this.chapterList)
         setTimeout(() => {
-          this.scroller.scrollToAnchor(String(chapter));
+          this.scroller.scrollToAnchor(String(getChapter));
         }, 3000);
       });
     }
@@ -333,7 +321,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
         setTimeout(() => {
           this.notscrollyUp = true;
         }, 1000);
-        
+
       });
     }
       // load th next 6 posts

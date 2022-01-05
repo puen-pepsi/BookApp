@@ -30,7 +30,7 @@ export class ShowStoryService {
   storyParams:StoryParams;
   viewsParams:ViewsParams ;
   list : Chapter[];
-  constructor(private http:HttpClient,private accountService:AccountService) { 
+  constructor(private http:HttpClient,private accountService:AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
         this.user = user;
         this.storyParams = new StoryParams(user);
@@ -38,9 +38,9 @@ export class ShowStoryService {
     })
     if(!this.user){
       this.storyParams = new StoryParams();
-      console.log(this.storyParams)
+      // console.log(this.storyParams)
       this.viewsParams = new ViewsParams();
-      console.log(this.viewsParams)
+      // console.log(this.viewsParams)
     }
   }
   getStoryParams(init:string){
@@ -97,7 +97,7 @@ export class ShowStoryService {
         .pipe(map(response => {
           //console.log(response);
           this.showStoryCache.set(Object.values(StoryParams).join('-'),response);
-          
+
           return response;
         }))
   }
@@ -120,7 +120,7 @@ export class ShowStoryService {
       if(showstory){
         return of(showstory);
       }
-      
+
       return this.http.get<ShowStory>(this.baseUrl+'showstory/'+storyName);
   }
   getStoryChapter(storyId:number,published:boolean){
@@ -218,5 +218,5 @@ export class ShowStoryService {
   deleteStoryLike(storyId:number){
     return this.http.delete(this.baseUrl+'likeStories/'+storyId,{});
   }
-  
+
 }

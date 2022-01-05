@@ -70,7 +70,14 @@ export class StoryFormComponent implements OnInit {
     this.response = event;
     this.storyService.formData.imageUrl = this.ResoucreUrl + this.response.dbPath;
   }
-
+  onSearchChange(searchValue: string) {  
+    var char = searchValue.slice(-1);
+    const nameRegexp: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if(nameRegexp.test(char)){
+       this.storyService.formData.storyName = '';
+       this.toastr.error("Special Characters","Invalid Characters")
+    }
+  }
   returnToStory(){
     //this.submitSuccess.emit(false);
     this.storyService.formData = new Story();

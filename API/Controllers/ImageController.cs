@@ -21,6 +21,7 @@ namespace API.Controllers
         {
             var formCollection = await Request.ReadFormAsync();
             var file = formCollection.Files.First();
+
             var folderName = Path.Combine("Resources", "images");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             if (file.Length == 0)
@@ -30,11 +31,12 @@ namespace API.Controllers
                 return await Task.FromResult(new { error = new { message = "Folder does not exist" } });
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
             var fullPath = Path.Combine(pathToSave, fileName);
-            var dbPath = Path.Combine("images", fileName);
+            var dbPath = Path.Combine("images/", fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
+            
             //string imageUrl = "https://localhost:5001/" + dbPath;
             string imageUrl = _config["ApiUrl"] + dbPath;
             return await Task.FromResult(new { Url = imageUrl });

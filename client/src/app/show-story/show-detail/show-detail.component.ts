@@ -1,12 +1,8 @@
-import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { ActivatedRoute, Router, RouterLink, Scroll } from '@angular/router';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
-import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription, Unsubscribable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Chapter } from 'src/app/_models/chapter';
 import { ShowStory } from 'src/app/_models/showstory';
 import { StoryComment } from 'src/app/_models/storycomment';
@@ -14,7 +10,6 @@ import { User } from 'src/app/_models/user';
 import { Userhistory } from 'src/app/_models/userhistory';
 import { AccountService } from 'src/app/_services/account.service';
 import { CommentService } from 'src/app/_services/comment.service';
-import { BreadcrumbService } from 'xng-breadcrumb';
 import { ShowStoryService } from '../show-story.service';
 import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-show.component';
 
@@ -73,7 +68,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   //   })
   // }
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
-    console.log(tabChangeEvent)
+    // console.log(tabChangeEvent)
       if(tabChangeEvent.tab.textLabel==="Chapter Comments" && this.comments.length === 0){
         if(!this.hubOn){
             this.commentService.createHubConnection(this.user,this.storyName);

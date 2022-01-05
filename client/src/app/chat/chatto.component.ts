@@ -2,6 +2,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ViewportScroller } from '@angular/common';
 import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, Observer } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
@@ -54,7 +55,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
       //this.loadNextPost();
      }
     }
-    private _scrollToBottom() {
+    _scrollToBottom() {
       // I use setTimeout because this has to be executed after the view has rendered the elements
       // setTimeout(
       //   () =>
@@ -69,13 +70,13 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
           bottom: 0,
           behavior: 'smooth',
         });
-      }, 1000);
+      }, 2000);
       setTimeout(() => {
         this.virtualScrollViewport.scrollTo({
           bottom: 0,
           behavior: 'smooth',
         });
-      }, 2000);
+      }, 3000);
     }
   onSubmit() {
     this.chatService.SendMessags(this.groupname,this.commentForm.value.content).then(()=>{

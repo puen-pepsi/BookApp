@@ -145,6 +145,7 @@
               <div class="mb-3">
                 <label for="storyname" class="form-label">Story Name <i class="fas fa-info-circle"></i></label>
                 <input class="form-control" placeholder="Story Name" name="storyname" #storyName="ngModel"
+                  (input)="onSearchChange($event.target.value)"
                   [(ngModel)]="storyService.formData.storyName" required />
               </div>
               <div class="mb-3">

@@ -29,11 +29,13 @@ export class LoginComponent implements OnInit {
   }
   login(){
     this.accountService.login(this.model).subscribe(response => {
+      console.log(response)
       this.router.navigateByUrl(this.returnUrl);
       this.toastr.success("LogIn success","Infomation");
     },(error) => {
       this.errorMessage = error;
       this.showError = true;
+      console.log(this.errorMessage)
     })
   }
   logout(){
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.accountService.signInWithGoogle()
     .then(res => {
       const user: SocialUser = { ...res };
-      console.log(user)
+      // console.log(user)
       const externalAuth: ExternalAuthDto = {
         provider: user.provider,
         idToken: user.idToken

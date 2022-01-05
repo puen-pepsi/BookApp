@@ -21,6 +21,7 @@ namespace API
                 var host = CreateHostBuilder(args).Build();
                 using var scope = host.Services.CreateScope();
                 var services = scope.ServiceProvider;
+                // var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 try
                 {
                     var context = services.GetRequiredService<DataContext>();
@@ -28,6 +29,7 @@ namespace API
                     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                     await context.Database.MigrateAsync();
                     await Seed.SeedUsers(userManager,roleManager);
+                    // await Seed.SeedAsync(context,loggerFactory);
                 }
                 catch(Exception ex)
                 {

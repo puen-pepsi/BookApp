@@ -1,35 +1,22 @@
-        
+
         <div class="top-between">
-          <h4>Recent Chapter</h4>  
+          <h4>Recent Chapter</h4>
           <button mat-button color="primary" routerLink="/stories/recent">More..</button>
       </div>
       <mat-divider></mat-divider>
-<div class="search-results"
-infinite-scroll
-[infiniteScrollDistance]="1"
-[infiniteScrollThrottle]="150"
-(scrolled)="onScroll()">
-<!-- <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Recent Chapter</span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-       <mat-icon>share</mat-icon>
-     </button>
-</mat-toolbar> -->
- 
+<div class="recentch">
+      <!-- infinite-scroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="150"
+      (scrolled)="onScroll()"> -->
+
     <div *ngIf="chapters">
-        <mat-card *ngFor="let row of chapters i as index" 
+        <mat-card *ngFor="let row of chapters i as index"
             (click)="gotoChapter(row.storyName,row.order)"
-            class="mat-elevation-z0"> 
+            class="mat-elevation-z0">
              <app-recent-card [row]="row"></app-recent-card>
 
-        </mat-card> 
+        </mat-card>
     </div>
 <div *ngIf = "!notEmptyPost" class="row pb-5 pt-5">
   <div class="col-md-12 d-flex justify-content-center">

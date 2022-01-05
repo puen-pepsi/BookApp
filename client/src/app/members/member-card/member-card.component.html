@@ -29,13 +29,13 @@
         </ul>
     </div>
     <mat-card-content>
-        <h6 class="card-title text-center mt-2 mb-0">
-            <span [class.is-online]="(presence.onlineUsers$ | async).includes(member.username)">
-               <i class="fa fa-user mr-2"></i> 
-            </span>
-            
-            {{member.knownAs || member.username | titlecase}}
-        </h6>
+            <h6 class="card-title text-center mt-2 mb-0">
+                <span [class.is-online]="(presence.onlineUsers$ | async).includes(member.username)">
+                   <i class="fa fa-user mr-1"></i> 
+                </span>
+                
+                {{member.knownAs || member.username | titlecase | truncate:[7, '...'] }}
+            </h6>
       <span class="card-text text-muted text-center limitText  " 
            style="width: 100px;">{{member.title || "-"}}</span>
 

@@ -6,7 +6,7 @@
         class="img-circle rounded-circle">
         <i class="fas fa-crown fa-rotate-45" *ngIf="isVIP"></i>
     </div>
-    <div class="label_name" *ngIf="knownAs && title">
+    <div class="label_name" *ngIf="knownAs">
         <div class="knownAs"><strong >{{knownAs | titlecase}}</strong>
             <span class="title">{{title}}</span>
         </div>

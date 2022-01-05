@@ -6,12 +6,12 @@
             <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
-                alt="{{showstory.storyName}}" 
+                alt="{{showstory.storyName}}"
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
                 <img src="./assets/images/blackcover.png"
-                alt="{{showstory.storyName}}" 
+                alt="{{showstory.storyName}}"
                 class="card-img-top">
                 <div class="text_up">
                     <h4>{{showstory.storyName | titlecase }}</h4>
@@ -22,16 +22,16 @@
                 </div>
             </ng-template>
         </div>
-        
-        
+
+
     </div>
      <div class="col-md-8 pt-2" >
          <div>
             <h2>{{showstory.storyName | titlecase}}</h2>
-           
+
             <hr/>
-            
-            <div fxLayout="row" fxLayoutAlign="space-between center" class="detials"> 
+
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="detials">
                 <div  >
                     <p><i class="fas fa-list-alt"></i>&nbsp;&nbsp;{{showstory.genre}}</p>
                 </div>
@@ -46,13 +46,13 @@
                 </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="3rem">
-                <div> 
-                    <!-- <img 
+                <div>
+                    <!-- <img
                         class="img-circle rounded-circle mr-2"
-                        src="{{showstory.userPhoto || './assets/user.png'}}" 
+                        src="{{showstory.userPhoto || './assets/user.png'}}"
                         alt="{{showstory.userName}}">
                     <strong>{{showstory.userName | titlecase}}</strong> -->
-                    
+
                     <app-label-name
                       (username)="gotoMember($event)"
                       [imageUrl]='showstory.userPhoto'
@@ -70,21 +70,21 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem" class="mt-4">
                 <div >
-                    <app-star-rating-show [rating]="rating" 
-                        [starCount]="starCount"  
-                        [color]="starColor" 
+                    <app-star-rating-show [rating]="rating"
+                        [starCount]="starCount"
+                        [color]="starColor"
                         [fSize] = "fSize"
                         [wSize] = "fSize"
                         (ratingUpdated)="onRatingChanged($event)"
                         [yourRate]='yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"'
                     >
                     </app-star-rating-show>
-                    
+
                 </div>
                 <div class="pt-2" >
                         <p>{{showstory.rating | number:'1.2-2'}} ({{showstory.totalRate}} ratings)</p>
                 </div>
-                <app-report 
+                <app-report
                     [reportType]="showstory.storyName"
                     [reportId]="showstory.storyId"
                     (message)="onReport($event)">
@@ -92,32 +92,33 @@
             </div>
 
             <br/>
-            <div class="pt-2" >
-                <mat-chip-list aria-label="tags">
-                    <mat-chip *ngFor="let ele of tags" (click)="goToTag(ele)">
-                        #{{ele}}
-                    </mat-chip>
-                </mat-chip-list>
-            </div>
+
         </div>
+        <div class="tag pt-2" >
+          <mat-chip-list aria-label="tags">
+              <mat-chip *ngFor="let ele of tags" (click)="goToTag(ele)">
+                  #{{ele}}
+              </mat-chip>
+          </mat-chip-list>
+      </div>
             <div fxLayout="row" fxLayoutAlign="end end" fxHide.xs
                 fxLayoutGap="0.2rem" class="buttongroup">
-               
+
                 <button *ngIf="!userHistory"
                     type="button" class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
-                <button *ngIf="userHistory" 
-                        type="button" class="btn btn-primary" 
+                <button *ngIf="userHistory"
+                        type="button" class="btn btn-primary"
                         [routerLink]="['/stories',storyName,'chapters']" fragment="{{userHistory.fregment}}">
                         <i class="fas fa-book-open"></i>&nbsp;&nbsp;Continue Reading..</button>
-                
+
                 <button *ngIf="!userLiked"
-                    type="button" class="btn btn-warning" 
+                    type="button" class="btn btn-warning"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
                 <button *ngIf="userLiked"
-                    type="button" class="btn btn-success" 
-                    (click)="addLikeStory(showstory)"> 
+                    type="button" class="btn btn-success"
+                    (click)="addLikeStory(showstory)">
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
             </div>
             <div fxLayout="column"  fxHide.gt-xs
@@ -125,21 +126,21 @@
                 <button type="button" *ngIf="!userHistory"
                     class="btn btn-primary" [routerLink]="['/stories',storyName,'chapters']">
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
-                <button *ngIf="userHistory" 
-                        type="button" class="btn btn-primary" 
+                <button *ngIf="userHistory"
+                        type="button" class="btn btn-primary"
                         [routerLink]="['/stories',storyName,'chapters']" fragment="{{userHistory.fregment}}">
                         <i class="fas fa-book-open"></i>&nbsp;&nbsp;Continue Reading..</button>
-                
+
                 <button *ngIf="!userLiked"
-                    type="button" class="btn btn-warning" 
+                    type="button" class="btn btn-warning"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
                 <button *ngIf="userLiked"
-                    type="button" class="btn btn-success" 
-                    (click)="addLikeStory(showstory)"> 
+                    type="button" class="btn btn-success"
+                    (click)="addLikeStory(showstory)">
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
             </div>
-        </div> 
+        </div>
     </div>
         <!-- <mat-divider></mat-divider> -->
 
@@ -149,25 +150,25 @@
 <!-- <tabset class="member-tabset" #storyTab>
     <tab heading='Synopsis' (selectTab)="onTabActivated($event)">
         <div class="row">
-            
+
         </div>
         <p>{{showstory.description}}</p>
     </tab>
     <tab heading='Table of Contents' (selectTab)="onTabActivated($event)">
         <app-show-table-content [initContent]="initContent"></app-show-table-content>
-    </tab> 
+    </tab>
     <tab heading='Novel Comments' (selectTab)="onTabActivated($event)">
         <app-comment [comments]="comments"></app-comment>
-    </tab> 
+    </tab>
     <tab heading='Chapter Comments' (selectTab)="onTabActivated($event)">
         <app-show-comment-chapter></app-show-comment-chapter>
-    </tab> 
+    </tab>
 </tabset> -->
 
     <mat-tab-group mat-stretch-tabs #tabGroup (selectedTabChange)="tabChanged($event)">
         <mat-tab label="Synopsis" >
             <mat-card-content>
-               <p>{{showstory.description}}</p> 
+               <p>{{showstory.description}}</p>
             </mat-card-content>
         </mat-tab>
         <mat-tab label="Table of Contents" >

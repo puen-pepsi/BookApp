@@ -20,7 +20,7 @@ export class PaypalComponent implements OnInit,AfterContentInit{
     this.accountService.currentUser$.pipe(take(1)).subscribe(user =>{
       this.user = user;
     })
-    
+
    }
   ngAfterContentInit(): void {
     render(
@@ -30,11 +30,14 @@ export class PaypalComponent implements OnInit,AfterContentInit{
           value: "5.00",
           onApprove: (details) => {
             //alert("Transaction Successfull")
-            this.toastr.success("Transaction Successfull","VIP Membership")
+            this.toastr.success(`Transaction Successfull
+                                 Please SingOut and SingIn Again`,"VIP Membership")
             //console.log(this.user)
-            //expire vip 
+            //expire vip
             this.adminService.getVipForUser(this.user.username).subscribe(res =>{
                 console.log(res)
+                this.accountService.setCurrentUser(this.user);
+                this.getExpiredUserVIP();
             })
           }
         }
@@ -43,21 +46,23 @@ export class PaypalComponent implements OnInit,AfterContentInit{
 
   ngOnInit(): void {
     //get expired date vip
+    this.getExpiredUserVIP();
+  }
+  getExpiredUserVIP(){
     this.adminService.getExpiredUser(this.user.username).subscribe(res => {
-        if(res){
-          this.expireddate = res;
-          this.days = this.getDaysRemain(res)
-          console.log(this.days)
-        }
-        
+      if(res){
+        this.expireddate = res;
+        this.days = this.getDaysRemain(res)
+        // console.log(this.days)
+      }
     })
   }
   getDaysRemain(expiredate:Date){
     var expired = new Date(expiredate);
     var currentdate = new Date();
-    console.log(expired)
-    console.log(currentdate)
+    // console.log(expired)
+    // console.log(currentdate)
     var diff = expired.getTime() - currentdate.getTime();
-    return (diff > 0? Math.ceil(diff / (1000 * 3600 * 24)):0); 
+    return (diff > 0? Math.ceil(diff / (1000 * 3600 * 24)):0);
   }
 }

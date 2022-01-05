@@ -11,7 +11,7 @@ export class HasRoleDirective {
   user:User;
   constructor(private viewContainerRef:ViewContainerRef,
       private templateRef:TemplateRef<any>,
-      private accountService:AccountService) { 
+      private accountService:AccountService) {
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
           this.user = user;
         })
@@ -27,5 +27,5 @@ export class HasRoleDirective {
     }else{
       this.viewContainerRef.clear();
     }
-  }    
+  }
 }

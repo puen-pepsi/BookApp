@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import {map} from 'rxjs/operators'
+import { map} from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
@@ -104,7 +104,7 @@ export class AccountService {
   public signOutExternal = () => {
     this._externalAuthService.signOut();
   }
- 
+
   externalLogin(externalAuth: ExternalAuthDto){
     return this.http.post(this.baseUrl+'account/externallogin',externalAuth).pipe(
       map((response:User)=>{
@@ -116,10 +116,10 @@ export class AccountService {
       })
     );
   }
-  Savesresponse(responce)    
-  {    
-    return this.http.post(this.baseUrl+'account/saveresponse',responce);    
-  }    
+  Savesresponse(responce)
+  {
+    return this.http.post(this.baseUrl+'account/saveresponse',responce);
+  }
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}${route}`;
   }

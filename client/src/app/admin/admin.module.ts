@@ -49,10 +49,11 @@ import { BannerDialogFormComponent } from './banner-dialog/banner-dialog-form/ba
 import { BannerDialogCardComponent } from './banner-dialog/banner-dialog-card/banner-dialog-card.component';
 import { BannerDialogImageComponent } from './banner-dialog/banner-dialog-form/banner-dialog-image/banner-dialog-image.component';
 import { ShowStoryModule } from '../show-story/show-story.module';
+import { TermOfServiceComponent } from '../term-of-service/term-of-service.component';
 
 
 @NgModule({
-  declarations: [    
+  declarations: [
     AdminPanelComponent,
     UserManagementComponent,
     GenreComponent,

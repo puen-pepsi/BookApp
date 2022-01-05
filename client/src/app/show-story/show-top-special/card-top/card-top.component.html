@@ -1,0 +1,11 @@
+
+<mat-card class="card mat-elevation-z0"  (click)="Goto(card.storyName)">
+    <div class="rank">
+      <h1>{{index}}</h1>
+    </div>
+  <img src="{{card.imageUrl}}" >
+  <div class="content">
+     <h5>{{card.storyName | truncate:[20, '...']}}</h5>
+     <p class="text">{{card.description}}</p>
+  </div>
+</mat-card>

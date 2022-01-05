@@ -2,9 +2,9 @@
   <div class="col-md-3">
     <!-- <div class="top-between">
       <h5>Feature {{storyParams.storyType | titlecase}}</h5>
-      
-      <div fxFlexAlign="center end">    
-          <button mat-stroked-button color="accent" (click)="resetFilters()">Reset</button>        
+
+      <div fxFlexAlign="center end">
+          <button mat-stroked-button color="accent" (click)="resetFilters()">Reset</button>
      </div>
     </div> -->
     <!-- <h3>Feature {{storyParams.storyType | titlecase}}</h3> -->
@@ -13,7 +13,7 @@
          <mat-expansion-panel class="mat-elevation-z0">
            <mat-expansion-panel-header>
              <mat-panel-title>
-               Sort
+               Sort By
              </mat-panel-title>
            </mat-expansion-panel-header>
              <mat-list>
@@ -80,34 +80,34 @@
 
             </div> -->
             <!-- <div class="top-between">
-                <h3>Novel</h3>  
+                <h3>Novel</h3>
               </div> -->
             <mat-toolbar class="custom-toolbar">
                  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
                     <mat-icon>menu</mat-icon>
                   </button>
-                  <span>Rainobu {{storyParams.storyType | titlecase}}</span>
+                  <span>Rainobu {{storyParams.storyType | titlecase}}s</span>
                   <span class="example-spacer"></span>
-                  <!-- <button mat-stroked-button color="accent" (click)="resetFilters()">Reset</button>        
+                  <!-- <button mat-stroked-button color="accent" (click)="resetFilters()">Reset</button>
                   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
                    <mat-icon>share</mat-icon>
                  </button> -->
                  <div style="font-size: 14px;">
                   <mat-form-field appearance="outline" class="searchTerm" >
                     <mat-label>Search..</mat-label>
-                    <input #search matInput 
+                    <input #search matInput
                               (keyup.enter)="onSearch()"
                               placeholder="Search">
-                      <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>    
+                      <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>
                   </mat-form-field>
                   </div>
                 <span>
                   <button mat-icon-button (click)="resetFilters()">
-                   <mat-icon>autorenew</mat-icon></button> 
-                </span> 
+                   <mat-icon>autorenew</mat-icon></button>
+                </span>
             </mat-toolbar>
         <div class="card-vertical" *ngIf="showstory">
-            <div *ngFor="let story of showstory index as i" class="mb-2">
+            <div *ngFor="let story of showstory index as i" class="item">
                 <app-show-card-all
                     [row]="story">
                 </app-show-card-all>

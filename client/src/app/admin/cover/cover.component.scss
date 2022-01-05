@@ -1,7 +1,7 @@
 .cover{
     position:absolute;
     top:0;
-    left: 0;
+    //left: 0;
     right: 0;
     width: 100vw;
     height: 100vh;
@@ -23,8 +23,14 @@ img{
     transform: translate(-50%, -50%);
     color: whitesmoke;
   }
-button{
+.fingerprint{
     position:absolute;
+    display: flex;
+    justify-content: center;
     bottom : 5%;
-    left: 50%;
+    width: 100vw;
+}
+button{
+  margin-left: auto;
+  margin-right: auto;
 }

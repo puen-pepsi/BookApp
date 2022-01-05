@@ -43,7 +43,7 @@ export class SlideFormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.router.navigate(['slide']);
+        this.router.navigate(['admin/slide']);
       },
       err => {
         console.log(err);

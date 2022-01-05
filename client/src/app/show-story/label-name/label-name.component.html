@@ -1,18 +1,16 @@
 <div class="rank" (click)="gotoMember()">
-          
-    <div class="image">    
-            <img src="{{imageUrl || './assets/user.png'}}" 
+    <div class="image">
+            <img src="{{imageUrl || './assets/user.png'}}"
             [ngStyle]="{'box-shadow':rank,'height':pHeight+'px'}"
             alt="{{knownAs}}" [matTooltip]="tooltip"
             class="img-circle rounded-circle">
-            <i class="fas fa-crown fa-rotate-45" *ngIf="isVIP"></i>         
+            <i class="fas fa-crown fa-rotate-45" *ngIf="isVIP"></i>
     </div>
-    <div class="label_name" *ngIf="knownAs && title">
-        <div class="knownAs"> 
+    <div class="label_name" *ngIf="knownAs">
+        <div class="knownAs">
             <span class="name">{{knownAs | titlecase}}</span>
             <span class="title">{{title}}</span>
         </div>
     </div>
 </div>
-
-        <!-- [ngStyle]="{'box-shadow':'0 0 0 2px '+bShadow,'max-height':'40px'}" -->
+<!-- [ngStyle]="{'box-shadow':'0 0 0 2px '+bShadow,'max-height':'40px'}" -->

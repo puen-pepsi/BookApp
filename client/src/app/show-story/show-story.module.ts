@@ -57,6 +57,8 @@ import { RecentCardComponent } from './recent-chapter/recent-card/recent-card.co
 import { ShowTopCardComponent } from './show-top-rank/show-top-card/show-top-card.component';
 import { DialogAdsComponent } from './show-tchapter/dialog-ads/dialog-ads.component';
 import { MemberAreaComponent } from './member-area/member-area.component';
+import { ShowTopSpecialComponent } from './show-top-special/show-top-special.component';
+import { CardTopComponent } from './show-top-special/card-top/card-top.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +111,8 @@ import { MemberAreaComponent } from './member-area/member-area.component';
     ShowTopCardComponent,
     DialogAdsComponent,
     MemberAreaComponent,
+    ShowTopSpecialComponent,
+    CardTopComponent,
   ],
   imports: [
     CommonModule,

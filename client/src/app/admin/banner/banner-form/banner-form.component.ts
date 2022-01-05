@@ -44,7 +44,7 @@ export class BannerFormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.router.navigate(['banner']);
+        this.router.navigate(['admin/banner']);
       },
       err => {
         console.log(err);

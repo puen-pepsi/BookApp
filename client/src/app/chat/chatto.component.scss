@@ -40,7 +40,7 @@
   height: 600px;
 }
 .commnet-items{
-  height: 55px;
+  height: 60px;
   /* border:solid 1px; */
   margin-bottom: 0.5rem;
 }
@@ -125,15 +125,23 @@ p {
   }
   
   .mine .message {
-    color: white;
+    
     margin-left: 25%;
-    padding: 8px 15px;
-    background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
-    background-attachment: fixed;
+    
+    // background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+    // background-repeat:no-repeat
+    // background-attachment: fixed;
     position: relative;
     
   }
-  
+  .mine .message p{
+    padding: 8px 15px;
+    color: white;
+    // background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+    // background-attachment: fixed;
+    border-radius:20px;
+    background-color:#0085D1;
+  }
   // .mine .message.last:before {
   //   content: "";
   //   position: absolute;

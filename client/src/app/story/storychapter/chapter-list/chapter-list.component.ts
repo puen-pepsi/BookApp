@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { Chapter } from 'src/app/_models/chapter';
 import { ActivitiesService } from 'src/app/_services/activities.service';

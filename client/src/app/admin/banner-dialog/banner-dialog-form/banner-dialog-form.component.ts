@@ -44,7 +44,7 @@ export class BannerDialogFormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.router.navigate(['bannerdialog']);
+        this.router.navigate(['admin/bannerdialog']);
       },
       err => {
         console.log(err);

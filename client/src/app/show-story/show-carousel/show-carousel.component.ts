@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit  } from '@angular/core';
 import { LazyLoadParams } from 'src/app/_models/lazyLoadParams';
 import { ShowStory } from 'src/app/_models/showstory';
 import { ShowStoryService } from '../show-story.service';
@@ -6,7 +6,7 @@ import { ShowStoryService } from '../show-story.service';
 @Component({
   selector: 'app-show-carousel',
   templateUrl: './show-carousel.component.html',
-  styleUrls: ['./show-carousel.component.scss']
+  styleUrls: ['./show-carousel.component.scss'],
 })
 export class ShowCarouselComponent implements OnInit {
   @Input() storyType:string;

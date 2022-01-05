@@ -53,7 +53,8 @@ namespace API.Controllers
                     var fullPath = Path.Combine(pathToSave, fileName);
                     //var dbPath = Path.Combine(folderName, fileName);
                     //*edit path to db
-                    var dbPath = Path.Combine("images",fileName);
+                     var dbPath = Path.Combine("images/",fileName);
+                    
                     // using (var stream = new FileStream(fullPath, FileMode.Create))
                     // {
                     //     file.CopyTo(stream);
@@ -95,9 +96,8 @@ namespace API.Controllers
                     //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var fullPath = Path.Combine(pathToSave, fileName);
-                    //var dbPath = Path.Combine(folderName, fileName);
-                    var dbPath = Path.Combine("images",fileName);
-
+                    // var dbPath = Path.Combine(folderName, fileName);
+                    var dbPath = Path.Combine("images/",fileName);
                     // using (var stream = new FileStream(fullPath, FileMode.Create))
                     // {
                     //     file.CopyTo(stream);

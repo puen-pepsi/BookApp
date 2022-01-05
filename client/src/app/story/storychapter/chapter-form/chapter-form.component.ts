@@ -30,15 +30,15 @@ export class ChapterFormComponent implements OnInit,OnChanges{
   publishCheck:boolean;
   user : User;
   baseApiUrl = environment.apiUrl;
+
   public Editor = ClassicEditor;
   public EditorData = '';
   public config = {
       toolbar: [ 'undo', 'redo','|',
                 'heading', '|',
                 '|', 'outdent', 'indent', '|','alignment:left', 'alignment:center','alignment:right' ,
-                'bold', 'italic','blockQuote','horizontalLine',
-                '|','fontsize', 'fontFamily','fontColor', 'fontBackgroundColor',
-                '|', 
+                'bold', 'italic','horizontalLine',
+                '|','fontsize', 
                 '|','imageUpload',],
                 fontFamily: {
                   options: [
@@ -59,10 +59,11 @@ export class ChapterFormComponent implements OnInit,OnChanges{
                  simpleUpload: {
                   // The URL that the images are uploaded to.
                   //uploadUrl: 'https://localhost:5001/api/Image',
-                  uploadUrl: this.baseApiUrl + 'Image', 
+
+                  uploadUrl: this.baseApiUrl + 'Image',
                   // Enable the XMLHttpRequest.withCredentials property.
                   // withCredentials: true,
-      
+
                   // // Headers sent along with the XMLHttpRequest to the upload server.
                   // headers: {
                   //     'X-CSRF-TOKEN': 'CSRF-Token',
@@ -112,14 +113,14 @@ export class ChapterFormComponent implements OnInit,OnChanges{
       // This value must be kept in sync with the language defined in webpack.config.js.
       language: 'en',
       // style:['height:500px']
-      
+
 
   };
   constructor(public storyChapterService:StorychapterService,
               public storyService:StoryService,
               // private accountService:AccountService,
               private activitiesService:ActivitiesService,
-              private toastr:ToastrService) { 
+              private toastr:ToastrService) {
                 // this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
               }
 

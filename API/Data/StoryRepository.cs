@@ -187,7 +187,9 @@ namespace API.Data
             }
             if(storyParams.Search !=""){
                 query = query.Where(s => s.StoryName.ToLower().Contains(storyParams.Search) 
-                    || s.Tags.ToLower().Contains(storyParams.Search.ToLower()));
+                    || s.Tags.ToLower().Contains(storyParams.Search.ToLower())
+                    || s.Genre.ToLower().Contains(storyParams.Search.ToLower())
+                    || s.Author.KnownAs.ToLower().Contains(storyParams.Search.ToLower()));
             }
             // query = query.Where(a => a.UserName == storyParams.Author);
             
@@ -367,6 +369,8 @@ namespace API.Data
                         StoryId = s.Id,
                         StoryName = s.StoryName,
                         AuthorId = s.AuthorId,
+                        ImageUrl = s.ImageUrl,
+                        Description = s.Description,
                         AuthorName = s.Author.UserName,
                         Views = s.ViewCount.Where(v => v.RateCreated > query).Count(),
                     })

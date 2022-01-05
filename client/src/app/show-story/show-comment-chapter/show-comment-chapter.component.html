@@ -4,15 +4,15 @@
         <mat-expansion-panel-header>
         <mat-panel-title>
             <mat-icon class="material-icons-outlined">comment</mat-icon>
-            &nbsp;&nbsp; Chapter. {{chapter.order}}     
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{chapter.chapterName | titlecase}}     
+            &nbsp;&nbsp; Chapter. {{chapter.order}}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{chapter.chapterName | titlecase}}
         </mat-panel-title>
         <!-- <mat-panel-description>
            {{chapter.chapterName | titlecase}}
         </mat-panel-description> -->
         </mat-expansion-panel-header>
         <app-comment [comments]="comments"
-                    [commentChapter]="chapter.id"></app-comment>
+                    [commentChapter]="chapter.order"></app-comment>
     </mat-expansion-panel>
   </div>
 </mat-accordion>

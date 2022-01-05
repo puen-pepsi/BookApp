@@ -45,7 +45,7 @@ export class CoverFormComponent implements OnInit {
         // console.log(res);
         // this.photoSevice.upload()
         this.resetForm(form);
-        this.router.navigate(['cover']);
+        this.router.navigate(['admin/cover']);
       },
       err => {
         console.log(err);

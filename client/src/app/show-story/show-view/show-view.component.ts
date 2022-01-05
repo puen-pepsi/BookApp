@@ -1,10 +1,9 @@
-import { C } from '@angular/cdk/keycodes';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { from, of } from 'rxjs';
-import { distinct, filter, map, pairwise, throttleTime } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { distinct } from 'rxjs/operators';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { ShowStoryViews } from 'src/app/_models/showstoryviews';
 import { ViewsParams } from 'src/app/_models/viewsparams';
@@ -17,11 +16,9 @@ export interface setRank{
 @Component({
   selector: 'app-show-view',
   templateUrl: './show-view.component.html',
-  styleUrls: ['./show-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./show-view.component.scss']
 })
-export class ShowViewComponent implements OnInit,AfterViewInit {
+export class ShowViewComponent implements OnInit {
   @ViewChild('scroller') scroller: CdkVirtualScrollViewport;
   activitiesType = ActivitiesType.Ranking;
   listItems:ShowStoryViews[];
@@ -37,24 +34,10 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
               private activitiesService : ActivitiesService,
               private toastr:ToastrService,
               private router: Router,
-              private ngZone: NgZone) { 
+              private ngZone: NgZone) {
     this.viewsParams = this.showStoryService.getViewsParams();
   }
-  ngAfterViewInit(): void {
-    // this.scroller.elementScrolled().pipe(
-    //   map(() => this.scroller.measureScrollOffset('bottom')),
-    //   pairwise(),
-    //   filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
-    //   throttleTime(200)
-    // ).subscribe(() => {
-    //   this.ngZone.run(() => {
-    //     console.log("fetch");
-    //     this.fetchMore();
-    //   });
-    // }
-    // );
-    
-  }
+
   open(event){
     this.router.navigate(['/stories',event.storyName]);
   }
@@ -62,10 +45,10 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
     console.log(event)
   }
   gotoMember(event){
-    
+
   }
   nextBatch(index) {
-    
+
       // console.log(index)
 
   }
@@ -76,7 +59,7 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
   this.showStoryService.setViewsParams(this.viewsParams);
     //console.log(this.storyParams);
    this.showStoryService.getShowStoryViews(this.viewsParams).subscribe(response =>{
-                      this.listItems = response.result; 
+                      this.listItems = response.result;
                 });
 
   }
@@ -95,7 +78,7 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
       from(arrRank).pipe(distinct(e=>e.authorId)).subscribe(res => {
         this.activitiesService.postTitle(this.activitiesType,res.authorId,res.text ).subscribe(res =>{
             this.toastr.success(`Give Rank to Author ${order}`,"Rank")
-        })  
+        })
       })
   }
   // fetchMore(): void {
@@ -115,5 +98,5 @@ export class ShowViewComponent implements OnInit,AfterViewInit {
   //   this.listItems = [...this.listItems, ...newItems];
 
   // }
-  
+
 }

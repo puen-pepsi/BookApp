@@ -107,7 +107,7 @@ namespace API.Controllers
             var resultx = await _userManager.UpdateAsync(user);
             if(!resultx.Succeeded) return BadRequest("Failed to add VIP details");
 
-            return Ok(vipuser);
+            return Ok(user);
         }
         [HttpGet("get-vip-expired/{username}")]
         public async Task<ActionResult> getVipExpiredDate(string username){

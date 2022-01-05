@@ -59,7 +59,6 @@ import { PhotoEditorSingleComponent } from './members/photo-editor-single/photo-
 import { LabelTagComponent } from './show-story/label-name/label-tag/label-tag.component';
 import { MemberPointComponent } from './members/member-point/member-point.component';
 import { TitleEditorComponent } from './members/title-editor/title-editor.component';
-import { NullWithDefaultPipe } from './null-with-default.pipe';
 import { IntoduceComponent } from './home/intoduce/intoduce.component';
 import { NewsCarouselComponent } from './news/news-carousel/news-carousel.component';
 import { NewsDetailComponent } from './news/news-detail/news-detail.component';
@@ -68,6 +67,10 @@ import { PaypalComponent } from './admin/paypal/paypal.component';
 import { NewsSmallCardComponent } from './news/news-small-card/news-small-card.component';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 import { AdminModule } from './admin/admin.module';
+import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
+import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,7 +115,6 @@ import { AdminModule } from './admin/admin.module';
     LabelTagComponent,
     MemberPointComponent,
     TitleEditorComponent,
-    NullWithDefaultPipe,
     IntoduceComponent,
     NewsCarouselComponent,
     NewsDetailComponent,
@@ -120,6 +122,9 @@ import { AdminModule } from './admin/admin.module';
     PaypalComponent,
     NewsSmallCardComponent,
     HomeCarouselComponent,
+    NullWithDefaultPipe,
+    TermOfServiceComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -147,6 +152,11 @@ import { AdminModule } from './admin/admin.module';
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorHandlerService,
+    //   multi: true
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AppHttpInterceptor,
     //   multi: true
     // },
     {

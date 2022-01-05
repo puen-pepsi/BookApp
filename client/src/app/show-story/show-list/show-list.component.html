@@ -12,35 +12,35 @@
 </div>
 <div class="top-between">
     <h3>Feature Novel</h3>
-    
-    <div fxFlexAlign="center end">    
+
+    <div fxFlexAlign="center end">
 
         <button mat-stroked-button color="primary" routerLink='all'>All</button>
    </div>
   </div> -->
   <div class="top-between">
     <div  fxLayout="row" fxLayoutAlign="start center">
-        <h3>Feature {{storyParams.storyType | titlecase}}</h3> 
-        <button mat-icon-button 
+        <h3>Featured {{storyParams.storyType | titlecase}}s</h3>
+        <button mat-icon-button
               matTooltip="All"
               [routerLink]="['all',storyParams.storyType]" >
               <mat-icon>list</mat-icon>
-            </button>       
+            </button>
     </div>
      <span class="spacer"></span>
-    
+
       <div  style="font-size: 15px;">
       <mat-form-field appearance="outline" class="searchTerm">
         <mat-label>Search..</mat-label>
-         <input #search matInput 
+         <input #search matInput
                   (keyup.enter)="onSearch()"
                   placeholder="Search">
-          <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>    
+          <mat-icon matSuffix (click)="onSearch()" style="cursor: pointer;">search</mat-icon>
       </mat-form-field>
         <button mat-icon-button  (click)="resetFilters()" matTooltip="Reset">
          <mat-icon>autorenew</mat-icon>
-        </button> 
-        
+        </button>
+
       </div>
   </div>
 <div class="row" *ngIf="showstory">
@@ -50,7 +50,7 @@
                 <mat-expansion-panel class="mat-elevation-z0">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      Sort
+                      Sort By
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                     <mat-list>
@@ -107,24 +107,24 @@
               </mat-accordion>
         </ng-container>
     </div>
-    
-    <!-- <div class="col-md-9 mt-2 mb-2" fxLayout="row warp" fxLayout.lt-sm="column" 
+
+    <!-- <div class="col-md-9 mt-2 mb-2" fxLayout="row warp" fxLayout.lt-sm="column"
         fxLayoutGap.gt-sm="10px" > -->
         <div class="content col-md-9 mt-2 mb-2" >
-          
+
         <!-- <div class="previos">
             <button mat-fab color="second" (click)="pagePrevios()">
                 <mat-icon>arrow_back</mat-icon>
             </button>
         </div> -->
         <div *ngFor="let story of showstory index as i" class="item" >
-            <app-show-card 
+            <app-show-card
                 [story]="story"
-                [index]="i" 
-                [page]="pagination.currentPage" 
+                [index]="i"
+                [page]="pagination.currentPage"
                 [pagesize]="storyParams.pageSize"
                 (refesh)="refesh($event)">
-            </app-show-card>    
+            </app-show-card>
         </div>
         <!-- <div class="next">
             <button mat-fab color="second" (click)="pageNext()">
@@ -134,7 +134,7 @@
     </div>
 </div>
 <mat-paginator *ngIf="pagination"
-    [length]="pagination?.totalItems" 
+    [length]="pagination?.totalItems"
     [pageSizeOptions]="[10]"
     [showFirstLastButtons]="true"
     [pageIndex]="pagination.currentPage-1"
@@ -142,23 +142,23 @@
 </mat-paginator>
 <!-- <p>{{pagination | json}}</p> -->
 <!-- <div class="d-flex justify-content-center" *ngIf="pagination">
-    <pagination 
-        [boundaryLinks]="true" 
+    <pagination
+        [boundaryLinks]="true"
         [totalItems]="pagination?.totalItems"
         [itemsPerPage]="pagination?.itemsPerPage"
         [(ngModel)]="pagination.currentPage"
         (pageChanged)="pageChanged($event)"
-        previousText="&lsaquo;" 
-        nextText="&rsaquo;" 
-        firstText="&laquo;" 
-        lastText="&raquo;"> 
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;">
     </pagination>
 </div> -->
 <!-- <div class="row mt-4">
     <div class="col-md-6">
         <div class="top-between">
-            <h3>Top Rankers</h3>  
-            <button mat-button *appHasRole ='["Admin", "Moderator"]' 
+            <h3>Top Rankers</h3>
+            <button mat-button *appHasRole ='["Admin", "Moderator"]'
                 color="warn"
                 (click)="GetRank(viewsParams.orderByViews)">
                 Set Rank
@@ -168,7 +168,7 @@
     </div>
    <div class="col-md-6">
        <div class="top-between">
-         <h3>Random Picks</h3>  
+         <h3>Random Picks</h3>
          <button mat-fab color="warn" (click)="randomChild()">Go!</button>
        </div>
        <mat-divider></mat-divider>

@@ -12,6 +12,7 @@ import { CustomEncoder } from './custom-encoder';
 import { ForgotPasswordDto } from '../_models/forgotpasswordDto';
 import { ResetPasswordDto } from '../_models/ResetPasswordDto';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +24,8 @@ export class AccountService {
   clearTimeout: any;
   constructor(private http: HttpClient,
             private _externalAuthService: SocialAuthService,
-            private presence:PresenceService) { }
+            private presence:PresenceService,
+            private router : Router) { }
 
   login(model:any){
     return this.http.post(this.baseUrl + 'account/login',model).pipe(
@@ -61,24 +63,25 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
       localStorage.setItem('user',JSON.stringify(user));
       this.currentUserSource.next(user);
-      // let date = new Date();
-      // let expirationDate = this.helper.getTokenExpirationDate(user.token);
-      // var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
-      //  this.autoLogout(secondBetweenTwoDate);
+      let date = new Date();
+      let expirationDate = this.helper.getTokenExpirationDate(user.token);
+      var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
+      this.autoLogout(secondBetweenTwoDate);
   }
-  // autoLogout(expirationDate: number) {
-  //   console.log(expirationDate);
-  //   this.clearTimeout = setTimeout(() => {
-  //     this.logout();
-  //   }, expirationDate *1000);
-  // }
+  autoLogout(expirationDate: number) {
+    //console.log(expirationDate);
+    this.clearTimeout = setTimeout(() => {
+      this.logout();
+    }, expirationDate *1000);
+  }
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
-    // if (this.clearTimeout) {
-    //   clearTimeout(this.clearTimeout);
-    // }
+    this.router.navigateByUrl('/');
+    if (this.clearTimeout) {
+      clearTimeout(this.clearTimeout);
+    }
   }
   public forgotPassword = (route: string, body: ForgotPasswordDto) => {
     return this.http.post(this.createCompleteRoute(route, this.baseUrl), body);

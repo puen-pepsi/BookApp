@@ -95,7 +95,7 @@ const routes: Routes = [
       },
       {path:'news',component:NewsListComponent},
       {path:'news/create',component:NewsFormComponent,data:{type:'create'}},
-      {path:'news/edit/:id',component:NewsFormComponent},
+      {path:'news/edit/:id',component:NewsFormComponent,data:{type:'edit'}},
       {path:'news/:id',component:NewsDetailComponent},
       {
         path:'chatto',component:ChattoComponent,canActivate:[AuthGuard]

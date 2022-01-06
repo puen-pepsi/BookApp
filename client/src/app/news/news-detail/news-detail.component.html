@@ -13,12 +13,13 @@
         </mat-card-header>
         <img mat-card-image src="{{news.pictureUrl || './assets/images/blackcover.png'}}" alt="{{news.topic}}" >
         <mat-card-content>
-                <p class="text">{{news.content}}</p> 
+                <!-- <p class="text">{{news.content}}</p> -->
+                <div [innerHtml] = "news.content | sanitizeHtml"></div>
                 <div>
                     <small>{{news.newsCreated | date }}</small>
                     <span> | By {{news.userName}}</span>
                 </div>
             </mat-card-content>
     </mat-card>
-    
+
 </div>

@@ -2,13 +2,14 @@
     <div class="main">
         <div class="image">
             <img src="{{row.pictureUrl || './assets/images/blackcover.png'}}"
-                alt="{{row.topic}}" 
+                alt="{{row.topic}}"
                 class="img">
         </div>
         <div class="body">
             <div class="top">
                <h6><b>{{row.topic | titlecase}}</b></h6>
-                <p class="text">{{row.content}}</p> 
+                <!-- <p class="text">{{row.content}}</p> -->
+                <div [innerHtml] = "row.content | sanitizeHtml" class="text"></div>
             </div>
             <div class="create text-muted">
                 <div>
@@ -21,17 +22,17 @@
                         </button> -->
                       <a routerLink="/news/{{row.id}}">Read</a>
                       <div *appHasRole='["Admin","Moderator"]'>
-                        <button mat-stroked-button 
+                        <button mat-stroked-button
                             (click)="populateForm(row)"
                             color="primary"
                             >Edit</button>
-                          <button mat-stroked-button 
+                          <button mat-stroked-button
                               (click)="deleteRow(row)"
                               color="warn"
                             >Delete</button>
                       </div>
                 </div>
-                
+
             </div>
         </div>
 

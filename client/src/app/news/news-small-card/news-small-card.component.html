@@ -2,13 +2,14 @@
     <div class="main">
         <div class="image">
             <img src="{{row.pictureUrl || './assets/images/blackcover.png'}}"
-                alt="{{row.topic}}" 
+                alt="{{row.topic}}"
                 class="img">
         </div>
         <div class="body">
             <div class="top">
                <span class="title">{{row.topic | titlecase}}</span>
-                <p class="text">{{row.content}}</p> 
+                <!-- <p class="text">{{row.content}}</p> -->
+                <div [innerHtml] = "row.content | sanitizeHtml"></div>
             </div>
             <div class="create text-muted">
                 <div>
@@ -16,10 +17,10 @@
                     <small>{{row.newsCreated | timeago}}</small>
                 </div>
                 <!-- <div fxLayout="row" fxLayoutAlign=" end">
-                      
+
                       <a routerLink="/news/{{row.id}}">Read</a>
                 </div>  -->
-                
+
             </div>
         </div>
 

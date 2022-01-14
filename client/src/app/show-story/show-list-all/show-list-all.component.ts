@@ -33,7 +33,7 @@ export class ShowListAllComponent implements OnInit {
   constructor(private showStoryService:ShowStoryService,
                private spinner: NgxSpinnerService,
               private route:ActivatedRoute
-             ) { 
+             ) {
               this.storyParams = this.showStoryService.getStoryParams(this.route.snapshot.params.storytype);
               // this.storyParams.storyType = this.route.snapshot.params.storytype;
   }
@@ -65,6 +65,7 @@ export class ShowListAllComponent implements OnInit {
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
+      console.log(this.showstory);
     });
   }
   lazyLoad(){
@@ -78,6 +79,7 @@ export class ShowListAllComponent implements OnInit {
       this.showstory = this.showstory.concat(newpost);
       this.pagination = response.pagination;
       this.notscrolly = true;
+      console.log(this.showstory);
     });
     // this.lazyloadParams.currentItem = this.showstory.length;
     // this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(data => {
@@ -126,7 +128,7 @@ export class ShowListAllComponent implements OnInit {
   }
   // pageChanged(event:any){
   //   console.log(event)
-    
+
   //   this.showStoryService.setStoryParams(this.storyParams);
   //   // this.storyParams.pageNumber++;
   //   console.log(this.storyParams)
@@ -161,5 +163,5 @@ export class ShowListAllComponent implements OnInit {
     this.loadStory();
   }
 
- 
+
 }

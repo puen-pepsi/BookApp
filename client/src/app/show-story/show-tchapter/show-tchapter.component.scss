@@ -1,7 +1,9 @@
 :host ::ng-deep html {
   scroll-behavior: smooth;
 }
-
+.search-results{
+  height: 100%;
+}
 .memberarea{
    display: flex;
     height: 80vh;

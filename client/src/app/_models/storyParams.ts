@@ -10,7 +10,7 @@ export class StoryParams{
     pageSize = 10;
     // topViews = 'views'
     // topRate = 'rating'
-    orderBy = 'rating';   
+    orderBy = 'rating';
     constructor(user?:User){
         this.genre ='All';
         this.author='';

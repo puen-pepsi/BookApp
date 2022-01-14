@@ -71,17 +71,7 @@
  </ng-container>
   </div>
   <div class="col-md-9">
-    <div class="search-results"
-            infinite-scroll
-            [infiniteScrollDistance]="1"
-            [infiniteScrollThrottle]="150"
-            (scrolled)="onScroll()">
-            <!-- <div class="bgHeader">
-
-            </div> -->
-            <!-- <div class="top-between">
-                <h3>Novel</h3>
-              </div> -->
+    <div >
             <mat-toolbar class="custom-toolbar">
                  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
                     <mat-icon>menu</mat-icon>
@@ -106,6 +96,11 @@
                    <mat-icon>autorenew</mat-icon></button>
                 </span>
             </mat-toolbar>
+      <div class="search-results"
+        infinite-scroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="150"
+        (scrolled)="onScroll()">
         <div class="card-vertical" *ngIf="showstory">
             <div *ngFor="let story of showstory index as i" class="item">
                 <app-show-card-all
@@ -114,6 +109,8 @@
                 <!-- <mat-divider></mat-divider> -->
             </div>
         </div>
+      </div>
+
 </div>
 <div *ngIf = "!notEmptyPost" class="row pb-5 pt-5">
     <div class="col-md-12 d-flex justify-content-center">

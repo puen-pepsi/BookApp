@@ -1,8 +1,6 @@
-import { ɵangular_packages_common_http_http_h } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Chapter } from 'src/app/_models/chapter';
 import { ChapterList } from 'src/app/_models/chapterlist';
 import { ShowStoryService } from '../show-story.service';
 
@@ -20,7 +18,7 @@ export class ShowTableContentComponent implements OnInit {
   constructor(private showstoryService:ShowStoryService,private spinner: NgxSpinnerService,
     private route:ActivatedRoute,
     private router:Router) { }
-   
+
   ngOnInit(): void {
     this.storyName = this.route.snapshot.params.storyname;
     this.loadInitContent();

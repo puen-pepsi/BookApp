@@ -28,7 +28,6 @@ import { LikeComponent } from './Like/like.component';
 import { ShowCommentChapterComponent } from './show-comment-chapter/show-comment-chapter.component';
 import { ShowTableContentComponent } from './show-table-content/show-table-content.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReportComponent } from './report/report.component';
 import { DialogComponent } from './report/dialog/dialog.component';
@@ -125,7 +124,6 @@ import { CardTopComponent } from './show-top-special/card-top/card-top.component
     ScrollSpyModule,
     NgbModule,
     ScrollingModule,
-    InfiniteScrollModule,
     NgxSpinnerModule,
   ],
   exports: [

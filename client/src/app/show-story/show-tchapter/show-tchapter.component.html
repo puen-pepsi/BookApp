@@ -34,9 +34,8 @@
         </mat-card>
         <div class="search-results"
             infinite-scroll
-            [infiniteScrollDistance]="0.5"
-            [infiniteScrollUpDistance]="1.5"
-            [infiniteScrollThrottle]="50"
+            [infiniteScrollDistance]="1"
+            [infiniteScrollThrottle]="150"
             (scrolled)="onScrollDown()">
           <div  *ngFor="let chapter of chapterList index as i" [attr.Id]='i+1'
               spyTarget="{{chapter.order}}" style="margin-bottom: 50px;">

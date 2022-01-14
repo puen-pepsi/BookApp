@@ -17,6 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { GetRoleDirective } from '../_directives/get-role.directive';
 import { SanitizeHtmlPipe } from 'src/pipe/sanitize-html.pipe';
 import { TruncatePipe } from 'src/pipe/truncate.pipe';
+import { InfiniteScrollModule} from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { TruncatePipe } from 'src/pipe/truncate.pipe';
     ScrollSpyModule,
     IvyCarouselModule,
     Ng2SearchPipeModule,
+    InfiniteScrollModule
   ],
   exports:[
     BsDropdownModule,
@@ -60,7 +63,8 @@ import { TruncatePipe } from 'src/pipe/truncate.pipe';
     IvyCarouselModule,
     Ng2SearchPipeModule,
     SanitizeHtmlPipe,
-    TruncatePipe
+    TruncatePipe,
+    InfiniteScrollModule
   ]
 })
 export class SharedModule { }

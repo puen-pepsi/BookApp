@@ -1,5 +1,5 @@
 <!-- HTML content -->
-<div class="demo">
+<div class="demo" *ngIf="showstory">
     <h4>Hot {{storyType | titlecase}}</h4>
     <carousel #myCarousel class="carousel-html-content" style="z-index: 2;"
         [overflowCellsLimit]="'3'"

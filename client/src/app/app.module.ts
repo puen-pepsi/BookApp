@@ -45,7 +45,6 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
 import { FooterComponent } from './footer/footer.component';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ChattoComponent } from './chat/chatto.component';
 import { NewsComponent } from './news/news.component';
@@ -70,7 +69,7 @@ import { AdminModule } from './admin/admin.module';
 import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
+// import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,9 +140,8 @@ import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
     ShowStoryModule,
     AuthenticationModule,
     SocialLoginModule,
-    InfiniteScrollModule,
     ScrollingModule,
-    AdminModule
+    AdminModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

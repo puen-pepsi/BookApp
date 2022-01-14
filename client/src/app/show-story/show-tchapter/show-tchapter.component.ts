@@ -139,6 +139,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
         console.log(res);
       })
       if(!this.user.roles.includes("VIP")){
+        if(this.bannerdialog != undefined || this.bannerdialog != null)
         this.getDialog();
       }
     }
@@ -153,25 +154,28 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
      this.spyService.spy({ thresholdBottom: 50 });
   }
   getDialog(){
-    setTimeout(() => {
-      this.openDialog();
-      }, 4000);
+    if(this.bannerdialog != null || this.bannerdialog != undefined){
+      setTimeout(() => {
+        this.openDialog();
+        }, 4000);
+    }
   }
   openDialog(): void {
    // const timeout = 5000;
-    const dialogRef = this.dialog.open(DialogAdsComponent, {
+     const dialogRef = this.dialog.open(DialogAdsComponent, {
 
       data: {
               // title : this.bannerdialog.title,
               // url:this.bannerdialog.url,
               descriptions:this.bannerdialog[0].descriptions
             }
-    });
-    dialogRef.afterOpened().subscribe(_ => {
-      // setTimeout(() => {
-      //    dialogRef.close();
-      // }, timeout)
-    })
+      });
+      dialogRef.afterOpened().subscribe(_ => {
+        // setTimeout(() => {
+        //    dialogRef.close();
+        // }, timeout)
+      })
+
   }
   // getStoryName(){
   //   return this.route.snapshot.params.storyname;
@@ -268,6 +272,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   }
   onScrollDown() {
     if (this.notscrolly && this.notEmptyPost) {
+      console.log("scrolldown");
       // this.spinner.show();
       this.notscrolly = false;
       this.loadNextPost();
@@ -295,7 +300,6 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
       var getChapter = chapter -1 < 0 ? 0 : chapter-1;
       this.showStoryService.getChapterLazy(this.storyname,getChapter,3).subscribe(res =>{
         this.chapterList = res;
-        // console.log(this.chapterList)
         setTimeout(() => {
           this.scroller.scrollToAnchor(String(getChapter));
         }, 3000);
@@ -337,6 +341,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
       }
       // add newly fetched posts to the existing post
       this.chapterList = this.chapterList.concat(newPost);
+      console.log(this.chapterList)
       this.notscrolly = true;
     });
   }

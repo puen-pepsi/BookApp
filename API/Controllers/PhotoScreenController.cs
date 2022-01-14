@@ -27,6 +27,7 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoScreen>> RandomScreen()
         {
             var getall = await _unitOfWork.ScreenRepository.GetPhotoScreenAll();
+            if( getall.Count() == 0)return Ok(null);
             var getOne = getall.ToArray();
 
             var generator = new Random();  

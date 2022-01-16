@@ -13,14 +13,14 @@ import { ShowStoryService } from '../show-story.service';
 export class ShowListVerticalComponent implements OnInit,OnChanges {
   @Input('random')  random:boolean;
 
-  showstory : ShowStory[];
+  showstory : Partial<ShowStory[]>;
   notEmptyPost = true;
   notscrolly = true;
   lazyloadParams = new LazyLoadParams ;
   constructor(private showStoryService:ShowStoryService,
                private spinner: NgxSpinnerService,
               private route:ActivatedRoute
-             ) { 
+             ) {
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.loadStory();

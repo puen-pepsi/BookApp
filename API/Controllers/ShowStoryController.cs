@@ -46,8 +46,10 @@ namespace API.Controllers
         {
             var story = await _unitOfWork.StoryRepository
                     .GetStoriesAsynclazyload(currentItem,takeSize,storyType);
-             var storyreturn = _mapper.Map<IEnumerable<StoryDto>>(story);  
-            return Ok(storyreturn);
+             //var storyreturn = _mapper.Map<IEnumerable<StoryDto>>(story);  
+
+            //return Ok(storyreturn);
+            return Ok(story);
         }
         [HttpGet("getStoryRandom/{takesize}")]
         public async Task<ActionResult<IEnumerable<StoryDto>>> getStoryRandom(int takesize)

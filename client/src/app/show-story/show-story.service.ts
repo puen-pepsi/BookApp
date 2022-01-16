@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { initHour } from 'ngx-bootstrap/chronos/units/hour';
 import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -75,11 +74,11 @@ export class ShowStoryService {
 
   }
   getShowStoryLazyLoad(lazyLoad:LazyLoadParams){
-    return this.http.get<ShowStory[]>(this.baseUrl+'showstory/getStoryLazyLoad/'
+    return this.http.get<Partial<ShowStory[]>>(this.baseUrl+'showstory/getStoryLazyLoad/'
               +lazyLoad.currentItem+'/'+lazyLoad.takeSize+'/'+lazyLoad.storyType);
   }
   getShowStoryRandom(takesize:number){
-    return this.http.get<ShowStory[]>(this.baseUrl+'showstory/getStoryRandom/'+takesize);
+    return this.http.get<Partial<ShowStory[]>>(this.baseUrl+'showstory/getStoryRandom/'+takesize);
   }
   getShowStory(StoryParams:StoryParams){
     var response = this.showStoryCache.get(Object.values(StoryParams).join('-'));

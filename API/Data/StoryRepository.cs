@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -148,7 +149,7 @@ namespace API.Data
         {
             throw new System.NotImplementedException();
         }
-        public async Task<IEnumerable<Story>> GetStoriesAsynclazyload(int currentStory,int pageSize,string storyType)
+        public async Task<IEnumerable<StoryDto>> GetStoriesAsynclazyload(int currentStory,int pageSize,string storyType)
         {
             return await _context.Stories
                             .Include( s =>s.ViewCount)
@@ -156,10 +157,25 @@ namespace API.Data
                             .Include( s => s.Author)
                             .ThenInclude( s => s.Photos)
                             .Include( s => s.Chapters)
-                            .ThenInclude(sc => sc.Published)
+                            .ThenInclude(s => s.Published)
                             .Where( s => s.Type == storyType)
+                            // .OrderByDescending(s => s.ViewCount.Count)
                             .Skip(currentStory)
                             .Take(pageSize)
+                            .Select(s => new StoryDto{
+                                Genre = s.Genre,
+                                ImageUrl = s.ImageUrl,
+                                Rating = s.Ratings.Count() == 0 ? 0 : s.Ratings.Average(s => s.Rated),
+                                StoryName = s.StoryName,
+                                Description = s.Description,
+                                UserName = s.Author.KnownAs,
+                                UserPhoto = s.Author.Photos.FirstOrDefault(x => x.IsMain).Url,
+                                GetState  = s.Created.GetState(s.State),
+                                TotalChapter = s.Chapters
+                                    .Where(p => p.Published.Created > DateTime.MinValue).Count() == 0? 0: s.Chapters
+                                    .Where(p => p.Published.Created > DateTime.MinValue).Count(),
+                                Views = s.ViewCount.Count
+                            })
                             .ToListAsync();  
         }
          public async Task<IEnumerable<StoryDto>> GetStoriesAsyncRandom(int pageSize)
@@ -169,9 +185,24 @@ namespace API.Data
                             .Include( s => s.Ratings)
                             .Include( s => s.Author)
                             .Include( s => s.Chapters)
+                            .Select(s => new StoryDto{
+                                Genre = s.Genre,
+                                ImageUrl = s.ImageUrl,
+                                Rating = s.Ratings.Count() == 0 ? 0 : s.Ratings.Average(s => s.Rated),
+                                StoryName = s.StoryName,
+                                Description = s.Description,
+                                UserName = s.Author.KnownAs,
+                                //UserPhoto = s.Author.Photos.FirstOrDefault(x => x.IsMain).Url,
+                                //GetState  = s.Created.GetState(s.State),
+                                //TotalChapter = s.Chapters
+                                //    .Where(p => p.Published.Created > DateTime.MinValue).Count() == 0? 0: s.Chapters
+                                //    .Where(p => p.Published.Created > DateTime.MinValue).Count(),
+                                //Views = s.ViewCount.Count
+                            })
                             .ToListAsync();  
             var random = allstory.OrderBy(t => Guid.NewGuid()).Take(pageSize);
-            return _mapper.Map<IEnumerable<StoryDto>>(random);     
+            //return _mapper.Map<IEnumerable<StoryDto>>(random);     
+            return random;
         }
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {

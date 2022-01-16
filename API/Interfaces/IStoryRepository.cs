@@ -15,7 +15,7 @@ namespace API.Interfaces
          void UpdateStory(Story story);
          void UpdateStoryChapter(StoryChapter storyChapter);
          Task<IEnumerable<StoryViewsDto>> GetViewsQuery(ViewsParams viewsParams);
-         Task<IEnumerable<Story>> GetStoriesAsynclazyload(int currentStory,int pageSize,string storyType);
+         Task<IEnumerable<StoryDto>> GetStoriesAsynclazyload(int currentStory,int pageSize,string storyType);
          Task<IEnumerable<StoryDto>> GetStoriesAsyncRandom(int pageSize);
 
          Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams);

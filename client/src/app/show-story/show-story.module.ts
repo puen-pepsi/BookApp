@@ -9,7 +9,6 @@ import { ShowAChapterComponent } from './show-tchapter/show-achapter/show-achapt
 import { CommentComponent } from './comment/comment/comment.component';
 import { ShowStoryRoutingModule } from './show-story-routing.module';
 import { SharedModule } from '../_modules/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowStoryComponent } from './show-story.component';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -117,8 +116,6 @@ import { CardTopComponent } from './show-top-special/card-top/card-top.component
     CommonModule,
     SharedModule,
     ShowStoryRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
     ScrollSpyModule,

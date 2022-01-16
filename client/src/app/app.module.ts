@@ -27,11 +27,6 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.component';
-import { StoryComponent } from './story/story.component';
-import { StoryListComponent } from './story/story-list/story-list.component';
-import { StoryFormComponent } from './story/story-form/story-form.component';
-import { StoryFormImageComponent } from './story/story-form-image/story-form-image.component';
-import { StorychapterComponent } from './story/storychapter/storychapter.component';
 import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
 import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -42,7 +37,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { AuthorStoryComponent } from './members/member-detail/author-story/author-story.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider ,FacebookLoginProvider} from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
 import { FooterComponent } from './footer/footer.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -69,6 +64,7 @@ import { AdminModule } from './admin/admin.module';
 import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { StoryModule } from './story/story.module';
 // import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
@@ -90,13 +86,6 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     PhotoManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
-    StoryComponent,
-    StoryListComponent,
-    StoryFormComponent,
-    StoryFormImageComponent,
-    StorychapterComponent,
-    ChapterFormComponent,
-    ChapterListComponent,
     SectionHeaderComponent,
     HeaderComponent,
     SidenavListComponent,
@@ -124,7 +113,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     NullWithDefaultPipe,
     TermOfServiceComponent,
     PrivacyPolicyComponent
-  ],
+ ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -142,11 +131,12 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     SocialLoginModule,
     ScrollingModule,
     AdminModule,
+    StoryModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    //{provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorHandlerService,

@@ -1,6 +1,5 @@
 import {  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ConsoleLogger, formatArrayBuffer } from '@microsoft/signalr/dist/esm/Utils';
 import { ToastrService } from 'ngx-toastr';
 import { Chapter } from 'src/app/_models/chapter';
 import { StoryService } from 'src/app/_services/story.service';
@@ -38,7 +37,7 @@ export class ChapterFormComponent implements OnInit,OnChanges{
                 'heading', '|',
                 '|', 'outdent', 'indent', '|','alignment:left', 'alignment:center','alignment:right' ,
                 'bold', 'italic','horizontalLine',
-                '|','fontsize', 
+                '|','fontsize',
                 '|','imageUpload',],
                 fontFamily: {
                   options: [

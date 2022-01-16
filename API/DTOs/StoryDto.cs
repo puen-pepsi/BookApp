@@ -33,7 +33,6 @@ namespace API.DTOs
         public string Tags { get; set; }
         public string LastChapterName { get; set; }    
         public string LastChapterCreate { get; set; }    
-        public int MyProperty { get; set; }
         // public StoryDto()
         // {   
         //     Chapters = new Collection<StoryChapterDto>();

@@ -18,6 +18,7 @@ import { GetRoleDirective } from '../_directives/get-role.directive';
 import { SanitizeHtmlPipe } from 'src/pipe/sanitize-html.pipe';
 import { TruncatePipe } from 'src/pipe/truncate.pipe';
 import { InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import { InfiniteScrollModule} from 'ngx-infinite-scroll';
     ScrollSpyModule,
     IvyCarouselModule,
     Ng2SearchPipeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     BsDropdownModule,
@@ -64,7 +67,9 @@ import { InfiniteScrollModule} from 'ngx-infinite-scroll';
     Ng2SearchPipeModule,
     SanitizeHtmlPipe,
     TruncatePipe,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

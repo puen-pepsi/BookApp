@@ -131,7 +131,7 @@ import { StoryModule } from './story/story.module';
     SocialLoginModule,
     ScrollingModule,
     AdminModule,
-    StoryModule
+    StoryModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

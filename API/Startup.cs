@@ -35,6 +35,10 @@ namespace API
                 x.UseSqlite(_config.GetConnectionString
                 ("DefaultConnection"));
             });
+            //   services.AddDbContext<DataContext>(x => {
+            //     x.UseSqlServer(_config.GetConnectionString
+            //     ("DefaultConnection"));
+            // });
             ConfigureServices(services);
         }
         public void ConfigureProductionServices(IServiceCollection services)

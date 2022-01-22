@@ -9,7 +9,7 @@ import { AccountService } from '../../_services/account.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  
+
 })
 export class LoginComponent implements OnInit {
   model:any={};
@@ -17,10 +17,12 @@ export class LoginComponent implements OnInit {
   public showError: boolean;
   registerMode = false;
   returnUrl:string;
-  constructor(public accountService: AccountService ,
+  constructor(
+    public accountService: AccountService ,
     private router : Router,
     private route :ActivatedRoute,
-    private toastr:ToastrService,) { }
+    private toastr:ToastrService,
+    ) { }
 
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/')
     this.toastr.success("LogOut success","Information")
-  } 
+  }
 
   public loginWithGoogle = () => {
     //this.showError = false;

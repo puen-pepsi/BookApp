@@ -54,10 +54,17 @@
 </div>
 
 <div class="novel">
-     <app-show-carousel
-        [storyType]= "'novel'"></app-show-carousel>
+  <div *ngIf="showstory">
+    <app-show-carousel
+    [showstory]="showstory"
+    [storyType]= "'novel'">
+  </app-show-carousel>
 
-
-   <app-show-carousel
-      [storyType]= "'manga'"></app-show-carousel>
+  </div>
+  <div *ngIf="showstoryM">
+    <app-show-carousel
+    [showstory]="showstoryM"
+    [storyType]= "'manga'">
+  </app-show-carousel>
+  </div>
 </div>

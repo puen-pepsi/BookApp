@@ -9,26 +9,20 @@ import { ShowStoryService } from '../show-story.service';
   styleUrls: ['./show-carousel.component.scss'],
 })
 export class ShowCarouselComponent implements OnInit {
+  @Input() showstory:Partial<ShowStory[]>;
   @Input() storyType:string;
-  showstory:Partial<ShowStory[]>;
-  lazyloadParams = new LazyLoadParams;
-  // imagesForSlider = [
-  //   {path: '../../assets/images/slice1.png'},
-  //   {path: '../../assets/images/slice2.png'},
-  //   {path: '../../assets/images/slice3.png'},
-  //   {path: '../../assets/images/slice4.png'},
-  //   {path: '../../assets/images/slice5.png'},
-  //   {path: '../../assets/images/slice6.png'},
-  // ];
+  // showstory:Partial<ShowStory[]>;
+  // lazyloadParams = new LazyLoadParams;
+
   constructor(private showStoryService:ShowStoryService) { }
 
   ngOnInit(): void {
-    this.lazyloadParams.storyType = this.storyType;
-    this.loadStory(this.storyType);
+    // this.lazyloadParams.storyType = this.storyType;
+    // this.loadStory(this.storyType);
   }
-  loadStory(storytype:string){
-    this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(res =>{
-      this.showstory = res
-    });
-  }
+  // loadStory(storytype:string){
+  //   this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(res =>{
+  //     this.showstory = res
+  //   });
+  // }
 }

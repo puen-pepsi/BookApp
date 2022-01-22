@@ -29,7 +29,7 @@ export class LabelNameComponent implements OnInit,AfterViewInit{
   isVIP:boolean;
   constructor(private rankService : RankService,
               private adminSevice : AdminService) {
-     
+
    }
   ngAfterViewInit(): void {
     // console.log(this.imageUrl);
@@ -40,7 +40,8 @@ export class LabelNameComponent implements OnInit,AfterViewInit{
     //  this.setHeight = this.pHeight;
     this.isVIP = false;
      this.adminSevice.getUserRoles(this.userName).subscribe(res =>{
-       if(res.roles){
+       //check google login
+       if(res.roles != null){
           this.role = res.roles;
           this.isVIP = this.role.includes("VIP");
        }
@@ -79,6 +80,7 @@ export class LabelNameComponent implements OnInit,AfterViewInit{
     }
   }
   gotoMember(){
+
     this.username.emit(this.userName.toLowerCase());
   }
   createCrown(vip:string[]):boolean{

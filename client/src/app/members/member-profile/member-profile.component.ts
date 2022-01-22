@@ -44,16 +44,16 @@ export class MemberProfileComponent implements OnInit {
       private accountService:AccountService,
       private bcService:BreadcrumbService,
       private rankService:RankService,
-      private router:Router) { 
+      private router:Router) {
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       }
- 
+
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
-      // console.log(this.member.username);
+      console.log(this.member.username);
       this.author = this.member.username;
       this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;
@@ -66,7 +66,7 @@ export class MemberProfileComponent implements OnInit {
       params.tab ? this.selected.setValue(params.tab): this.selected.setValue(0) ;
       if(params.tab == 2){
          this.messageService.createHubConnection(this.user,this.member.username);
-      }   
+      }
     })
 
     this.galleryOptions = [
@@ -81,7 +81,7 @@ export class MemberProfileComponent implements OnInit {
     ]
     this.galleryImages = this.getImages();
     this.getUrl();
-    
+
   }
   CreateRank(point:number){
     for (let i = 0; i < this.allRank.length ; i++) {
@@ -134,7 +134,7 @@ export class MemberProfileComponent implements OnInit {
     }else{
       this.messageService.stopHubConnection();
     }
-  
+
   }
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();

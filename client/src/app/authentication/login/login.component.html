@@ -4,28 +4,24 @@
             <div class="logo">
                  <img src="./assets/images/logo.png" (click)="home()">
             </div>
-               
-
             <div *ngIf="!registerMode">
             <h3 class="mb-4  text-center">Have an account?</h3>
-            
             <form *ngIf="(accountService.currentUser$|async) === null" #loginForm="ngForm" class="signin-form" (ngSubmit)="login()"
               autocomplete="off">
                   <div class="form-group">
-                    <input 
+                    <input
                         name="username"
                         [(ngModel)]="model.username"
-                        class="form-control mr-sm-2" 
-                        type="text" 
+                        class="form-control mr-sm-2"
+                        type="text"
                         placeholder="&#61447; UserName/Email">
                     </div>
-                    
                     <div class="form-group">
-                        <input 
+                        <input
                         name="password"
                         [(ngModel)]="model.password"
-                        class="form-control mr-sm-2" 
-                        type="password" 
+                        class="form-control mr-sm-2"
+                        type="password"
                         placeholder="&#61475; Password">
                     </div>
             <div class="form-group">
@@ -38,7 +34,7 @@
                                   <span class="checkmark"></span>
                             </label>
                             </div>
-                            <div class="w-50 text-md-right">                                
+                            <div class="w-50 text-md-right">
                                 <a [routerLink]="['/authentication/forgotpassword']"> Forgot Password </a>
                             </div>
             </div>
@@ -54,7 +50,7 @@
                         <img src="./assets/images/minilogo_blue.png" style="height: 32px;"/>
                     </button>
                 </div>
-                
+
             </div>
             </div>
             <div *ngIf="registerMode">
@@ -67,24 +63,24 @@
         <!-- <div class="row justify-content-center" *ngIf="!registerMode">
             <div class="col-md-6 col-lg-4" >
             <div class="login-wrap p-0">
-              
+
 
               <form *ngIf="(accountService.currentUser$|async) === null" #loginForm="ngForm" class="signin-form" (ngSubmit)="login()"
               autocomplete="off">
                   <div class="form-group">
-                    <input 
+                    <input
                     name="username"
                     [(ngModel)]="model.username"
-                    class="form-control mr-sm-2" 
-                    type="text" 
+                    class="form-control mr-sm-2"
+                    type="text"
                     placeholder="UserName">
                     </div>
                     <div class="form-group">
-                        <input 
+                        <input
                         name="password"
                         [(ngModel)]="model.password"
-                        class="form-control mr-sm-2" 
-                        type="password" 
+                        class="form-control mr-sm-2"
+                        type="password"
                         placeholder="Password">
                     </div>
             <div class="form-group">
@@ -97,7 +93,7 @@
                                   <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="w-50 text-md-right">                                
+                            <div class="w-50 text-md-right">
                                 <a [routerLink]="['/authentication/forgotpassword']" style="color: #666"> Forgot Password </a>
                             </div>
             </div>
@@ -113,14 +109,14 @@
                     <img src="./assets/images/minilogo_blue.png" style="height: 32px;"/>
                 </button>
             </div>
-             
+
             </div>
           </div>
             </div>
-            
+
 
         </div> -->
-        
+
         </div>
     </div>
 </div>

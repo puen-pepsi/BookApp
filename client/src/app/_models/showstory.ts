@@ -4,7 +4,7 @@ import { Photo } from "./photo";
 export interface ShowStory {
     storyId:number;
     storyName : string;
-    description :string;       
+    description :string;
     genre :string;
     language:string;
     imageUrl:string;
@@ -15,6 +15,7 @@ export interface ShowStory {
     created:Date;
     state:string;
     getState:string;
+    knownAs:string;
     userName:string;
     userPhoto:string;
     title:string;
@@ -23,5 +24,5 @@ export interface ShowStory {
     lastChapterName: string;
     lastChapterCreate: Date;
     //photos: Photo[];
-    
+
 }

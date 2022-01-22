@@ -59,7 +59,8 @@ namespace API.Helpers
             CreateMap<StoryChapter, ChapterListDto>();
             CreateMap<Published, PublishedDto>().ReverseMap();
             CreateMap<Story, StoryDto>()
-                .ForMember(dest => dest.UserName, ex => ex.MapFrom(src => src.Author.KnownAs))
+                .ForMember(dest => dest.UserName, ex => ex.MapFrom(src => src.Author.UserName))
+                .ForMember(dest => dest.KnownAs,ex => ex.MapFrom(src => src.Author.KnownAs))
                 // .ForMember(dest => dest.Title, opt => opt.MapFrom(src => 
                 //     src.Author.titleAcitive.FirstOrDefault(x => x.IsMain).Name))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => 

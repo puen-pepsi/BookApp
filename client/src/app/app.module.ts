@@ -136,7 +136,7 @@ import { StoryModule } from './story/story.module';
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
-    //{provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorHandlerService,

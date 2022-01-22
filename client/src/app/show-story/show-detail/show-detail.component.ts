@@ -42,13 +42,13 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     private commentService:CommentService,
     private toastr:ToastrService,
     private router:Router,
-    ) { 
+    ) {
           this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user=user);
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
           // this.bcService.set("@detail",'');
-         
-    
+
+
     }
   ngOnInit(): void {
     this.storyName = this.route.snapshot.params.storyname;
@@ -78,11 +78,11 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
           if(!this.hubOn){
               this.commentService.createHubConnection(this.user,this.storyName);
               this.hubOn = true;
-          }   
+          }
         }else{
           this.commentService.stopHubConnection();
           this.hubOn = false;
-        }    
+        }
   }
   // onTabActivated(data: TabDirective){
   //   this.activeTab = data;
@@ -105,7 +105,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   //     if(!this.hubOn){
   //         this.commentService.createHubConnection(this.user,this.storyName);
   //         this.hubOn = true;
-  //     }   
+  //     }
   //   }else{
   //     this.commentService.stopHubConnection();
   //     this.hubOn = false;
@@ -135,9 +135,9 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
           });
          this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
             this.userLiked = res;
-          }) 
+          })
     }
-    
+
   }
   addLikeStory(story:ShowStory){
     this.showStoryService.addLikeStory(story.storyName).subscribe(()=>{
@@ -154,6 +154,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     this.router.navigate(['stories/tag/',ele]);
   }
   gotoMember(event){
+    console.log(event)
     this.router.navigate(['/members',event]);
   }
   // getStoryName(){

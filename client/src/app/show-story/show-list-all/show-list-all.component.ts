@@ -79,7 +79,7 @@ export class ShowListAllComponent implements OnInit {
       this.showstory = this.showstory.concat(newpost);
       this.pagination = response.pagination;
       this.notscrolly = true;
-      console.log(this.showstory);
+      // console.log(this.showstory);
     });
     // this.lazyloadParams.currentItem = this.showstory.length;
     // this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(data => {

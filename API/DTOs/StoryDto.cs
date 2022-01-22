@@ -21,6 +21,7 @@ namespace API.DTOs
         public int Views { get; set; }
         //user author
         public string UserName { get; set; }
+        public string KnownAs {get;set;}
         public int AuthorId { get; set; }
         public string UserPhoto { get; set; }
         public string Title { get; set; }

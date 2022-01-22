@@ -2,19 +2,19 @@
     <div class="main">
         <div class="image">
             <img src="{{row.imageUrl || './assets/images/blackcover.png'}}"
-                alt="{{row.storyName}}" 
+                alt="{{row.storyName}}"
                 class="img">
-            
+
         </div>
         <div class="body">
             <div class="top">
-               <h6><b>{{row.storyName| titlecase}}</b>&nbsp;&nbsp;<small class="text-muted">({{row.genre}})</small></h6>
-                <p class="text">{{row.description}}</p> 
+               <h6><b>{{row.storyName| titlecase | truncate:[35, '...'] }}</b>&nbsp;&nbsp;<small class="text-muted">({{row.genre}})</small></h6>
+                <p class="text">{{row.description}}</p>
             </div>
             <div class="create text-muted">
                 <div>
                     <span>By {{row.userName}}</span>&nbsp;|
-                     <small class="pl-2">{{row.created | timeago}}</small>
+                     <small class="pl-2">{{row.lastChapterCreate | timeago}}</small>
                 </div>
                 <div fxLayoutAlign="end">
                     <button (click)="goToDetial(row.storyName)"
@@ -24,11 +24,11 @@
             </div>
         </div>
         <div class="star">
-            <app-star-rating-show 
-                [rating]="rating"  
-                [starCount]="starCount" 
+            <app-star-rating-show
+                [rating]="rating"
+                [starCount]="starCount"
                 [totalRate]="totalRate"
-                [color]="starColor" 
+                [color]="starColor"
                 [fSize] = "fSize"
                 [wSize] = "fSize"
                 (ratingUpdated)="onRatingChanged($event)">

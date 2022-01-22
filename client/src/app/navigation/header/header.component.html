@@ -77,7 +77,6 @@
        </ng-container>
        <ng-container *ngIf="(accountService.currentUser$|async)==null">
         <mat-nav-list class="list-horizontal">
-
           <mat-list-item class="item-link"
             #menuTrigger="matMenuTrigger"
             [matMenuTriggerFor]="novel"
@@ -85,7 +84,6 @@
             routerLink='/stories' routerLinkActive='active'>
             <mat-icon >auto_stories</mat-icon>
             <span class="text-space">Novel</span>
-
           </mat-list-item>
              <mat-menu #novel="matMenu" >
               <span (mouseleave)="menuTrigger.closeMenu()">
@@ -138,21 +136,8 @@
    <div fxFlex="fill" fxLayout fxLayoutAlign="flex-end">
        <ul fxLayout fxLayoutGap="0px" class="navigation-items" >
         <li class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-                    <!-- <app-label-name
-                      [imageUrl]='user.photoUrl'
-                      [knownAs]='user.knownAs'
-                      [pHeight]='"40px"'
-                      [point]='user.point'
-                      [title]='user.title'>
-                    </app-label-name> -->
-                    <!-- <p>{{user | json}}</p> -->
-          <!-- <img #person src="{{user.photoUrl|| './assets/user.png'}} "
-          [ngStyle]="{'box-shadow':CreateColor(user.totalPoint)}"
-          class="img-circle rounded-circle mr-0"
-            alt="{{user.username}}">           -->
             <button mat-button
               #menuTrigger="matMenuTrigger"
-
               [matMenuTriggerFor]="beforeMenu">
               <app-label-name fxHide.lt-sm
               [imageUrl]='user.photoUrl'

@@ -174,7 +174,8 @@ namespace API.Data
                                 TotalChapter = s.Chapters
                                     .Where(p => p.Published.Created > DateTime.MinValue).Count() == 0? 0: s.Chapters
                                     .Where(p => p.Published.Created > DateTime.MinValue).Count(),
-                                Views = s.ViewCount.Count
+                                Views = s.ViewCount.Count,
+                                LastChapterCreate =  s.Chapters.OrderByDescending(x => x.Order).First().Published.Created.ToString()
                             })
                             .ToListAsync();  
         }
@@ -198,6 +199,8 @@ namespace API.Data
                                 //    .Where(p => p.Published.Created > DateTime.MinValue).Count() == 0? 0: s.Chapters
                                 //    .Where(p => p.Published.Created > DateTime.MinValue).Count(),
                                 //Views = s.ViewCount.Count
+                                LastChapterCreate =  s.Chapters.OrderByDescending(x => x.Order).First().Published.Created.ToString()
+
                             })
                             .ToListAsync();  
             var random = allstory.OrderBy(t => Guid.NewGuid()).Take(pageSize);
@@ -206,7 +209,7 @@ namespace API.Data
         }
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {
-            var query = _context.Stories.AsQueryable();
+            var query = _context.Stories.Include(s => s.Ratings).AsQueryable();
             if(storyParams.Genre != "All"){
                 query = query.Where(s => s.Genre == storyParams.Genre);
             }
@@ -227,7 +230,8 @@ namespace API.Data
             query = storyParams.OrderBy switch
             {
                 "created" => query.OrderByDescending( s => s.Created),
-                "rating" => query.OrderByDescending(s => s.Rating),
+                "rating" => query.OrderByDescending(s => s.Ratings.Average(s => s.Rated))
+                    .ThenByDescending( s => s.Ratings.Count()),
                 "views" => query.OrderByDescending(s => s.ViewCount.Count),
                 _ => query.OrderBy(s=>s.Rating)
             };

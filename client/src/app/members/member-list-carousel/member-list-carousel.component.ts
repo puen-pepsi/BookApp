@@ -19,9 +19,9 @@ export class MemberListCarouselComponent implements OnInit {
                 {value:'female',display:'females'},
                 {value:'Other',display:'other'}]
 
-  constructor(private memberService:MembersService) { 
+  constructor(private memberService:MembersService) {
     this.userParams = this.memberService.getUserParams();
-    this.userParams.pageSize = 20;
+    this.userParams.pageSize = 5;
   }
 
   ngOnInit(): void {

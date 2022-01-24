@@ -54,14 +54,14 @@
 </div>
 
 <div class="novel">
-  <div *ngIf="showstory">
+  <div *ngIf="showstory.length > 0">
     <app-show-carousel
     [showstory]="showstory"
     [storyType]= "'novel'">
   </app-show-carousel>
 
   </div>
-  <div *ngIf="showstoryM">
+  <div *ngIf="showstoryM.length > 0">
     <app-show-carousel
     [showstory]="showstoryM"
     [storyType]= "'manga'">

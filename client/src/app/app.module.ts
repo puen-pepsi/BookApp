@@ -27,8 +27,6 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.component';
-import { ChapterFormComponent } from './story/storychapter/chapter-form/chapter-form.component';
-import { ChapterListComponent } from './story/storychapter/chapter-list/chapter-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MaterialModule} from './material.module';
 import { SectionHeaderComponent } from './section-header/section-header.component';

@@ -433,7 +433,7 @@ namespace API.Data
                             .ThenInclude( c => c.Photos)
                             // .Where(c => c.Published != null && c.Published.Created > twoweek )
                             .OrderByDescending(c => c.Published.Created)
-                            .Take(10)
+                            .Take(5)
                             .ToListAsync();
         }
     }

@@ -1,13 +1,13 @@
 <div class="card">
-   
+
         <!-- <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
             No messages yet... say hi by using the message box below
         </div>
-     
+
         <ul
             *ngIf="(messageService.messageThread$ | async)?.length > 0" class="chat">
             <li *ngFor="let message of (messageService.messageThread$ | async)">
-              
+
                 <div *ngIf="message.senderUsername == username" class="recieved">
                     <span class="chat-img float-left">
                         <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
@@ -18,11 +18,11 @@
                     <div>
                         <small class="text-muted">
                             <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                            <span class="text-danger" *ngIf="!message.dateRead 
+                            <span class="text-danger" *ngIf="!message.dateRead
                                 && message.senderUsername !== username">
                                 (unread)
                             </span>
-                            <span class="text-success" *ngIf="message.dateRead 
+                            <span class="text-success" *ngIf="message.dateRead
                                 && message.senderUsername !== username">
                                 (read {{message.dateRead | timeago}})
                             </span>
@@ -31,17 +31,17 @@
                     </div>
                 </div>
                 <div *ngIf="message.senderUsername != username" class="out">
-    
+
                     <div class="chat-body">
                       <p>{{message.content}}</p>
                     <div >
                         <small class="text-muted">
                             <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                            <span class="text-danger" *ngIf="!message.dateRead 
+                            <span class="text-danger" *ngIf="!message.dateRead
                                 && message.senderUsername !== username">
                                 (unread)
                             </span>
-                            <span class="text-success" *ngIf="message.dateRead 
+                            <span class="text-success" *ngIf="message.dateRead
                                 && message.senderUsername !== username">
                                 (read {{message.dateRead | timeago}})
                             </span>
@@ -50,17 +50,17 @@
                     </div>
                 </div>
             </li>
-        </ul> 
+        </ul>
     </div>
     <div class="card-footer">
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off" >
             <div class="input-group">
-                <input 
+                <input
                     name="messageContent"
                     required
                     [(ngModel)]="messageContent"
-                    type="text" 
-                    class="form-control input-sm" 
+                    type="text"
+                    class="form-control input-sm"
                     placeholder="Send a private message">
                 <div class="input-group-append">
                     <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
@@ -81,7 +81,8 @@
                 No messages yet... say hi by using the message box below
             </div>
             <div *ngIf="(messageService.messageThread$ | async)?.length > 0">
-                <cdk-virtual-scroll-viewport itemSize="60" minBufferPx="500" maxBufferPx="1000"
+                <cdk-virtual-scroll-viewport
+                  itemSize="60" minBufferPx="500" maxBufferPx="1000"
                  class="container">
                 <div *cdkVirtualFor="let message of (messageService.messageThread$ | async)" class="commnet-items">
                     <div  *ngIf="message.senderUsername == username" class="yours messages">
@@ -89,46 +90,46 @@
                             <div class="pic-msg">
                                 <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
                                      alt="{{message.senderUsername}}">
-                            </div> 
+                            </div>
                             <div class="message" >
-                                <p class="top"><b>{{message.senderUsername}}</b> | {{message.content}}</p>    
+                                <p class="top"><b>{{message.senderUsername}}</b> | {{message.content}}</p>
                                 <small class="text-muted">
                                     <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                                    <span class="text-danger" *ngIf="!message.dateRead 
+                                    <span class="text-danger" *ngIf="!message.dateRead
                                         && message.senderUsername !== username">
                                         (unread)
                                     </span>
-                                    <span class="text-success" *ngIf="message.dateRead 
+                                    <span class="text-success" *ngIf="message.dateRead
                                         && message.senderUsername !== username">
                                         (read {{message.dateRead | timeago}})
                                     </span>
-                                </small>        
+                                </small>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div *ngIf="message.senderUsername != username" class="mine messages">
                         <div class="message last">
                             <p>{{message.content}}</p>
-                        </div>   
+                        </div>
                         <small class="text-muted">
                             <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                            <span class="text-danger" *ngIf="!message.dateRead 
+                            <span class="text-danger" *ngIf="!message.dateRead
                                 && message.senderUsername !== username">
                                 (unread)
                             </span>
-                            <span class="text-success" *ngIf="message.dateRead 
+                            <span class="text-success" *ngIf="message.dateRead
                                 && message.senderUsername !== username">
                                 (read {{message.dateRead | timeago}})
                             </span>
                         </small>
-                    </div>  
+                    </div>
                 </div>
                 </cdk-virtual-scroll-viewport>
-            </div> 
+            </div>
         </mat-card-content>
         <mat-card-footer class="card-footer">
-            <form fxLayout="row" 
+            <form fxLayout="row"
             (ngSubmit)="sendMessage()" [formGroup]="commentForm">
             <mat-form-field class="example-full-width">
                     <mat-label>Leave a message</mat-label>
@@ -138,7 +139,7 @@
             <mat-action-list fxFlexAlign="start">
                 <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
                 <i class="fas fa-paper-plane fa-lg"></i></button>
-            </mat-action-list> 
+            </mat-action-list>
         </form>
         </mat-card-footer>
     </mat-card>

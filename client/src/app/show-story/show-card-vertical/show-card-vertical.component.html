@@ -14,7 +14,8 @@
             <div class="create text-muted">
                 <div>
                     <span>By {{row.userName}}</span>&nbsp;|
-                     <small class="pl-2">{{row.lastChapterCreate | timeago}}</small>
+                     <small *ngIf="row.lastChapterCreate"
+                      class="pl-2">{{row.lastChapterCreate | timeago}}</small>
                 </div>
                 <div fxLayoutAlign="end">
                     <button (click)="goToDetial(row.storyName)"

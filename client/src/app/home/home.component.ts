@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   //   {path: '../../assets/images/slice6.png'},
   // ];
   constructor(private showStoryService:ShowStoryService) { }
-  showstory:Partial<ShowStory[]>;
-  showstoryM:Partial<ShowStory[]>;
+  showstory:Partial<ShowStory[]> = [];
+  showstoryM:Partial<ShowStory[]>= [];
   lazyloadParams = new LazyLoadParams;
   ngOnInit(): void {
       this.loadStory("novel");

@@ -10,6 +10,7 @@ export class FollowAuthorComponent  {
   @Input() isActive:boolean;
   @Input() membername:string;
   @Input() user:User;
+  @Input() isText:boolean = false;
   @Output() follow = new EventEmitter<Object>()
   constructor() { }
 

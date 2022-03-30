@@ -97,10 +97,13 @@ namespace API.Helpers
                     ex => ex.MapFrom(sr => sr.Ratings.Count() == 0 ? 0 : sr.Ratings.Count()))
                 .ForMember(dest => dest.Rating,
                     ex => ex.MapFrom(sr => sr.Ratings.Count() == 0 ? 0 : sr.Ratings.Average(src => src.Rated)))
-                .ForMember(dest => dest.TotalChapter,
+                // .ForMember(dest => dest.TotalChapter,
+                //     ex => ex.MapFrom(src => src.Chapters
+                //    .Where(src => src.Published.Created > DateTime.MinValue).Count() == 0 ? 0 : src.Chapters
+                //    .Where(src => src.Published.Created > DateTime.MinValue).Count()));
+            .ForMember(dest => dest.TotalChapter,
                     ex => ex.MapFrom(src => src.Chapters
-                            .Where(src => src.Published.Created > DateTime.MinValue).Count() == 0 ? 0 : src.Chapters
-                            .Where(src => src.Published.Created > DateTime.MinValue).Count()));
+                            .Where(src => src.Order > 0).Count()));
             CreateMap<StoryComment, StoryCommentDto>()
                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.UserPost.UserName))
                 .ForMember(d => d.KnownAs, o => o.MapFrom(s => s.UserPost.KnownAs))

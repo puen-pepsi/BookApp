@@ -159,7 +159,7 @@ namespace API.Data
                             .Include( s => s.Chapters)
                             .ThenInclude(s => s.Published)
                             .Where( s => s.Type == storyType)
-                            // .OrderByDescending(s => s.ViewCount.Count)
+                            .OrderByDescending(s => s.ViewCount.Count)
                             .Skip(currentStory)
                             .Take(pageSize)
                             .Select(s => new StoryDto{

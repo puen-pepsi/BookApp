@@ -1,5 +1,9 @@
-<button mat-mini-fab aria-label="Active icon"  (click)="onClick()" >
-    <mat-icon class="material-icons-outlined" >
-        {{isActive?'done':'favorite'}}
-    </mat-icon>
+<div *ngIf="isText" (click)="onClick()">
+    {{isActive?'Following':'Follow'}}
+</div>
+
+<button *ngIf="!isText" mat-mini-fab aria-label="Active icon"  (click)="onClick()" >
+        <mat-icon class="material-icons-outlined" >
+            {{isActive?'done':'favorite'}}
+        </mat-icon>  
 </button>

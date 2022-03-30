@@ -38,7 +38,7 @@ export class ChapterFormComponent implements OnInit,OnChanges{
                 '|', 'outdent', 'indent', '|','alignment:left', 'alignment:center','alignment:right' ,
                 'bold', 'italic','horizontalLine',
                 '|','fontsize',
-                '|','imageUpload',],
+                '|','imageUpload'],
                 fontFamily: {
                   options: [
                       //'default',

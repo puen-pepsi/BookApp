@@ -63,6 +63,7 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
       localStorage.setItem('user',JSON.stringify(user));
       this.currentUserSource.next(user);
+      
       let date = new Date();
       let expirationDate = this.helper.getTokenExpirationDate(user.token);
       var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);

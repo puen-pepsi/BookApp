@@ -38,6 +38,7 @@ export class ShowTagComponent implements OnInit {
     this.showStoryService.getStoryTag(tagname).subscribe(res =>{
       this.storylist = res;
       this.tagName = tagname;
+      console.log(this.storylist);
    })
   }
   getAllTags(){

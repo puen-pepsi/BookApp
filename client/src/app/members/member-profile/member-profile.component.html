@@ -41,7 +41,14 @@
     </div>
     
             <div class="btn-group d-flex">
-                <button class="btn btn-primary">Follow</button>
+                <button class="btn btn-primary">
+                    <app-follow-author *ngIf="user"
+                        [isActive]="memberId != null"
+                        [membername]="member.username"
+                        [isText]="true"
+                        (follow)="followthis($event)" >
+                    </app-follow-author> 
+                </button>
                 <button (click)="selected.setValue(2)" class="btn btn-success">Message</button>
             </div>
             <br/>

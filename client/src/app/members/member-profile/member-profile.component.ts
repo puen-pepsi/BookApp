@@ -18,6 +18,8 @@ import { RankService } from 'src/app/_services/rank.service';
 import { Rank } from 'src/app/_models/rank.model';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FormControl } from '@angular/forms';
+import { MemberLike } from 'src/app/_models/memberlike';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-member-profile',
   templateUrl: './member-profile.component.html',
@@ -25,7 +27,8 @@ import { FormControl } from '@angular/forms';
 })
 export class MemberProfileComponent implements OnInit {
   // @ViewChild('memberTabs',{static:true}) memberTabs: TabsetComponent;
-  member :Member
+  member :Member;
+  memberId :MemberLike;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   // activeTab:TabDirective;
@@ -43,6 +46,7 @@ export class MemberProfileComponent implements OnInit {
       private messageService:MessageService,
       private accountService:AccountService,
       private bcService:BreadcrumbService,
+      private toastr:ToastrService,
       private rankService:RankService,
       private router:Router) {
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
@@ -53,7 +57,7 @@ export class MemberProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
-      console.log(this.member.username);
+      //console.log(this.member.username);
       this.author = this.member.username;
       this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;
@@ -81,7 +85,29 @@ export class MemberProfileComponent implements OnInit {
     ]
     this.galleryImages = this.getImages();
     this.getUrl();
-
+    //Get following 
+    if(this.user){
+      this.memberService.getMemberLiked(this.member.id).subscribe(res =>{
+        this.memberId = res;
+      });
+    }
+  }
+  followthis(event){
+    if(event.active){
+      this.addLike(event.membername);
+    }else{
+      this.unLike(event.membername);
+    }
+  }
+  addLike(membername:string){
+    this.memberService.addLike(membername).subscribe(() =>{
+      this.toastr.success('You have Following '+ membername);
+    })
+  }
+  unLike(membername:string){
+    this.memberService.deletelikes(membername).subscribe(()=>{
+      this.toastr.success('You have unFollow '+ membername);
+    })
   }
   CreateRank(point:number){
     for (let i = 0; i < this.allRank.length ; i++) {

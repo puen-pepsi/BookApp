@@ -62,7 +62,7 @@ const routes: Routes = [
          loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule)
         // data: { breadcrumb: 'Stories' }
       },
-      {path:'paypal',component:PaypalComponent},
+      {path:'premium',component:PaypalComponent},
       {path:'recent',component:RecentChapterComponent},
       {path:'slideshow',component:ShowSlideComponent},
       {path:'members',component:MemberListComponent,

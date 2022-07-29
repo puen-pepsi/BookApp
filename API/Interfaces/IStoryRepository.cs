@@ -33,7 +33,7 @@ namespace API.Interfaces
         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize);
          Task<Story> GetStoryById(int id,bool includeRelated = false );
         // Task<Story> GetStoryById(int id);
-         Task<Story> GetStoryByName(string storyName);
+         Task<Story> GetStoryByName(string storyName,bool include);
          Task<StoryChapter> GetStoryChapterById(int id);
          Task<StoryComment> GetStoryCommentById(int id);
          Task<Rating> GetYouRate(int storyId,int userId);

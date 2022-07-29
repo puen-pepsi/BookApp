@@ -83,7 +83,7 @@ namespace API.SignalR
             //     throw new HubException("You cannot send messages to yourself");
 
             var sender = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
-            var storyCur = await _unitOfWork.StoryRepository.GetStoryByName(createCommentDto.StoryName);
+            var storyCur = await _unitOfWork.StoryRepository.GetStoryByName(createCommentDto.StoryName,false);
 
             if (storyCur == null) throw new HubException("Not found story");
 

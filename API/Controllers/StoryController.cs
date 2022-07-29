@@ -26,12 +26,13 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StoryDto>>> Get()
         {
-            var username = User.GetUsername();
+           var username = User.GetUsername();
             if(username == null)
                 return NotFound();
             var storyUserList = await _unitOfWork.StoryRepository.GetStoryByUserName(username);
              if(storyUserList == null)
                 return NotFound();
+
             var story = _mapper.Map<IEnumerable<StoryDto>>(storyUserList);
             return Ok(story);
         }
@@ -60,7 +61,7 @@ namespace API.Controllers
                 return BadRequest();
             }
             //Check storyName
-            var existStoryName = await _unitOfWork.StoryRepository.GetStoryByName(storyDto.StoryName);
+            var existStoryName = await _unitOfWork.StoryRepository.GetStoryByName(storyDto.StoryName,false);
             if( existStoryName != null)
                     return BadRequest("Novel Name is taken");
             storyDto.UserName= User.GetUsername();

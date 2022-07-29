@@ -25,7 +25,7 @@ namespace API.Controllers
         public async Task<ActionResult> AddHistoryStory([FromRoute] string storyname, [FromRoute] string fregment)
         {
             var sourceUserId = User.GetUserId();
-            var storyHistory = await _unitOfWork.StoryRepository.GetStoryByName(storyname);
+            var storyHistory = await _unitOfWork.StoryRepository.GetStoryByName(storyname,false);
             var sourceUser = await _unitOfWork.HistoryRepository.GetHistoryStoryWithUser(sourceUserId);
             //check liked
             if (storyHistory == null) return NotFound();

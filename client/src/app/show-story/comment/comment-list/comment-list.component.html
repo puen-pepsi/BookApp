@@ -73,33 +73,6 @@
               [point]='comment.point'>
             </app-label-name>
             </div>
-            <!-- <div class="right">
-              <div class="righttop">
-                <small class="text-muted ">{{comment.created | timeago}}</small>
-              </div>
-              <div class="p-2" id="rconners1">
-                <p>{{comment.content}}</p>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="start center" >
-              <button mat-button>
-                  <like [likeCount]="comment.liked.length"
-                      [isActive]="comment.liked.includes(commentService.user.username)"
-                      [usersLike]="comment.liked"
-                      (commentId)="addLike(comment.id)"></like>
-                </button>
-                <button
-                  mat-button color="primary"
-                  (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i></button>
-                <button *ngIf="comment.userName === commentService.user.username"
-                  mat-button (click)="onDeleteComment(comment.id)">
-                  Remove</button>
-                  <app-report
-                    [reportType]="'comment'"
-                    [reportId]="comment.id"
-                    (message)="onReport($event)">
-                </app-report>
-              </div>
-            </div> -->
             <div class="right">
               <div id="rconners1">
                 <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>

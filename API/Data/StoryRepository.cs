@@ -76,30 +76,54 @@ namespace API.Data
         public async Task<IEnumerable<Story>> GetStoryByUserName(string username)
         {                
             return await _context.Stories
-                .Include(s => s.Ratings)
+                //.Include(s => s.Ratings)
                 .Include(s=> s.Author)
                     .ThenInclude(a => a.Photos)
-                .Include(s => s.ViewCount) 
+                //.Include(s => s.ViewCount) 
                 .Include(s => s.Chapters)
                     .ThenInclude(c => c.Published)
                 .Where(x => x.UserName == username)
                 .ToListAsync();
         }
-        public async Task<Story> GetStoryByName(string storyName)
+        public async Task<Story> GetStoryByName(string storyName,bool include)
         {
-             return await _context.Stories
+            //newedit
+             if(include){
+                    var story = await _context.Stories
                             .Include(s => s.Chapters)
                                 .ThenInclude(sc => sc.Published)
-                            .Include(s=> s.Author)
-                                .ThenInclude(s => s.Photos)  
+                            // .Include(s=> s.Author)
+                            //     .ThenInclude(s => s.Photos)
+
                             // .Include(s => s.Author)
                             //     .ThenInclude(s => s.titleAcitive)  
                             // .Include( s => s.Author)
                             //     .ThenInclude( s => s.recievePoints)
-                            .Include(s => s.ViewCount)
-                            .Include(p => p.PhotoStories)
-                            .Include(s => s.Ratings)
+                            // .Include(p => p.PhotoStories)
+                            
+                            // .Include(s => s.ViewCount)
+                            // .Include(s => s.Ratings)
                             .SingleOrDefaultAsync(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower());
+                    story.Author = await _context.Users
+                                        .Include(s => s.Photos)
+                                        .FirstOrDefaultAsync(x => x.Id == story.AuthorId);
+                    story.Ratings = await _context.Ratings.Where( x => x.StoryRatedId == story.Id).ToListAsync();
+                    story.ViewCount = await _context.Views
+                                    .Where ( v => v.StoryViewId == story.Id)
+                                    .ToListAsync();
+                    story.Chapters = await _context.StoryChapters.Include(p => p.Published)
+                                    .Where( c => c.StoryId == story.Id && c.Order > 0)
+                                    .ToListAsync();
+                    return story;
+                    // return await _context.Stories
+                    //                     .Where(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower())
+                    //                     .Include(c => c.Chapters).ThenInclude( p=>p.Published)
+                    //                     .Include(s => s.ViewCount)
+                    //                     .Include( a => a.Author).ThenInclude( p => p.Photos)
+                    //                     .Include( r => r.Ratings)
+                    //                     .FirstOrDefaultAsync();
+             }
+             return await _context.Stories.SingleOrDefaultAsync(s => s.StoryName.Replace(" ","").Trim().ToLower() == storyName.Replace(" ","").Trim().ToLower());
         }
         public Task<StoryChapter> GetStoryChapter(int id)
         {
@@ -285,6 +309,7 @@ namespace API.Data
                             .Skip(currentChapter)
                             .Take(pageSize)
                             .ToListAsync();          
+
         }
         public async Task<IEnumerable<StoryChapter>> GetStoryChapterLazyloadUp(string storyName,int currentChapter,int pageSize)
         {

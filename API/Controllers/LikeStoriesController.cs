@@ -21,7 +21,7 @@ namespace API.Controllers
         public async Task<ActionResult> AddLikeStory(string storyname)
         {
             var sourceUserId = User.GetUserId();
-            var likedStory = await _unitOfWork.StoryRepository.GetStoryByName(storyname);
+            var likedStory = await _unitOfWork.StoryRepository.GetStoryByName(storyname,false);
             var sourceUser = await _unitOfWork.LikeStoryRepository.GetStoryWithLikeStory(sourceUserId);
             //check liked
             if(likedStory == null)return NotFound();

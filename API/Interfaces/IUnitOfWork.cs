@@ -1,8 +1,9 @@
+using System;
 using System.Threading.Tasks;
 
 namespace API.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IUserRepository UserRepository {get; }
         IMessageRepository MessageRepository {get;}

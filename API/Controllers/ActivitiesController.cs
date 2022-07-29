@@ -46,7 +46,7 @@ namespace API.Controllers
             var userid = User.GetUserId();
             activities.UserActiveId = userid;
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(activities.UserActiveId);
-            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName,false);
             activities.story = story;
             var author = await _unitOfWork.UserRepository.GetUserByIdAsync(story.AuthorId);
             var PointType = await _unitOfWork.ActivitiesRepository.GetPoint(activities.Type);

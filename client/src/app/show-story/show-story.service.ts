@@ -32,7 +32,7 @@ export class ShowStoryService {
   constructor(private http:HttpClient,private accountService:AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
         this.user = user;
-        this.storyParams = new StoryParams(user);
+        this.storyParams = new StoryParams(user); 
         this.viewsParams = new ViewsParams(user);
     })
     if(!this.user){
@@ -52,7 +52,7 @@ export class ShowStoryService {
   }
   resetStoryParams(){
     this.storyParams = new StoryParams(this.user);
-    return this.storyParams;
+    return this.storyParams;  
   }
   getViewsParams(){
     return this.viewsParams;

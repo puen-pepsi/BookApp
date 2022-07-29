@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using API.Interfaces;
 using AutoMapper;
@@ -49,7 +50,11 @@ namespace API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
+        public void Dispose()
+        {
+             _context.Dispose();
+            GC.SuppressFinalize(this);
+        }
         public bool HasChanges()
         {
             return _context.ChangeTracker.HasChanges();

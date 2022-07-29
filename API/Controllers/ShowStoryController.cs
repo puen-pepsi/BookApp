@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -88,7 +89,7 @@ namespace API.Controllers
         [HttpGet("{storyName}")]
         public async Task<ActionResult<StoryDto>> GetStoryByName(string storyName)
         {
-            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName,true);
             if (story == null)
                 return NotFound();
             var StoryShow = _mapper.Map<StoryDto>(story);
@@ -99,13 +100,13 @@ namespace API.Controllers
         public async Task<ActionResult<StoryDto>> AddViews(string storyName)
         {
             var userId = User.GetUserId();
-            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName,false);
             if (story == null)
                 return NotFound();
             //story.Views++;
             var viewHit = new View{
                 UserViewId = userId,
-                StoryViewId = story.Id
+                StoryViewId = story.Id,
             };
             story.ViewCount.Add(viewHit);
             if(await _unitOfWork.Complete()){

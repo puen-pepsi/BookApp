@@ -34,7 +34,7 @@ namespace API.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
-            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName);
+            var story = await _unitOfWork.StoryRepository.GetStoryByName(storyName,false);
             if(story == null)
                 return NotFound();
             storyComment.UserPostId = User.GetUserId();

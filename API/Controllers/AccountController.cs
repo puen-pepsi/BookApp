@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using EmailService;
@@ -17,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     public class AccountController : BaseApiController
     {
         private readonly ITokenService _tokenService;

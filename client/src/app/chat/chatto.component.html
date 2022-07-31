@@ -1,6 +1,6 @@
 
-<div class="row">
-    <div class="col-md-3" fxHide.lt-sm>
+<div fxlayout="row" fxLayoutGap="20px">
+    <div fxFlex="30" fxHide.lt-sm>
         <div class="listname">
             <mat-card *ngFor="let member of (presence.onlineUsers$ | async)" class="mb-1">
             <a routerLink='/members/{{member}}'
@@ -18,7 +18,7 @@
         </div>
 
     </div>
-    <div class="col-md-9">
+    <div fxFlex>
         <mat-toolbar>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
                 <mat-icon>forum</mat-icon>
@@ -82,7 +82,8 @@
                         placeholder="Ex. It makes me feel..."/>
                 </mat-form-field>
                 <mat-action-list fxFlexAlign="start">
-                    <button type="submit" mat-raised-button [disabled]="commentForm.value.content==''">
+                    <button type="submit" mat-raised-button 
+                        [disabled]="!commentForm.valid">
                     <i class="fas fa-paper-plane fa-lg"></i></button>
                 </mat-action-list>
             </form>

@@ -40,7 +40,7 @@
   height: 600px;
 }
 .commnet-items{
-  height: 60px;
+  height: auto;
   /* border:solid 1px; */
   margin-bottom: 0.5rem;
 }
@@ -122,6 +122,7 @@ p {
   
   .mine {
     align-items: flex-end;
+    
   }
   
   .mine .message {
@@ -132,7 +133,6 @@ p {
     // background-repeat:no-repeat
     // background-attachment: fixed;
     position: relative;
-    
   }
   .mine .message p{
     padding: 8px 15px;
@@ -179,3 +179,32 @@ p {
 a{
   text-decoration: none;
 }
+
+::-webkit-scrollbar-thumb
+{
+    
+    border-radius: 5px;
+    background: rgb(232, 232, 232) !important;
+}
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+  
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+::-webkit-scrollbar-track-piece:start {
+    /* Select the top half (or left half) or scrollbar track individually */
+
+  }
+ 
+ ::-webkit-scrollbar-thumb:window-inactive {
+    /* Select the thumb when the browser window isn't in focus */
+    visibility: hidden;
+ }
+ 
+ ::-webkit-scrollbar-button:horizontal:decrement:hover {
+    /* Select the down or left scroll button when it's being hovered by the mouse */
+   visibility: visible;
+  }

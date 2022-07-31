@@ -25,6 +25,8 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
  notEmptyPost = true;
  notscrolly = true;
  theme:string;
+ submiting:boolean = false;
+
   constructor(public chatService : ChatService,
               private fb: FormBuilder,
               private accountService:AccountService,
@@ -42,7 +44,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
   ngOnInit(): void {
     this.chatService.createHubConnection(this.user,"openChat");
     this.commentForm = this.fb.group({
-      content: [''],
+      content: ['',[Validators.required]],
     });
   } 
   loadNext(){
@@ -79,11 +81,15 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
       }, 3000);
     }
   onSubmit() {
-    this.chatService.SendMessags(this.groupname,this.commentForm.value.content).then(()=>{
+    this.submiting = true;
+      this.chatService.SendMessags(this.groupname,this.commentForm.value.content).then(()=>{
         this.commentForm.reset();
         this._scrollToBottom();
-    })
+        this.submiting = false;
+      })
+    
   }
+
   ngOnDestroy(): void {
     this.chatService.stopHubConnection();
   }

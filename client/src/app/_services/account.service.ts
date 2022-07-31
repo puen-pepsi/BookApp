@@ -64,25 +64,25 @@ export class AccountService {
       localStorage.setItem('user',JSON.stringify(user));
       this.currentUserSource.next(user);
       
-      let date = new Date();
-      let expirationDate = this.helper.getTokenExpirationDate(user.token);
-      var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
-      this.autoLogout(secondBetweenTwoDate);
+      // let date = new Date();
+      // let expirationDate = this.helper.getTokenExpirationDate(user.token);
+      // var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
+      // this.autoLogout(secondBetweenTwoDate);
   }
-  autoLogout(expirationDate: number) {
-    //console.log(expirationDate);
-    this.clearTimeout = setTimeout(() => {
-      this.logout();
-    }, expirationDate *1000);
-  }
+  // autoLogout(expirationDate: number) {
+  //   //console.log(expirationDate);
+  //   this.clearTimeout = setTimeout(() => {
+  //     this.logout();
+  //   }, expirationDate *1000);
+  // }
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
     this.router.navigateByUrl('/');
-    if (this.clearTimeout) {
-      clearTimeout(this.clearTimeout);
-    }
+    // if (this.clearTimeout) {
+    //   clearTimeout(this.clearTimeout);
+    // }
   }
   public forgotPassword = (route: string, body: ForgotPasswordDto) => {
     return this.http.post(this.createCompleteRoute(route, this.baseUrl), body);

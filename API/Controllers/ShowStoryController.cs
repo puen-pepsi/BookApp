@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     public class ShowStoryController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;

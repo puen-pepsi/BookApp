@@ -18,33 +18,49 @@ export class RecentChapterComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit(): void {
-    this.showstorySevice.getChapterRecent().subscribe(res => {
-       this.chapters = res;
-    })
+    // this.showstorySevice.getChapterRecent().subscribe(res => {
+    //    this.chapters = res;
+    // })
+    this.loadInitContent()
   }
-  // onScroll() {
-  //   if (this.notscrolly && this.notEmptyPost) {
-  //     // this.spinner.show();
-  //     this.notscrolly = false;
-  //     this.lazyLoad();
-  //   }
-  // }
+
   gotoChapter(storyname:string,index){
     this.router.navigate(['/stories',storyname,'chapters'],{fragment:String(index)});
   }
-  //lazyLoad(){
-    //next page => page ++
-    // const countContent = this.news.length;
-    // this.newsService.getNewsLazyLoad(countContent,this.take).subscribe(res => {
-    //   const newpost = res;
-    //   if(newpost.length ===0){
-    //     this.notEmptyPost = false;
-    //   }
-    //   this.news = this.news.concat(newpost);
-    //   this.notscrolly = true;
-    //});
-  //}
+
   gotoStory(row){
       this.router.navigate(['/stories',row.storyName]);
+  }
+  loadInitContent() {
+    this.showstorySevice.getChapterRecent(0,10).subscribe(data =>{
+      this.chapters = data;
+      // console.log(this.chapters)
+    });
+  }
+
+  onScroll() {
+    if (this.notscrolly && this.notEmptyPost) {
+      //this.spinner.show();
+      this.notscrolly = false;
+      this.loadNextPost();
+      console.log("scroll down")
+     }
+    }
+  // load th next 6 posts
+loadNextPost() {
+  const countContent = this.chapters.length;
+  // console.log(countContent)
+  this.showstorySevice.getChapterRecent(countContent,10)
+    .subscribe( (data: any) => {
+      const newPost = data;
+      //this.spinner.hide();
+      if (newPost.length === 0 ) {
+        this.notEmptyPost =  false;
+      }
+      // add newly fetched posts to the existing post
+      this.chapters = this.chapters.concat(newPost);
+      console.log(this.chapters)
+      this.notscrolly = true;
+    });
   }
 }

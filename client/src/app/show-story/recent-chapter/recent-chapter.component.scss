@@ -16,10 +16,11 @@
 .example-spacer {
     flex: 1 1 auto;
   }
-.recentch{
-  height:460px;
-  overflow:hidden;
-}
+//**edit scroller
+// .recentch{
+//   height:460px;
+//   overflow:hidden;
+// }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .recentch::-webkit-scrollbar {
   display: none;

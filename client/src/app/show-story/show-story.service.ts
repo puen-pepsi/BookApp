@@ -145,8 +145,8 @@ export class ShowStoryService {
       // .toPromise()
       // .then(res => this.list = res as Chapter[]);
   }
-  getChapterRecent(){
-    return this.http.get<Chapter[]>(this.baseUrl+'chapters/getrecentchapter');
+  getChapterRecent(countSize:number,pageSize:number){
+    return this.http.get<Chapter[]>(this.baseUrl+'chapters/getrecentchapter/'+countSize+'/'+pageSize);
   }
   getGenreList(){
     return this.http.get<any[]>(this.baseUrl + 'story/GetAllGenre');

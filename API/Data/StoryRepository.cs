@@ -448,9 +448,9 @@ namespace API.Data
                             .ToListAsync();
         }
 
-        public async Task<IEnumerable<StoryChapter>> GetStoryChapterRecent()
+        public async Task<IEnumerable<StoryChapter>> GetStoryChapterRecent(int currentChapter,int pageSize)
         {
-            DateTime twoweek = DateTime.Now.AddDays(-14);
+            // DateTime twoweek = DateTime.Now.AddDays(-14);
              return await _context.StoryChapters
                             .Include(c => c.Published)
                             .Include(c => c.Story)
@@ -458,7 +458,8 @@ namespace API.Data
                             .ThenInclude( c => c.Photos)
                             // .Where(c => c.Published != null && c.Published.Created > twoweek )
                             .OrderByDescending(c => c.Published.Created)
-                            .Take(5)
+                            .Skip(currentChapter)
+                            .Take(pageSize)
                             .ToListAsync();
         }
     }

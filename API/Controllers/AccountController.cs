@@ -18,7 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ServiceFilter(typeof(LogUserActivity))]
+    
     public class AccountController : BaseApiController
     {
         private readonly ITokenService _tokenService;

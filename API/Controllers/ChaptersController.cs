@@ -36,10 +36,10 @@ namespace API.Controllers
             return Ok(_mapper.Map<IEnumerable<StoryChapter>,IEnumerable<StoryChapterDto>>(ChapterList));
 
         }
-         [HttpGet("getrecentchapter")]
-        public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetRecentChapter()
+         [HttpGet("getrecentchapter/{currentChapter}/{pageSize}")]
+        public async Task<ActionResult<IEnumerable<StoryChapterDto>>> GetRecentChapter([FromRoute] int currentChapter,[FromRoute] int pageSize)
         {
-            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterRecent();
+            var ChapterList = await _unitOfWork.StoryRepository.GetStoryChapterRecent(currentChapter,pageSize);
             if(ChapterList == null)
                 return NotFound();
                 

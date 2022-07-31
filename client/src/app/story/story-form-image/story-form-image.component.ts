@@ -95,7 +95,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     if(id == 0){
-      this.http.post(this.baseUrl + 'story/photos/150/180', formData, {reportProgress: true, observe: 'events'})
+      this.http.post(this.baseUrl + 'story/photos/350/450', formData, {reportProgress: true, observe: 'events'})
             .subscribe(event => {
               if (event.type === HttpEventType.UploadProgress)
                 this.progress = Math.round(100 * event.loaded / event.total);
@@ -104,7 +104,7 @@ export class StoryFormImageComponent implements OnInit,OnDestroy{
               }
             });
     }else{
-      this.http.put(this.baseUrl + 'story/photos/'+id+'/150/180', formData, {reportProgress: true, observe: 'events'})
+      this.http.put(this.baseUrl + 'story/photos/'+id+'/350/450', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

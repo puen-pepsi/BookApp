@@ -22,7 +22,7 @@
 infinite-scroll
 [infiniteScrollDistance]="1"
 [infiniteScrollThrottle]="150"
-(scrolled)="onScroll()">
+(scrolled)="onScrollDown($event)">
 <mat-toolbar>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
@@ -41,10 +41,10 @@ infinite-scroll
 </mat-toolbar>
   <mat-card-content>
     <div *ngIf="news">
-        <div *ngFor="let row of news i as index" >
-        <app-news-card [row]="row"
-                    (deleteId)="deleteNews($event)" ></app-news-card>
-        <mat-divider></mat-divider>
+        <div *ngFor="let row of news" >
+          <app-news-card [row]="row"
+                      (deleteId)="deleteNews($event)" ></app-news-card>
+          <mat-divider></mat-divider>
         </div> 
     </div>
 </mat-card-content>  

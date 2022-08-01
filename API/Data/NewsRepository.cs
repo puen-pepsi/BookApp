@@ -39,8 +39,8 @@ namespace API.Data
         public async Task<IEnumerable<News>> GetNewsLazyLoad(int current, int takesize)
         {
             return await _context.Newses
-                        .Include(x=>x.UserNews)
-                            .ThenInclude(x => x.Photos)
+                        // .Include(x=>x.UserNews)
+                        //     .ThenInclude(x => x.Photos)
                         .OrderByDescending(x => x.NewsCreated)
                         .Skip(current)
                         .Take(takesize)

@@ -146,7 +146,7 @@ export class NewsFormComponent implements OnInit {
     this.newsService.putNews().subscribe(
       res => {
         this.resetForm(form);
-        this.newsService.refreshList();
+        // this.newsService.refreshList();
         this.router.navigate(['news']);
         this.toastr.success("Edit News Success","Information")
       },

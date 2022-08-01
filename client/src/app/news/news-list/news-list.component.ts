@@ -11,23 +11,33 @@ import { NewsService } from 'src/app/_services/news.service';
 export class NewsListComponent implements OnInit {
   news : News[]=[];
   notEmptyPost = true;
-  notscrolly = true;
+  notscrolly = false;
+  newLoad = false;
   take =10;
-  constructor(public newsService:NewsService,private router:Router) { }
+  constructor(public newsService:NewsService,private router:Router) {
+    
+   }
 
   ngOnInit(): void {
-    this.loadnews();
+    // this.loadnews();
+    // console.log("OnInit")
+    this.lazyLoad();
+    
   }
-  onScroll() {
+  onScrollDown(ev:any) {
+    console.log("scroll",ev)
+
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();
       this.notscrolly = false;
       this.lazyLoad();
     }
+    this.notscrolly = true;
   }
   loadnews(){
     this.newsService.getNewsTake(this.take).subscribe(res => {
       this.news = res;
+      console.log("LoadNews")
    });
   }
   lazyLoad(){

@@ -59,6 +59,7 @@ export class ShowListComponent implements OnInit,OnDestroy {
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
+      console.log(this.pagination)
       // this.dataSource.data = response.result;
       // this.obs = this.dataSource.connect();
     });

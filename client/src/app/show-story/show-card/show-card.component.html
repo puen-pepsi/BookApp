@@ -63,10 +63,14 @@
                 [wSize] = "fSize"
                 (ratingUpdated)="onRatingChanged($event)">
                 </app-star-rating-show>
-                <div class="Awards">
+                <div class="Awards" *ngIf="(index+1)+((page-1)*pagesize) < 6"> 
                     <mat-icon >emoji_events</mat-icon>
-                    <span *ngIf="index > -1" class="number">{{(index+1)+((page-1)*pagesize)}} </span>
+                    <!-- <span *ngIf="index > -1" class="number">{{(index+1)+((page-1)*pagesize)}} </span> -->
+                    <span  class="number">{{(index+1)+((page-1)*pagesize)}} </span>
                 </div>
+                <!-- <div class="OnlyNumber" *ngIf="(index+1)+((page-1)*pagesize) > 5">
+                    <span  class="numberWhite">{{(index+1)+((page-1)*pagesize)}} </span>
+                </div> -->
             </div>
 
     </div>

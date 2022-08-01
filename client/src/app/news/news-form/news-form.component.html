@@ -23,6 +23,11 @@
         <input class="form-control" placeholder="Topic News" name="topic" #topic="ngModel"
           [(ngModel)]="newsService.formData.topic" required />
       </div>
+      <div class="mb-3">
+        <label for="headline" class="form-label">Headline News <i class="fas fa-info-circle"></i></label>
+        <textarea  class="form-control" placeholder="headline News" name="headline" #headline="ngModel"
+          [(ngModel)]="newsService.formData.headline" required ></textarea>
+      </div>
       <!-- <div class="mb-3">
         <label for="content" class="form-label">Content <i class="fas fa-info-circle"></i></label>
         <textarea class="form-control"

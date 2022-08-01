@@ -1,6 +1,7 @@
 export class News{
     id:number;
     topic:string;
+    headline:string;
     content:string;
     pictureUrl:string;
     userName:string;
@@ -9,6 +10,7 @@ export class News{
     constructor(){
         this.id=0;
         this.topic="";
+        this.headline="";
         this.content ="";
         this.pictureUrl="";
         this.userName="";

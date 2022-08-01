@@ -11,7 +11,7 @@ namespace API.Extensions
             var old = today- create;
 
             if ( old.Days < 14) return "New";
-            return "On going";
+            return "Ongoing";
         }
     }
 }

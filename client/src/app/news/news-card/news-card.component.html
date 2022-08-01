@@ -9,11 +9,12 @@
             <div class="top">
                <h6><b>{{row.topic | titlecase}}</b></h6>
                 <!-- <p class="text">{{row.content}}</p> -->
-                <div [innerHtml] = "row.content | sanitizeHtml" class="text"></div>
-            </div>
+                <!-- <div [innerHtml] = "row.content | sanitizeHtml" class="text"></div> -->
+                <div><p>{{row.headline | titlecase }}</p></div>
+              </div>
             <div class="create text-muted">
                 <div>
-                    <small>{{row.newsCreated | date }}</small>
+                    <small>{{row.newsCreated | date }}</small>&nbsp;|
                     <small>{{row.newsCreated | timeago}}</small>
                 </div>
                 <div fxLayout="row" fxLayoutAlign=" end">

@@ -8,8 +8,8 @@
         <div class="body">
             <div class="top">
                <span class="title">{{row.topic | titlecase | truncate:[32, '...']}}</span>
-                <!-- <p class="text">{{row.content}}</p> -->
-                <div [innerHtml] = "row.content | sanitizeHtml"></div>
+                <p class="text">{{row.headline}}</p>
+                <!-- <div [innerHtml] = "row.content | sanitizeHtml"></div> -->
             </div>
             <div class="create text-muted">
                 <div>

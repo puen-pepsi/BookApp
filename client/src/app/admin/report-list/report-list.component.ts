@@ -18,16 +18,30 @@ export class ReportListComponent implements OnInit {
   load(){
     this.reportTopicService.getAllReport().subscribe(res=> {
       this.reportlist = res;
+      console.log(this.reportlist)
     })
   }
   onDelete(id:number)
   {
-    this.reportTopicService.deleteReport(id)
+    var report =  this.reportlist.findIndex( r => r.id == id);
+    //delete list report
+    // this.reportTopicService.deleteReport(id)
+    // .subscribe(
+    //   res=>{
+    //      this.load();
+    //   },
+    //   err=>{console.log(err)}
+    // )
+    //delete comment report
+    this.reportTopicService.deleteComment(this.reportlist[report].reportId)
     .subscribe(
-      res=>{
-         this.load();
-      },
-      err=>{console.log(err)}
+      res => {
+        this.reportTopicService.deleteReport(id).subscribe( res => {
+          this.load();
+        })
+      }
     )
+    //---reportType => storyName || "comment"
+    //delet story from report
   }
 }

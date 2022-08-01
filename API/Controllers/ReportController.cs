@@ -46,6 +46,15 @@ namespace API.Controllers
             await _unitOfWork.Repository.DeleteAsync<Report>(model);
             return model;
         }
-        
+        [HttpDelete("comment/{id}")]
+        public async Task<ActionResult<StoryComment>> DeleteComment(int id)
+        {
+            var model = await _unitOfWork.Repository.SelectById<StoryComment>(id);
+            if(model == null){
+                return NotFound();
+            }
+            await _unitOfWork.Repository.DeleteAsync<StoryComment>(model);
+            return model;
+        }
     }
 }

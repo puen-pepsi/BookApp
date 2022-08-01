@@ -25,6 +25,9 @@ export class ReporttopicService {
   deleteReport(id:number){
     return this.http.delete(this.baseUrl + 'report/' + id);
   }
+  deleteComment(id:number){
+    return this.http.delete(this.baseUrl + 'report/comment/' + id);
+  }
   refreshList() {
     this.http.get(this.baseUrl + 'reporttopic')
       .toPromise()

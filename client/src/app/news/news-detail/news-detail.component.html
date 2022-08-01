@@ -9,8 +9,11 @@
                     <small>{{news.newsCreated | date }}</small>
                     <span> | By {{news.userName}}</span>
                 </div>
+                <div class="headline"><p>{{news.headline | titlecase }}</p></div>
             </mat-card-subtitle>
+            
         </mat-card-header>
+        
         <img mat-card-image src="{{news.pictureUrl || './assets/images/blackcover.png'}}" alt="{{news.topic}}" >
         <mat-card-content>
                 <!-- <p class="text">{{news.content}}</p> -->

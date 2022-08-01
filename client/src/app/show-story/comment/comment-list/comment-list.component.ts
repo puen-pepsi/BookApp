@@ -56,7 +56,7 @@ export class CommentListComponent implements OnInit, OnDestroy {
       console.log(res);
     });
   }
-  onReport(event){
+  onReport(event:any){
     this.showService.postReport(event).subscribe(res => {
       console.log(res)
     })

@@ -10,7 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
 export class ReportComponent {  
   @Input() reportType: string;
   @Input() reportId: number;
-  @Output() message = new EventEmitter();
+  @Output() message = new EventEmitter<any>();
   
   constructor(public dialog: MatDialog) { }
 
@@ -26,7 +26,8 @@ export class ReportComponent {
     
     dialogRef.afterClosed().subscribe(result => {
       //console.log('The dialog was closed');
-       if(result !== undefined){
+      
+       if(result !== false){
           if(!(result.reportTopic == '' && result.comment == '')){
             this.message.emit(result);
           }

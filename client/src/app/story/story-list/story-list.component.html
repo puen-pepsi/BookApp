@@ -6,55 +6,7 @@
         <i class="fas fa-plus"></i> Create A Story
       </button>
  </div>
-    <!-- <tabset class="member-tabset">
-        <tab heading='Stories'>
-            <div class="container">
-                <div class="row">
-                  <ng-container *ngIf="storyService.list.length > 0;then first else second"></ng-container>
-                    <ng-template #first>
-                      <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                              <th>Image/StoryName</th>
-                              <th>Type</th>
-                              <th>Chapters</th>
-                              <th>State</th>
-                              <th>Rating</th>
-                              <th>Views</th>
-                              <th></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let row of storyService.list">
-                              <td><img src= "{{row.imageUrl?row.imageUrl:'./assets/images/blackcover.png'}}" alt={{row.storyName}} >
-                                {{row.storyName}}
-                              </td>
-                              <td>{{row.type}}</td>
-                              <td>{{row.totalChapter}}</td>
-                              <td>{{row.state}}</td>
-                              <td>{{row.rating}}</td>
-                              <td>{{row.views}}</td>
-                              <td>
-                                <button (click)="populateForm(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-search"></i> EXPLORE  </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                    </table>
-                    </ng-template>
-                    <ng-template #second>
-                        <div class="text-center p-5">
-                        <p>
-                          I’ve never written a novel or drawn a manga before and this is my first time… then we have only 1 answer then. MAKE. YOUR. DREAMS. COME. TRUE. Write/draw and take a leap of faith. Don’t worry about it being your first time. We are cheering you on!
-                        </p>
-                        </div>
-
-                    </ng-template>
-
-                  </div>
-            </div>
-        </tab>
-
-    </tabset> -->
+ 
     <ng-container *ngIf="storyService.list.length > 0;then first else second"></ng-container>
     <ng-template #first>
           <mat-tab-group mat-tabs #tabGroup>
@@ -63,7 +15,7 @@
             <mat-table [dataSource]="storyService.list" class="mat-elevation-z0">
                 <ng-container matColumnDef="imageUrl">
                   <mat-header-cell *matHeaderCellDef >Name</mat-header-cell>
-                  <mat-cell *matCellDef="let item">
+                  <mat-cell *matCellDef="let item" >
                     <img [src]="item.imageUrl?item.imageUrl:'./assets/images/blackcover.png'" />
                   </mat-cell>
                 </ng-container>
@@ -103,6 +55,12 @@
                     {{item.views}}
                   </mat-cell>
                 </ng-container>
+                <!-- <ng-container matColumnDef="deleted">
+                  <mat-header-cell *matHeaderCellDef [ngClass]="'w-100'">Deleted</mat-header-cell>
+                  <mat-cell *matCellDef="let item" [ngClass]="'w-100'">
+                    {{item.deleted}}
+                  </mat-cell>
+                </ng-container> -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef [ngClass]="'w-150'"></mat-header-cell>
                   <mat-cell *matCellDef="let item" [ngClass]="'w-150'">
@@ -114,53 +72,14 @@
                 <mat-row
                   mat-row
                   (click)="populateForm(row)"
+                  [ngClass]="{'highlight': row.deleted}" 
                   *matRowDef="let row; columns: displayedColumns;"
                   ></mat-row>
+                <!-- <mat-row [ngClass]="{'make-red': row.deleted}" 
+                  *matRowDef="let row; columns: displayedColumns;">
+                </mat-row> -->
+
             </mat-table>
-          <!-- <div class="row">
-
-            <ng-container *ngIf="storyService.list.length > 0;then first else second"></ng-container>
-              <p>{{storyService.list | json}}/p>
-              <ng-template #first>
-                <table class="table table-borderless">
-                  <thead>
-                      <tr>
-                        <th>Image/StoryName</th>
-                        <th>Type</th>
-                        <th>Chapters</th>
-                        <th>State</th>
-                        <th>Rating</th>
-                        <th>Views</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let row of storyService.list">
-                        <td><img src= "{{row.imageUrl?row.imageUrl:'./assets/images/blackcover.png'}}" alt={{row.storyName}} >
-                          {{row.storyName}}
-                        </td>
-                        <td>{{row.type}}</td>
-                        <td>{{row.totalChapter}}</td>
-                        <td>{{row.state}}</td>
-                        <td>{{row.rating}}</td>
-                        <td>{{row.views}}</td>
-                        <td>
-                          <button (click)="populateForm(row)" class='btn btn-outline-primary btn-sm '><i class="fas fa-search"></i> EXPLORE  </button>
-                        </td>
-                      </tr>
-                    </tbody>
-              </table>
-              </ng-template>
-              <ng-template #second>
-                  <div class="text-center p-5">
-                    <p>
-                    I’ve never written a novel or drew a manga before and this is my first time… Ah… then we have only 1 answer then.
-                    <b>MAKE. YOUR. DREAMS. COME. TRUE.</b> Write/Draw and take a leap of faith. Don’t worry about it being your first time. Hey… check out this cool quote by a wise spider;“It’s just a leap of faith.”
-                  </p>
-                  </div>
-
-              </ng-template>
-            </div> -->
         </mat-card>
       </mat-tab>
   </mat-tab-group>

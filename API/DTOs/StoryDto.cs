@@ -17,6 +17,7 @@ namespace API.DTOs
         public string ImageUrl { get; set; }
         public string State { get; set; }
         public string GetState { get; set; }
+        public bool Deleted { get; set; }
         // public string LastChapter { get; set; }
         public int Views { get; set; }
         //user author

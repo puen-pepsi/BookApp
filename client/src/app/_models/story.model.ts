@@ -14,6 +14,7 @@ export class Story{
         userphoto:string;
         totalChapter:number;
         tags:string;
+        deleted:boolean;
         constructor(){
                 this.storyId=0;
                 this.storyName="";
@@ -25,6 +26,7 @@ export class Story{
                 this.userphoto="";
                 this.views=0;
                 this.state="New";
-                this.rating=0;      
+                this.rating=0;
+                this.deleted=false;      
         }
 }

@@ -61,8 +61,9 @@ namespace API.Controllers
             {"email", user.Email }
         };
         var callback = QueryHelpers.AddQueryString(registerDto.ClientURI, param);
+        var userName = user.UserName;
         var message = new MailMessage(new string[] { user.Email }, "Rainobu Email Verification", 
-                $"Please verify your email by clicking this : <a href='{callback}'>link</a>", 
+                $"'{userName}' Please verify your email by clicking this : <a href='{callback}'>link</a>", 
                 null);
         await _emailSender.SendEmailAsync(message);
 

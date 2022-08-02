@@ -21,6 +21,7 @@ namespace API.Entities
         public AppUser Author { get; set; }
         public DateTime Created { get; set; }
         public string Tags { get; set; }
+        public bool Deleted {get;set;}
         public virtual ICollection<PhotoStory> PhotoStories { get; set; }
         public virtual ICollection<StoryChapter> Chapters { get; set; }
         public virtual ICollection<StoryComment> PostComments { get; set; }

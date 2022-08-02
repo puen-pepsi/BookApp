@@ -7,7 +7,8 @@ import { StoryComponent } from './story.component';
 const routes: Routes = [
       {path:'',component:StoryComponent},
       {path:'create',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
-      {path:'edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+      // {path:'edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
+      {path:'edit/:id',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
 ];
 
 @NgModule({

@@ -28,8 +28,8 @@ export class StoryListComponent implements OnInit {
   }
   populateForm(selectedRecord: Story) {
     this.storyService.formData = Object.assign({},selectedRecord);
-    //this.StoryDetail.emit(true);
-    this.router.navigate(['mystory/edit' , this.storyService.formData.storyName])
+    // this.router.navigate(['mystory/edit' , this.storyService.formData.storyName])
+    this.router.navigate(['mystory/edit' , this.storyService.formData.storyId])
     
   }
   // public createImagePath = (serverPath: string) => {

@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MaterialModule } from '../material.module';
 import { ConfirmEmailComponent } from './confirm-email.component';
+import { EmailsendComponent } from './emailsend/emailsend.component';
 
 
 
@@ -25,7 +26,8 @@ import { ConfirmEmailComponent } from './confirm-email.component';
     EmailConfirmationComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    EmailsendComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { ConfirmEmailComponent } from './confirm-email.component';
       {path:'register',component:RegisterComponent},
       {path: 'forgotpassword',component:ForgotPasswordComponent },
       {path:'resetpassword',component:ResetPasswordComponent},
-      {path: 'emailconfirmation', component: EmailConfirmationComponent }
+      {path: 'emailconfirmation', component: EmailConfirmationComponent },
+      {path:'emailsend',component:EmailsendComponent}
     ])
   ],
   exports:[

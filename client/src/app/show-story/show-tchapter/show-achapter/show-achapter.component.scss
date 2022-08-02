@@ -24,3 +24,6 @@
     // font-family: montserrat;
 
 }
+:host ::ng-deep figure {
+  margin: 0 !important; 
+}

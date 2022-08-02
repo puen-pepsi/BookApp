@@ -29,10 +29,11 @@ export class ChapterFormComponent implements OnInit,OnChanges{
   publishCheck:boolean;
   user : User;
   baseApiUrl = environment.apiUrl;
-
+  submitting:boolean=false;
   public Editor = ClassicEditor;
   public EditorData = '';
-  public config = {
+  public config:any;
+  public configNovel = {
       toolbar: [ 'undo', 'redo','|',
                 'heading', '|',
                 '|', 'outdent', 'indent', '|','alignment:left', 'alignment:center','alignment:right' ,
@@ -115,6 +116,57 @@ export class ChapterFormComponent implements OnInit,OnChanges{
 
 
   };
+  public configManga = {
+    toolbar: [ 'imageUpload'],
+             
+               simpleUpload: {
+                // The URL that the images are uploaded to.
+                //uploadUrl: 'https://localhost:5001/api/Image',
+
+                uploadUrl: this.baseApiUrl + 'Image',
+                // Enable the XMLHttpRequest.withCredentials property.
+                // withCredentials: true,
+
+                // // Headers sent along with the XMLHttpRequest to the upload server.
+                // headers: {
+                //     'X-CSRF-TOKEN': 'CSRF-Token',
+                //     Authorization: 'Bearer <JSON Web Token>'
+                // }
+              },
+              image:{
+                 // Configure the available styles.
+                  styles: [
+                      'alignLeft', 'alignCenter', 'alignRight'
+                  ],
+
+                  // Configure the available image resize options.
+                  resizeOptions: [
+                      {
+                          name: 'resizeImage:original',
+                          label: 'Original',
+                          value: null
+                      },
+                      {
+                          name: 'resizeImage:50',
+                          label: '50%',
+                          value: '50'
+                      },
+                      {
+                          name: 'resizeImage:75',
+                          label: '75%',
+                          value: '75'
+                      }
+                  ],
+
+                  // You need to configure the image toolbar, too, so it shows the new style
+                  // buttons as well as the resize buttons.
+                  
+            },
+
+    // This value must be kept in sync with the language defined in webpack.config.js.
+    language: 'en',
+    // style:['height:500px']
+};
   constructor(public storyChapterService:StorychapterService,
               public storyService:StoryService,
               // private accountService:AccountService,
@@ -132,7 +184,9 @@ export class ChapterFormComponent implements OnInit,OnChanges{
 
   ngOnInit(): void {
       // console.log("oninit")
+      this.storyService.formData.type === 'novel'?this.config = this.configNovel:this.config = this.configManga;
       if(this.storyChapterService.formData.storyId > 0)this.EditorData=this.storyChapterService.formData.content;
+      
     }
   // resetContent(){
   //   console.log(this.editorComponent.editorInstance.data.set('')) ;
@@ -141,13 +195,15 @@ export class ChapterFormComponent implements OnInit,OnChanges{
     this.storyChapterService.formData.content = editor.getData();
   }
   onSubmit(form:NgForm) {
+    this.submitting =true;
     // console.log(form);
     if(this.storyChapterService.formData.id == 0) //we will use the id as identifier for updating or insertion
-    this.insertRecord(form);
+          this.insertRecord(form);
     else
-    this.updateRecord(form);
+          this.updateRecord(form);
   }
   insertRecord(form:NgForm) {
+
     this.storyChapterService.postStoryChapter(this.publishCheck).subscribe(
       res => {
         // console.log(res);
@@ -174,6 +230,7 @@ export class ChapterFormComponent implements OnInit,OnChanges{
         })
       })
     }
+    this.submitting =false;
   }
   updateRecord(form: NgForm) {
     this.storyChapterService.putStoryChapter(this.publishCheck).subscribe(
@@ -199,6 +256,7 @@ export class ChapterFormComponent implements OnInit,OnChanges{
         })
       })
     };
+    this.submitting =false;
   }
   public resetForm(form: NgForm) {
     form.form.reset();

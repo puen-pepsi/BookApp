@@ -32,7 +32,6 @@ export class NewsListComponent implements OnInit {
       this.notscrolly = false;
       this.lazyLoad();
     }
-    this.notscrolly = true;
   }
   loadnews(){
     this.newsService.getNewsTake(this.take).subscribe(res => {

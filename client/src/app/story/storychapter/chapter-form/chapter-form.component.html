@@ -1,4 +1,4 @@
-<!-- <p>{{storyChapterService.formData | json}}</p> -->
+<p>{{storyService.formData | json}}</p>
 <form novalidate #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
     <input type="hidden" name="id" value="statusService.formData.id" />
     
@@ -10,7 +10,10 @@
       </div>
       <div style="width: 756px;">
         <label for="content" class="form-label">Content  <i class="fas fa-info-circle"></i></label>
-        <ckeditor #editor  [editor]="Editor" [config]='config' (change)="onChange($event)" 
+        <ckeditor  #editor  
+          [editor]="Editor" 
+          [config]='config' 
+          (change)="onChange($event)" 
           [data]="EditorData">
         </ckeditor>
       </div>
@@ -22,9 +25,9 @@
           <button class="btn btn-primary" type="button" (click)="backToChapter()"><i class="fas fa-arrow-left"></i>  Back To Chapter</button>
         </div>
         <div>
-                <button class="btn btn-danger Header" #publish [disabled]="form.invalid" type="submit" 
+                <button class="btn btn-danger Header" #publish [disabled]="form.invalid || submitting" type="submit" 
                 (click)="createPublish(true)"><i class="fas fa-check"></i>  PUBLISH</button>
-                <button class="btn btn-primary Header " #save type="submit" [disabled]="form.invalid"
+                <button class="btn btn-primary Header " #save type="submit" [disabled]="form.invalid || submitting"
                 (click)="createPublish(false)"><i class="far fa-bookmark"></i>  SAVE</button> 
         </div>
       </div>

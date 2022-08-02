@@ -52,6 +52,7 @@ export class StoryFormComponent implements OnInit {
   //   }
   //}
   selectedTab = 0;
+  submitting:boolean=false;
   constructor(public storyService:StoryService,
               public storyChapterService:StorychapterService,
               private router:Router,
@@ -70,14 +71,14 @@ export class StoryFormComponent implements OnInit {
     this.response = event;
     this.storyService.formData.imageUrl = this.ResoucreUrl + this.response.dbPath;
   }
-  onSearchChange(searchValue: string) {  
-    var char = searchValue.slice(-1);
-    const nameRegexp: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-    if(nameRegexp.test(char)){
-       this.storyService.formData.storyName = '';
-       this.toastr.error("Special Characters","Invalid Characters")
-    }
-  }
+  // onSearchChange(searchValue: string) {  
+  //   var char = searchValue.slice(-1);
+  //   const nameRegexp: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+  //   if(nameRegexp.test(char)){
+  //      this.storyService.formData.storyName = '';
+  //      this.toastr.error("Special Characters","Invalid Characters")
+  //   }
+  // }
   returnToStory(){
     //this.submitSuccess.emit(false);
     this.storyService.formData = new Story();
@@ -85,6 +86,7 @@ export class StoryFormComponent implements OnInit {
   }
   onSubmit(form:NgForm) {
     // console.log(form);
+    this.submitting = true;
     this.submitupload = true;
     
     if(this.storyService.formData.storyId == 0) //we will use the id as identifier for updating or insertion
@@ -102,12 +104,13 @@ export class StoryFormComponent implements OnInit {
         this.storyService.refreshList();
         this.router.navigate(['mystory'])
         this.submitSuccess.emit(false);
-
+        
       },
       err => {
         console.log(err);
       }
     );
+    this.submitting =false;
   }
   updateRecord(form: NgForm) {
     this.storyService.putStory().subscribe(
@@ -122,6 +125,7 @@ export class StoryFormComponent implements OnInit {
         console.log(err);
       }
     );
+    this.submitting = false;
   }
   resetForm(form: NgForm) {
       form.form.reset();

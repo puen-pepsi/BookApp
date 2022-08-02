@@ -19,3 +19,6 @@
     flex-direction: row;
     justify-content: space-between;
 }
+:host ::ng-deep figure {
+    margin: 0 !important; 
+  }

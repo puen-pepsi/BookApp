@@ -43,17 +43,5 @@ export class ShowListVerticalComponent implements OnInit,OnChanges {
       // console.log(res)
     });
   }
-  // lazyLoad(){
-  //   this.lazyloadParams.currentItem = this.showstory.length;
-  //   this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(data => {
-  //     const newPost = data;
-  //    this.spinner.hide();
-  //    if (newPost.length === 0 ) {
-  //      this.notEmptyPost =  false;
-  //    }
-  //    // add newly fetched posts to the existing post
-  //    this.showstory = this.showstory.concat(newPost);
-  //    this.notscrolly = true;
-  //   });
-  // }
+  
 }

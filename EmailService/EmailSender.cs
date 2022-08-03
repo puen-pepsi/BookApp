@@ -92,7 +92,6 @@ namespace EmailService
                     await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, false);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
-
                     await client.SendAsync(mailMessage);
                 }
                 catch

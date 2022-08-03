@@ -20,9 +20,5 @@ export class ShowCarouselComponent implements OnInit {
     // this.lazyloadParams.storyType = this.storyType;
     // this.loadStory(this.storyType);
   }
-  // loadStory(storytype:string){
-  //   this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(res =>{
-  //     this.showstory = res
-  //   });
-  // }
+
 }

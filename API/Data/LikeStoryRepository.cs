@@ -39,7 +39,8 @@ namespace API.Data
             like = like.Where(like => like.SourceUserId == likeStoryParams.UserId);
             storylike = like.Select(like => like.LikedStory);
 
-            var likedStory = storylike.Select(slike => new LikeStoryDto
+            var likedStory = storylike.Where(s => s.Deleted ==false)
+                                       .Select(slike => new LikeStoryDto
             {
                 storyId = slike.Id,
                 storyName = slike.StoryName,

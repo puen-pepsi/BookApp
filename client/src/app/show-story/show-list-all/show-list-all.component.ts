@@ -81,31 +81,9 @@ export class ShowListAllComponent implements OnInit {
       this.notscrolly = true;
       // console.log(this.showstory);
     });
-    // this.lazyloadParams.currentItem = this.showstory.length;
-    // this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(data => {
-    //   const newPost = data;
-    // //  this.spinner.hide();
-    //  if (newPost.length === 0 ) {
-    //    this.notEmptyPost =  false;
-    //  }
-    //  // add newly fetched posts to the existing post
-    //  this.showstory = this.showstory.concat(newPost);
-    //  this.notscrolly = true;
-    // });
+
   }
-  // lazyLoad(){
-  //   this.lazyloadParams.currentItem = this.showstory.length;
-  //   this.showStoryService.getShowStoryLazyLoad(this.lazyloadParams).subscribe(data => {
-  //     const newPost = data;
-  //   //  this.spinner.hide();
-  //    if (newPost.length === 0 ) {
-  //      this.notEmptyPost =  false;
-  //    }
-  //    // add newly fetched posts to the existing post
-  //    this.showstory = this.showstory.concat(newPost);
-  //    this.notscrolly = true;
-  //   });
-  // }
+
   resetFilters(){
     this.seachTerm.nativeElement.value = '';
     this.storyParams = this.showStoryService.resetStoryParams();

@@ -41,7 +41,9 @@ namespace API.Data
             //storyHistory = History.Select( x => x.HistoryStory);
 
             storyHistory = History.Select(History => History.HistoryStory);
-            var historyStory = storyHistory.Select(uHistory => new HistoryStoryDto
+            var historyStory = storyHistory
+                .Where(d => d.Deleted == false)
+                .Select(uHistory => new HistoryStoryDto
             {
                 storyId = uHistory.Id,
                 storyName = uHistory.StoryName,

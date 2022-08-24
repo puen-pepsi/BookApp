@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Genres } from 'src/app/_models/genre';
 import { GenreService } from 'src/app/_services/genre.service';
@@ -11,7 +11,7 @@ import { GenreService } from 'src/app/_services/genre.service';
 })
 export class GenreFormComponent implements OnInit {
   constructor(public genreService:GenreService,
-      private toastr:ToastrService,private fb:FormBuilder) { }
+      private toastr:ToastrService,private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }

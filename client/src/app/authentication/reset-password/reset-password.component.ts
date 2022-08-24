@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/_services/account.service';
 import { PasswordConfirmationValidatorService } from './custom-validaors/password-confirmation-validator.service';
@@ -11,7 +11,7 @@ import { ResetPasswordDto } from 'src/app/_models/ResetPasswordDto';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  public resetPasswordForm: FormGroup;
+  public resetPasswordForm: UntypedFormGroup;
   public showSuccess: boolean;
   public showError: boolean;
   public errorMessage: string;
@@ -23,9 +23,9 @@ export class ResetPasswordComponent implements OnInit {
     private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.resetPasswordForm = new FormGroup({
-      password: new FormControl('', [Validators.required]),
-      confirm: new FormControl('')
+    this.resetPasswordForm = new UntypedFormGroup({
+      password: new UntypedFormControl('', [Validators.required]),
+      confirm: new UntypedFormControl('')
     });
     this.resetPasswordForm.get('confirm').setValidators([Validators.required,
       this._passConfValidator.validateConfirmPassword(this.resetPasswordForm.get('password'))]);

@@ -5,7 +5,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 
 
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
-import {  FormControl, NgForm } from '@angular/forms';
+import {  UntypedFormControl, NgForm } from '@angular/forms';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -41,7 +41,7 @@ export class StoryFormComponent implements OnInit {
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
+  tagCtrl = new UntypedFormControl();
   filteredTags: Observable<string[]>;
   tags: string[] = ['Rainobu'];
   // allTags: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { ReportTopic } from 'src/app/_models/reporttopic';
 import { ReporttopicService } from 'src/app/_services/reporttopic.service';
 
@@ -10,7 +10,7 @@ import { ReporttopicService } from 'src/app/_services/reporttopic.service';
 })
 export class ReporttopicFormComponent implements OnInit {
   constructor(public reportTopicService :ReporttopicService,
-    private fb:FormBuilder) { }
+    private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }

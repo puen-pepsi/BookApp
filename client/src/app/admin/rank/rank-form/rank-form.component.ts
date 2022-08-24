@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { Rank } from 'src/app/_models/rank.model';
 import { RankService } from 'src/app/_services/rank.service';
 
@@ -10,7 +10,7 @@ import { RankService } from 'src/app/_services/rank.service';
 })
 export class RankFormComponent implements OnInit {
   constructor(public rankService :RankService,
-    private fb:FormBuilder) { }
+    private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,5 @@
 import { Input, Component, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { ActivitiesService } from 'src/app/_services/activities.service';
 import { CommentService } from 'src/app/_services/comment.service';
@@ -15,11 +15,11 @@ export class ReplyComponent implements OnInit {
   @Input('commentId') commentId: string;
   @Input('replyId') replyId: string;
   @Input('storyName') storyname:string;
-  replyForm: FormGroup;
+  replyForm: UntypedFormGroup;
   activitiesType = ActivitiesType.writeComment;
   activitiesTimer = true;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public commentService:CommentService,
     private activitiesService:ActivitiesService
     ){}

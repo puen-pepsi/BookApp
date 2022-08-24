@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { Status } from 'src/app/_models/status.model';
 import { StatusService } from 'src/app/_services/status.service';
 
@@ -10,7 +10,7 @@ import { StatusService } from 'src/app/_services/status.service';
 })
 export class StatusFormComponent implements OnInit {
   constructor(public statusService:StatusService,
-    private fb:FormBuilder) { }
+    private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }

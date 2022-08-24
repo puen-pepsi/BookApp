@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { timeStamp } from 'console';
 import { ForgotPasswordDto } from 'src/app/_models/forgotpasswordDto';
 import { AccountService } from 'src/app/_services/account.service';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  public forgotPasswordForm: FormGroup
+  public forgotPasswordForm: UntypedFormGroup
   public successMessage: string;
   public errorMessage: string;
   public showSuccess: boolean;
@@ -54,8 +54,8 @@ export class ForgotPasswordComponent implements OnInit {
     })
   }
   resetForm(){
-    this.forgotPasswordForm = new FormGroup({
-      email: new FormControl("", [Validators.required])
+    this.forgotPasswordForm = new UntypedFormGroup({
+      email: new UntypedFormControl("", [Validators.required])
     })
   }
 }

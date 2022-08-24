@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { delay, take } from 'rxjs/operators';
 import { Message } from 'src/app/_models/message';
@@ -21,12 +21,12 @@ export class MemberMessagesComponent implements OnInit,AfterViewInit,OnDestroy{
   scrollToIndex$: Subject<void> = new Subject();
   @Input() messages: Message[];
   @Input() username: string;
-  commentForm: FormGroup;
+  commentForm: UntypedFormGroup;
   user:User;
   //fix message
   //loading=false;
   constructor(public messageService:MessageService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private accountService:AccountService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }

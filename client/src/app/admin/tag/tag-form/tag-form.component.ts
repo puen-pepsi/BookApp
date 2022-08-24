@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { Tags } from 'src/app/_models/tag';
 import { TagsService } from 'src/app/_services/tags.service';
 
@@ -10,7 +10,7 @@ import { TagsService } from 'src/app/_services/tags.service';
 })
 export class TagFormComponent implements OnInit {
   constructor(public tagsService :TagsService,
-    private fb:FormBuilder) { }
+    private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }

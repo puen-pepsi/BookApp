@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
@@ -16,7 +16,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit {
   @ViewChild(CdkVirtualScrollViewport)
   public virtualScrollViewport?: CdkVirtualScrollViewport;
  user:User;
- commentForm: FormGroup;
+ commentForm: UntypedFormGroup;
  groupname="openChat"
  notEmptyPost = true;
  notscrolly = true;
@@ -24,7 +24,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit {
  submiting:boolean = false;
 
   constructor(public chatService : ChatService,
-              private fb: FormBuilder,
+              private fb: UntypedFormBuilder,
               private accountService:AccountService,
               public presence:PresenceService) { 
                   this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);

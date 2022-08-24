@@ -17,7 +17,7 @@ import { ShowStoryService } from 'src/app/show-story/show-story.service';
 import { RankService } from 'src/app/_services/rank.service';
 import { Rank } from 'src/app/_models/rank.model';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MemberLike } from 'src/app/_models/memberlike';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -37,7 +37,7 @@ export class MemberProfileComponent implements OnInit {
   author:string;
   allRank : Rank[] = [];
   rank:string;
-  selected = new FormControl(0);
+  selected = new UntypedFormControl(0);
   // backgroundUrl="https://localhost:5001/Resources/images/f583a490-da7e-45ca-acdd-0d486e6e31a6.jpeg";
   constructor(public presence:PresenceService,
       private memberService:MembersService,

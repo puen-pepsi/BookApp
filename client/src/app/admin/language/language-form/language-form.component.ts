@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { Language } from 'src/app/_models/language.model';
 import { LanguageService } from 'src/app/_services/language.service';
 
@@ -11,7 +11,7 @@ import { LanguageService } from 'src/app/_services/language.service';
 export class LanguageFormComponent implements OnInit {
 
   constructor(public languageService:LanguageService,
-    private fb:FormBuilder) { }
+    private fb:UntypedFormBuilder) { }
 
 ngOnInit(): void {
 }

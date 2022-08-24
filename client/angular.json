@@ -142,6 +142,5 @@
     "@schematics/angular:component": {
       "styleext": "scss"
     }
-  },
-  "defaultProject": "client"
+  }
 }

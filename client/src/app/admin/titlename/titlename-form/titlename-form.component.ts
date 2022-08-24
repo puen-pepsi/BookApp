@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { UntypedFormBuilder, NgForm } from '@angular/forms';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { TitleName } from 'src/app/_models/titlename.model';
 import { TitlenameService } from 'src/app/_services/titlename.service';
@@ -13,7 +13,7 @@ export class TitlenameFormComponent implements OnInit {
     activitiesType = ActivitiesType;
     enumKeys=[];
   constructor(public titlenameService :TitlenameService,
-    private fb:FormBuilder) { 
+    private fb:UntypedFormBuilder) { 
         this.enumKeys=Object.keys(this.activitiesType).filter(f => !isNaN(Number(f)));
       }
 

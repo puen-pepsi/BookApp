@@ -7,20 +7,25 @@
     // background-color: #000000;
     // margin-bottom: 15px;
 }
-.image{
+// .image{
+//     height: 65px;
+//     width: 98px;
+//     object-fit: cover;
+//     overflow: hidden;
+// }
+// .image img{
+//     // height: 130px;
+//     //height: 100%;
+//     border-radius: 5px;
+//     overflow: hidden;
+//     border:white solid 0.2px;
+// }
+img {
     height: 65px;
-    width: 98px;
-    max-width: 100px;
+    width:98px;
     object-fit: cover;
-    overflow: hidden;
-}
-.image img{
-    // height: 130px;
-    //height: 100%;
-    width:100%;
     border-radius: 5px;
     overflow: hidden;
-    border:white solid 0.2px;
 }
 .main{
     display: flex;

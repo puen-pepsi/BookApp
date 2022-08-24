@@ -1,24 +1,20 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { ChatService } from '../_services/chat.service';
 import { PresenceService } from '../_services/presence.service';
-import { ThemeService } from '../_services/theme.service';
 
 @Component({
   selector: 'app-chatto',
   templateUrl: './chatto.component.html',
   styleUrls: ['./chatto.component.scss']
 })
-export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges {
+export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit {
   @ViewChild(CdkVirtualScrollViewport)
   public virtualScrollViewport?: CdkVirtualScrollViewport;
-
  user:User;
  commentForm: FormGroup;
  groupname="openChat"
@@ -33,9 +29,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
               public presence:PresenceService) { 
                   this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
               }
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log("change")
-  }
+
   ngAfterViewInit(): void {
     // this.virtualScrollViewport.scrollTo({bottom:0});
     this._scrollToBottom();
@@ -67,6 +61,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
       //     }),
       //   1000
       // );
+
       setTimeout(() => {
         this.virtualScrollViewport.scrollTo({
           bottom: 0,
@@ -79,6 +74,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit,OnChanges
           behavior: 'smooth',
         });
       }, 3000);
+
     }
   onSubmit() {
     this.submiting = true;

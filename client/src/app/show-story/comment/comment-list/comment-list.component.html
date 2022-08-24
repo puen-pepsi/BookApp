@@ -1,69 +1,130 @@
 <!-- <div class="mt-2" *ngFor="let comment of comments; let i = index"> -->
-<ng-container *ngIf="(commentService.commentThread$ | async)?.length > 0">
-  <cdk-virtual-scroll-viewport itemSize="120" minBufferPx="960" maxBufferPx="1920" class="container">
-  <div  *cdkVirtualFor="let comment of (commentService.commentThread$ | async);let i =index ">
-    <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
-      <ng-template #first>
-        <div *ngIf="comment.parentId==null  && comment.chapterId==null "
-          class="commentlist">
-            <!-- <div class="created">
-            </div> -->
-            <div class="left ">
-                    <app-label-name
-                      (username)="gotoMember($event)"
-                      [pHeight]= '35'
-                      [imageUrl]='comment.image'
-                      [userName]='comment.userName'
-                      [knownAs]='comment.knownAs'
-                      [title]='comment.title'
-                      [point]='comment.point'>
-                    </app-label-name>
-            </div>
-             <div class="right">
-              <div id="rconners1">
-                <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
-                <p>{{comment.content}}</p>
+    <!-- <cdk-virtual-scroll-viewport 
+      itemSize="120" 
+      class="viewport">  
+    <ng-container  *cdkVirtualFor="let comment of (commentService.commentThread$ | async);
+          let i =index ;let count = count; " 
+      class="view-item">
+      <ng-container *ngIf="commentChapter==null;then first else second"></ng-container>
+        <ng-template #first>
+          <div *ngIf="comment.parentId==null  && comment.chapterId==null "
+            class="commentlist">
+              <div class="left ">
+                      <app-label-name
+                        (username)="gotoMember($event)"
+                        [pHeight]= '35'
+                        [imageUrl]='comment.image'
+                        [userName]='comment.userName'
+                        [knownAs]='comment.knownAs'
+                        [title]='comment.title'
+                        [point]='comment.point'>
+                      </app-label-name>
               </div>
-              <div fxLayout="row" fxLayoutAlign="start center" >
-                <button mat-button>
-                  <like [likeCount]="comment.liked.length"
-                      [isActive]="comment.liked.includes(commentService.user.username)"
-                      [usersLike]="comment.liked"
-                      (commentId)="addLike(comment.id)"></like>
-                </button>
-                <button
-                  mat-button color="primary"
-                  (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
-                </button>
-                <button *ngIf="comment.userName === commentService.user.username"
-                  mat-button (click)="onDeleteComment(comment.id)">
-                  Remove
-                </button>
-                <button *appHasRole='["Admin"]'
-                  mat-button (click)="onDeleteComment(comment.id)">
-                  Remove
-                </button>
-                <app-report *ngIf="comment.userName !== commentService.user.username"
-                    [reportType]="'comment'"
-                    [reportId]="comment.id"
-                    (message)="onReport($event)">
-                </app-report>
+              <div class="right">
+                <div id="rconners1">
+                  <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
+                  <p>{{comment.content}}</p>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" >
+                  <button mat-button>
+                    <like [likeCount]="comment.liked.length"
+                        [isActive]="comment.liked.includes(commentService.user.username)"
+                        [usersLike]="comment.liked"
+                        (commentId)="addLike(comment.id)"></like>
+                  </button>
+                  <button
+                    mat-button color="primary"
+                    (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
+                  </button>
+                  <button *ngIf="comment.userName === commentService.user.username"
+                    mat-button (click)="onDeleteComment(comment.id)">
+                    Remove
+                  </button>
+                  <button *appHasRole='["Admin"]'
+                    mat-button (click)="onDeleteComment(comment.id)">
+                    Remove
+                  </button>
+                  <app-report *ngIf="comment.userName !== commentService.user.username"
+                      [reportType]="'comment'"
+                      [reportId]="comment.id"
+                      (message)="onReport($event)">
+                  </app-report>
+                </div>
+                <mat-divider></mat-divider>
               </div>
-              <mat-divider></mat-divider>
             </div>
+            <div>
+              <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+                [storyName]='this.storyName'></app-reply-form>
+
           </div>
-          <div>
-          <mat-action>
-            <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
-              [storyName]='this.storyName'></app-reply-form>
-          </mat-action>
-        </div>
-      </ng-template>
-      <ng-template #second>
-        <div *ngIf="comment.chapterId===commentChapter"
-          class="commentlist">
-            <div class="left">
-              <app-label-name
+        </ng-template>
+        <ng-template #second>
+          <div *ngIf="comment.chapterId===commentChapter"
+            class="commentlist">
+              <div class="left">
+                <app-label-name
+                (username)="gotoMember($event)"
+                [pHeight]= '35'
+                [imageUrl]='comment.image'
+                [userName]='comment.userName'
+                [knownAs]='comment.knownAs'
+                [title]='comment.title'
+                [point]='comment.point'>
+              </app-label-name>
+              </div>
+              <div class="right">
+                <div id="rconners1">
+                  <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
+                  <p>{{comment.content}}</p>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" >
+                  <button mat-button>
+                    <like [likeCount]="comment.liked.length"
+                        [isActive]="comment.liked.includes(commentService.user.username)"
+                        [usersLike]="comment.liked"
+                        (commentId)="addLike(comment.id)"></like>
+                  </button>
+                  <button
+                    mat-button color="primary"
+                    (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
+                  </button>
+                  <button *ngIf="comment.userName === commentService.user.username"
+                    mat-button (click)="onDeleteComment(comment.id)">
+                    Remove
+                  </button>
+                  <button *appHasRole='["Admin"]'
+                    mat-button (click)="onDeleteComment(comment.id)">
+                    Remove
+                  </button>
+                  <app-report *ngIf="comment.userName !== commentService.user.username"
+                      [reportType]="'comment'"
+                      [reportId]="comment.id"
+                      (message)="onReport($event)">
+                  </app-report>
+                </div>
+              </div>
+            </div>
+            <div>
+                <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+                  [storyName]='this.storyName'></app-reply-form>
+            </div>
+        </ng-template>
+  </ng-container>
+ </cdk-virtual-scroll-viewport> -->
+
+
+<cdk-virtual-scroll-viewport #scroller
+    itemSize="120" 
+    class="viewport">
+    <div class="viewport-header">Total Comments:{{commentlist.length}}</div>
+    <!-- <div *ngIf="commentlist.length>0;else other_content" > -->
+      <ng-container  *cdkVirtualFor="let comment of commentlist;
+            let i = index ;let count = count; " 
+        class="view-item">
+        <div  class="commentlist">
+          <div class="left ">
+            <app-label-name
               (username)="gotoMember($event)"
               [pHeight]= '35'
               [imageUrl]='comment.image'
@@ -72,49 +133,52 @@
               [title]='comment.title'
               [point]='comment.point'>
             </app-label-name>
-            </div>
-            <div class="right">
-              <div id="rconners1">
-                <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
-                <p>{{comment.content}}</p>
-              </div>
-              <div fxLayout="row" fxLayoutAlign="start center" >
-                <button mat-button>
-                  <like [likeCount]="comment.liked.length"
-                      [isActive]="comment.liked.includes(commentService.user.username)"
-                      [usersLike]="comment.liked"
-                      (commentId)="addLike(comment.id)"></like>
-                </button>
-                <button
-                  mat-button color="primary"
-                  (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
-                </button>
-                <button *ngIf="comment.userName === commentService.user.username"
-                  mat-button (click)="onDeleteComment(comment.id)">
-                  Remove
-                </button>
-                <button *appHasRole='["Admin"]'
-                  mat-button (click)="onDeleteComment(comment.id)">
-                  Remove
-                </button>
-                <app-report *ngIf="comment.userName !== commentService.user.username"
-                    [reportType]="'comment'"
-                    [reportId]="comment.id"
-                    (message)="onReport($event)">
-                </app-report>
-              </div>
-            </div>
           </div>
-          <div>
-            <mat-action>
-              <app-reply-form [commentId]="comment.id" *ngIf="togglePanel[i]"
+          <div class="right">
+            <div id="rconners1">
+              <div id="showtime"><small class="text-muted ">{{comment.created | timeago}}</small></div>
+              <p>{{comment.content}}</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" >
+              <button mat-button>
+                <like [likeCount]="comment.liked.length"
+                    [isActive]="comment.liked.includes(commentService.user.username)"
+                    [usersLike]="comment.liked"
+                    (commentId)="addLike(comment.id)"></like>
+              </button>
+              <button
+                mat-button color="primary"
+                (click)="togglePanel[i] = !togglePanel[i]"><i class="far fa-comment"></i>
+              </button>
+              <button *ngIf="comment.userName === commentService.user.username"
+                mat-button (click)="onDeleteComment(comment.id)">
+                Remove
+              </button>
+              <button *appHasRole='["Admin"]'
+                mat-button (click)="onDeleteComment(comment.id)">
+                Remove
+              </button>
+              <app-report *ngIf="comment.userName !== commentService.user.username"
+                  [reportType]="'comment'"
+                  [reportId]="comment.id"
+                  (message)="onReport($event)">
+              </app-report>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+         </div>
+      
+          <div *ngIf="togglePanel[i]">
+              <app-reply-form [commentId]="comment.id" 
                 [storyName]='this.storyName'></app-reply-form>
-            </mat-action>
           </div>
-
-      </ng-template>
-  </div>
- </cdk-virtual-scroll-viewport>
-</ng-container>
-
+         
+      </ng-container>
+  <!-- </div> -->
+  <!-- <ng-template #other_content>
+    <div class="empty" >
+      Waiting Your Comment...
+    </div>
+  </ng-template> -->
+</cdk-virtual-scroll-viewport>
 

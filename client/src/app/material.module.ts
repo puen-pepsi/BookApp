@@ -27,6 +27,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [MatSliderModule,
@@ -48,7 +49,6 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatSortModule,
         MatCarouselModule,
         MatDialogModule,
-
         MatCheckboxModule,
         MatRadioModule,
         MatExpansionModule,
@@ -56,7 +56,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatMenuModule,
         MatTooltipModule,
         MatSlideToggleModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule
     ],
     exports: [MatSliderModule,
         MatSnackBarModule,
@@ -84,7 +85,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatMenuModule,
         MatTooltipModule,
         MatSlideToggleModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule
     ]
 })
 export class MaterialModule { }

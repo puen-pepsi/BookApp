@@ -38,7 +38,11 @@
                     No messages yet... say hi by using the message box below
                 </div>
                 <div *ngIf="(chatService.commentThread$ | async )?.length > 0">
-                    <cdk-virtual-scroll-viewport itemSize="60" minBufferPx="1260" maxBufferPx="6000"
+                    <cdk-virtual-scroll-viewport 
+                        #scroller
+                        itemSize="60" 
+                        minBufferPx="1260" 
+                        maxBufferPx="6000"
                      class="container">
                     <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)"
                             class="commnet-items">

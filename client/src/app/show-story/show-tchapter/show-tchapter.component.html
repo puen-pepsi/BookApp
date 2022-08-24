@@ -109,50 +109,38 @@
               <mat-icon (click)="toggleCommentChapter()" >close</mat-icon>
           </div>
         </mat-card >
-        <mat-card class="p-0 mat-elevation-z0" >
-          <app-comment [comments]="comments" *ngIf="user"
-                    [commentChapter]="commentChapter"></app-comment>
+        <mat-card class="content mat-elevation-z0" style="height:100%">
+          <app-comment *ngIf="user"
+                    [commentChapter]="commentChapter">
+          </app-comment>
           <div class="memberarea">
             <span><mat-icon>groups</mat-icon></span>
             <h5 *ngIf="!user">Members’ area</h5>
           </div>
         </mat-card>
 
-        </div>
+      </div>
     </div>
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowComment" >
       <div class="section-nav" >
-        <!-- <div class="header">
-          <h5>Novel Comment</h5>
-          <div class="rightCircle">
-              <mat-icon (click)="toggleComment()" >close</mat-icon>
-          </div>
-        </div> -->
         <mat-card class="header mat-elevation-z0">
                   <h5>Novel Comment</h5>
                   <div class="rightCircle">
                     <mat-icon (click)="toggleComment()" >close</mat-icon>
                 </div>
         </mat-card>
-        <mat-card class="p-0 mat-elevation-z0">
-            <mat-card-content>
-              <app-comment *ngIf="user" [comments]="comments"></app-comment>
+        <mat-card class="mat-elevation-z0" style="height:100%">
+              <app-comment *ngIf="user" 
+                [commentChapter]="null"></app-comment>
               <div class="memberarea">
                 <span><mat-icon>groups</mat-icon></span>
                 <h5 *ngIf="!user">Members’ area</h5>
               </div>
-            </mat-card-content>
         </mat-card>
       </div>
     </div>
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowSetting" >
       <div class="section-nav" >
-        <!-- <div class="header">
-          <h5>Settings</h5>
-          <div class="rightCircle">
-              <mat-icon (click)="toggleSetting()" [inline]="true">close</mat-icon>
-          </div>
-        </div> -->
         <mat-card class="header mat-elevation-z0">
           <h5>Settings</h5>
           <div class="rightCircle">

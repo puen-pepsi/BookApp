@@ -74,8 +74,7 @@
   /* margin-left: 1rem; */
   /* margin-right:  -30px; */
   width: 100%;
-  overflow-y:scroll;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100vh;
   align-self: start;
   // border-left: 1px solid rgb(218, 223, 228);
@@ -139,4 +138,29 @@
   overflow: hidden;
   text-overflow: ellipsis;
   /* font-weight: bold; */
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100vh;
+
+  // li {
+  //   height: 100px;
+  // }
+
+  // Bonus points
+  &::-webkit-scrollbar {
+      height: 5px;
+      width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+      background-color: rgb(44, 44, 44,0) !important;
+    
+  }
+
+  &::-webkit-scrollbar-thumb {
+      
+      border-radius: 5px;
+       background: rgb(232, 232, 232) !important;
+  }
 }

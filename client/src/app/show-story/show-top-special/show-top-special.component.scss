@@ -82,15 +82,15 @@ div.mat-expansion-panel-body {
   background-repeat :no-repeat ;
   background-size:cover;
 }
-
+.toprank{
+  width : 100%;
+}
 .toprank > ul {
-  margin-top: 40px;
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: row;
+  display: flex; 
   justify-content: center;
-  flex-wrap: wrap;
-  min-height: 550px;
+  margin-top: 80px;
+  padding-bottom: 20px;
+  min-height: 300px;
   height: 100%;
   padding-left: 0;
 }
@@ -98,7 +98,7 @@ div.mat-expansion-panel-body {
   width: 230px;
 }
 .toprank >ul> li:first-child{
-  padding-top: 4%;
+  // padding-top: 4%;
   display: block;
   // align-self: flex-start;
   //position: relative;
@@ -106,7 +106,7 @@ div.mat-expansion-panel-body {
   z-index: 1;
 }
 .toprank >ul> li:nth-child(2){
-  padding-top: 14%;
+  // padding-top: 14%;
   display: block;
   // align-self: flex-start;
   z-index: 2;
@@ -115,7 +115,7 @@ div.mat-expansion-panel-body {
   // }
 }
 .toprank >ul> li:nth-child(3){
-  padding-top: 18%;
+  // padding-top: 18%;
   display: block;
   // align-self: flex-start;
   z-index: 3;
@@ -170,24 +170,20 @@ div.mat-expansion-panel-body {
 
 /* Small screens */
 @media only screen and (max-width: 768px) {
-  .toprank{
-    background-image: none;
-    background-repeat :no-repeat ;
-    background-size:auto;
-    background-position: bottom;
-  }
+  // .toprank{
+  //   background-image: none;
+  //   background-repeat :no-repeat ;
+  //   background-size:auto;
+  //   background-position: bottom;
+  // }
   .item{
     margin-top: 10px;
   }
-  .toprank >ul> li:first-child{
-    order:1;
+  .toprank > ul {
+    flex-direction: column;
+    align-items: center;
   }
-  .toprank >ul> li:nth-child(2){
-    order:2;
-  }
-  .toprank >ul> li:nth-child(3){
-    order:3;
-  }
+
   .stand{
     border: solid 1px rgb(158, 158, 158);
     padding : 20px 10px 25px 10px;
@@ -197,28 +193,15 @@ div.mat-expansion-panel-body {
 
 /* Large screens */
 @media only screen and (min-width: 768px) {
-  .toprank{
-    background-image: url("/assets/images/leaderboard.png");
-    background-repeat :no-repeat ;
-    background-size:auto;
-    background-position: bottom;
-  }
-  .toprank >ul> li:first-child{
-    order:2;
-  }
-  .toprank >ul> li:nth-child(2){
-    order:1;
-  }
-  .toprank >ul> li:nth-child(3){
-    order:3;
-  }
-.stand{
-  border:none;
-  padding : 140px 10px 25px 10px;
-
-  h1{
-    display: none;
-  }
-}
+ 
+  // .toprank >ul> li:first-child{
+  //   order:2;
+  // }
+  // .toprank >ul> li:nth-child(2){
+  //   order:1;
+  // }
+  // .toprank >ul> li:nth-child(3){
+  //   order:3;
+  // }
 
 }

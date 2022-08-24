@@ -1,8 +1,18 @@
-.container{
-    height: calc(100vh - 200px);
-    /* height: 480px; */
-    /* width: 100%; */
+// .container{
+//    height: calc(100vh - 200px);
+//     /* height: 480px; */
+//     /* width: 100%; */
+// }
+.viewport{
+   height: 100%;
 }
+.view-item{
+    height: 120px;
+    // padding:0 5px;
+}
+// div .view-item .commentlist:empty{
+//     display: none;
+// }
 .commentlist{
     display: flex;
     flex-direction: column;
@@ -16,6 +26,12 @@
     /* border:solid 1px; */
     box-sizing: border-box;
     
+}
+.commentlist p{
+    margin-bottom:0;
+}
+.commentlist:empty{
+    display: none;
 }
 .comment{
     padding:0px 5px 0px 5px;
@@ -65,7 +81,7 @@
     position: relative;
     top: -10px;
     margin-left: 45px;
-    padding:2px 2px 2px 2px;
+    padding:2px 2px 2px 0px;
     width: auto;
     z-index: 1;
 }
@@ -81,4 +97,45 @@
     right:1rem;
     justify-content: end;
 }
+.togglePanel{
+    height: 200px;
+}
+.empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+}
+.viewport-header{
+    height: 30px;
+    opacity: 0.5;
+    // background: lightgray;
+}
+// .spinner-item {
+//     display: grid;
+//     place-items: center;
+//     margin-top: 10px;
+// }
+cdk-virtual-scroll-viewport {
+    // height: calc(100vh - 160px);
+    li {
+      height: 100px;
+    }
 
+    // Bonus points
+    &::-webkit-scrollbar {
+        height: 5px;
+        width: 5px;
+    }
+  
+    &::-webkit-scrollbar-track {
+        background-color: rgb(44, 44, 44,0) !important;
+      
+    }
+  
+    &::-webkit-scrollbar-thumb {
+        
+        border-radius: 5px;
+         background: rgb(232, 232, 232) !important;
+    }
+  }

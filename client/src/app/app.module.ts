@@ -63,6 +63,7 @@ import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { StoryModule } from './story/story.module';
+import {LazyImgDirective} from './_directives/img.directive'
 // import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { StoryModule } from './story/story.module';
     HomeCarouselComponent,
     NullWithDefaultPipe,
     TermOfServiceComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    LazyImgDirective
  ],
   imports: [
     BrowserModule,

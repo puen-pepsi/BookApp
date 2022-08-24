@@ -1,7 +1,9 @@
 // import { Comment } from './../comment.model';
-import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { StoryComment } from 'src/app/_models/storycomment';
 import { CommentService } from 'src/app/_services/comment.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
 import { ShowStoryService } from '../../show-story.service';
@@ -12,21 +14,45 @@ import { ShowStoryService } from '../../show-story.service';
   styleUrls: ['./comment-list.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentListComponent implements OnInit, OnDestroy {
+export class CommentListComponent implements OnInit, OnDestroy ,OnChanges{
    @Input() commentChapter:number;
-
+   commentlist:StoryComment[]=[];
+  // @ViewChild('scroller') scroller:CdkVirtualScrollViewport;
   storyName: string;
   showReply = false;
   togglePanel: any = {};
   commentSub: Subscription;
-
+  
   constructor(
     public commentService:CommentService,
     private route: ActivatedRoute,
     private router:Router,
     private confirmService:ConfirmService,
     private showService : ShowStoryService,
-  ) {}
+  ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.commentChapter)
+    this.commentSub = this.commentService.commentThread$.subscribe(comments =>{
+      this.commentlist = comments.filter(comment=> comment.chapterId == this.commentChapter 
+              && comment.parentId == null);
+      console.log(this.commentlist)
+      //story comment => chapter == null && parentId = null
+  })
+
+  }
+  // ngAfterViewInit(): void {
+  //   this.scroller.elementScrolled().pipe(
+  //     map(() => this.scroller.measureScrollOffset('bottom')),
+  //     pairwise(),
+  //     filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
+  //     throttleTime(200)
+  //   ).subscribe(() => {
+  //     this.ngZone.run(() => {
+  //       console.log("Get Data")
+  //     });
+  //   }
+  //   );
+  // }
     
   ngOnInit() {
     this.storyName = this.route.snapshot.params.storyname;
@@ -36,6 +62,15 @@ export class CommentListComponent implements OnInit, OnDestroy {
     //   .subscribe((commentList: StoryComment[]) => {
     //     this.comments = commentList;
     //   });
+    
+    // this.commentSub =  this.commentService.commentThread$.subscribe(comments => {
+    //         this.commentChapter > 0?
+    //           this.commentlist = comments.filter(comment => comment.chapterId == this.commentChapter):
+    //           this.commentlist = comments.filter(comment => comment.chapterId == null);
+    //         console.log(this.commentlist)
+    //   });
+    console.log(this.commentChapter)
+
   }
 
   onDeleteComment(id) {
@@ -65,6 +100,6 @@ export class CommentListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/members',event]);
   }
   ngOnDestroy() {
-    // this.commentSub.unsubscribe();
+    this.commentSub.unsubscribe();
   }
 }

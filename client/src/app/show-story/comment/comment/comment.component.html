@@ -1,4 +1,4 @@
-    <div class="pt-2 pb-2 pl-2 pr-2">
+    <div class="pt-2 pb-2 pl-2 pr-2 comment">
       <form fxLayout="row" 
           (ngSubmit)="onSubmit()" [formGroup]="commentForm">
           <mat-form-field class="example-full-width">
@@ -11,11 +11,12 @@
               <i class="fas fa-paper-plane fa-lg"></i></button>
           </mat-action-list> 
       </form>
-      </div>
+      
       <!-- <div class="comment">
         <app-comment-pop [username]="username" (message)="onSubmit($event)"></app-comment-pop>
       </div> -->
-      <app-comment-list [commentChapter]="commentChapter"></app-comment-list>
-    
-    
+    </div>
+    <div class="comments">
+        <app-comment-list [commentChapter]="commentChapter"></app-comment-list>
+    </div>
   

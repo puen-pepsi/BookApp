@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, AfterViewInit  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input  } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscribable, Subscription } from 'rxjs';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
 import { StoryComment } from 'src/app/_models/storycomment';
 import { ActivitiesService } from 'src/app/_services/activities.service';
@@ -12,7 +13,7 @@ import { CommentService } from 'src/app/_services/comment.service';
   styleUrls: ['./comment.component.scss']
 })
 
-export class CommentComponent implements OnInit,AfterViewInit{
+export class CommentComponent implements OnInit{
   @Input() comments:StoryComment[];
   @Input() commentChapter:number;
   private storyName: string;
@@ -20,14 +21,13 @@ export class CommentComponent implements OnInit,AfterViewInit{
   activitiesTimer = true;
   username:string;
   commentForm: FormGroup;
+  commentlist:StoryComment[]=[];
+  commentSub :Subscription;
   constructor(
     private fb: FormBuilder,
     public commentService:CommentService,
     private activitiesService:ActivitiesService,
     private route: ActivatedRoute) {}
-  ngAfterViewInit(): void {
-    // console.log(this.commentChapter)
-  }
 
   ngOnInit() {
     this.storyName = this.route.snapshot.params.storyname;
@@ -36,7 +36,6 @@ export class CommentComponent implements OnInit,AfterViewInit{
     });
     
     this.username = this.commentService.user.username;
-
   }
 
   onCommentCancel() {

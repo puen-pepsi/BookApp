@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component,  ElementRef,  OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component,  ElementRef,  EventEmitter,  OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { ScrollSpyService } from 'ng-spy';
 import {  Unsubscribable } from 'rxjs';
@@ -19,7 +19,6 @@ import { DialogAdsComponent } from './dialog-ads/dialog-ads.component';
 import { BannerService } from 'src/app/_services/banner.service';
 import { BannerDialogService } from 'src/app/_services/banner-dialog.service';
 import { Slide } from 'src/app/_models/slide.model';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 @Component({
   selector: 'app-show-tchapter',
   templateUrl: './show-tchapter.component.html',
@@ -30,7 +29,6 @@ import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 })
 export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   @ViewChild('content',{static:true}) content:ElementRef;
-
   activitiesType1 = ActivitiesType.viewStory;
   activitiesType2 = ActivitiesType.likeChapter;
   activitiesTimer1 = true;
@@ -112,7 +110,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
         if(this.current != activeTargetName){
           this.current = activeTargetName;
           this.commentChapter = +this.current;
-          //console.log(this.current)
+          console.log(this.current)
         }
 
       }
@@ -201,7 +199,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     const chapter = [...this.chapterList.values()]
       .reduce((arr,elem)=> arr.concat(elem),[])
       .find((chapter:ChapterList)=> chapter.order === +target);
-      console.log(chapter);
+      // console.log(chapter);
       if(chapter){
         this.scroller.scrollToAnchor(target);
       }
@@ -341,7 +339,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
       }
       // add newly fetched posts to the existing post
       this.chapterList = this.chapterList.concat(newPost);
-      console.log(this.chapterList)
+      // console.log(this.chapterList)
       this.notscrolly = true;
     });
   }

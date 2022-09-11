@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,ChangeDetectionStrategy } from '@angular/core';
 import { ShowStory } from 'src/app/_models/showstory';
 import { StarRatingColor} from 'src/app/show-story/star-rating/star-rating-show/star-rating-show.component'
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,8 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-show-card',
   templateUrl: './show-card.component.html',
-  styleUrls: ['./show-card.component.scss']
+  styleUrls: ['./show-card.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ShowCardComponent implements OnInit {
 @Input() story : ShowStory;

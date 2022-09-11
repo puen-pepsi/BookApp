@@ -2,7 +2,6 @@
 <div class="demo" *ngIf="showstory">
     <h4>Hot {{storyType | titlecase}}</h4>
     <carousel #myCarousel class="carousel-html-content" style="z-index: 2;"
-        [overflowCellsLimit]="'3'"
         [cellWidth]='150'
         [height]="'280'">
         <div *ngFor="let story of showstory"

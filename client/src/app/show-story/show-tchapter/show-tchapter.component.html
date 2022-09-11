@@ -5,16 +5,12 @@
             <div style="border: 0px;">
             <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
-                <img src="{{showstory.imageUrl}}"
-                (click)="gotoStory(showstory.storyName)"
-                alt="{{showstory.storyName}}"
-                class="card-img-top">
+                <img src="{{showstory.imageUrl}}" (click)="gotoStory(showstory.storyName)"
+                loading="lazy" alt="{{showstory.storyName}}" class="card-img-top">
             </ng-template>
             <ng-template #second>
-                  <img src="./assets/images/blackcover.png"
-                    alt="{{showstory.storyName}}"
-                    (click)="gotoStory(showstory.storyName)"
-                    class="card-img-top">
+                  <img src="./assets/images/blackcover.png" (click)="gotoStory(showstory.storyName)"
+                  loading="lazy" alt="{{showstory.storyName}}" class="card-img-top">
                 <div class="text_up">
                     <h4>{{showstory.storyName | titlecase }}</h4>
                 </div>
@@ -58,14 +54,6 @@
                       </mat-card-content>
                   </mat-card>
                 </div>
-
-                <!-- Ads Rainobu -->
-                <!-- <div class="ads" *appGetRole='["VIP"]'>
-                  <a href="https://www.SmarterASP.NET/index?r=rainobu">
-                    <img src="https://www.SmarterASP.NET/affiliate/728X90.gif" border="0">
-                  </a>
-                  <img *ngIf="bannerchapter" src={{bannerchapter.url}}>
-              </div> -->
                  <div *ngIf="bannerchapter" class="ads">
                   <div  *appGetRole='["VIP"]'>
                     <div  innerHtml="{{bannerchapter[0].descriptions}}" ></div>
@@ -141,12 +129,13 @@
     </div>
     <div @slidex fxFlex="30" fxHide.xs *ngIf="ShowSetting" >
       <div class="section-nav" >
-        <mat-card class="header mat-elevation-z0">
+        <mat-card class="header mat-elevation-z0 pb-5">
           <h5>Settings</h5>
           <div class="rightCircle">
-              <mat-icon (click)="toggleSetting()" [inline]="true">close</mat-icon>
+              <mat-icon (click)="toggleSetting()" >close</mat-icon>
           </div>
         </mat-card>
+        
         <mat-divider></mat-divider>
         <mat-card class="p-0 mat-elevation-z0" style="height:90vh;">
           <div class="bodysetting">
@@ -195,7 +184,7 @@
           <li class="nav-item">
             <a class="nav-link" (click)=toggleSetting()>
               <mat-icon>settings</mat-icon>
-              <span class="link-text">Settings</span>
+              <span class="link-text">Font Settings</span>
             </a>
           </li>
         </ul>

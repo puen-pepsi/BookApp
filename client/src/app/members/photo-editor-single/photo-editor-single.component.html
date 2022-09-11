@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-4" *ngFor="let banner of member.banners">
-        <img src="{{banner.url}}" alt="{{banner.url}}" class="img-thumbnail p-1">
+        <img src="{{banner.url}}" 
+        loading="lazy" alt="{{banner.url}}" class="img-thumbnail p-1">
         <div >
             <button 
                 [disabled]="banner.isMain"

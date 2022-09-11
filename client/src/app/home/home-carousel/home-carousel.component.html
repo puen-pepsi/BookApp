@@ -1,4 +1,4 @@
-<mat-carousel
+<!-- <mat-carousel
     timings="250ms ease-in"
     [autoplay]="true"
     interval="5000"
@@ -9,7 +9,8 @@
     [loop]="true"
     [hideArrows]="false"
     [useKeyboard]="true"
-    [useMouseWheel]="false">
+    [useMouseWheel]="false"
+    lazyLoad="true">
     <mat-carousel-slide
         #matCarouselSlide
         *ngFor="let slide of slides; let i = index"
@@ -18,13 +19,35 @@
     <div class="desc" (click)="gotoUrl(slide.gotoUrl)">
       <h1>{{slide.title | uppercase }}</h1>
       <p>{{slide.descriptions | titlecase}}</p>
-      <!-- <button  mat-flat-button
-        (click)="matCarouselSlide.disabled = !matCarouselSlide.disabled" >
-        Click me!
-      </button> -->
-      <!-- <button mat-flat-button (click)="gotoUrl(slide.gotoUrl)">
-        test
-      </button> -->
     </div>
     </mat-carousel-slide>
-</mat-carousel>
+</mat-carousel> -->
+
+<div [style.height]="auto" *ngIf="slides.length > 0">
+    <mat-carousel
+      timings="250ms ease-in"
+      [autoplay]="true"
+      interval="5000"
+      color="primary"
+      maxWidth="auto"
+      proportion="60"
+      [loop]="true"
+      [hideArrows]="false"
+      [hideIndicators]="true"
+      [useKeyboard]="true"
+      [useMouseWheel]="false"
+      [lazyLoad]="true"
+      orientation="ltr"
+    >
+      <mat-carousel-slide
+        #matCarouselSlide
+        *ngFor="let slide of slides; let i = index"
+        [image]= slide.url
+        [hideOverlay]="true">
+        <div class="desc" (click)="gotoUrl(slide.gotoUrl)">
+          <h1>{{slide.title | uppercase }}</h1>
+          <p>{{slide.descriptions | titlecase}}</p>
+        </div>
+      </mat-carousel-slide>
+    </mat-carousel>
+  </div>

@@ -1,0 +1,31 @@
+
+<mat-toolbar color="primary">
+    Recent Chapter
+  </mat-toolbar>
+  
+  <cdk-virtual-scroll-viewport #scroller itemSize="100" class="content">
+    <mat-list>
+      <ng-container *cdkVirtualFor="let item of listItems">
+        <mat-list-item>
+          <img matListAvatar [src]="item.imageUrl">
+          <h3 matLine> {{item.chapterName}} </h3>
+          <p matLine>
+            <span> "tests" </span>
+          </p>
+          <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+            <mat-icon>
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </ng-container>
+      <div class="spinner-item">
+        <mat-progress-spinner *ngIf="loading"
+                [mode]="'indeterminate'" 
+                [diameter]="50"></mat-progress-spinner>
+        <div *ngIf="!notEmptyPost" class="text-muted h6 alert alert-secondary p-2">No more Chapter</div>
+      </div>
+
+    </mat-list>
+  </cdk-virtual-scroll-viewport>

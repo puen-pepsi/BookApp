@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,ChangeDetectionStrategy } from '@angular/core';
 import { ShowHistory } from 'src/app/_models/ShowHIstory';
 import { UserLiked } from 'src/app/_models/userLiked';
 import { ShowStoryService } from '../../show-story.service';
@@ -7,7 +7,8 @@ import { StarRatingColor } from '../../star-rating/star-rating-show/star-rating-
 @Component({
   selector: 'app-history-card',
   templateUrl: './history-card.component.html',
-  styleUrls: ['./history-card.component.scss']
+  styleUrls: ['./history-card.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HistoryCardComponent implements OnInit {
   @Input('history') history:ShowHistory;

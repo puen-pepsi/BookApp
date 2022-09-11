@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
   }
   login(){
     this.accountService.login(this.model).subscribe(response => {
-      console.log(response)
+      // console.log(response)
       this.router.navigateByUrl(this.returnUrl);
       this.toastr.success("LogIn success","Infomation");
     },(error) => {
       this.errorMessage = error;
       this.showError = true;
-      console.log(this.errorMessage)
+      // console.log(this.errorMessage)
     })
   }
   logout(){

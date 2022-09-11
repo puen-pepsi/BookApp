@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output ,ChangeDetectionStrategy} from '@angular/core';
 import { Router } from '@angular/router';
-import { idLocale } from 'ngx-bootstrap/chronos';
 import { News } from 'src/app/_models/news.model';
 import { NewsService } from 'src/app/_services/news.service';
 
 @Component({
   selector: 'app-news-card',
   templateUrl: './news-card.component.html',
-  styleUrls: ['./news-card.component.scss']
+  styleUrls: ['./news-card.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class NewsCardComponent implements OnInit {
   @Input() row:News;

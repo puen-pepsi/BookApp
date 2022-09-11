@@ -10,6 +10,7 @@ import { ShowNovelComponent } from './show-novel/show-novel.component';
 import { ShowTagComponent } from './show-tag/show-tag.component';
 import { RecentChapterComponent } from './recent-chapter/recent-chapter.component';
 import { ShowTopSpecialComponent } from './show-top-special/show-top-special.component';
+import { RecentListComponent } from './recent-chapter/recent-list/recent-list.component';
 
 const routes : Routes =[
     // {path :'',component:ShowListComponent,
@@ -29,7 +30,8 @@ const routes : Routes =[
     {path:'list',component:ShowListVerticalComponent,data:{storytype:'novel'}},
     // {path:'topviews',component:ShowViewComponent},
     {path:'topviews',component:ShowTopSpecialComponent},
-    {path:'recent',component:RecentChapterComponent},
+    {path:'recent',component:RecentChapterComponent,data:{showAll:'all'}},
+    // {path:'recent',component:RecentListComponent},
     //{path:'',component:ShowStoryComponent},
     {path:'',component:ShowNovelComponent,data:{storytype:'novel'}},
     {path:':storyname',

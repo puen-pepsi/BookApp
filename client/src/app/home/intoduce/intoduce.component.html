@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div  class="row justify-content-center">
         <div class="col-md-6 text-center mb-5">
-            <img src="./assets/images/logo.png" >
+            <img src="./assets/images/logo.png" loading="lazy">
         </div>
             <div *ngIf="!registerMode">
                 <p class="lead text-center">Whether it be reading an epic tale of an isekai-ed hero or having a 
@@ -11,7 +11,7 @@
                 </p>
                         <div class="text-center">
                             <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
-                            <button class="btn btn-info btn-lg">Learn more</button>
+                            <button (click)="goTo()" class="btn btn-info btn-lg">Learn more</button>
                         </div>
             </div>
 

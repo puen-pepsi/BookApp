@@ -2,7 +2,7 @@
     <div class="center">
         <div class="justify-content-center">
             <div class="logo">
-                 <img src="./assets/images/logo.png" (click)="home()">
+                 <img src="./assets/images/logo.png" loading="lazy" (click)="home()">
             </div>
             <div *ngIf="!registerMode">
             <h3 class="mb-4  text-center">Have an account?</h3>
@@ -42,12 +42,12 @@
             <p class="w-100 text-center" style="color: rgb(150, 150, 150);">&mdash; Or Sign Up With &mdash;</p>
             <div  fxLayoutAlign="center center">
                 <div><button class="btn" type="button" (click)="loginWithGoogle()" >
-                    <img src="https://img.icons8.com/color/32/000000/google-logo.png"/>
+                    <img src="https://img.icons8.com/color/32/000000/google-logo.png" loading="lazy"/>
                 </button>
                 </div>
                 <div>
                     <button class="btn" type="button" (click)="registerToggle()">
-                        <img src="./assets/images/minilogo_blue.png" style="height: 32px;"/>
+                        <img src="./assets/images/minilogo_blue.png" style="height: 32px;" loading="lazy"/>
                     </button>
                 </div>
 

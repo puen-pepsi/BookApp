@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { reverse } from 'dns';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -39,12 +40,15 @@ export class ChatService {
     //   .finally(() => this.busyService.idle());
 
     this.hubConnection.on('ReceiveChatMessage', comments => {
-      this.commentThreadSource.next([...comments]);
+      this.commentThreadSource.next([...comments].reverse());
     })
-    
+    this.hubConnection.on('GetMoreMessages', comments => {
+        this.commentThread$.pipe(take(1)).subscribe(commentx => {
+          this.commentThreadSource.next([...comments.reverse(),...commentx])
+        })
+    })
     this.hubConnection.on('NewChatMessage', comment => {
       this.commentThread$.pipe(take(1)).subscribe(comments => {
-        //console.log(comment)
         this.commentThreadSource.next([...comments,comment])
       })
     })
@@ -76,11 +80,14 @@ export class ChatService {
   }
 
 
-  async SendMessags(groupname:string,content:string){
-    return this.hubConnection.invoke('SendMessags',{groupname,content})
+  async SendMessages(groupname:string,content:string){
+    return this.hubConnection.invoke('SendMessages',{groupname,content})
         .catch(error=> console.log(error));
   }
   
- 
+  async MoreMessags(groupname:string,lastId:number){
+    return this.hubConnection.invoke('MoreMessages',{groupname,lastId})
+        .catch(error=> console.log(error));
+  }
   
 }

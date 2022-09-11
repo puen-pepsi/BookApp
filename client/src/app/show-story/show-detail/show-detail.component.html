@@ -3,16 +3,15 @@
 <div class="row mb-4">
     <div class="col-md-4">
         <div class="card">
+            <h2>{{showstory.storyName | titlecase}}</h2>
             <ng-container *ngIf="showstory.imageUrl;then first else second"></ng-container>
             <ng-template #first>
                 <img src="{{showstory.imageUrl}}"
-                alt="{{showstory.storyName}}"
-                class="card-img-top">
+                loading="lazy" alt="{{showstory.storyName}}" class="card-img-top">
             </ng-template>
             <ng-template #second>
                 <img src="./assets/images/blackcover.png"
-                alt="{{showstory.storyName}}"
-                class="card-img-top">
+                loading="lazy" alt="{{showstory.storyName}}" class="card-img-top">
                 <div class="text_up">
                     <h4>{{showstory.storyName | titlecase }}</h4>
                 </div>

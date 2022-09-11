@@ -24,15 +24,8 @@
                 <mat-icon>forum</mat-icon>
               </button>
               <span>Rainobu Chatto</span>
-              <!--<span class="example-spacer"></span>
-               <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                <mat-icon>favorite</mat-icon>
-              </button>
-              <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-               <mat-icon>share</mat-icon>
-             </button> -->
         </mat-toolbar>
-        <mat-card class="mat-elevation-z0">
+        <!-- <mat-card class="mat-elevation-z0">
             <mat-card-content>
                 <div *ngIf="(chatService.commentThread$ | async)?.length === 0">
                     No messages yet... say hi by using the message box below
@@ -41,16 +34,73 @@
                     <cdk-virtual-scroll-viewport 
                         #scroller
                         itemSize="60" 
-                        minBufferPx="1260" 
-                        maxBufferPx="6000"
                      class="container">
-                    <div *cdkVirtualFor="let message of (chatService.commentThread$ | async)"
+                    <ng-container *cdkVirtualFor="let message of (chatService.commentThread$ | async)"
                             class="commnet-items">
                         <div  *ngIf="message.userName !== user.username" class="yours messages">
                             <div class="d-flex">
                                 <div class="pic-msg">
                                   <img class="rounded-circle " src="{{message.image || './assets/user.png'}}"
-                                        alt="{{message.userName}}">
+                                    loading="lazy" alt="{{message.userName}}">
+                                </div>
+
+                                <div class="message last" >
+                                            <p><b>{{message.knownAs}}</b> | {{message.content}}</p>
+                                            <small class="text-muted">
+                                                <span class="fa fa-clock-o">{{message.created | timeago}}</span>
+                                            </small>
+                                 </div>
+
+                            </div>
+                        </div>
+                        <div *ngIf="message.userName === user.username" class="mine messages">
+                            <div class="message">
+                                <p>{{message.content}}</p>
+                            </div>
+                            <small class="text-muted">
+                                <span class="fa fa-clock-o">{{message.created | timeago}}</span>
+                            </small>
+                        </div>
+                    </ng-container>
+                    </cdk-virtual-scroll-viewport>
+                </div>
+            </mat-card-content>
+            <mat-card-footer class="card-footer">
+                <form fxLayout="row"
+                (ngSubmit)="onSubmit()" [formGroup]="commentForm">
+                <mat-form-field class="example-full-width">
+                        <mat-label>Leave a message</mat-label>
+                        <input formControlName="content" matInput  autocomplete="off"
+                        placeholder="Ex. It makes me feel..."/>
+                </mat-form-field>
+                <mat-action-list fxFlexAlign="start">
+                    <button type="submit" mat-raised-button 
+                        [disabled]="!commentForm.valid">
+                    <i class="fas fa-paper-plane fa-lg"></i></button>
+                </mat-action-list>
+            </form>
+            </mat-card-footer>
+        </mat-card> -->
+        <mat-card class="mat-elevation-z0">
+            <mat-card-content>
+           <cdk-virtual-scroll-viewport 
+                        #scroller
+                        itemSize="60" 
+                     class="container">
+                     <div class="spinner-item">
+                        <mat-progress-spinner *ngIf="loading"
+                                [mode]="'indeterminate'" 
+                                [diameter]="50"></mat-progress-spinner>
+                        <!-- <div *ngIf="!notEmptyPost" class="text-muted h6 alert alert-secondary p-2">No more Chapter</div> -->
+                      </div>
+                    <!-- <ng-container *cdkVirtualFor="let message of (chatService.commentThread$ | async)" -->
+                    <ng-container *cdkVirtualFor="let message of chatList;trackBy:trackByFn;"
+                            class="commnet-items">
+                        <div  *ngIf="message.userName !== user.username" class="yours messages">
+                            <div class="d-flex">
+                                <div class="pic-msg">
+                                  <img class="rounded-circle " src="{{message.image || './assets/user.png'}}"
+                                    loading="lazy" alt="{{message.userName}}">
                                 </div>
 
                                 <div class="message last" >
@@ -73,12 +123,12 @@
                                 <span class="fa fa-clock-o">{{message.created | timeago}}</span>
                             </small>
                         </div>
-                    </div>
+                    </ng-container>
                     </cdk-virtual-scroll-viewport>
-                </div>
-            </mat-card-content>
-            <mat-card-footer class="card-footer">
-                <form fxLayout="row"
+                </mat-card-content>
+                <mat-card-footer class="card-footer">
+                    
+                    <form fxLayout="row"
                 (ngSubmit)="onSubmit()" [formGroup]="commentForm">
                 <mat-form-field class="example-full-width">
                         <mat-label>Leave a message</mat-label>
@@ -91,8 +141,9 @@
                     <i class="fas fa-paper-plane fa-lg"></i></button>
                 </mat-action-list>
             </form>
-            </mat-card-footer>
-        </mat-card>
+                </mat-card-footer>
+            </mat-card>
+
     </div>
 </div>
 

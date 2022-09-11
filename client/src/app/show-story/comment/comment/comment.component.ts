@@ -1,5 +1,5 @@
 import { Component, OnInit, Input  } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscribable, Subscription } from 'rxjs';
 import { ActivitiesType } from 'src/app/_models/activitiestype';
@@ -20,11 +20,11 @@ export class CommentComponent implements OnInit{
   activitiesType = ActivitiesType.writeComment;
   activitiesTimer = true;
   username:string;
-  commentForm: UntypedFormGroup;
+  commentForm: FormGroup;
   commentlist:StoryComment[]=[];
   commentSub :Subscription;
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     public commentService:CommentService,
     private activitiesService:ActivitiesService,
     private route: ActivatedRoute) {}

@@ -10,8 +10,6 @@
     </div>
 </div>
 <div class="picture">
-    <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}"
-                class="img-circle rounded-circle "> -->
                 <app-label-name 
                 [pHeight]='200'
                 [imageUrl]='member.photoUrl'
@@ -25,7 +23,10 @@
         <i class="fa fa-user-circle text-success"></i> Online now
     </div>
     <div>
-        <p><strong>Name : </strong>{{member.knownAs}}</p>
+        <p><strong>Name : </strong>{{member.username | titlecase}}</p>
+    </div>
+    <div>
+        <p><strong>Nickname : </strong>{{member.knownAs | titlecase}}</p>
     </div>
     <div>
         <p><strong>Location : </strong>{{member.city}}, {{member.country}}</p>
@@ -55,28 +56,12 @@
             
 </div>
 <div  class="detial">
-    <!-- <tabset class="member-tabset" #memberTabs>
-        <tab heading='About {{member.username | titlecase}}' (selectTab)="onTabActivated($event)">
-            <h4>Tales Of {{ member.username}}</h4>
-            <p>{{member.introduction}}</p>
-            <h4>Current Quest</h4>
-            <p>{{member.lookingFor}}</p>
-            <app-author-story [authorname]="author"></app-author-story>
-        </tab>
-        <tab heading='Gallery' (selectTab)="onTabActivated($event)">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 
-            style="display: inline-block; margin-bottom: 20px; "></ngx-gallery>
-        </tab>
-        <tab heading='Messages' (selectTab)="onTabActivated($event)">
-            <app-member-messages [username]="member.username"></app-member-messages>
-        </tab>
-    </tabset> -->
     <div class="col-md-12">
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z0"
             #tabGroup [selectedIndex]="selected.value"          
             (selectedTabChange)="tabChanged($event)">
-        <mat-tab label="About {{member.username | titlecase}}">
-            <h4>Tales Of {{ member.username}}</h4>
+        <mat-tab label="About {{member.knownAs || member.username | titlecase}}">
+            <h4>Tales Of {{member.knownAs || member.username | titlecase}}</h4>
             <p>{{member.introduction}}</p>
             <h4>Current Quest</h4>
             <p>{{member.lookingFor}}</p>

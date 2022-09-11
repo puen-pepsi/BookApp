@@ -1,6 +1,4 @@
-import { StringMapWithRename } from "@angular/compiler/src/compiler_facade_interface";
 import { Guid } from "guid-typescript";
-import { Published } from "./published";
 
 export class Chapter{
     id:number;

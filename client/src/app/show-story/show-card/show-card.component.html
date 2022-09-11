@@ -5,13 +5,13 @@
     <div class="card-img-wrapper">
         <ng-container *ngIf="story.imageUrl;then first else second"></ng-container>
             <ng-template #first>
-            <img src="{{story.imageUrl}}"
+            <img src="{{story.imageUrl}}" loading="lazy"
                 alt="{{story.storyName}}"
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">
             </ng-template>
             <ng-template #second>
-                <img src="./assets/images/blackcover.png"
+                <img src="./assets/images/blackcover.png" loading="lazy"
                 alt="{{story.storyName}}"
                 (click)="goToDetial(story.storyName)"
                 class="card-img-top">
@@ -55,13 +55,13 @@
             <div class="text-muted truncate">{{story.genre }}</div><br/>
             <div class="star-award">
                 <app-star-rating-show
-                [rating]="rating"
-                [starCount]="starCount"
-                [totalRate]="totalRate"
-                [color]="starColor"
-                [fSize] = "fSize"
-                [wSize] = "fSize"
-                (ratingUpdated)="onRatingChanged($event)">
+                    [rating]="rating"
+                    [starCount]="starCount"
+                    [totalRate]="totalRate"
+                    [color]="starColor"
+                    [fSize] = "fSize"
+                    [wSize] = "fSize"
+                    (ratingUpdated)="onRatingChanged($event)">
                 </app-star-rating-show>
                 <div class="Awards" *ngIf="(index+1)+((page-1)*pagesize) < 6"> 
                     <mat-icon >emoji_events</mat-icon>
@@ -76,77 +76,4 @@
     </div>
 </div>
 
-<!-- <mat-card class="card">
-    <div class="new btn btn-danger btn-sm" *ngIf="story.getState==='New'">
-        New
-    </div>
-    <div class="card-img-wrapper">
-        <ng-container *ngIf="story.imageUrl;then first else second"></ng-container>
-            <ng-template #first>
-            <img src="{{story.imageUrl}}"
-                alt="{{story.storyName}}"
-                (click)="goToDetial(story.storyName)"
-                class="card-img-top">
-            </ng-template>
-            <ng-template #second>
-                <img src="./assets/images/blackcover.png"
-                alt="{{story.storyName}}"
-                (click)="goToDetial(story.storyName)"
-                class="card-img-top">
-                <div class="text_up" (click)="goToDetial(story.storyName)">
-                    <h5>{{story.storyName | titlecase }}</h5>
-                </div>
-                <div id="benmark" (click)="goToDetial(story.storyName)">
-                    <span>{{story.userName}}</span>
-                    <h6>&copy; Rainobu</h6>
-                </div>
-            </ng-template>
-        <ul class="list-inline member-icons animate text-center">
-            <li class="list-inline-item">
-                <button  #show id="show" color="primary"
-                    matTooltip="Read"
-                    (click)="goToDetial(story.storyName)"
-                    mat-mini-fab aria-label="Action icon">
-                    <mat-icon>menu_book</mat-icon>
-                </button>
-            </li>
-            <li class="list-inline-item">
-                    <app-followstory [isActive]="userLiked != null"
-                        [storyid]="story.storyId"
-                        [storyname]="story.storyName"
-                        (follow)="followthis($event)"></app-followstory>
-            </li>
-            <li class="list-inline-item">
-                <button  color="warn" mat-mini-fab
-                    matTooltip="Info Author"
-                    [routerLink]="['/members',story.userName.toLowerCase()]"
-                    aria-label="Action icon">
-                    <mat-icon>account_box</mat-icon>
-                </button>
-            </li>
-        </ul>
-    </div>
-    <mat-card-header>
-        <mat-card-title class="truncate">
-                {{story.storyName | titlecase}}
-        </mat-card-title>
-        <mat-card-subtitle>
-            {{story.genre}}
-        </mat-card-subtitle>
-    </mat-card-header>
-        <div class="star-award">
-            <app-star-rating-show
-            [rating]="rating"
-            [starCount]="starCount"
-            [totalRate]="totalRate"
-            [color]="starColor"
-            [fSize] = "fSize"
-            [wSize] = "fSize"
-            (ratingUpdated)="onRatingChanged($event)">
-            </app-star-rating-show>
-            <div class="Awards">
-                <mat-icon >emoji_events</mat-icon>
-                <span *ngIf="index > -1" class="number">{{(index+1)+((page-1)*pagesize)}} </span>
-            </div>
-        </div>
-</mat-card> -->
+

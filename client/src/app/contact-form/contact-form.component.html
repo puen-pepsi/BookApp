@@ -1,0 +1,37 @@
+
+    <div class="contactus">
+      <h2 class="text-center mb-5">Contact Us</h2>
+            <form [formGroup]="FormData" (submit)="onSubmit(FormData.value)">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Full Name </mat-label>
+                  <input formControlName="fullname"  matInput required />
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error>The Full Name is required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="legacy">
+                <mat-label>Email*</mat-label>
+                <input formControlName="email" matInput required/>
+                <mat-icon matSuffix>
+                  <span class="material-symbols-outlined">
+                       mail
+                  </span>
+                </mat-icon>
+                <mat-hint>We'll never share your email with anyone else.</mat-hint>
+                <mat-error>{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Description*</mat-label>
+                  <textarea formControlName="content"  
+                  placeholder="Description ..." matInput required></textarea>
+                  <mat-error>The Description is required</mat-error>
+                </mat-form-field>
+          <button mat-flat-button color="primary" 
+          type="submit"
+          [disabled]="FormData.invalid">
+             Send
+          </button>
+          <a mat-stroked-button routerLink="/">Cancel</a>
+          </form>
+    </div>
+
+ 

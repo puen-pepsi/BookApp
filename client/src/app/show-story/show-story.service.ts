@@ -42,7 +42,7 @@ export class ShowStoryService {
       // console.log(this.viewsParams)
     }
   }
-  getStoryParams(init:string){
+  getStoryParams(init:string){//novel,manga
     this.storyParams.storyType=init;
     this.storyParams.pageNumber = 1;
     return this.storyParams;
@@ -96,7 +96,7 @@ export class ShowStoryService {
         .pipe(map(response => {
           //console.log(response);
           this.showStoryCache.set(Object.values(StoryParams).join('-'),response);
-
+          console.log(this.showStoryCache);
           return response;
         }))
   }

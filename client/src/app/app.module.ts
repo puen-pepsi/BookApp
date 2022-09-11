@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
+
+
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
@@ -62,13 +63,14 @@ import { AdminModule } from './admin/admin.module';
 import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { StoryModule } from './story/story.module';
 import {LazyImgDirective} from './_directives/img.directive'
+import { StoryModule } from './story/story.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 // import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     HomeComponent,
     MemberListComponent,
     MemberDetailComponent,
@@ -112,10 +114,12 @@ import {LazyImgDirective} from './_directives/img.directive'
     NullWithDefaultPipe,
     TermOfServiceComponent,
     PrivacyPolicyComponent,
-    LazyImgDirective
+    LazyImgDirective,
+    ContactFormComponent,
  ],
   imports: [
     BrowserModule,
+    LazyLoadImageModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -131,7 +135,7 @@ import {LazyImgDirective} from './_directives/img.directive'
     SocialLoginModule,
     ScrollingModule,
     AdminModule,
-    StoryModule,
+    StoryModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

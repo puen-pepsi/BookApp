@@ -1,14 +1,18 @@
 <app-cover fxHide.lt-sm></app-cover>
+<!-- <img [lazyLoad]="'https://localhost:4200/assets/images/1.jpg'" />
+<img src="https://localhost:4200/assets/images/2.jpg" loading="lazy"/> -->
+
 <div class="row">
   <div class="col-md-7">
-   <app-home-carousel></app-home-carousel>
+      <app-home-carousel [slides] = "slides"></app-home-carousel>
+   
    <div class="toprank ">
       <div class="top-between">
         <h4>Popular on RAINOBU</h4>
         <button mat-button color="primary" [routerLink]="['stories/all','novel']">More..</button>
       </div>
       <!-- <h5>Rainobu Top Rank</h5> -->
-      <app-show-top-rank></app-show-top-rank>
+      <app-show-top-rank [storytop]="topStory"></app-show-top-rank>
   </div>
   </div>
   <div class="col-md-5">
@@ -17,7 +21,7 @@
           <h4>Rainobu News</h4>
           <button mat-button color="primary" routerLink="/news">More..</button>
       </div>
-      <app-news-carousel></app-news-carousel>
+        <app-news-carousel></app-news-carousel>
       </div>
 
       <div class="member mt-4">
@@ -31,39 +35,17 @@
 
   </div>
 </div>
-<div class="row mt-5"  >
-    <div class="col-md-7">
-        <!-- <div class="demo">
-            <carousel style="z-index: 2;"
-                [images]="imagesForSlider"
-                [objectFit]="'cover'"
-                [cellWidth]="'100%'"
-                [height]="400"
-                [autoplay]="true"
-                [dots]="true"
-                [loop]="true"
-                [arrows]="false">
-            </carousel>
-        </div> -->
-
-
-
-
-    </div>
-
-</div>
-
 <div class="novel">
-  <div *ngIf="showstory.length > 0">
+  <div *ngIf="rateStory">
     <app-show-carousel
-    [showstory]="showstory"
+    [showstory]="rateStory"
     [storyType]= "'novel'">
   </app-show-carousel>
 
   </div>
-  <div *ngIf="showstoryM.length > 0">
+  <div *ngIf="rateManga">
     <app-show-carousel
-    [showstory]="showstoryM"
+    [showstory]="rateManga"
     [storyType]= "'manga'">
   </app-show-carousel>
   </div>

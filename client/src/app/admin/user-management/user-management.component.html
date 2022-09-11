@@ -8,12 +8,14 @@
     <table class="table">
         <tr>
             <th style="width: 30%;">UserName</th>
-            <th style="width: 40%;">Active roles</th>
+            <th style="width: 20%;">Nickname</th>
+            <th style="width: 20%;">Active roles</th>
             <th style="width: 20%;"></th>
             <th style="width: 10%"></th>
         </tr> 
         <tr *ngFor="let user of users | filter:searchText">
             <td>{{user.username}}</td>
+            <td>{{user.knownAs}}</td>
             <td>{{user.roles}}</td>
             <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>
             <td>

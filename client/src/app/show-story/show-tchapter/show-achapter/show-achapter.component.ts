@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input ,ChangeDetectionStrategy} from '@angular/core';
 import { Chapter } from 'src/app/_models/chapter';
 import 'ts-replace-all'
 @Component({
   selector: 'app-show-achapter',
   templateUrl: './show-achapter.component.html',
-  styleUrls: ['./show-achapter.component.scss']
+  styleUrls: ['./show-achapter.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ShowAChapterComponent  {
   @Input() chapter:Chapter;

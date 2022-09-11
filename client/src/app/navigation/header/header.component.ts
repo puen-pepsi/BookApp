@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Component, EventEmitter, Input, OnInit, Output,ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { ExternalAuthDto } from 'src/app/_models/externalAuthDto';
-import { Rank } from 'src/app/_models/rank.model';
 import { AccountService } from 'src/app/_services/account.service';
 import { RankService } from 'src/app/_services/rank.service';
 import { ThemeService } from 'src/app/_services/theme.service';
@@ -13,7 +10,8 @@ import { ThemeService } from 'src/app/_services/theme.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
   @Input() headlogo:string;
@@ -25,10 +23,15 @@ export class HeaderComponent implements OnInit {
   public errorMessage: string = '';
   public showError: boolean;
   public theme:string;
-  allRank:Rank[] = [];
+  // allRank:Rank[] = [];
   ShowToggle = false;
   // bgtool:string = 'white';
   // getTheme: 'dark-mode' | 'light-mode';
+  isSticky: boolean = false;
+@HostListener('window:scroll', ['$event'])
+checkScroll() {
+  this.isSticky = window.pageYOffset >= 200;
+}
   constructor(public accountService: AccountService ,
     private router : Router,
     private route :ActivatedRoute,
@@ -48,9 +51,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     
     // this.headlogo = this.route.snapshot.data.headlogo;
-    this.rankService.getAllRank().subscribe( (res:Rank[]) => {
-      this.allRank = res;
-   });
+  //   this.rankService.getAllRank().subscribe( (res:Rank[]) => {
+  //     this.allRank = res;
+  //  });
   //  this.getTheme = localStorage.getItem('user-theme')==='dark-mode'?'light-mode': 'dark-mode';
   //  console.log(this.isDarkMode)
   //  this.themeService.update(this.getTheme);
@@ -128,18 +131,19 @@ export class HeaderComponent implements OnInit {
         this.showError = true;
       });
   }
-  CreateColor(point:number){
-    for (let i = 0; i < this.allRank.length ; i++) {
-      if(point < this.allRank[i].maxPoint){
-        // this.bShadow = this.allRank[i].color;
-        return  '0 0 0 2px '+ this.allRank[i].color;
-      }
-      if(i == this.allRank.length-1){
-        // this.bShadow = this.allRank[this.allRank.length-1].color;
-        return '0 0 0 2px '+ this.allRank[this.allRank.length-1].color;
-      }
-    }
-  }
+  // CreateColor(point:number){
+  //   for (let i = 0; i < this.allRank.length ; i++) {
+  //     if(point < this.allRank[i].maxPoint){
+  //       // this.bShadow = this.allRank[i].color;
+  //       return  '0 0 0 2px '+ this.allRank[i].color;
+  //     }
+  //     if(i == this.allRank.length-1){
+  //       // this.bShadow = this.allRank[this.allRank.length-1].color;
+  //       return '0 0 0 2px '+ this.allRank[this.allRank.length-1].color;
+  //     }
+  //   }
+  // }
+  
   // Savesresponse(socialusers: SocialUser) {    
     
   //   this.accountService.Savesresponse(socialusers).subscribe((res: any) => {    

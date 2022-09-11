@@ -1,7 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
-import { timeStamp } from 'console';
 import { Rank } from 'src/app/_models/rank.model';
 import { AdminService } from 'src/app/_services/admin.service';
 import { RankService } from 'src/app/_services/rank.service';

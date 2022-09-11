@@ -1,6 +1,7 @@
 <div class="rank">
     <div class="image">
         <img src="{{imageUrl || './assets/user.png'}}" 
+        loading="lazy"
         [ngStyle]="{'box-shadow':rank,'height':pHeight+'px'}"
         alt="{{knownAs}}" [matTooltip]="tooltip"
         class="img-circle rounded-circle">

@@ -27,6 +27,7 @@ import { PaypalComponent } from './admin/paypal/paypal.component';
 import { IntoduceComponent } from './home/intoduce/intoduce.component';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       // {path:'mystory/edit/:storyName',component:StoryFormComponent,canDeactivate:[PreventUnsavedChangesGuard]},
       {path:'messages',component:MessagesComponent,canActivate:[AuthGuard]},
       {path:'aboutus',component:IntoduceComponent},
+      {path:'contactus',component:ContactFormComponent},
       {path:'termofservice',component:TermOfServiceComponent},
       {path:'privacypolicy',component:PrivacyPolicyComponent},
 

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit  } from '@angular/core';
-import { LazyLoadParams } from 'src/app/_models/lazyLoadParams';
+import { Component, Input, OnInit,ChangeDetectionStrategy  } from '@angular/core';
 import { ShowStory } from 'src/app/_models/showstory';
 import { ShowStoryService } from '../show-story.service';
 
@@ -7,9 +6,10 @@ import { ShowStoryService } from '../show-story.service';
   selector: 'app-show-carousel',
   templateUrl: './show-carousel.component.html',
   styleUrls: ['./show-carousel.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ShowCarouselComponent implements OnInit {
-  @Input() showstory:Partial<ShowStory[]>;
+  @Input() showstory:Partial<ShowStory[]> = [];
   @Input() storyType:string;
   // showstory:Partial<ShowStory[]>;
   // lazyloadParams = new LazyLoadParams;

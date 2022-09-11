@@ -9,8 +9,8 @@
     "client": {
       "projectType": "application",
       "schematics": {
-            "@schematics/angular:component": {
-          "styleext": "scss"
+          "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "root": "",
@@ -140,7 +140,7 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "style": "scss"
     }
   }
 }

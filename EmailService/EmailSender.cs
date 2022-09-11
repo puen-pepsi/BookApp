@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 using MimeKit;
 
 namespace EmailService
@@ -36,8 +37,9 @@ namespace EmailService
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
-            var bodyBuilder = new BodyBuilder { HtmlBody = string.Format("<h2 style='color:red;'>{0}</h2>", message.Content) };
-
+            // var bodyBuilder = new BodyBuilder { HtmlBody = string.Format("<h2 style='color:red;'>{0}</h2>", message.Content) };
+            var bodyBuilder = new BodyBuilder { HtmlBody = message.Content};
+            
             if (message.Attachments != null && message.Attachments.Any())
             {
                 byte[] fileBytes;
@@ -89,9 +91,11 @@ namespace EmailService
                 try
                 {
                     // await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
-                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, false);
-                    client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                    // client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    // await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                    // await client.SendAsync(mailMessage);
+                    await client.ConnectAsync("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+                    await client.AuthenticateAsync("leone.davis82@ethereal.email","7PgRd2DKvmce8mmZWd");
                     await client.SendAsync(mailMessage);
                 }
                 catch

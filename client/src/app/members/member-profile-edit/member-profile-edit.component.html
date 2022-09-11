@@ -79,7 +79,7 @@
             #tabGroup (selectedTabChange)="tabChanged($event)">
         <mat-tab label="About">
             <form #editForm="ngForm" id="editForm" (ngSubmit)='updateMember()'>
-                <h4 for="knownAs">KnownAs:</h4> 
+                <h4 for="knownAs">Nickname:</h4> 
                 <textarea class="form-control" [(ngModel)]="member.knownAs"  name="knownAs"  rows="1"></textarea>
                 <h4 class="mt-4">Your Tales of Adventure</h4>
                 <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>

@@ -2,7 +2,7 @@
   <ngb-carousel>
     <ng-template ngbSlide *ngFor="let image of images">
       <div class="wrapper">
-        <img [src]="image.src" alt="Random first slide">
+        <img [src]="image.src" loading="lazy" alt="Random first slide">
       </div>
       <div class="carousel-caption">
         

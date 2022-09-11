@@ -1,5 +1,8 @@
-<mat-carousel
+<div *ngIf="slides.length > 0">
+<mat-carousel 
     timings="250ms ease-in"
+    [lazyLoad]="true"
+    orientation="ltr"
     [autoplay]="true"
     interval="2000"
         color="primary"
@@ -14,7 +17,7 @@
     <mat-carousel-slide
         #matCarouselSlide
         *ngFor="let slide of slides; let i = index"
-        [image]="slide.url"
+        [image]=slide.url
         [hideOverlay]="true">
     <div class="desc" (click)="gotoUrl(slide.gotoUrl)">
       <h1>{{slide.title | uppercase }}</h1>
@@ -29,4 +32,5 @@
     </div>
     </mat-carousel-slide>
 </mat-carousel>
+</div>
 

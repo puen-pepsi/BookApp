@@ -16,7 +16,7 @@
                 <ng-container matColumnDef="imageUrl">
                   <mat-header-cell *matHeaderCellDef >Name</mat-header-cell>
                   <mat-cell *matCellDef="let item" >
-                    <img [src]="item.imageUrl?item.imageUrl:'./assets/images/blackcover.png'" />
+                    <img [src]="item.imageUrl?item.imageUrl:'./assets/images/blackcover.png'" loading="lazy"/>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="storyName">

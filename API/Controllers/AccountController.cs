@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
-using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using EmailService;
@@ -62,33 +59,40 @@ namespace API.Controllers
         };
         var callback = QueryHelpers.AddQueryString(registerDto.ClientURI, param);
         var userName = user.UserName;
-        var message = new MailMessage(new string[] { user.Email }, "Rainobu Email Verification", 
-                $"'{userName}' Please verify your email by clicking this : <a href='{callback}'>link</a>", 
-                null);
+        var html = new StringBuilder();
+        html.Append(string.Format("<table width='60%' align='center' cellspacing='0' cellpadding='0' bgcolor='#FFFFFF' height='120px'>" + 
+                        "<tbody><tr><td align='center' bgcolor='#30b8e9' width='100%' valign='middle'>" + 
+                        "<img src='https://localhost:4200/assets/images/headermail.jpg'></td></tr></tbody></table>" +
+                        "<table align='center' width='60%' valign='top'><tbody><tr><td style='padding-top:2rem'><p>Dear {0},</p>" + 
+                        "</td></tr><tr><td><p>Thank you for signing up with Rainobu!"+ 
+                        "Cheers to the start of our new adventure!! To verify your email please click on the button down below.</p>" + 
+                        "</td></tr><tr><td> <p style='text-align:center;'>"+"<br/><br/>"+
+                        "<a href='{1}' style='border:none;background-color:#30b8e9;padding:10px 15px;border-radius:10px;text-decoration: none;color:white;'>Verify Now</a>" +
+                        "</p><br/><br/></td></tr>" +
+                        "<tr><td>Best Wishes,<br/>Rainobu Team </td></tr> </tbody></table>",userName,callback));
+
+        var message = new MailMessage(new string[] { user.Email },"Rainobu Email Verification",html.ToString(),null);
+  
+
         await _emailSender.SendEmailAsync(message);
 
         var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
         if (!roleResult.Succeeded) return BadRequest(result.Errors);
           var ActiveType = await _unitOfWork.TitleRepository.GetTitleName(ActivitiesType.FirstRegister);
-            var getTitle = new TitleActive{
-                AppUserId = user.Id,
-                AppUser = user,
-                TitleNameId = ActiveType.Id,
-                TitleName = ActiveType,
-                Name = ActiveType.Name,
-                IsMain =true,
-                Type = ActivitiesType.FirstRegister
-            };
-        user.titleAcitive.Add(getTitle);
-        if(!await _unitOfWork.Complete())return BadRequest("Problem Add Title");
-        // return new UserDto
-        // {
-        //     Username = user.UserName,
-        //     Token = await _tokenService.CreateToken(user),
-        //     //KnownAs = user.KnownAs,
-        //     //Gender = user.Gender
-        // };
+          if(ActiveType != null){
+                var getTitle = new TitleActive{
+                    AppUserId = user.Id,
+                    AppUser = user,
+                    TitleNameId = ActiveType.Id,
+                    TitleName = ActiveType,
+                    Name = ActiveType.Name,
+                    IsMain =true,
+                    Type = ActivitiesType.FirstRegister
+                };
+            user.titleAcitive.Add(getTitle);
+            if(!await _unitOfWork.Complete())return BadRequest("Problem Add Title");
+          }
         return Ok();
     }
 
@@ -100,18 +104,12 @@ namespace API.Controllers
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
-            // .Include(r => r.recievePoints)
-            // .Include(t => t.titleAcitive)
-            //     .ThenInclude(t => t.TitleName)
             .Include( v => v.VipUsers)
             .SingleOrDefaultAsync(x => x.Email == loginDto.Username.ToLower());
         }else{
              user = await _userManager.Users
             .Include(p => p.Photos)
             .Include(l => l.LikedStoryByUsers)
-            // .Include(r => r.recievePoints)
-            // .Include(t => t.titleAcitive)
-            //     .ThenInclude(t => t.TitleName)
             .Include( v => v.VipUsers)
             .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower()); 
         }
@@ -129,17 +127,6 @@ namespace API.Controllers
             .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded) return Unauthorized("Invalid Password");
-        //get role
-        // var userRoles = await _userManager.GetRolesAsync(user);
-        // if(userRoles.Contains("VIP") ){
-        //     DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
-        //     DateTime current = DateTime.Now;
-        //     int resualtDate = DateTime.Compare(expired, current);
-        //     if(resualtDate < 0){
-        //         var resultRemoveRole = await _userManager.RemoveFromRoleAsync(user,"VIP");
-        //         if (!resultRemoveRole.Succeeded) return BadRequest("Failed to remove from roles");
-        //     }
-        // }
         var isVIP = await _userManager.IsInRoleAsync(user, "VIP");
         if(isVIP){
             // DateTime expired = user.VipUsers.Max(x => x.ExpiredDate);
@@ -312,13 +299,9 @@ namespace API.Controllers
             Token = await _tokenService.CreateToken(user),
             PhotoUrl = main.Photos.FirstOrDefault(x => x.IsMain)?.Url,
             KnownAs = user.KnownAs,
-            // Point = user.recievePoints.Sum(p => p.Point),
             Point = user.Point,
-            // Title = user.titleAcitive.FirstOrDefault(x => x.IsMain)?.Name
             Title = user.Title
-            //Gender = user.Gender,
         };
-        // return Ok(new AuthResponseDto { Token = token, IsAuthSuccessful = true });
     }
 
     // [Route("Savesresponse")]    

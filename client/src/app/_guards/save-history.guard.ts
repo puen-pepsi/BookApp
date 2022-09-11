@@ -1,6 +1,5 @@
-import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ShowStoryService } from '../show-story/show-story.service';

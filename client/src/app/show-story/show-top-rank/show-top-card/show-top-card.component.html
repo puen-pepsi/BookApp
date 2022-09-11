@@ -7,12 +7,12 @@
             </div>
             <ng-container *ngIf="topcard.imageUrl;then first else second"></ng-container>
             <ng-template #first>
-                <img src="{{topcard.imageUrl}}"
-                class="rounded-circle img-thumbnail">
+                <img src="{{topcard.imageUrl}}" 
+                loading="lazy" class="rounded-circle img-thumbnail">
             </ng-template>
             <ng-template #second>
                 <img src="./assets/images/blackcover.png"
-                class="rounded-circle">
+                loading="lazy" class="rounded-circle">
             </ng-template>
             <div class="star">
               <app-star-rating-show
@@ -29,10 +29,10 @@
         <div class="more-info">
           <div class="author">
               <h4>{{topcard.storyName | titlecase}}</h4>
-               <span><img
+               <span><img src="{{topcard.userPhoto || './assets/user.png'}}"
                 class="img-circle rounded-circle mr-2" style="max-height: 20px;"
-                src="{{topcard.userPhoto || './assets/user.png'}}"
-                alt="{{topcard.userName}}"> {{topcard.userName | titlecase}}
+                loading="lazy" alt="{{topcard.userName}}">
+                {{topcard.userName | titlecase}}
                 <!-- <span fxHide.lt-sm>
                     | {{topcard.createAt | timeago}} : Created
                 </span>   -->

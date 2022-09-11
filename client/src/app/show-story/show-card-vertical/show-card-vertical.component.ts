@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShowStory } from 'src/app/_models/showstory';
 import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-show.component';
@@ -6,7 +6,8 @@ import { StarRatingColor } from '../star-rating/star-rating-show/star-rating-sho
 @Component({
   selector: 'app-show-card-vertical',
   templateUrl: './show-card-vertical.component.html',
-  styleUrls: ['./show-card-vertical.component.scss']
+  styleUrls: ['./show-card-vertical.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ShowCardVerticalComponent implements OnInit {
   @Input()  row:ShowStory;

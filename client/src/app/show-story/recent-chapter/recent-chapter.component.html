@@ -13,7 +13,7 @@
     <div *ngIf="chapters">
         <mat-card *ngFor="let row of chapters i as index"
             (click)="gotoChapter(row.storyName,row.order)"
-            class="mat-elevation-z0">
+            class="mat-elevation-z0" >
              <app-recent-card [row]="row"></app-recent-card>
 
         </mat-card>

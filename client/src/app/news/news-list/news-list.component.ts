@@ -33,12 +33,12 @@ export class NewsListComponent implements OnInit {
       this.lazyLoad();
     }
   }
-  loadnews(){
-    this.newsService.getNewsTake(this.take).subscribe(res => {
-      this.news = res;
-      console.log("LoadNews")
-   });
-  }
+  // loadnews(){
+  //   this.newsService.getNewsTake(this.take).subscribe(res => {
+  //     this.news = res;
+  //     console.log("LoadNews")
+  //  });
+  // }
   lazyLoad(){
     //next page => page ++
     const countContent = this.news.length;

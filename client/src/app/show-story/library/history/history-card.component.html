@@ -7,11 +7,11 @@
           </div>
           <ng-container *ngIf="history.imageUrl;then first else second"></ng-container>
           <ng-template #first> 
-              <img src="{{history.imageUrl}}"
+              <img src="{{history.imageUrl}}" loading="lazy"
               class="rounded-circle img-thumbnail">
           </ng-template>
           <ng-template #second>
-              <img src="./assets/images/blackcover.png"
+              <img src="./assets/images/blackcover.png" loading="lazy"
               class="rounded-circle">
           </ng-template>
           <div class="star">
@@ -29,7 +29,7 @@
       <div class="more-info">
         <div class="author"> 
             <h4>{{history.storyName | titlecase}}</h4>   
-             <span><img 
+             <span><img loading="lazy"
               class="img-circle rounded-circle mr-2" style="max-height: 20px;"
               src="{{history.userPhoto || './assets/user.png'}}" 
               alt="{{history.userName}}"> {{history.userName | titlecase}}

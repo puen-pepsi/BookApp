@@ -8,6 +8,8 @@ import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ThemeService } from './_services/theme.service';
+import { StoryService } from './_services/story.service';
+import { Tags } from './_models/tag';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,8 +23,10 @@ export class AppComponent implements OnInit{
   users: any;
   isDarkMode:boolean;
   datatype;
+  tagArray;
   constructor(private accountService:AccountService,
               private themeService: ThemeService,
+              private storyService:StoryService,
               private presence:PresenceService,
               private route :ActivatedRoute
               ){
@@ -41,6 +45,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
      this.setCurrentUser();
+     this.getAllTags();
   }
   toggleDarkMode() {
     this.isDarkMode = this.themeService.isDarkMode();
@@ -65,7 +70,12 @@ export class AppComponent implements OnInit{
     }
     
   }
-
+  getAllTags(){
+    this.storyService.getAllTags()
+         .subscribe( (res:Tags[]) => {
+             this.tagArray = res.map(res => res.tagName);
+         });
+   }
   
 
 }

@@ -37,7 +37,7 @@ namespace API.SignalR
             await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
             //get messages 
             var massages = await _unitOfWork.ChatMessageRepository.
-                GetChatThread(groupName);
+                GetChatThread(groupName,0,10);
 
             if (_unitOfWork.HasChanges()) await _unitOfWork.Complete();
 
@@ -77,7 +77,7 @@ namespace API.SignalR
 
             throw new HubException("Failed to remove from group");
         }
-        public async Task SendMessags(CreateChatMessagesDto createChatMessagesDto)
+        public async Task SendMessages(CreateChatMessagesDto createChatMessagesDto)
         {
             var username = Context.User.GetUsername();
             // if (username == createMessageDto.RecipientUsername.ToLower())
@@ -108,10 +108,10 @@ namespace API.SignalR
                 await Clients.Group(groupName).SendAsync("NewChatMessage", _mapper.Map<ChatMessageDto>(messages));
             }
         }
-        public async Task GetMoreMessages(string groupName ,int LastId){
+        public async Task MoreMessages(MoreChatMessagesDto moreChatMessagesDto){
             //last id for skips ,take for take
             var massages = await _unitOfWork.ChatMessageRepository.
-                GetChatThread(groupName);
+                GetChatThread(moreChatMessagesDto.GroupName,moreChatMessagesDto.LastId,10);
 
             if (_unitOfWork.HasChanges()) await _unitOfWork.Complete();
 

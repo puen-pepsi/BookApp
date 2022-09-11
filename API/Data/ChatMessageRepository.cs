@@ -37,14 +37,22 @@ namespace API.Data
                         .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<ChatMessageDto>> GetChatThread(string groupName)
+        // public async Task<IEnumerable<ChatMessageDto>> GetChatThread(string groupName)
+        public async Task<IEnumerable<ChatMessageDto>> GetChatThread(string groupName,
+                int nSkip,int nTake )
         {
-              var messages = await _context.ChatMessages
-                .Where(g => g.GroupName == groupName)
-                .OrderBy(m => m.Created)
-                .ProjectTo<ChatMessageDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-
+            //   var messages = await _context.ChatMessages
+            //     .Where(g => g.GroupName == groupName)
+            //     .OrderBy(m => m.Created)
+            //     .ProjectTo<ChatMessageDto>(_mapper.ConfigurationProvider)
+            //     .ToListAsync();
+            var messages = await _context.ChatMessages
+                          .Where(g => g.GroupName == groupName)
+                          .OrderByDescending(m => m.Created)
+                          .Skip(nSkip)
+                          .Take(nTake)
+                          .ProjectTo<ChatMessageDto>(_mapper.ConfigurationProvider)
+                          .ToListAsync();
             return messages;
         }
     }

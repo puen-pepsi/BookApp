@@ -34,6 +34,7 @@ namespace API
             services.AddDbContext<DataContext>(x => {
                 x.UseSqlite(_config.GetConnectionString
                 ("DefaultConnection"));
+                // o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             });
             //   services.AddDbContext<DataContext>(x => {
             //     x.UseSqlServer(_config.GetConnectionString

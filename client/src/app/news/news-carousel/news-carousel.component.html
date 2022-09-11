@@ -1,25 +1,57 @@
-<carousel class="carousel-html-content" style="z-index: 2;"
+<!-- <carousel class="carousel-html-content" style="z-index: 2;" 
         [height]="'250'"
         [cellsToShow]="'1'"
+
         [autoplay]="true"
         [loop]="true"
->
-    <div *ngFor="let row of newsHome"
-        class="carousel-cell" >
-        <div class="news">
-               <img src={{row.pictureUrl}}  >
-                <div class="content" >
-                     <!-- <p class="text">{{row.content}}</p> -->
-                     <!-- <div [innerHtml] = "news.content | sanitizeHtml" class="text"></div> -->
-                     <p class="text">{{row.topic | titlecase }}</p>
-                </div>
+        (change)="getData($event)"
+        >   
+    <ng-container  *ngFor="let row of newsHome">
+        <div class="carousel-cell" >
+            <div class="news">
+                    <img [src]= "row.pictureUrl"  loading="lazy"> 
+                    <div class="content" >
+                        <p class="text">{{row.topic | titlecase }}</p>
+                    </div>
+            </div>
         </div>
-    </div>
-</carousel>
-<div *ngIf="newsService.list" class="newslist ">
+    </ng-container>
+</carousel> -->
+<div *ngIf="newsHome.length > 0" [style.height]="'230px'">
+    <mat-carousel  
+        timings="250ms ease-in"
+        [autoplay]="true"
+        interval="5000"
+        color="primary"
+        [maintainAspectRatio]="false"
+        [slideHeight]="'200px'"
+        [maxWidth]="auto"
+        slides="4"
+        [loop]="true"
+        [hideArrows]="false" 
+        [useKeyboard]="true" 
+        [useMouseWheel]="false"
+        [orientation]="ltr"
+        [lazyLoad]="true" 
+        (change)="onChange($event)">
+            <mat-carousel-slide
+                #matCarouselSlide
+                *ngFor="let slide of newsHome; let i = index"
+                [image]= slide.pictureUrl
+                [hideOverlay]="true">
+                <div class="content" >
+                    <p>{{slide.topic | uppercase }}</p>
+                </div> 
+                </mat-carousel-slide>
+    </mat-carousel>
+    <!-- <div class="content">
+        {{newsHome[currentSlideIndex].topic}}
+    </div> -->
+</div>
+
+<div *ngIf="newsHome.length > 0" class="newslist ">
     <div *ngFor="let row of newsHome" class="mt-1">
-        <!-- <mat-divider></mat-divider> -->
-    <!-- <app-news-card [row]="row"></app-news-card> -->
+      
     <app-news-small-card [row]="row"></app-news-small-card>
 
 </div>

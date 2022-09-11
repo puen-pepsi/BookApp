@@ -57,7 +57,8 @@ import { DialogAdsComponent } from './show-tchapter/dialog-ads/dialog-ads.compon
 import { MemberAreaComponent } from './member-area/member-area.component';
 import { ShowTopSpecialComponent } from './show-top-special/show-top-special.component';
 import { CardTopComponent } from './show-top-special/card-top/card-top.component';
-
+import { MatCarouselModule } from 'ng-mat-carousel';
+import { RecentListComponent } from './recent-chapter/recent-list/recent-list.component';
 @NgModule({
   declarations: [
     ShowListComponent,
@@ -111,6 +112,7 @@ import { CardTopComponent } from './show-top-special/card-top/card-top.component
     MemberAreaComponent,
     ShowTopSpecialComponent,
     CardTopComponent,
+    RecentListComponent,
   ],
   imports: [
     CommonModule,
@@ -122,6 +124,7 @@ import { CardTopComponent } from './show-top-special/card-top/card-top.component
     NgbModule,
     ScrollingModule,
     NgxSpinnerModule,
+    MatCarouselModule
   ],
   exports: [
     ShowCardComponent,

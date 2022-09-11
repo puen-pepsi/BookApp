@@ -5,12 +5,14 @@
              <ng-template #first>
                          <!-- <p>{{story | json}}</p> -->
                  <img src="{{story.imageUrl}}"
+                 loading="lazy"
                  alt="{{story.storyName}}" 
                  (click)="goToDetial(story.storyName)"
                  class="card-img-top">
              </ng-template>
              <ng-template #second>
                  <img src="./assets/images/blackcover.png"
+                 loading="lazy"
                  alt="{{story.storyName}}" 
                  (click)="goToDetial(story.storyName)"
                  class="card-img-top">

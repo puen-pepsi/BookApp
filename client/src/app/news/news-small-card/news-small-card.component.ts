@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { News } from 'src/app/_models/news.model';
 import { NewsService } from 'src/app/_services/news.service';
@@ -6,10 +6,11 @@ import { NewsService } from 'src/app/_services/news.service';
 @Component({
   selector: 'app-news-small-card',
   templateUrl: './news-small-card.component.html',
-  styleUrls: ['./news-small-card.component.scss']
+  styleUrls: ['./news-small-card.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class NewsSmallCardComponent implements OnInit {
-  @Input() row:News;
+  @Input() row:Partial<News>;
   @Output() deleteId = new EventEmitter();
   constructor(public newsService:NewsService,
               private router : Router) { }

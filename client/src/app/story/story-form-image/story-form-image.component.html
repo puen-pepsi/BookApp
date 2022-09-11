@@ -2,7 +2,7 @@
     <!-- <p>{{storyService.formData.imageUrl}}</p> -->
     <div >
             <img src ="{{storyService.formData.imageUrl || './assets/images/default.jpeg'}}" 
-    class="img-thumbnail image" (click)="fileInput.click($event)">
+            loading="lazy" class="img-thumbnail image" (click)="fileInput.click($event)">
         <div class="upload">
                 <button
                     class="btn btn-secondary btn-sm "

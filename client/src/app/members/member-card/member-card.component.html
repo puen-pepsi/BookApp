@@ -1,6 +1,7 @@
 <mat-card class="card">
     <div class="card-img-wrapper">
-        <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}" class="card-img-top">
+        <img src="{{member.photoUrl || './assets/user.png'}}"
+        loading="lazy" alt="{{member.username}}" class="card-img-top">
         <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">
                 <button mat-mini-fab [disabled]="!user"
@@ -43,64 +44,3 @@
     <!-- <mat-card-actions>
     </mat-card-actions> -->
   </mat-card>
-
-
-<!-- <div class="card">
-    <div class="top">
-         <app-title *appHasRole ='["Admin", "Moderator"]' (message)="giveTitle($event)">
-        </app-title>
-    </div>
-    <div class="card-img-wrapper">
-        <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}" class="card-img-top">
-        <ul class="list-inline member-icons animate text-center">
-            <li class="list-inline-item">
-                <button mat-mini-fab
-                    [routerLink]="['/members',member.username]"
-                    color="primary"
-                    aria-label="Action icon" >
-                    <mat-icon>person</mat-icon>
-                </button>
-            </li>
-            <li class="list-inline-item">
-                <app-follow-author
-                [isActive]="memberId != null"
-                [membername]="member.username"
-                (follow)="followthis($event)"  
-                ></app-follow-author>
-            </li>
-            <li class="list-inline-item">
-                <button mat-mini-fab
-                    routerLink='/members/{{member.username}}' 
-                    [queryParams]='{tab:2}'
-                    color="warn"
-                    aria-label="Action icon">
-                    <mat-icon>email</mat-icon>
-                </button>
-            </li>
-        </ul>
-    </div>
-    <div class="card-body p-1">
-        <h6 class="card-title text-center mb-1">
-            <span [class.is-online]="(presence.onlineUsers$ | async).includes(member.username)">
-               <i class="fa fa-user mr-2"></i> 
-            </span>
-            
-            {{member.knownAs || member.username | titlecase}}
-        </h6>
-        <p class="card-text text-muted text-center flexible limitText">{{member.title || "-"}}</p>
-        
-    </div>
-</div> -->
-<!-- <div class="mb-3 d-flex align-items-stretch">
-    <div class="card">
-      <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}" class="card-img-top">
-      <div class="card-body d-flex flex-column">
-       
-        <span [class.is-online]="(presence.onlineUsers$ | async).includes(member.username)">
-           <i class="fa fa-user mr-2"></i> 
-        </span>
-        <h5 class="card-title"> {{member.knownAs || member.username}}</h5>
-        <p class="card-text mb-4">{{member.title || "-"}}</p>
-      </div>
-    </div>
-</div> -->

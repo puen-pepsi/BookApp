@@ -31,7 +31,7 @@
   <ul>
     <li *ngFor="let rank of listItems.slice(0,3) index as i" class="item">
         <h1>{{i+1}}</h1>
-        <img src="{{rank.imageUrl}}" (click)="Goto(rank.storyName)">
+        <img src="{{rank.imageUrl}}" (click)="Goto(rank.storyName)" loading="lazy">
         <div class="stand" (click)="Goto(rank.storyName)">
           
           <h5>{{rank.storyName | truncate:[18, '..']}}</h5>

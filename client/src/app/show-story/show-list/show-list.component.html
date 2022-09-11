@@ -20,7 +20,7 @@
   </div> -->
   <div class="top-between">
     <div  fxLayout="row" fxLayoutAlign="start center">
-        <h3>Featured {{storyParams.storyType | titlecase}}s</h3>
+        <h3>Featured {{storyParams.storyType=='novel'?"Novels":"Original Manga"}}</h3>
         <button mat-icon-button
               matTooltip="All"
               [routerLink]="['all',storyParams.storyType]" >

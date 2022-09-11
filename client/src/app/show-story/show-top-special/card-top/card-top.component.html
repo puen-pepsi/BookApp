@@ -3,7 +3,7 @@
     <div class="rank">
       <h1>{{index}}</h1>
     </div>
-  <img src="{{card.imageUrl}}" >
+  <img src="{{card.imageUrl}}" loading="lazy" >
   <div class="content">
      <h5>{{card.storyName | truncate:[20, '...']}}</h5>
      <p class="text">{{card.description}}</p>

@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-md-3 footer-brand animated fadeInLeft">
             <!-- <img src="./assets/images/logotransparent.png" alt="Rainobu"> -->
-            <img [src]="footerlogo" (click)="logoClick($event)">
+            <img [src]="footerlogo" (click)="logoClick($event)" loading="lazy">
             <p>
                 Whether it be reading an epic tale of an isekai-ed hero or having a
                         peaceful online tea time conversation with your friends, you can find them all here in
@@ -60,7 +60,7 @@
                             <i class="fab fa-discord"></i>
                         </span>
                     </a>
-                    <a href="https://twitter.com/RAINOBU_Book?t=HCvCThd7uj52lZ3Z8S0GNw&s=09">
+                    <a href="https://twitter.com/rainobu_">
                       <span class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
                     </a>
                     <a href="https://instagram.com/rainobu_official/">
@@ -69,14 +69,14 @@
                 </p>
 
             </div>
-            <p>© 2021 Rainobu, All rights reserved</p>
+            <p>©{{currentYear}} Rainobu, All rights reserved</p>
         </div>
         <div class="col-md-4 footer-nav animated fadeInUp">
             <!-- <h4>Menu —</h4> -->
             <div class="col-md-6">
                 <ul class="pages">
                     <li><a routerLink="/aboutus">About Us</a></li>
-                    <li><a href="#">Contacts</a></li>
+                    <li><a routerLink="/contactus">Contacts</a></li>
                     <li><a routerLink="/termofservice">Terms & Condition</a></li>
                     <li><a routerLink="/privacypolicy">Privacy Policy</a></li>
                 </ul>

@@ -21,6 +21,7 @@ namespace API.Entities
         public AppUser Author { get; set; }
         public DateTime Created { get; set; }
         public string Tags { get; set; }
+        //Add column Deleted
         public bool Deleted {get;set;}
         public virtual ICollection<PhotoStory> PhotoStories { get; set; }
         public virtual ICollection<StoryChapter> Chapters { get; set; }
@@ -31,6 +32,7 @@ namespace API.Entities
         public virtual  ICollection<UserStory> StoryLiked { get; set; }
         public virtual ICollection<UserHistory> StoryHistory { get; set; }
         public virtual ICollection<TagStory> StoryTags { get; set;}
+        public virtual ICollection<Activities> Activities{get;set;}
         public Story()
         {
             Chapters = new Collection<StoryChapter>();
@@ -42,6 +44,7 @@ namespace API.Entities
             StoryLiked = new Collection<UserStory>();
             StoryHistory =new Collection<UserHistory>();
             StoryTags =new Collection<TagStory>();
+            Activities = new Collection<Activities>();
         }
     }
 }

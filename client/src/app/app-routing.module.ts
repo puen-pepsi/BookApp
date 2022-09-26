@@ -28,8 +28,9 @@ import { IntoduceComponent } from './home/intoduce/intoduce.component';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { RefreshGuard } from './_guards/refresh.guard';
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'',component:HomeComponent,canActivate:[RefreshGuard]},
   {
     path:'',
     runGuardsAndResolvers:'always',
@@ -57,7 +58,7 @@ const routes: Routes = [
       // },
       {
         path:'mystory',
-          loadChildren:() => import('./story/story.module').then(mod => mod.StoryModule)
+          loadChildren:() => import('./story/story.module').then(mod => mod.StoryModule),canActivate:[AuthGuard]
       },
       {
         path: 'admin',

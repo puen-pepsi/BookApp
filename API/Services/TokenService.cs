@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -46,7 +47,7 @@ namespace API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddYears(1),
+                Expires = DateTime.UtcNow.AddDays(2),
                 SigningCredentials = creds
             };
 
@@ -56,6 +57,10 @@ namespace API.Services
 
             return tokenHandler.WriteToken(token);
         }
+
+
+
+
         public async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(ExternalAuthDto externalAuth)
         {
                 try
@@ -71,6 +76,44 @@ namespace API.Services
                     return null;
                 }
         }
+    public  RefreshToken GenerateRefreshToken()
+    {
+        var randomNumber = new byte[64];
+        string newToken = "";
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomNumber);
+            newToken =  Convert.ToBase64String(randomNumber);
+        }
+        var refreshToken = new RefreshToken
+        {
+            
+            Token = newToken,
+            Expires = DateTime.Now.AddDays(1),
+            Created = DateTime.Now
+            
+        };
+
+        return  refreshToken;
+    }
+
+
+        // private void SetRefreshToken(RefreshToken newRefreshToken)
+        // {
+        //     var cookieOptions = new CookieOptions
+        //     {
+        //         HttpOnly = true,
+        //         Expires = newRefreshToken.Expires
+        //     };
+        //     Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+        // user.RefreshToken = newRefreshToken.Token;
+        // user.TokenCreated = newRefreshToken.Created;
+        // user.TokenExpires = newRefreshToken.Expires;
+        // user.RefreshToken = newRefreshToken.Token;
+        // user.RefreshTokenExpiryTime = newRefreshToken.Expires;
+
+        // }
 
     }
 }

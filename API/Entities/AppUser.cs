@@ -20,6 +20,9 @@ namespace API.Entities
         //edit faster
         public int Point { get; set; }
         public string Title { get; set; }
+        //Add Column here
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
         public ICollection<Banner> Banners { get; set; }
         public ICollection<Photo> Photos { get; set; }
         // Users Click Like

@@ -48,3 +48,15 @@ input{
 .form-control::placeholder  {
     font-family: FontAwesome;
 }
+.label-meta{
+    display: flex;
+    justify-content: space-around;
+}
+.label-meta .remember{
+  font-size: 0.7rem;
+  font-weight: 300;
+}
+.label-meta .forgotpassword{
+  font-size: 0.7rem;
+  text-align: right;
+}

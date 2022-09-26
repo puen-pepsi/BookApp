@@ -182,7 +182,8 @@ namespace API.Data
                             .ThenInclude( s => s.Photos)
                             .Include( s => s.Chapters)
                             .ThenInclude(s => s.Published)
-                            .Where( s => s.Type == storyType && s.Deleted == false)
+                            .Where( s => s.Type == storyType)
+                            // .Where( s => s.Type == storyType && s.Deleted == false)
                             .OrderByDescending(s => s.ViewCount.Count)
                             .Skip(currentStory)
                             .Take(pageSize)
@@ -235,7 +236,7 @@ namespace API.Data
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {
             var query = _context.Stories.Include(s => s.Ratings).AsQueryable();
-            query = query.Where( d => d.Deleted == false);
+            // query = query.Where( d => d.Deleted == false);
             if(storyParams.Genre != "All"){
                 query = query.Where(s => s.Genre == storyParams.Genre);
             }
@@ -269,7 +270,7 @@ namespace API.Data
         public async Task<PagedList<StoryDto>> GetAuthorStory(AuthorStoryParams authorStoryParams)
         {
             var query = _context.Stories.AsQueryable();
-                query = query.Where(d => d.Deleted == false);
+                // query = query.Where(d => d.Deleted == false);
             if(authorStoryParams.AuthorName != null){
                 query = query.Where(a => a.UserName == authorStoryParams.AuthorName);             
             }

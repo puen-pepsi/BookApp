@@ -488,6 +488,9 @@ namespace API.Data.Migrations
                     b.Property<string>("content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("headline")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("topic")
                         .HasColumnType("nvarchar(max)");
 
@@ -790,6 +793,9 @@ namespace API.Data.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1176,7 +1182,7 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("API.Entities.Story", "story")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("storyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1629,6 +1635,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Story", b =>
                 {
+                    b.Navigation("Activities");
+
                     b.Navigation("Chapters");
 
                     b.Navigation("PhotoStories");

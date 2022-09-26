@@ -6,5 +6,6 @@ export interface User{
     point:number;
     title:string;
     roles:string[];
+    refreshToken:string;
     //myList:number[];
 }

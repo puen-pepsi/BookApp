@@ -54,7 +54,16 @@ export class AccountService {
   }
   isAuthenticated(){
     const user = JSON.parse(localStorage.getItem("user"));
-    return !this.helper.isTokenExpired(user.token);
+    //isTokenExpired => log out to page login
+    if(user == null){
+      return null;
+    }
+    if(!this.helper.isTokenExpired(user.token)){
+      return true;
+    }else{
+      this.logout();
+      return false;
+    }
   }
   setCurrentUser(user:User){
     user.roles = [];
@@ -68,6 +77,23 @@ export class AccountService {
       // let expirationDate = this.helper.getTokenExpirationDate(user.token);
       // var secondBetweenTwoDate = Math.abs((new Date().getTime() - expirationDate.getTime()) / 1000);
       // this.autoLogout(secondBetweenTwoDate);
+  }
+  refreshToken(){
+    // Try refreshing tokens using refresh token
+    let isRefreshSuccess: boolean;
+    const user = JSON.parse(localStorage.getItem("user"));
+    if(!user)console.log("null")
+    // if (!user.token || !user.refreshToken) { 
+    //   isRefreshSuccess = false;
+    // }
+   if(user){
+      this.http.post(this.baseUrl + 'token/refresh',{token:user.refreshToken}).subscribe((res:User) => {
+        this.setCurrentUser(res)
+        isRefreshSuccess = true;
+      });
+   }
+
+    return isRefreshSuccess;
   }
   // autoLogout(expirationDate: number) {
   //   //console.log(expirationDate);

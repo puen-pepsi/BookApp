@@ -10,6 +10,8 @@ namespace API.DTOs
         public string KnownAs { get; set; }
         public int Point { get; set; }
         public string Title { get; set; }
+
+        public string RefreshToken { get; set; }
         //public string Gender { get; set; }
         //public IEnumerable<int> MyList { get; set; } 
     }

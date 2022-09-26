@@ -6,6 +6,7 @@ namespace API.Entities
     {
         public int id { get; set; }
         public string topic { get; set; }//storyName
+        //Add Column headline
         public string headline { get; set; }
         public string content { get; set; }//synopsis
         public string PictureUrl { get; set; }//Image story ?

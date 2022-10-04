@@ -155,13 +155,23 @@ export class ShowStoryService {
     return this.http.get<any[]>(this.baseUrl + 'story/GetAllLanguage');
   }
   getPostRate(rate:number,story:ShowStory){
-    //console.log(rate);
     return this.http.post<ShowStory>(this.baseUrl+'story/RateStory/'+story.storyId+'/'+rate,null).pipe(
       map(res => {
-        //console.log(res)
-        const index = this.showStories.indexOf(story);
-        this.showStories[index] = res;
-        return this.showStories[index];
+        // const index = this.showStories.indexOf(story);
+        // // this.showStories[index].rating = res.rating;
+        // this.showStories[index].yourRate = rate;
+        // return this.showStories[index];
+        const showstory:ShowStory = [...this.showStoryCache.values()]
+        .reduce((arr,elem)=> arr.concat(elem.result),[])
+        .find((showStory:ShowStory)=> showStory.storyName===story.storyName);
+        if(showstory){
+          showstory.rating = res.rating;
+          showstory.yourRate = rate;
+          showstory.totalRate = res.totalRate;
+          console.log(showstory)
+          return showstory
+        }
+        return 
       })
     );
   }
@@ -171,8 +181,15 @@ export class ShowStoryService {
   getAddViews(storyName:string){
     return this.http.put(this.baseUrl + 'showstory/'+storyName,null);
   }
-  addLikeStory(storyname:string){
-    return this.http.post(this.baseUrl +'likestories/' + storyname,{});
+  // addLikeStory(storyname:string){
+    addLikeStory(story:ShowStory){
+    return this.http.post(this.baseUrl +'likestories/' + story.storyName,{})
+    .pipe(map( ()=>{
+      const index = this.showStories.indexOf(story);
+      story.liked = true;
+      this.showStories[index] = story;
+      return this.showStories[index];
+    }));
   }
   addLikeChapter(id:number){
     return this.http.post(this.baseUrl+'chapters/addlike/'+id,{});

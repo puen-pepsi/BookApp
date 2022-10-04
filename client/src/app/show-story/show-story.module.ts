@@ -20,7 +20,6 @@ import { ReplyListComponent } from './comment/reply-list/reply-list.component';
 import { NavSidebarComponent } from './show-tchapter/nav-sidebar.component';
 import { LibraryComponent } from './library/library.component';
 import { HistoryComponent } from './library/history/history.component';
-import { LibraryCardComponent } from './library/library-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HistoryCardComponent } from './library/history/history-card.component';
 import { LikeComponent } from './Like/like.component';
@@ -77,7 +76,6 @@ import { RecentListComponent } from './recent-chapter/recent-list/recent-list.co
     NavSidebarComponent,
     LibraryComponent,
     HistoryComponent,
-    LibraryCardComponent,
     HistoryCardComponent,
     LikeComponent,
     DialogComponent,

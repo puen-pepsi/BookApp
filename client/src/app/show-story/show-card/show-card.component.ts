@@ -21,7 +21,7 @@ export class ShowCardComponent implements OnInit {
 @Input() index : number;
 @Input() page : number;
 @Input() pagesize :number;
-@Output() refesh = new EventEmitter();
+@Output() refresh = new EventEmitter();
 activitiesType = ActivitiesType.followStory;
 activitiesTimer = true;
 rating:number=0;
@@ -29,9 +29,9 @@ starColor:StarRatingColor = StarRatingColor.lightblue;
 fSize : string = "1.2rem";
 starCount:number = 5;
 totalRate:number;
-yourRate:any;
+// yourRate:any;
 mylist : number[]=[];
-userLiked : UserLiked;
+// userLiked : UserLiked;
 user:User;
   constructor(private showStoryService:ShowStoryService,
               private activitiesService:ActivitiesService,
@@ -49,41 +49,33 @@ user:User;
     // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
     //   this.yourRate = res;
     // });
-    if(this.user){
-      this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
-        this.userLiked = res;
-      });      
-    }
+    // if(this.user){
+    //   this.showStoryService.getUserLiked(this.story.storyId).subscribe(res =>{
+    //     this.userLiked = res;
+    //   });      
+    // }
   }
   goToDetial(storyname:string){
     this.router.navigate(['/stories',storyname]);
   }
   onRatingChanged(rating){
-    //console.log(rating);
-    //this.rating = rating;
-    // this.showStoryService.getPostRate(rating,this.story).subscribe(res => {
-    //   console.log(res);
-    // });
     this.showStoryService.getPostRate(rating,this.story).subscribe(res => {
-      this.rating = res.rating;
-      // this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
-      //   this.yourRate = res;
-      // });
-      this.refesh.emit(res);
+      this.story = res;
+      this.refresh.emit(res);
     });
   }
-  followthis(event){
-    if(event.active){
-      this.addLikeStory(event.storyname);
+  followthis(event:ShowStory){
+    if(event.liked){
+      this.addLikeStory(event);
     }else{
-      this.deletLikeStory(event.storyid,event.storyname);
+      this.deletLikeStory(event.storyId,event.storyName);
     }
   }
-  addLikeStory(storyname:string){
-    this.showStoryService.addLikeStory(storyname).subscribe(() => {
-      this.toastr.success('You have liked '+ storyname);
+  addLikeStory(story:ShowStory){
+    this.showStoryService.addLikeStory(story).subscribe(() => {
+      this.toastr.success('You have liked '+ story.storyName);
       if(this.activitiesTimer){
-        this.activitiesService.postActivities(this.activitiesType,storyname).subscribe(res =>{
+        this.activitiesService.postActivities(this.activitiesType,story.storyName).subscribe(res =>{
         console.log(res);
       })
       }
@@ -101,6 +93,9 @@ user:User;
       setTimeout(() => {
         this.activitiesTimer = true;
       }, 300000);
+      //storylike => hide
+      
+      this.refresh.emit(storyid);
     })
   }
  

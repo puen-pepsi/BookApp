@@ -154,6 +154,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<int>> GetRateStory(int storyId)
         {
+            
             var YouRate = await _unitOfWork.StoryRepository.GetYouRate(storyId,User.GetUserId());
             if(YouRate == null)
                 return Ok(0);
@@ -164,6 +165,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<StoryDto>> RateStory(int storyId,int rate)
         {
+            if(User.GetUserId() <=0 )return BadRequest("Only Members Rating");
             var existRate = await _unitOfWork.StoryRepository.GetYouRate(storyId,User.GetUserId());
             if(existRate==null){
                 var storyRate = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
@@ -184,6 +186,7 @@ namespace API.Controllers
              await _unitOfWork.Repository.UpdateAsync<Rating>(existRate);
                 var storyback = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
                 var storybackDto = _mapper.Map<StoryDto>(storyback);
+
                 return Ok(storybackDto);
             
             //return BadRequest("Problem create Rate");

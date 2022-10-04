@@ -235,8 +235,11 @@ namespace API.Data
         }
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {
-            var query = _context.Stories.Include(s => s.Ratings).AsQueryable();
+            var query = _context.Stories.AsQueryable();
             // query = query.Where( d => d.Deleted == false);
+            // query = query.Include(s => s.Ratings.Where(y => y.UserRatedId == storyParams.UserId));  
+
+            
             if(storyParams.Genre != "All"){
                 query = query.Where(s => s.Genre == storyParams.Genre);
             }
@@ -262,10 +265,9 @@ namespace API.Data
                 "views" => query.OrderByDescending(s => s.ViewCount.Count),
                 _ => query.OrderBy(s=>s.Rating)
             };
-            // var pro = query.ProjectTo<StoryDto>(configuration).AsNoTracking();
-            // var test = _mapper.ProjectTo<StoryDto>(query);
-            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(_mapper.ConfigurationProvider).AsNoTracking(),
-                    storyParams.PageNumber,storyParams.PageSize);
+
+            return await PagedList<StoryDto>.CreateAsync(query.ProjectTo<StoryDto>(_mapper.ConfigurationProvider,new { CurrentUserId = storyParams.UserId }).AsNoTracking(),storyParams.PageNumber,storyParams.PageSize);
+
         }
         public async Task<PagedList<StoryDto>> GetAuthorStory(AuthorStoryParams authorStoryParams)
         {

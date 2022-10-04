@@ -81,6 +81,8 @@ namespace API.Controllers
                   
                  
             }
+            var userId = User.GetUserId();
+            storyParams.UserId = userId;
             var story = await _unitOfWork.StoryRepository.GetStoriesAsync(storyParams);
 
             Response.AddPaginationHeader(story.CurrentPage, story.PageSize,

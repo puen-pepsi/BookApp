@@ -10,7 +10,7 @@ namespace API.Interfaces
     {
         Task<UserStory> GetUserLikeStory(int sourceUserId,int likedstoryId);
         Task<AppUser> GetStoryWithLikeStory(int userId);
-        Task<PagedList<LikeStoryDto>> GetStoryLikes(LikeStoryParams likeStoryParams);
+        Task<PagedList<StoryDto>> GetStoryLikes(LikeStoryParams likeStoryParams);
 
         void DeleteStoryLiked(UserStory userStory);
     }

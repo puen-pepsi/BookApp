@@ -1,12 +1,10 @@
 using System;
 using System.Linq;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+
 
 namespace API.Helpers
 {
@@ -14,6 +12,7 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
+            int CurrentUserId = 0;
             CreateMap<AppUser, MemberDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
@@ -59,6 +58,10 @@ namespace API.Helpers
             CreateMap<StoryChapter, ChapterListDto>();
             CreateMap<Published, PublishedDto>().ReverseMap();
             CreateMap<Story, StoryDto>()
+                .ForMember(dest => dest.Liked,
+                ex => ex.MapFrom(src => src.StoryLiked.Any(x => x.SourceUserId == CurrentUserId)))
+                .ForMember(dest => dest.fregment,ex => ex.MapFrom(src => src.StoryHistory.FirstOrDefault(y => y.SourceUserId == CurrentUserId).fregment))
+                .ForMember(dest => dest.YourRate, ex => ex.MapFrom(src => src.Ratings.Any( x => x.UserRatedId == CurrentUserId) ? src.Ratings.FirstOrDefault( x => x.UserRatedId == CurrentUserId).Rated : 0))
                 .ForMember(dest => dest.UserName, ex => ex.MapFrom(src => src.Author.UserName))
                 .ForMember(dest => dest.KnownAs,ex => ex.MapFrom(src => src.Author.KnownAs))
                 // .ForMember(dest => dest.Title, opt => opt.MapFrom(src => 
@@ -67,6 +70,7 @@ namespace API.Helpers
                     src.Author.Title))
                 .ForMember(dest => dest.UserPhoto, ex => ex.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
                 // .ForMember(dest => dest.Point, ex => ex.MapFrom(src => src.Author.recievePoints.Sum(x => x.Point)))
+                
                 .ForMember(dest => dest.Point, ex => ex.MapFrom(src => src.Author.Point))
                 .ForMember(dest => dest.LastChapterName, 
                              opt => {
@@ -93,6 +97,7 @@ namespace API.Helpers
                 //                 .Select(x => x.ChapterName).Take(1)))
                 .ForMember(dest => dest.Views, ex => ex.MapFrom(src => src.ViewCount.Count))
                 .ForMember(dest => dest.StoryId, ex => ex.MapFrom(src => src.Id))
+
                 .ForMember(dest => dest.TotalRate,
                     ex => ex.MapFrom(sr => sr.Ratings.Count() == 0 ? 0 : sr.Ratings.Count()))
                 .ForMember(dest => dest.Rating,
@@ -104,6 +109,8 @@ namespace API.Helpers
             .ForMember(dest => dest.TotalChapter,
                     ex => ex.MapFrom(src => src.Chapters
                             .Where(src => src.Order > 0).Count()));
+            // .ForMember(dest => dest.YourRate,ex => ex.MapFrom(src => src.Ratings.FirstOrDefault(x => x.UserRatedId == 1)))
+
             CreateMap<StoryComment, StoryCommentDto>()
                 .ForMember(d => d.UserName, o => o.MapFrom(s => s.UserPost.UserName))
                 .ForMember(d => d.KnownAs, o => o.MapFrom(s => s.UserPost.KnownAs))

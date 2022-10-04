@@ -41,7 +41,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LikeStoryDto>>> GetStorylikes([FromQuery] LikeStoryParams likeStoryParams)
+        public async Task<ActionResult<IEnumerable<StoryDto>>> GetStorylikes([FromQuery] LikeStoryParams likeStoryParams)
         {
             likeStoryParams.UserId = User.GetUserId();
             var storylike = await  _unitOfWork.LikeStoryRepository.GetStoryLikes(likeStoryParams);

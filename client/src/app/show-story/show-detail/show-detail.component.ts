@@ -24,7 +24,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   fSize : string = "2rem";
   showstory : ShowStory;
   userHistory : Userhistory;
-  userLiked:any;
+  // userLiked:any;
   user : User;
   // activeTab:TabDirective;
   rating:number=0;
@@ -112,36 +112,32 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
   //   }
   // }
   onRatingChanged(rating:number){
-    //this.rating = rating;
     this.showStoryService.getPostRate(rating,this.showstory).subscribe(res => {
-      // this.showstory =res;
-      this.rating = res.rating;
-      this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
-        this.yourRate = res;
-      });
+      this.showstory = res;
     });
   }
   refresh(){
     this.route.data.subscribe(data => {
       this.showstory = data.showstory;
-      this.rating = this.showstory.rating;
+      // this.rating = this.showstory.rating;
     });
-    if(this.user){
-         this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
-            this.yourRate = res;
-         });
-         this.showStoryService.getUserHistory(this.showstory.storyId).subscribe(res =>{
-            this.userHistory = res;
-          });
-         this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
-            this.userLiked = res;
-          })
-    }
+    // if(this.user){
+        //  this.showStoryService.getYouRate(this.showstory.storyId).subscribe(res => {
+        //     this.yourRate = res;
+        //  });
+        //  this.showStoryService.getUserHistory(this.showstory.storyId).subscribe(res =>{
+        //     this.userHistory = res;
+        //   });
+        
+        //  this.showStoryService.getUserLiked(this.showstory.storyId).subscribe(res =>{
+        //     this.userLiked = res;
+        //   })
+    // }
 
   }
   addLikeStory(story:ShowStory){
-    this.showStoryService.addLikeStory(story.storyName).subscribe(()=>{
-      this.refresh();
+    this.showStoryService.addLikeStory(story).subscribe(()=>{
+      // this.refresh();
       this.toastr.success('You have liked '+ story.storyName);
     })
   }

@@ -46,16 +46,16 @@ export class HistoryCardListComponent implements OnInit {
   }
   followthis(event){
     if(event.active){
-      this.addLikeStory(event.storyname);
+      this.addLikeStory(event);
     }else{
       this.deletLikeStory(event.storyid,event.storyname);
     }
   }
-  addLikeStory(storyname:string){
-    this.showStoryService.addLikeStory(storyname).subscribe(() => {
-      this.toastr.success('You have liked '+ storyname);
+  addLikeStory(story:ShowStory){
+    this.showStoryService.addLikeStory(story).subscribe(() => {
+      this.toastr.success('You have liked '+ story.storyName);
       if(this.activitiesTimer){
-        this.activitiesService.postActivities(this.activitiesType,storyname).subscribe(res =>{
+        this.activitiesService.postActivities(this.activitiesType,story.storyName).subscribe(res =>{
         console.log(res);
       })
       }

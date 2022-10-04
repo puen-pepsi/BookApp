@@ -36,6 +36,7 @@ export class StarRatingShowComponent implements OnInit {
     }
   }
   onClick(rating:number) {
+    //check user login 
     this.snackBar.open(this.response[rating-1],'',{
       duration:this.snackBarDuration,
       panelClass:['snack-bar']

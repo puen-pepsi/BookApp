@@ -69,13 +69,13 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem" class="mt-4">
                 <div >
-                    <app-star-rating-show [rating]="rating"
+                    <app-star-rating-show [rating]="showstory.rating"
                         [starCount]="starCount"
                         [color]="starColor"
                         [fSize] = "fSize"
                         [wSize] = "fSize"
                         (ratingUpdated)="onRatingChanged($event)"
-                        [yourRate]='yourRate==0?"Please Vote":"Your Rate : "+yourRate+"/5"'
+                        [yourRate]='showstory.yourRate==0?"Please Vote":"Your Rate : "+showstory.yourRate+"/5"'
                     ></app-star-rating-show>
                 </div>
                 <div class="pt-2" >
@@ -106,14 +106,15 @@
                     <i class="fas fa-book-open"></i>&nbsp;&nbsp;Read</button>
                 <button *ngIf="userHistory"
                         type="button" class="btn btn-primary"
-                        [routerLink]="['/stories',storyName,'chapters']" fragment="{{userHistory.fregment}}">
+                        [routerLink]="['/stories',storyName,'chapters']" 
+                        fragment="{{showstory.fregment}}">
                         <i class="fas fa-book-open"></i>&nbsp;&nbsp;Continue Reading..</button>
 
-                <button *ngIf="!userLiked"
+                <button *ngIf="!showstory.liked"
                     type="button" class="btn btn-warning"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
-                <button *ngIf="userLiked"
+                <button *ngIf="showstory.liked"
                     type="button" class="btn btn-success"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>

@@ -23,6 +23,9 @@ export interface ShowStory {
     tags:string;
     lastChapterName: string;
     lastChapterCreate: Date;
+    liked:boolean;
+    yourRate:number;
+    fregment:string;
     //photos: Photo[];
 
 }

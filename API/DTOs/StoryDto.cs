@@ -29,8 +29,11 @@ namespace API.DTOs
         public int Point { get; set; }
         public DateTime Created { get; set; }
         public double Rating { get; set; }
-        public  int TotalRate { get; set; }
+        //Liked => boolean
+        public string fregment { get; set; }
+        public bool Liked { get; set; }
         public int YourRate { get; set; }
+        public  int TotalRate { get; set; }
         public int TotalChapter { get; set; }
         public string Tags { get; set; }
         public string LastChapterName { get; set; }    

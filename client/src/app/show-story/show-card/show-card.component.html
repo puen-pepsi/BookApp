@@ -33,9 +33,10 @@
                 </button>
             </li>
             <li class="list-inline-item" *ngIf="user">
-                    <app-followstory [isActive]="userLiked != null"
+                    <!-- <app-followstory [isActive]="story.liked"
                         [storyid]="story.storyId"
-                        [storyname]="story.storyName"
+                        [storyname]="story.storyName" -->
+                    <app-followstory [story]="story"
                         (follow)="followthis($event)"></app-followstory>
             </li>
             <li class="list-inline-item">

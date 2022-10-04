@@ -49,16 +49,18 @@ export class ShowListComponent implements OnInit,OnDestroy {
     //   this.dataSource.paginator = this.paginator;
       
   }
-  refesh(event){
-      const index = this.showstory.findIndex(x => x.storyId === event.storyId);
-      this.showstory[index] = event;
-  }
+  // refresh(event){
+  //     const index = this.showstory.findIndex(x => x.storyId === event.storyId);
+  //     console.log(this.showstory[index])
+  //     this.showstory[index] = event;
+  // }
   loadStory(){
     this.showStoryService.setStoryParams(this.storyParams);
     // console.log(this.storyParams);
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
+      console.log(this.showstory)
       // console.log(this.pagination)
       // this.dataSource.data = response.result;
       // this.obs = this.dataSource.connect();

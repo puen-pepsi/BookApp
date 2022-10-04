@@ -10,5 +10,6 @@ namespace API.Helpers
         public string OrderByViews { get; set; } ="weekly";
         public string Language { get; set; }
         public string Search { get; set;}
+        public int UserId { get; set; }
     }
 }

@@ -53,11 +53,13 @@ export class LibraryComponent implements OnInit {
     this.pageNumber--;
     this.loadStoryLikes();
   }
-  deleteStoryLike(storyid){
-    this.showstoryService.deleteStoryLike(storyid).subscribe(()=>{
-        this.loadStoryLikes();
-    })
+  deleteStoryLike(event:any){
+    // this.showstoryService.deleteStoryLike(storyid).subscribe(()=>{
+    //     this.loadStoryLikes();
+    // })
+    this.storylikes = this.storylikes.filter(x => x.storyId != event)
   }
+
   onTabActivated(data: TabDirective){
     this.activeTab = data;
     // if(this.activeTab.heading==='History'){

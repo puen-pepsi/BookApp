@@ -30,7 +30,7 @@ namespace API.Data
 
         public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
 
-        public ILikeStoryRepository LikeStoryRepository => new LikeStoryRepository(_context,_config);
+        public ILikeStoryRepository LikeStoryRepository => new LikeStoryRepository(_context,_config,_mapper);
 
         public IHistoryRepository HistoryRepository => new HistoryRepository(_context, _mapper,_config);
 

@@ -34,7 +34,7 @@
           <h1>{{i+1}}</h1>
         </div>
         
-        <img src="{{rank.imageUrl}}" (click)="Goto(rank.storyName)" loading="lazy">
+        <img src="{{rank.imageUrl || './assets/images/blackcover.png'}}" (click)="Goto(rank.storyName)" loading="lazy">
         <div class="stand" (click)="Goto(rank.storyName)">
           
           <h5>{{rank.storyName | truncate:[18, '..']}}</h5>

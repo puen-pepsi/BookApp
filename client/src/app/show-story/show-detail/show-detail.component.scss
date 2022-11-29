@@ -19,7 +19,9 @@ img{
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: hsla(0 0% 100% / 0.5);
+    // background-color: hsla(0 0% 100% / 0.5);
+    background-color: rgba(255, 255, 255, 0.259);
+    backdrop-filter: blur(20px);
     // background-color: orange;
     transform: rotate(90deg);
     transition: all 0.25s ease-in-out;
@@ -32,6 +34,19 @@ img{
   display: inline-block;
   position: relative;
   overflow: hidden;
+}
+.card h2 {
+    color:#00000085;
+    font-weight: 300;
+    position: absolute;
+    top: 50%;
+    right: -100%;
+    transform: translate(50%, -50%);
+    z-index: 1;
+    transition: all 0.5s ease-in-out;
+}
+.card:hover h2{
+    right:50%;
 }
 .card .text_up{
     position : absolute;
@@ -56,19 +71,7 @@ img{
     text-align: center;
     color:rgb(175, 175, 175);
 }
-.card h2 {
-    color:#00000085;
-    font-weight: 300;
-    position: absolute;
-    top: 50%;
-    right: -100%;
-    transform: translate(50%, -50%);
-    z-index: 1;
-    transition: all 0.5s ease-in-out;
-}
-.card:hover h2{
-    right:50%;
-}
+
 .rounded-circle {
     max-height: 35px;
 }

@@ -167,7 +167,19 @@ div.mat-expansion-panel-body {
   -webkit-box-orient: vertical;
 
 }
-
+.circle{
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.circle h1{
+  color: var(--main-color);
+  font-weight: 400;
+}
 /* Small screens */
 @media only screen and (max-width: 768px) {
   // .toprank{

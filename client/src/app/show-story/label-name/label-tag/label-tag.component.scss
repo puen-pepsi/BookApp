@@ -8,6 +8,7 @@
 .rank{
     display:flex;
     flex-direction: row;
+    
 }
 // .image{
 //     padding: 2px;
@@ -58,4 +59,7 @@
     -ms-transform: rotate(40deg);
     -o-transform: rotate(40deg);
     transform: rotate(40deg);
+}
+.label_name{
+  padding-left: 0.5rem;
 }

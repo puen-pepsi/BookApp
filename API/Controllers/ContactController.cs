@@ -25,7 +25,7 @@ namespace API.Controllers
                     "<p>Email : {1}</p><br/>"+
                     "<p>{2}</p>",contactDto.Fullname,contactDto.Email,contactDto.Content));
 
-            var message = new MailMessage(new string[] { "puen_pepsi@hotmail.com" }, "Rainobu Contact", 
+            var message = new MailMessage(new string[] { "rainobu.official@gmail.com" }, "Rainobu Contact", 
                 html.ToString(), null);
                 await _emailSender.SendEmailAsync(message);
             return Ok();

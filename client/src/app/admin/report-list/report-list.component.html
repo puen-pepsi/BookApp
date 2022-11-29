@@ -11,9 +11,14 @@
     <tbody>
       <tr *ngFor="let row of reportlist">
         <td >{{row.reportTopic}}</td>
-        <td >{{row.reportType}}</td>
+        <td ><a (click)="goToDetial(row.reportType)" >{{row.reportType}}</a></td>
         <td>{{row.comment}}</td>
         <td>{{row.userName}}</td>
+        <td>
+          <!-- <button type="button" class="btn btn-danger" 
+              (click)="onHide(row.id)">Hide</button> -->
+              <i class="fas fa-minus" (click)="onHide(row.id)"></i>
+        </td>
         <td>
           <!-- <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(row.id)"></i> -->
           <!-- <button (click)="onDelete(row.id)" class='btn btn-danger'><i class="far fa-trash-alt"></i>Delete</button> -->

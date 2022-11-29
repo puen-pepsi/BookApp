@@ -89,7 +89,7 @@ namespace API.Services
         {
             
             Token = newToken,
-            Expires = DateTime.Now.AddDays(1),
+            Expires = DateTime.Now.AddDays(2),
             Created = DateTime.Now
             
         };

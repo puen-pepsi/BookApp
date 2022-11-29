@@ -110,14 +110,15 @@
                         fragment="{{showstory.fregment}}">
                         <i class="fas fa-book-open"></i>&nbsp;&nbsp;Continue Reading..</button>
 
-                <button *ngIf="!showstory.liked"
+                <!-- <button *ngIf="!showstory.liked"
                     type="button" class="btn btn-warning"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-plus"></i>&nbsp;&nbsp;ADD TO LIBRARY</button>
                 <button *ngIf="showstory.liked"
                     type="button" class="btn btn-success"
                     (click)="addLikeStory(showstory)">
-                    <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
+                    <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button> -->
+                    <app-button-library [story]="showstory" [outline]="false"></app-button-library>
             </div>
             <div fxLayout="column"  fxHide.gt-xs
                 fxLayoutGap="0.2rem" class="buttongroupxs">
@@ -137,6 +138,7 @@
                     type="button" class="btn btn-success"
                     (click)="addLikeStory(showstory)">
                     <i class="fas fa-check"></i>&nbsp;&nbsp;IN LIBRARY</button>
+
             </div>
         </div>
     </div>

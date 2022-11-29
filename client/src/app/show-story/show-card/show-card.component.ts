@@ -21,7 +21,7 @@ export class ShowCardComponent implements OnInit {
 @Input() index : number;
 @Input() page : number;
 @Input() pagesize :number;
-@Output() refresh = new EventEmitter();
+@Output() refresh = new EventEmitter<ShowStory>();
 activitiesType = ActivitiesType.followStory;
 activitiesTimer = true;
 rating:number=0;
@@ -44,7 +44,7 @@ user:User;
               }
 
   ngOnInit(): void {
-    this.rating = this.story.rating;
+    // this.rating = this.story.rating;
     this.totalRate = this.story.totalRate;
     // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
     //   this.yourRate = res;
@@ -64,40 +64,16 @@ user:User;
       this.refresh.emit(res);
     });
   }
-  followthis(event:ShowStory){
-    if(event.liked){
-      this.addLikeStory(event);
-    }else{
-      this.deletLikeStory(event.storyId,event.storyName);
-    }
+  toggleFollow(event:ShowStory){
+    // if(event.liked){
+    //   this.addLikeStory(event);
+    // }else{
+    //   // this.deletLikeStory(event.storyId,event.storyName);
+    // }
+    //this.story.liked = event;
+    this.refresh.emit(event)
   }
-  addLikeStory(story:ShowStory){
-    this.showStoryService.addLikeStory(story).subscribe(() => {
-      this.toastr.success('You have liked '+ story.storyName);
-      if(this.activitiesTimer){
-        this.activitiesService.postActivities(this.activitiesType,story.storyName).subscribe(res =>{
-        console.log(res);
-      })
-      }
-      
-    })
-    // error => {
-    //   this.toastr.warning('You already liked' + story.storyName);
-    // }) 
-    
-  }
-  deletLikeStory(storyid:number,storyname:string){
-    this.showStoryService.deleteStoryLike(storyid).subscribe(()=>{
-      this.toastr.success('You have unliked '+storyname);
-      this.activitiesTimer = false;
-      setTimeout(() => {
-        this.activitiesTimer = true;
-      }, 300000);
-      //storylike => hide
-      
-      this.refresh.emit(storyid);
-    })
-  }
+
  
 
 }

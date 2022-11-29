@@ -30,7 +30,10 @@
 <div class="toprank" *ngIf="listItems">
   <ul>
     <li *ngFor="let rank of listItems.slice(0,3) index as i" class="item">
-        <h1>{{i+1}}</h1>
+        <div class="circle">
+          <h1>{{i+1}}</h1>
+        </div>
+        
         <img src="{{rank.imageUrl}}" (click)="Goto(rank.storyName)" loading="lazy">
         <div class="stand" (click)="Goto(rank.storyName)">
           

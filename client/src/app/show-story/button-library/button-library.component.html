@@ -1,0 +1,13 @@
+             <button *ngIf="!story.liked" [disabled]="isSubmitting" type="button" class="btn"
+             [ngClass]="{'btn-outline-success': outline ,'btn-success': !outline}"
+                     (click)="toggleFollowing()">
+                     <i class="fas fa-plus"></i>&nbsp;LIBRARY</button>
+
+
+
+                     
+                 <button *ngIf="story.liked" [disabled]="isSubmitting"
+                     type="button" class="btn"
+                     [ngClass]="{'btn-outline-success': outline ,'btn-success': !outline}"
+                     (click)="toggleFollowing()">
+                     <i class="fas fa-check"></i>&nbsp;LIBRARY</button>

@@ -25,7 +25,6 @@ export class ShowTopCardComponent implements OnInit {
   starCount:number = 5;
   totalRate:number;
   yourRate:any;
-  userLiked:UserLiked;
   user:User;
   constructor(public showStoryService:ShowStoryService,
               private activitiesService:ActivitiesService,
@@ -34,13 +33,20 @@ export class ShowTopCardComponent implements OnInit {
                }
 
   ngOnInit(): void {
-    this.rating = this.topcard.rating;
-    this.totalRate = this.topcard.totalRate;
     // this.showStoryService.getYouRate(this.story.storyId).subscribe(res => {
     //   this.yourRate = res;
     // });
 
   }
+  refreshCard(event:boolean){
+    this.topcard.liked = event;
+  }
+  // addLikeStory(story:ShowStory){
+  //   this.showStoryService.addLikeStory(story).subscribe(()=>{
+  //     // this.refresh();
+  //     this.toastr.success('You have liked '+ story.storyName);
+  //   })
+  // }
   // addLikeStory(storyname:string){
   //   this.showStoryService.addLikeStory(storyname).subscribe(() => {
   //     this.toastr.success('You have liked '+ storyname);

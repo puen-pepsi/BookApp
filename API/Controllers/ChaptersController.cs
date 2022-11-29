@@ -114,7 +114,9 @@ namespace API.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
-            var story = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+            // var story = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+            var story = await _unitOfWork.StoryRepository
+                                    .GetStoryByIdWithChapter(storyId);
             if(story == null)
                 return NotFound();
 
@@ -163,7 +165,8 @@ namespace API.Controllers
             storyChapterDto.Id = chapterUpdate.Id;
             storyChapterDto.StoryId = chapterUpdate.StoryId;
             if(publish && chapterUpdate.Published == null){
-                var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                // var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                var story = await _unitOfWork.StoryRepository.GetStoryByIdWithChapter(chapterUpdate.StoryId);
                 int iCount = story.Chapters.Where(x=>x.Published != null).Count();
                 storyChapterDto.Order = iCount + 1;
             }
@@ -191,7 +194,8 @@ namespace API.Controllers
                     var chapterUpdate = await _unitOfWork.StoryRepository.GetStoryChapterById(id);
                     if(chapterUpdate == null)
                         return NotFound();
-                    var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                    // var story = await _unitOfWork.StoryRepository.GetStoryById(chapterUpdate.StoryId,true);
+                    var story = await _unitOfWork.StoryRepository.GetStoryByIdWithChapter(chapterUpdate.StoryId);
                     int iCount = story.Chapters.Where(x=>x.Published != null).Count();
                     chapterUpdate.Order = iCount + 1;
                      _unitOfWork.StoryRepository.UpdateStoryChapter(chapterUpdate);

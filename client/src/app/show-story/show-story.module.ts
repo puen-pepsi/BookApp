@@ -58,6 +58,7 @@ import { ShowTopSpecialComponent } from './show-top-special/show-top-special.com
 import { CardTopComponent } from './show-top-special/card-top/card-top.component';
 import { MatCarouselModule } from 'ng-mat-carousel';
 import { RecentListComponent } from './recent-chapter/recent-list/recent-list.component';
+import { ButtonLibraryComponent } from './button-library/button-library.component';
 @NgModule({
   declarations: [
     ShowListComponent,
@@ -111,6 +112,7 @@ import { RecentListComponent } from './recent-chapter/recent-list/recent-list.co
     ShowTopSpecialComponent,
     CardTopComponent,
     RecentListComponent,
+    ButtonLibraryComponent,
   ],
   imports: [
     CommonModule,

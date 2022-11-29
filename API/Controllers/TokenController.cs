@@ -28,7 +28,7 @@ namespace API.Controllers
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
              if (user == null || user.RefreshToken != refreshTokenDto.Token || 
              user.RefreshTokenExpiryTime <= DateTime.Now)
-                return BadRequest("Invalid client request");
+                return BadRequest("Refresh Token Expired");
              var newRefreshToken = _tokenService.GenerateRefreshToken();
              user.RefreshToken = newRefreshToken.Token;
              user.RefreshTokenExpiryTime = newRefreshToken.Expires;

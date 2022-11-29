@@ -32,6 +32,8 @@ namespace API.Interfaces
         Task<IEnumerable<StoryChapter>> GetStoryChapterLazyloadUp(string storyName,int currentChapter,int pageSize);
         Task<IEnumerable<StoryChapter>> GetStoryChapterByStoryNameTake(string storyName,int countSize,int pageSize);
          Task<Story> GetStoryById(int id,bool includeRelated = false );
+         Task<Story> GetStoryByIdWithRate(int id);
+         Task<Story> GetStoryByIdWithChapter(int id);
         // Task<Story> GetStoryById(int id);
          Task<Story> GetStoryByName(string storyName,bool include);
          Task<StoryChapter> GetStoryChapterById(int id);

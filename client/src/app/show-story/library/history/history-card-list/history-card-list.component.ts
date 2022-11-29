@@ -48,7 +48,7 @@ export class HistoryCardListComponent implements OnInit {
     if(event.active){
       this.addLikeStory(event);
     }else{
-      this.deletLikeStory(event.storyid,event.storyname);
+      // this.deletLikeStory(event.storyid,event.storyname);
     }
   }
   addLikeStory(story:ShowStory){
@@ -62,15 +62,15 @@ export class HistoryCardListComponent implements OnInit {
       
     })
   }
-  deletLikeStory(storyid:number,storyname:string){
-    this.showStoryService.deleteStoryLike(storyid).subscribe(()=>{
-      this.toastr.success('You have unliked '+storyname);
-      this.activitiesTimer = false;
-      setTimeout(() => {
-        this.activitiesTimer = true;
-      }, 300000);
-    })
-  }
+  // deletLikeStory(storyid:number,storyname:string){
+  //   this.showStoryService.deleteStoryLike(storyid).subscribe(()=>{
+  //     this.toastr.success('You have unliked '+storyname);
+  //     this.activitiesTimer = false;
+  //     setTimeout(() => {
+  //       this.activitiesTimer = true;
+  //     }, 300000);
+  //   })
+  // }
   deleteHistory(story){
     // console.log(storyId)
     this.deleteId.emit(story);

@@ -26,6 +26,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit{
  theme:string;
  submiting:boolean = false;
  loading=false;
+ isShowButton = false
   constructor(public chatService : ChatService,
               private fb: FormBuilder,
               private accountService:AccountService,
@@ -55,6 +56,24 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit{
       this.ngZone.run(()=>{
         this.loadMore();
       })
+    })
+    this.virtualScrollViewport.elementScrolled().pipe(
+      map(()=> this.virtualScrollViewport.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1,y2])=>(y2 > y1 && y2 < 100)),
+      throttleTime(200)
+    ).subscribe(()=>{
+      console.log("GotoBottom")
+      this.isShowButton = true;
+    })
+    this.virtualScrollViewport.elementScrolled().pipe(
+      map(()=> this.virtualScrollViewport.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1,y2])=>(y2 < y1 && y2 < 100)),
+      throttleTime(200)
+    ).subscribe(()=>{
+      console.log("GotoBottom")
+      this.isShowButton = false;
     })
   }
 

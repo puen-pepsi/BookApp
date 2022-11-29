@@ -1,6 +1,6 @@
 <button mat-mini-fab aria-label="Active icon" 
         matTooltip="Follow this novel"  
-        (click)="onClick()">
+        (click)="toggleFollowing()">
     <mat-icon class="material-icons-outlined" >
         {{story.liked?'done':'bookmark_border'}}
     </mat-icon>

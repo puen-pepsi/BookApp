@@ -14,6 +14,7 @@ import { ShowStory } from 'src/app/_models/showstory';
 })
 export class AuthorStoryComponent implements OnInit {
   @Input() authorname:string;
+  @Input() knownAs:string;
   showstory : Partial<ShowStory[]>;
   pageNumber = 1;
   pageSize = 10;

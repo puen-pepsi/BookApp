@@ -66,6 +66,7 @@ namespace API.Data
                             .Include(p => p.PhotoStories)
                             .Include(s => s.Ratings)
                             .Include(h => h.StoryHistory)
+                            .AsSplitQuery()
                             .SingleOrDefaultAsync(s => s.Id == id);
         }
         // public async Task<Story> GetStoryById(int id)
@@ -82,6 +83,7 @@ namespace API.Data
                 //.Include(s => s.ViewCount) 
                 .Include(s => s.Chapters)
                     .ThenInclude(c => c.Published)
+                .AsSplitQuery()
                 .Where(x => x.UserName == username)
                 .ToListAsync();
         }
@@ -236,7 +238,7 @@ namespace API.Data
         public async Task<PagedList<StoryDto>> GetStoriesAsync(StoryParams storyParams)
         {
             var query = _context.Stories.AsQueryable();
-            // query = query.Where( d => d.Deleted == false);
+            query = query.Where( d => d.Deleted == false);
             // query = query.Include(s => s.Ratings.Where(y => y.UserRatedId == storyParams.UserId));  
 
             
@@ -465,10 +467,26 @@ namespace API.Data
                             .ThenInclude( c => c.Author)
                             .ThenInclude( c => c.Photos)
                             // .Where(c => c.Published != null && c.Published.Created > twoweek )
-                            .OrderByDescending(c => c.Published.Created)
+                            // .OrderByDescending(c => c.Published.Created)
+                            .Where(x => x.Story.Deleted != true)
+                            .OrderByDescending(c => c.Published.Id)
                             .Skip(currentChapter)
                             .Take(pageSize)
                             .ToListAsync();
+        }
+
+        public async Task<Story> GetStoryByIdWithRate(int id)
+        {
+            return await _context.Stories.Include(r=>r.Ratings)
+                            .SingleOrDefaultAsync(s=>s.Id == id);
+        }
+
+        public async Task<Story> GetStoryByIdWithChapter(int id)
+        {
+            return await _context.Stories
+                    .Include(c=>c.Chapters)
+                    .ThenInclude(p => p.Published)
+                    .SingleOrDefaultAsync(s=>s.Id == id);
         }
     }
 }

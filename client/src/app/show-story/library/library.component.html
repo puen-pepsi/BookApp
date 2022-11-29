@@ -21,7 +21,7 @@
     <mat-tab label="My favorite" (selectTab)="onTabActivated($event)">
         <div class="content">
             <div class="" *ngFor="let storylike of storylikes" class="item" >
-                <app-show-card [story]="storylike" (refresh)="deleteStoryLike($event)"></app-show-card>
+                <app-show-card [story]="storylike" (refresh)="removeStory($event)"></app-show-card>
             </div> 
         </div>
        

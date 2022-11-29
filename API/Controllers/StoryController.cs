@@ -168,7 +168,8 @@ namespace API.Controllers
             if(User.GetUserId() <=0 )return BadRequest("Only Members Rating");
             var existRate = await _unitOfWork.StoryRepository.GetYouRate(storyId,User.GetUserId());
             if(existRate==null){
-                var storyRate = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+                var storyRate = await _unitOfWork.StoryRepository
+                                    .GetStoryByIdWithRate(storyId);
                 if(storyRate == null)
                     return NotFound();
                 var rated = new Rating{
@@ -184,7 +185,8 @@ namespace API.Controllers
             }
              existRate.Rated = rate;
              await _unitOfWork.Repository.UpdateAsync<Rating>(existRate);
-                var storyback = await _unitOfWork.StoryRepository.GetStoryById(storyId,true);
+                var storyback = await _unitOfWork.StoryRepository
+                                    .GetStoryByIdWithRate(storyId);
                 var storybackDto = _mapper.Map<StoryDto>(storyback);
 
                 return Ok(storybackDto);

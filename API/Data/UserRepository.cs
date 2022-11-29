@@ -72,6 +72,7 @@ namespace API.Data
             return await _context.Users
                             .Include(u => u.recievePoints)
                             .Include(t => t.titleAcitive).ThenInclude(t => t.TitleName)
+                            .AsSplitQuery()
                             .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -89,6 +90,7 @@ namespace API.Data
                 .Include(p => p.Photos)
                 .Include(p => p.recievePoints)
                 .Include(p => p.titleAcitive)
+                .AsSplitQuery()
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 

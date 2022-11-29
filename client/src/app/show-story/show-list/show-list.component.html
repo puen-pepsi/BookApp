@@ -122,7 +122,8 @@
                 [story]="story"
                 [index]="i"
                 [page]="pagination.currentPage"
-                [pagesize]="storyParams.pageSize">
+                [pagesize]="storyParams.pageSize"
+                (refresh)="refresh($event)">
             </app-show-card>
         </div>
         <!-- <div class="next">

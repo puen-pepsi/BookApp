@@ -40,6 +40,7 @@ export class LabelTagComponent implements OnInit {
         this.imageUrl = res.photoUrl;
         this.point = res.point;
         this.title = res.title;
+        this.knownAs = res.knownAs;
      })
     //  this.adminSevice.getUserRoles(this.knownAs).subscribe(res =>{
     //   this.role = res.roles;
@@ -82,5 +83,8 @@ export class LabelTagComponent implements OnInit {
         return `0 0 0 ${this.border}px `+ this.allRank[this.allRank.length-1].color;
       }
     }
+  }
+  GetknownAs(username:string){
+
   }
 }

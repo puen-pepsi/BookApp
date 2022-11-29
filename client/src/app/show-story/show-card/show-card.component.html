@@ -37,7 +37,7 @@
                         [storyid]="story.storyId"
                         [storyname]="story.storyName" -->
                     <app-followstory [story]="story"
-                        (follow)="followthis($event)"></app-followstory>
+                        (toggle)="toggleFollow($event)"></app-followstory>
             </li>
             <li class="list-inline-item">
                 <button  color="warn" mat-mini-fab
@@ -56,7 +56,7 @@
             <div class="text-muted truncate">{{story.genre }}</div><br/>
             <div class="star-award">
                 <app-star-rating-show
-                    [rating]="rating"
+                    [rating]="story.rating"
                     [starCount]="starCount"
                     [totalRate]="totalRate"
                     [color]="starColor"

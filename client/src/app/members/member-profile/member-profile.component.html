@@ -65,7 +65,7 @@
             <p>{{member.introduction}}</p>
             <h4>Current Quest</h4>
             <p>{{member.lookingFor}}</p>
-            <app-author-story [authorname]="author"></app-author-story>
+            <app-author-story [authorname]="author" [knownAs]="member.knownAs"></app-author-story>
         </mat-tab>
         <mat-tab label="Gallery"> 
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 

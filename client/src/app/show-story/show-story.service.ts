@@ -182,15 +182,7 @@ export class ShowStoryService {
     return this.http.put(this.baseUrl + 'showstory/'+storyName,null);
   }
   // addLikeStory(storyname:string){
-    addLikeStory(story:ShowStory){
-    return this.http.post(this.baseUrl +'likestories/' + story.storyName,{})
-    .pipe(map( ()=>{
-      const index = this.showStories.indexOf(story);
-      story.liked = true;
-      this.showStories[index] = story;
-      return this.showStories[index];
-    }));
-  }
+
   addLikeChapter(id:number){
     return this.http.post(this.baseUrl+'chapters/addlike/'+id,{});
   }
@@ -231,8 +223,22 @@ export class ShowStoryService {
   deletHistoryUser(storyId:number){
     return this.http.delete(this.baseUrl+'historyUser/'+storyId,{});
   }
-  deleteStoryLike(storyId:number){
-    return this.http.delete(this.baseUrl+'likeStories/'+storyId,{});
+  addLikeStory(story:ShowStory){
+    return this.http.post(this.baseUrl +'likestories/' + story.storyName,{})
+    .pipe(map(()=>{
+      const index = this.showStories.indexOf(story);
+      story.liked = true;
+      this.showStories[index] = story;
+      return this.showStories[index];
+    }));
+  }
+  deleteStoryLike(story:ShowStory){
+    return this.http.delete(this.baseUrl+'likeStories/'+story.storyId,{}).pipe(map(()=>{
+      const index = this.showStories.indexOf(story);
+      story.liked = false;
+      this.showStories[index] = story;
+      return this.showStories[index];
+    }));;
   }
 
 }

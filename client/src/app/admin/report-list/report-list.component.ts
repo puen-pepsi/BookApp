@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { ReportList } from 'src/app/_models/reportlist';
 import { ReporttopicService } from 'src/app/_services/reporttopic.service';
@@ -10,7 +11,8 @@ import { ReporttopicService } from 'src/app/_services/reporttopic.service';
 })
 export class ReportListComponent implements OnInit {
   reportlist : ReportList[];
-  constructor(private reportTopicService:ReporttopicService) { }
+  constructor(private reportTopicService:ReporttopicService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.load();
@@ -43,5 +45,13 @@ export class ReportListComponent implements OnInit {
     )
     //---reportType => storyName || "comment"
     //delet story from report
+  }
+  onHide(id:number){
+    this.reportTopicService.deleteReport(id).subscribe( res => {
+      this.load();
+    })
+  }
+  goToDetial(storyname:string){
+    this.router.navigate(['/stories',storyname]);
   }
 }

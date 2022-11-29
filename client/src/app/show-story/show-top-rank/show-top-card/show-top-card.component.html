@@ -18,7 +18,7 @@
               <app-star-rating-show
                   [rating]="topcard.rating"
                   [starCount]="starCount"
-                  [totalRate]="totalRate"
+                  [totalRate]="topcard.totalRate"
                   [color]="starColor"
                   [fSize] = "fSize"
                   [wSize] = "fSize"
@@ -67,14 +67,17 @@
                 class="btn btn-outline-primary">
                 <i class="fas fa-book-open"></i>&nbsp;Details
              </button>
-             <!-- <button *ngIf="!userLiked"
-                     type="button" class="btn btn-outline-primary"
+             <!-- <button *ngIf="!topcard.liked"
+                     type="button" class="btn btn-outline-success"
                      (click)="addLikeStory(topcard)">
                      <i class="fas fa-plus"></i>&nbsp;LIBRARY</button>
-                 <button *ngIf="userLiked"
-                     type="button" class="btn btn-outline-light"
+                 <button *ngIf="topcard.liked"
+                     type="button" class="btn btn-outline-success"
                      (click)="deletLikeStory(topcard)">
                      <i class="fas fa-check"></i>&nbsp;LIBRARY</button> -->
+                <app-button-library [story]="topcard" 
+                  [outline]="true"
+                  (toggle)="refreshCard($event)"></app-button-library>
           </div>
         </div>
       </div>

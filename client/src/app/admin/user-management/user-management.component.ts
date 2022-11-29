@@ -30,7 +30,6 @@ export class UserManagementComponent implements OnInit {
   getUsersWithRoles(){
     this.adminService.getUserWithRoles().subscribe(users => {
       this.users = users;
-      console.log(users)
     })
   }
   openRolesModal(user:User){

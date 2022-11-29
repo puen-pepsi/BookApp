@@ -95,7 +95,7 @@ namespace EmailService
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
                     await client.SendAsync(mailMessage);
                     // await client.ConnectAsync("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-                    // await client.AuthenticateAsync("leone.davis82@ethereal.email","7PgRd2DKvmce8mmZWd");
+                    // await client.AuthenticateAsync("jackson24@ethereal.email","Nzfzt5hvvzsq44Yvja");
                     // await client.SendAsync(mailMessage);
                 }
                 catch

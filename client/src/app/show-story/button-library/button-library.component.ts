@@ -9,29 +9,23 @@ import { ActivitiesService } from 'src/app/_services/activities.service';
 import { ShowStoryService } from '../show-story.service';
 
 @Component({
-  selector: 'app-followstory',
-  templateUrl: './followstory.component.html',
-  styleUrls: ['./followstory.component.scss']
+  selector: 'app-button-library',
+  templateUrl: './button-library.component.html',
+  styleUrls: ['./button-library.component.scss']
 })
-export class FollowstoryComponent{
-  // @Input() isActive:boolean;
-  // @Input() storyid:number;
-  // @Input() storyname:string;
+export class ButtonLibraryComponent{
   @Input() story:ShowStory;
-  @Output() toggle = new EventEmitter<ShowStory>()
-  isSubmitting = false;
-  activitiesTimer = true;
+  @Input() outline:boolean;
+  @Output() toggle = new EventEmitter<boolean>();
+  isSubmitting=false;
   activitiesType = ActivitiesType.followStory;
+  activitiesTimer = true;
   constructor(private accountService:AccountService,
-              private router:Router,
+              private showStoryService:ShowStoryService,
               private activitiesService:ActivitiesService,
               private toastr:ToastrService,
-              private showStoryService:ShowStoryService) { }
-  // onClick(){
-  //   this.story.liked = !this.story.liked;
-  //   // this.follow.emit({storyid:this.storyid,storyname:this.storyname,active:this.isActive});
-  //   this.follow.emit(this.story);
-  // }
+              private router:Router) { }
+
   toggleFollowing() {
     this.isSubmitting = true;
       if( !this.accountService.isAuthenticated()){
@@ -41,25 +35,24 @@ export class FollowstoryComponent{
 
         // Follow this profile if we aren't already
         if (!this.story.liked) {
-          return this.showStoryService.addLikeStory(this.story).subscribe( response =>{
+          return this.showStoryService.addLikeStory(this.story).subscribe(() =>{
             this.isSubmitting = false;
             if(this.activitiesTimer){
                this.activitiesService.postActivities(this.activitiesType,this.story.  storyName).subscribe(res =>{
                   console.log(res);
               })
             }
-            this.toggle.emit(response);
+            this.toggle.emit(true);
             this.toastr.success('You have add to library '+ this.story.storyName);
           })
         }else{
-          return this.showStoryService.deleteStoryLike(this.story).subscribe(res =>{
-            console.log(res)
+          return this.showStoryService.deleteStoryLike(this.story).subscribe(() =>{
             this.isSubmitting = false;
             this.activitiesTimer = false;
                 setTimeout(() => {
                   this.activitiesTimer = true;
                 }, 300000);
-            this.toggle.emit(res);
+            this.toggle.emit(false);
             this.toastr.warning('You have delete from library '+ this.story.storyName);
           })
         }

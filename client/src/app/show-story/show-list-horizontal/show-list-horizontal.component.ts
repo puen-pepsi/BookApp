@@ -28,7 +28,7 @@ export class ShowListHorizontalComponent implements OnInit {
               private route:ActivatedRoute, 
               private changeDetectorRef: ChangeDetectorRef) { 
     this.storyParams = this.showStoryService.getStoryParams(this.route.snapshot.data.storytype);
-    console.log(this.storyParams)
+    // console.log(this.storyParams)
 
   }
   
@@ -50,7 +50,7 @@ export class ShowListHorizontalComponent implements OnInit {
     this.showStoryService.getShowStory(this.storyParams).subscribe(response => {
       this.showstory = response.result;
       this.pagination = response.pagination;
-      console.log(this.showstory)
+      // console.log(this.showstory)
       // this.dataSource.data = response.result;
       // this.obs = this.dataSource.connect();
     });

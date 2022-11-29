@@ -63,7 +63,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit{
       filter(([y1,y2])=>(y2 > y1 && y2 < 100)),
       throttleTime(200)
     ).subscribe(()=>{
-      console.log("GotoBottom")
+      // console.log("GotoBottom")
       this.isShowButton = true;
     })
     this.virtualScrollViewport.elementScrolled().pipe(
@@ -72,7 +72,7 @@ export class ChattoComponent implements OnInit,OnDestroy,AfterViewInit{
       filter(([y1,y2])=>(y2 < y1 && y2 < 100)),
       throttleTime(200)
     ).subscribe(()=>{
-      console.log("GotoBottom")
+      // console.log("GotoBottom")
       this.isShowButton = false;
     })
   }

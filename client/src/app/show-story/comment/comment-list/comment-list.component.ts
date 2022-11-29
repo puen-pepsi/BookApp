@@ -31,7 +31,7 @@ export class CommentListComponent implements OnInit, OnDestroy ,OnChanges{
     private showService : ShowStoryService,
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.commentChapter)
+    // console.log(this.commentChapter)
     this.commentSub = this.commentService.commentThread$.subscribe(comments =>{
       this.commentlist = comments.filter(comment=> comment.chapterId == this.commentChapter 
               && comment.parentId == null);

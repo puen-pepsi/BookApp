@@ -20,7 +20,7 @@ export class ReportListComponent implements OnInit {
   load(){
     this.reportTopicService.getAllReport().subscribe(res=> {
       this.reportlist = res;
-      console.log(this.reportlist)
+      //console.log(this.reportlist)
     })
   }
   onDelete(id:number)

@@ -110,7 +110,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
         if(this.current != activeTargetName){
           this.current = activeTargetName;
           this.commentChapter = +this.current;
-          console.log(this.current)
+          // console.log(this.current)
         }
 
       }
@@ -195,7 +195,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     //this.scroller.scrollToAnchor(target);
     // console.log(this.scroller.getScrollPosition())
     // this.scroller.scrollToPosition([0,1059]);
-    console.log(target)
+    // console.log(target)
     const chapter = [...this.chapterList.values()]
       .reduce((arr,elem)=> arr.concat(elem),[])
       .find((chapter:ChapterList)=> chapter.order === +target);
@@ -256,7 +256,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
     this.fSize = this.fSize * 1.2;
   }
   addLikeChapter(id:number){
-    console.log(id);
+    // console.log(id);
     this.showStoryService.addLikeChapter(id).subscribe(res =>{
       if(this.activitiesTimer2 != id && res){
         this.activitiesService.postActivities(this.activitiesType2,this.storyname).subscribe(res =>{
@@ -270,7 +270,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   }
   onScrollDown() {
     if (this.notscrolly && this.notEmptyPost) {
-      console.log("scrolldown");
+      // console.log("scrolldown");
       // this.spinner.show();
       this.notscrolly = false;
       this.loadNextPost();
@@ -306,7 +306,7 @@ export class ShowTChapterComponent implements OnInit,AfterViewInit,OnDestroy{
   loadPrePost() {
     //const countContent = this.chapterList.length;
       var countContent = this.chapterList[0].order;
-      console.log(countContent)
+      // console.log(countContent)
       if(countContent == 1){
           this.notFirstPost = false;
           return;

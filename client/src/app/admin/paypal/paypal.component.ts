@@ -35,7 +35,7 @@ export class PaypalComponent implements OnInit,AfterContentInit{
             //console.log(this.user)
             //expire vip
             this.adminService.getVipForUser(this.user.username).subscribe(res =>{
-                console.log(res)
+                //console.log(res)
                 this.accountService.setCurrentUser(this.user);
                 this.getExpiredUserVIP();
             })

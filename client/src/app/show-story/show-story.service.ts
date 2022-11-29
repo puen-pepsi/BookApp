@@ -96,7 +96,7 @@ export class ShowStoryService {
         .pipe(map(response => {
           //console.log(response);
           this.showStoryCache.set(Object.values(StoryParams).join('-'),response);
-          console.log(this.showStoryCache);
+          // console.log(this.showStoryCache);
           return response;
         }))
   }
@@ -168,7 +168,7 @@ export class ShowStoryService {
           showstory.rating = res.rating;
           showstory.yourRate = rate;
           showstory.totalRate = res.totalRate;
-          console.log(showstory)
+          // console.log(showstory)
           return showstory
         }
         return 

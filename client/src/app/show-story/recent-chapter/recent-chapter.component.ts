@@ -51,7 +51,7 @@ export class RecentChapterComponent implements OnInit {
       //this.spinner.show();
       this.notscrolly = false;
       this.lazyLoad();
-      console.log("scroll down")
+      // console.log("scroll down")
      }
     }
   // load th next 6 posts

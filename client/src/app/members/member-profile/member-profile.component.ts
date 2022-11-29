@@ -57,7 +57,7 @@ export class MemberProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.member = data.member;
-      console.log(this.member);
+      // console.log(this.member);
       this.author = this.member.username;
       this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;

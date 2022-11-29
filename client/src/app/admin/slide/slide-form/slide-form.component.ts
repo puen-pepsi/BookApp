@@ -26,7 +26,7 @@ export class SlideFormComponent implements OnInit {
     };
   }
   onSubmit(form:NgForm) {
-    console.log(form);
+    //console.log(form);
     if(this.slideService.formData.id == 0) //we will use the id as identifier for updating or insertion
     this.insertRecord(form);
     else

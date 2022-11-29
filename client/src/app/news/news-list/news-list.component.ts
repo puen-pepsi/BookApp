@@ -25,7 +25,7 @@ export class NewsListComponent implements OnInit {
     
   }
   onScrollDown(ev:any) {
-    console.log("scroll",ev)
+    // console.log("scroll",ev)
 
     if (this.notscrolly && this.notEmptyPost) {
       // this.spinner.show();

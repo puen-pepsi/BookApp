@@ -19,7 +19,7 @@ export class TagComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
+    //  console.log(id);
      this.tagsService.deleteTags(id)
      .subscribe(
        res=>{

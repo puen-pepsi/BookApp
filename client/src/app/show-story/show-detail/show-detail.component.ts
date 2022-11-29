@@ -150,7 +150,7 @@ export class ShowDetailComponent implements OnInit ,OnDestroy{
     this.router.navigate(['stories/tag/',ele]);
   }
   gotoMember(event){
-    console.log(event)
+    // console.log(event)
     this.router.navigate(['/members',event]);
   }
   // getStoryName(){

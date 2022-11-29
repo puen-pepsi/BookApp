@@ -34,7 +34,7 @@ export class ShowTableContentComponent implements OnInit {
     if (this.notscrolly && this.notEmptyPost) {
       //this.spinner.show();
       this.notscrolly = false;
-      console.log("scroll")
+      // console.log("scroll")
       this.loadNextPost();
      }
     }

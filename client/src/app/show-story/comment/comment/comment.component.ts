@@ -58,7 +58,7 @@ export class CommentComponent implements OnInit{
         this.commentForm.reset();
         if(this.activitiesTimer){
           this.activitiesService.postActivities(this.activitiesType,this.storyName).subscribe(res =>{
-            console.log(res)
+            // console.log(res)
             this.activitiesTimer = false;
             setTimeout(() => {
               this.activitiesTimer = true;

@@ -53,7 +53,7 @@ export class FollowstoryComponent{
           })
         }else{
           return this.showStoryService.deleteStoryLike(this.story).subscribe(res =>{
-            console.log(res)
+            // console.log(res)
             this.isSubmitting = false;
             this.activitiesTimer = false;
                 setTimeout(() => {

@@ -27,7 +27,7 @@ export class BannerDialogFormComponent implements OnInit {
     };
   }
   onSubmit(form:NgForm) {
-    console.log(form);
+    //console.log(form);
     if(this.bannerdialogService.formData.id == 0) //we will use the id as identifier for updating or insertion
     this.insertRecord(form);
     else

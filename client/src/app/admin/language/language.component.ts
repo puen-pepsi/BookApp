@@ -19,7 +19,7 @@ export class LanguageComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
+     //console.log(id);
      this.languageService.deleteLanguage(id)
      .subscribe(
        res=>{

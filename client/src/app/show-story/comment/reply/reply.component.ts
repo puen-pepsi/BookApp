@@ -52,7 +52,7 @@ export class ReplyComponent implements OnInit {
       this.replyForm.reset();
       if(this.activitiesTimer){
         this.activitiesService.postActivities(this.activitiesType,submittedVal.story_name).subscribe(res =>{
-          console.log(res)
+          // console.log(res)
           this.activitiesTimer = false;
           setTimeout(() => {
             this.activitiesTimer = true;

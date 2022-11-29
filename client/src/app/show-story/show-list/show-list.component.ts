@@ -51,7 +51,7 @@ export class ShowListComponent implements OnInit,OnDestroy {
   }
   refresh(event:ShowStory){
       const index = this.showstory.findIndex(x => x.storyId === event.storyId);
-      console.log(this.showstory[index])
+      // console.log(this.showstory[index])
       this.showstory[index] = event;
   }
   loadStory(){

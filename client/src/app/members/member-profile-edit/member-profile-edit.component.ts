@@ -56,7 +56,7 @@ export class MemberProfileEditComponent implements OnInit {
   loadMember(){
     this.memberServcice.getMember(this.user.username).subscribe(member => {
       this.member = member;
-      console.log(member)
+      // console.log(member)
       this.rankService.getAllRank().subscribe( (res:Rank[]) => {
         this.allRank = res;
         this.rank =this.CreateRank(this.member.point);

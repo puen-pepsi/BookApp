@@ -38,7 +38,7 @@ export class LibraryComponent implements OnInit {
     this.loadStoryLikes();
   }
   pageNext(){
-    console.log("next")
+    // console.log("next")
     //this.showStoryService.setStoryParams(this.storyParams);
     
     if(this.pageNumber + 1 > this.pagination.totalPages)return;
@@ -46,7 +46,7 @@ export class LibraryComponent implements OnInit {
     this.loadStoryLikes();
   }
   pagePrevios(){
-    console.log("previos")
+    // console.log("previos")
     //this.showStoryService.setStoryParams(this.storyParams);
     
     if(this.pageNumber -1 < 1)return;

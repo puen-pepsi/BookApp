@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       //clientURI:['https://rainobunew.azurewebsites.net/authentication/emailconfirmation']
    
     })
-    console.log(this.registerForm)
+    // console.log(this.registerForm)
   }
 
   matchValues(matchTo:string): ValidatorFn{

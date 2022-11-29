@@ -25,7 +25,7 @@ export class RecentListComponent implements OnInit,AfterViewInit {
       throttleTime(200)
     ).subscribe(() => {
       this.ngZone.run(() => {
-        console.log("bottom");
+        // console.log("bottom");
         this.loadNextPost();
       });
     }
@@ -39,7 +39,7 @@ export class RecentListComponent implements OnInit,AfterViewInit {
   loadinit(){
     this.showstorySevice.getChapterRecent(0,5).subscribe(data =>{
       this.listItems = data;
-      console.log(this.listItems)
+      // console.log(this.listItems)
     });
   }
   // fetchMore(){
@@ -79,7 +79,7 @@ export class RecentListComponent implements OnInit,AfterViewInit {
         timer(1000).subscribe(()=>{
             this.loading = false;
             this.listItems = this.listItems.concat(newPost);
-            console.log(this.listItems)
+            // console.log(this.listItems)
         })
       });
     }

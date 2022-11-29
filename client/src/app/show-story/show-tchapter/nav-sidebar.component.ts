@@ -27,7 +27,7 @@ export class NavSidebarComponent implements OnInit {
     this.showStoryService.getChapterList(this.storyName,0,0)
          .subscribe( res => {
              this.chapterList = res;
-             console.log(this.chapterList)
+            //  console.log(this.chapterList)
          });
    }
   goTo(target:string) {

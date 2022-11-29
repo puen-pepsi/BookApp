@@ -19,7 +19,7 @@ export class GenreComponent implements OnInit {
   }
   onDelete(id:number)
    {
-     console.log(id);
+     //console.log(id);
      this.genreService.deleteGenre(id)
      .subscribe(
        res=>{

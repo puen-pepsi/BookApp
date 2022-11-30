@@ -15,17 +15,20 @@ import { HasRoleDirective } from '../_directives/has-role.directive';
 import {IvyCarouselModule} from 'angular-responsive-carousel2'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { GetRoleDirective } from '../_directives/get-role.directive';
-import { SanitizeHtmlPipe } from 'src/pipe/sanitize-html.pipe';
-import { TruncatePipe } from 'src/pipe/truncate.pipe';
 import { InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShortNumberPipe } from '../pipes/short-number.pipe';
+import { SanitizeHtmlPipe } from '../pipes/sanitize-html.pipe';
+import { TruncatePipe } from '../pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
     HasRoleDirective,
     GetRoleDirective,
+    ShortNumberPipe,
     SanitizeHtmlPipe,
     TruncatePipe
+    
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Ng2SearchPipeModule,
     InfiniteScrollModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports:[
     BsDropdownModule,
@@ -68,7 +71,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TruncatePipe,
     InfiniteScrollModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShortNumberPipe
   ]
 })
 export class SharedModule { }

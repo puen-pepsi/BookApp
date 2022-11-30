@@ -60,3 +60,11 @@ div.mat-expansion-panel-body {
     align-items: flex-end;
     /* background-color: #ecf8fd; */
 }
+.content--views{
+    padding:0 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color:white;
+    background-color: var(--main-color);
+    border-radius: 1rem 1rem;
+}

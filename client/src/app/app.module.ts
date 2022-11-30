@@ -60,13 +60,14 @@ import { PaypalComponent } from './admin/paypal/paypal.component';
 import { NewsSmallCardComponent } from './news/news-small-card/news-small-card.component';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 import { AdminModule } from './admin/admin.module';
-import { NullWithDefaultPipe } from 'src/pipe/null-with-default.pipe';
+import { NullWithDefaultPipe } from 'src/app/pipes/null-with-default.pipe';
 import { TermOfServiceComponent } from './term-of-service/term-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import {LazyImgDirective} from './_directives/img.directive'
 import { StoryModule } from './story/story.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+
 // import { AppHttpInterceptor } from './_interceptors/AppHttpInterceptor';
 @NgModule({
   declarations: [
@@ -135,7 +136,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     SocialLoginModule,
     ScrollingModule,
     AdminModule,
-    StoryModule
+    StoryModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},

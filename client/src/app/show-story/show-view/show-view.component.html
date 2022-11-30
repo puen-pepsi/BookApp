@@ -54,10 +54,10 @@
                 <mat-list-item>
                 <!-- <img matListAvatar [src]="item.image"> -->
                   <h3 matLine style="width:400px">
-                    {{i+1}}&nbsp;&nbsp; {{item.storyName | titlecase }}
+                    {{i+1}}&nbsp;&nbsp; {{item.storyName | titlecase}}
                 </h3>
-
-                <span matBadge={{item.views}}></span>
+                <span class="content--views">{{item.views | shortNumber}}</span>
+                <!-- <span matBadge={{item.views | shortNumber}}></span> -->
                 <button mat-icon-button [matMenuTriggerFor]="itemMenu">
                     <mat-icon>
                         more_vert

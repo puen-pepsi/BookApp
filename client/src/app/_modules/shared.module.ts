@@ -28,7 +28,6 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
     ShortNumberPipe,
     SanitizeHtmlPipe,
     TruncatePipe
-    
   ],
   imports: [
     CommonModule,

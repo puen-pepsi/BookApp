@@ -34,8 +34,10 @@ namespace API.Controllers
         [HttpGet("taglist/{tagname}")]
         public async Task<ActionResult<IEnumerable<StoryTagDto>>> GetTagAsync(string tagname)
         {
+            var curtag = _unitOfWork.TagRepository.GetTagName(tagname);
             var taglist =  await _unitOfWork.TagRepository.GetStoryByTagName(tagname);
             var newlist  =    taglist.Select( t => new StoryTagDto{
+                                storyId = t.Stories.Id,
                                 storyName = t.Stories.StoryName,
                                 Genre =t.Stories.Genre,
                                 Description = t.Stories.Description,
